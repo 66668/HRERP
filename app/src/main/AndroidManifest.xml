@@ -1,0 +1,1203 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+          xmlns:tools="http://schemas.android.com/tools"
+          package="com.huirong">
+
+
+    <!-- 网络权限 -->
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE"/>
+    <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
+    <!--用于访问GPS定位-->
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"/>
+    <!--用于提高GPS定位速度-->
+    <uses-permission android:name="android.permission.ACCESS_LOCATION_EXTRA_COMMANDS"/>
+
+    <!--读写权限-->
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
+
+
+    <!-- 更改设置 -->
+    <uses-permission android:name="android.permission.WRITE_SETTINGS"/>
+
+    <!-- 拨打电话权限 -->
+    <uses-permission android:name="android.permission.CALL_PHONE"/>
+    <uses-permission android:name="android.permission.READ_PHONE_STATE"/> <!-- 否则不能监听每个状态 -->
+    <!--  发送消息-->
+    <uses-permission android:name="android.permission.SEND_SMS"/>
+    <!-- 相机权限-->
+    <uses-permission android:name="android.permission.CAMERA"/>
+
+    <!-- jpush start-->
+    <!-- jpush start-->
+
+    <permission
+        android:name="com.huirong.permission.JPUSH_MESSAGE"
+        android:protectionLevel="signature"/>
+
+    <!-- Required  一些系统要求的权限，如访问网络等-->
+    <uses-permission android:name="com.huirong.permission.JPUSH_MESSAGE"/>
+    <uses-permission android:name="android.permission.RECEIVE_USER_PRESENT"/>
+    <uses-permission android:name="android.permission.WAKE_LOCK"/>
+    <uses-permission android:name="android.permission.VIBRATE"/>
+    <uses-permission android:name="android.permission.MOUNT_UNMOUNT_FILESYSTEMS"/>
+
+    <!-- Optional for location -->
+    <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW"/> <!-- 用于开启 debug 版本的应用在6.0 系统上 层叠窗口权限 -->
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"/>
+    <uses-permission android:name="android.permission.CHANGE_WIFI_STATE"/>
+    <uses-permission android:name="android.permission.CHANGE_NETWORK_STATE"/>
+    <uses-permission android:name="android.permission.GET_TASKS"/>
+
+    <!-- jpush end-->
+
+    <application
+        android:name=".application.MyApplication"
+        android:allowBackup="true"
+        android:icon="@mipmap/zologo"
+        android:label="@string/app_name"
+        android:supportsRtl="true"
+        android:theme="@style/AppTheme">
+
+        <!-- 高德设置key -->
+        <meta-data
+            android:name="com.amap.api.v2.apikey"
+            android:value="0c89cf507f40dbf5d6f075cc3556ae71"/>
+
+        <!-- 高德定位需要的服务 -->
+        <service android:name="com.amap.api.location.APSService"/>
+
+        <!--jpush start -->
+
+        <!-- Rich push 核心功能 since 2.0.6-->
+        <activity
+            android:name="cn.jpush.android.ui.PopWinActivity"
+            android:exported="false"
+            android:theme="@style/MyDialogStyle">
+        </activity>
+
+        <!-- Required SDK核心功能-->
+        <activity
+            android:name="cn.jpush.android.ui.PushActivity"
+            android:configChanges="orientation|keyboardHidden"
+            android:exported="false"
+            android:theme="@android:style/Theme.NoTitleBar">
+            <intent-filter>
+                <action android:name="cn.jpush.android.ui.PushActivity"/>
+
+                <category android:name="android.intent.category.DEFAULT"/>
+                <category android:name="com.huirong"/>
+            </intent-filter>
+        </activity>
+        <!-- Required  SDK核心功能-->
+        <service
+            android:name="cn.jpush.android.service.DownloadService"
+            android:enabled="true"
+            android:exported="false">
+        </service>
+
+        <!-- Required SDK 核心功能-->
+        <!-- 可配置android:process参数将PushService放在其他进程中 -->
+        <service
+            android:name="cn.jpush.android.service.PushService"
+            android:process=":mult">
+            <intent-filter>
+                <action android:name="cn.jpush.android.intent.REGISTER"/>
+                <action android:name="cn.jpush.android.intent.REPORT"/>
+                <action android:name="cn.jpush.android.intent.PushService"/>
+                <action android:name="cn.jpush.android.intent.PUSH_TIME"/>
+            </intent-filter>
+        </service>
+
+        <!-- since 1.8.0 option 可选项。用于同一设备中不同应用的JPush服务相互拉起的功能。 -->
+        <!-- 若不启用该功能可删除该组件，将不拉起其他应用也不能被其他应用拉起 -->
+        <service
+            android:name="cn.jpush.android.service.DaemonService"
+            android:enabled="true"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="cn.jpush.android.intent.DaemonService"/>
+                <category android:name="com.huirong"/>
+            </intent-filter>
+
+        </service>
+
+        <!-- Required SDK核心功能-->
+        <receiver
+            android:name="cn.jpush.android.service.PushReceiver"
+            android:enabled="true">
+            <intent-filter android:priority="1000">
+                <action android:name="cn.jpush.android.intent.NOTIFICATION_RECEIVED_PROXY"/>   <!--Required  显示通知栏 -->
+                <category android:name="com.huirong"/>
+            </intent-filter>
+            <intent-filter>
+                <action android:name="android.intent.action.USER_PRESENT"/>
+                <action android:name="android.net.conn.CONNECTIVITY_CHANGE"/>
+            </intent-filter>
+            <!-- Optional -->
+            <intent-filter>
+                <action android:name="android.intent.action.PACKAGE_ADDED"/>
+                <action android:name="android.intent.action.PACKAGE_REMOVED"/>
+
+                <data android:scheme="package"/>
+            </intent-filter>
+        </receiver>
+
+        <!-- Required SDK核心功能-->
+        <receiver
+            android:name="cn.jpush.android.service.AlarmReceiver"
+            android:exported="false"/>
+
+        <!-- User defined.  For test only  用户自定义的广播接收器-->
+        <receiver
+            android:name="com.huirong.receiver.JPushReceiver"
+            android:enabled="true"
+            android:exported="false">
+            <intent-filter>
+                <action android:name="cn.jpush.android.intent.REGISTRATION"/> <!--Required  用户注册SDK的intent-->
+                <action android:name="cn.jpush.android.intent.MESSAGE_RECEIVED"/> <!--Required  用户接收SDK消息的intent-->
+                <action android:name="cn.jpush.android.intent.NOTIFICATION_RECEIVED"/> <!--Required  用户接收SDK通知栏信息的intent-->
+                <action android:name="cn.jpush.android.intent.NOTIFICATION_OPENED"/> <!--Required  用户打开自定义通知栏的intent-->
+                <action android:name="cn.jpush.android.intent.CONNECTION"/><!-- 接收网络变化 连接/断开 since 1.6.3 -->
+                <category android:name="com.huirong"/>
+            </intent-filter>
+        </receiver>
+
+        <!-- Required  . Enable it you can get statistics data with channel -->
+        <meta-data
+            android:name="JPUSH_CHANNEL"
+            android:value="developer-default"/>
+        <meta-data
+            android:name="JPUSH_APPKEY"
+            android:value="9f3089b2f841fd13680040ec"/> <!--  </>值来自开发者平台取得的AppKey-->
+
+        <!--jpush finish -->
+
+        <!--主界面 -->
+        <activity
+            android:name="com.huirong.ui.MainActivity"
+            android:label="@string/app_name"
+            android:screenOrientation="portrait">
+
+        </activity>
+
+        <!-- 登录-->
+        <activity
+            android:name="com.huirong.ui.LoginActivity"
+            android:label="@string/app_name"
+            android:screenOrientation="portrait"
+            android:theme="@style/Anim_style2">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN"/>
+
+                <category android:name="android.intent.category.LAUNCHER"/>
+            </intent-filter>
+        </activity>
+
+        <!-- 图片剪裁-->
+        <activity
+            android:name=".ui.appsfrg.childmodel.examination.create.PhotoClipPictureActivity"
+            android:label="@string/app_name"
+            android:screenOrientation="portrait"
+            android:theme="@style/Anim_style2">
+        </activity>
+
+        <!-- 01审批-->
+        <activity
+            android:name="com.huirong.ui.appsfrg.ExaminationAcitivity"
+            android:label="@string/app_name"
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar">
+        </activity>
+
+        <!-- 01-01 我的申请-->
+        <activity
+            android:name=".ui.appsfrg.childmodel.examination.ZOAplicationListActivity"
+            android:label="@string/app_name"
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar">
+        </activity>
+        <!-- 01-02 我的审批-->
+        <activity
+            android:name=".ui.appsfrg.childmodel.examination.ZOApprovelListActivity"
+            android:label="@string/app_name"
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar">
+        </activity>
+
+        <!-- 01-02 审批-驳回01-->
+        <activity
+            android:name=".ui.appsfrg.childmodel.examination.approvaldetail.CommonDisagreeActivity"
+            android:label="@string/app_name"
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar">
+        </activity>
+
+        <!--01-02 审批-批准02-->
+        <activity
+            android:name=".ui.appsfrg.childmodel.examination.approvaldetail.CommonAgreeActivity"
+            android:label="@string/app_name"
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar">
+        </activity>
+
+        <!--01-02 审批-转交03-->
+        <activity
+            android:name=".ui.appsfrg.childmodel.examination.approvaldetail.CommonTransfertoActivity"
+            android:label="@string/app_name"
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar">
+        </activity>
+
+        <!--01-02 审批-抄送04 公司-子公司-->
+        <activity
+            android:name=".ui.appsfrg.childmodel.examination.approvaldetail.CommonCopytoCoActivity"
+            android:label="@string/app_name"
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar">
+        </activity>
+
+        <!--01-02 审批-抄送04 子公司-部门-->
+        <activity
+            android:name=".ui.appsfrg.childmodel.examination.approvaldetail.CommonCopytoDeptActivity"
+            android:label="@string/app_name"
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar">
+        </activity>
+
+        <!--01-02 审批-抄送04 部门-联系人-->
+        <activity
+            android:name=".ui.appsfrg.childmodel.examination.approvaldetail.CommonCopytoEplActivity"
+            android:label="@string/app_name"
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar">
+        </activity>
+
+
+        <!-- 01-03我的抄送-->
+        <activity
+            android:name=".ui.appsfrg.childmodel.examination.ZOCopyListActivity"
+            android:label="@string/app_name"
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar">
+        </activity>
+
+
+        <!-- 01 请假01-->
+        <activity
+            android:name=".ui.appsfrg.childmodel.examination.create.LeaveActivity"
+            android:label="@string/app_name"
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar">
+        </activity>
+        <activity
+            android:name=".ui.appsfrg.childmodel.examination.applicationdetail.LeaveDetailAplActivity"
+            android:label="@string/app_name"
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar">
+        </activity>
+        <activity
+            android:name=".ui.appsfrg.childmodel.examination.approvaldetail.LeaveDetailApvlActivity"
+            android:label="@string/app_name"
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar">
+        </activity>
+        <activity
+            android:name=".ui.appsfrg.childmodel.examination.copydetail.LeaveDetailCopyActivity"
+            android:label="@string/app_name"
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar">
+        </activity>
+        <!--02出差 -->
+        <activity
+            android:name=".ui.appsfrg.childmodel.examination.create.BeAwayActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar">
+        </activity>
+        <activity
+            android:name=".ui.appsfrg.childmodel.examination.applicationdetail.BeawayDetailAplActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar">
+        </activity>
+
+        <activity
+            android:name=".ui.appsfrg.childmodel.examination.approvaldetail.BeawayDetailApvlActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar">
+        </activity>
+        <activity
+            android:name=".ui.appsfrg.childmodel.examination.copydetail.BeawayDetailCopyActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar">
+        </activity>
+        <!-- 用车03-->
+        <activity
+            android:name=".ui.appsfrg.childmodel.examination.create.VehicleActivity"
+            android:label="@string/app_name"
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar">
+        </activity>
+        <activity
+            android:name=".ui.appsfrg.childmodel.examination.applicationdetail.VehicleDetailAplActivity"
+            android:label="@string/app_name"
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar">
+        </activity>
+        <activity
+            android:name=".ui.appsfrg.childmodel.examination.approvaldetail.VehicleDetailApvlActivity"
+            android:label="@string/app_name"
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar">
+        </activity>
+        <activity
+            android:name=".ui.appsfrg.childmodel.examination.copydetail.VehicleDetailCopyActivity"
+            android:label="@string/app_name"
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar">
+        </activity>
+
+
+        <!-- 维护04-->
+        <activity
+            android:name=".ui.appsfrg.childmodel.examination.create.VehicleMaintainActivity"
+            android:label="@string/app_name"
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar">
+        </activity>
+        <activity
+            android:name=".ui.appsfrg.childmodel.examination.applicationdetail.VehicleMaintainDetailAplActivity"
+            android:label="@string/app_name"
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar">
+        </activity>
+        <activity
+            android:name=".ui.appsfrg.childmodel.examination.approvaldetail.VehicleMaintainDetailApvlActivity"
+            android:label="@string/app_name"
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar">
+        </activity>
+        <activity
+            android:name=".ui.appsfrg.childmodel.examination.copydetail.VehicleMaintainDetailCopyActivity"
+            android:label="@string/app_name"
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar">
+        </activity>
+
+        <!--01 加班05-->
+        <activity
+            android:name=".ui.appsfrg.childmodel.examination.create.WorkOverTimeActivity"
+            android:label="@string/app_name"
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar">
+        </activity>
+        <activity
+            android:name=".ui.appsfrg.childmodel.examination.applicationdetail.WorkOverTimeDetailAplActivity"
+            android:label="@string/app_name"
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar">
+        </activity>
+        <activity
+            android:name=".ui.appsfrg.childmodel.examination.approvaldetail.WorkOverTimeDetailApvlActivity"
+            android:label="@string/app_name"
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar">
+        </activity>
+        <activity
+            android:name=".ui.appsfrg.childmodel.examination.copydetail.WorkOverTimeDetailCopyActivity"
+            android:label="@string/app_name"
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar">
+        </activity>
+
+        <!--01 财务申请06-->
+        <activity
+            android:name=".ui.appsfrg.childmodel.examination.create.FinancialMenuActivity"
+            android:label="@string/app_name"
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar">
+        </activity>
+
+        <!-- 财务-借款申请06-01 -->
+        <activity
+            android:name=".ui.appsfrg.childmodel.examination.create.FinancialLoanActivity"
+            android:label="@string/app_name"
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar">
+        </activity>
+        <activity
+            android:name=".ui.appsfrg.childmodel.examination.applicationdetail.FinancialLoanDetailAplActivity"
+            android:label="@string/app_name"
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar">
+        </activity>
+        <activity
+            android:name=".ui.appsfrg.childmodel.examination.approvaldetail.FinancialLoanDetailApvlActivity"
+            android:label="@string/app_name"
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar">
+        </activity>
+        <activity
+            android:name=".ui.appsfrg.childmodel.examination.copydetail.FinancialLoanDetailCopyActivity"
+            android:label="@string/app_name"
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar">
+        </activity>
+        <!-- 财务-报销申请06-02 -->
+        <activity
+            android:name=".ui.appsfrg.childmodel.examination.create.FinancialReimburseActivity"
+            android:label="@string/app_name"
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar">
+        </activity>
+        <activity
+            android:name=".ui.appsfrg.childmodel.examination.applicationdetail.FinancialReimburseDetailAplActivity"
+            android:label="@string/app_name"
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar">
+        </activity>
+        <activity
+            android:name=".ui.appsfrg.childmodel.examination.approvaldetail.FinancialReimburseDetailApvlActivity"
+            android:label="@string/app_name"
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar">
+        </activity>
+        <activity
+            android:name=".ui.appsfrg.childmodel.examination.copydetail.FinancialReimburseDetailCopyActivity"
+            android:label="@string/app_name"
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar">
+        </activity>
+        <!-- 财务-付款申请06-03 -->
+        <activity
+            android:name=".ui.appsfrg.childmodel.examination.create.FinancialPayActivity"
+            android:label="@string/app_name"
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar">
+        </activity>
+        <activity
+            android:name=".ui.appsfrg.childmodel.examination.applicationdetail.FinancialPayDetailAplActivity"
+            android:label="@string/app_name"
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar">
+        </activity>
+        <activity
+            android:name=".ui.appsfrg.childmodel.examination.approvaldetail.FinancialPayDetailApvlActivity"
+            android:label="@string/app_name"
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar">
+        </activity>
+        <activity
+            android:name=".ui.appsfrg.childmodel.examination.copydetail.FinancialPayDetailCopyActivity"
+            android:label="@string/app_name"
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar">
+        </activity>
+
+        <!--01 辞职07-->
+        <activity
+            android:name=".ui.appsfrg.childmodel.examination.create.DimissionActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar">
+        </activity>
+
+        <activity
+            android:name=".ui.appsfrg.childmodel.examination.applicationdetail.DimissionDetailAplActivity"
+            android:label="@string/app_name"
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar">
+        </activity>
+        <activity
+            android:name=".ui.appsfrg.childmodel.examination.approvaldetail.DimissionDetailApvlActivity"
+            android:label="@string/app_name"
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar">
+        </activity>
+        <activity
+            android:name=".ui.appsfrg.childmodel.examination.copydetail.DimissionDetailCopyActivity"
+            android:label="@string/app_name"
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar">
+        </activity>
+        <!--01 订票 08-->
+        <activity
+            android:name=".ui.appsfrg.childmodel.examination.create.BookTicketsActivity"
+            android:label="@string/app_name"
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar">
+        </activity>
+        <activity
+            android:name=".ui.appsfrg.childmodel.examination.applicationdetail.BookTicketsDetailAplActivity"
+            android:label="@string/app_name"
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar">
+        </activity>
+
+        <activity
+            android:name=".ui.appsfrg.childmodel.examination.approvaldetail.BookTicketesDetailApvlActivity"
+            android:label="@string/app_name"
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar">
+        </activity>
+        <activity
+            android:name=".ui.appsfrg.childmodel.examination.copydetail.BookTicketsDetailCopyActivity"
+            android:label="@string/app_name"
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar">
+        </activity>
+
+        <!--01 调休09-->
+        <activity
+            android:name=".ui.appsfrg.childmodel.examination.create.TakeDaysOffActivity"
+            android:label="@string/app_name"
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar">
+        </activity>
+        <activity
+            android:name=".ui.appsfrg.childmodel.examination.applicationdetail.TakeDaysOffDetailAplActivity"
+            android:label="@string/app_name"
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar">
+        </activity>
+        <activity
+            android:name=".ui.appsfrg.childmodel.examination.approvaldetail.TakeDaysOffDetailApvlActivity"
+            android:label="@string/app_name"
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar">
+        </activity>
+        <activity
+            android:name=".ui.appsfrg.childmodel.examination.copydetail.TakeDaysOffDetailCopyActivity"
+            android:label="@string/app_name"
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar">
+        </activity>
+
+        <!-- 01 印章10-->
+        <activity
+            android:name=".ui.appsfrg.childmodel.examination.create.SignetActivity"
+            android:label="@string/app_name"
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar">
+        </activity>
+        <activity
+            android:name=".ui.appsfrg.childmodel.examination.applicationdetail.SignetDetailAplActivity"
+            android:label="@string/app_name"
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar">
+        </activity>
+        <activity
+            android:name=".ui.appsfrg.childmodel.examination.approvaldetail.SignetDetailApvlActivity"
+            android:label="@string/app_name"
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar">
+        </activity>
+        <activity
+            android:name=".ui.appsfrg.childmodel.examination.copydetail.SignetDetailCopyActivity"
+            android:label="@string/app_name"
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar">
+        </activity>
+
+        <!-- 01 培训11-->
+
+        <activity
+            android:name=".ui.appsfrg.childmodel.examination.create.TrainingActivity"
+            android:label="@string/app_name"
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar">
+        </activity>
+        <activity
+            android:name=".ui.appsfrg.childmodel.examination.applicationdetail.TrainingDetailAplActivity"
+            android:label="@string/app_name"
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar">
+        </activity>
+        <activity
+            android:name=".ui.appsfrg.childmodel.examination.approvaldetail.TrainingDetailApvlActivity"
+            android:label="@string/app_name"
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar">
+        </activity>
+
+        <activity
+            android:name=".ui.appsfrg.childmodel.examination.copydetail.TrainingDetailCopyActivity"
+            android:label="@string/app_name"
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar">
+        </activity>
+
+        <!-- 01 调动12-->
+        <activity
+            android:name=".ui.appsfrg.childmodel.examination.applicationdetail.PositionReplaceDetailAplActivity"
+            android:label="@string/app_name"
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar">
+        </activity>
+        <activity
+            android:name=".ui.appsfrg.childmodel.examination.approvaldetail.PositionReplaceDetailApvlActivity"
+            android:label="@string/app_name"
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar">
+        </activity>
+        <activity
+            android:name=".ui.appsfrg.childmodel.examination.copydetail.PositionReplaceDetailCopyActivity"
+            android:label="@string/app_name"
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar">
+        </activity>
+
+
+        <!-- 01  采购13-->
+        <activity
+            android:name=".ui.appsfrg.childmodel.examination.applicationdetail.ProcurementDetailAplActivity"
+            android:label="@string/app_name"
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar">
+        </activity>
+        <activity
+            android:name=".ui.appsfrg.childmodel.examination.approvaldetail.ProcurementDetailApvlActivity"
+            android:label="@string/app_name"
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar">
+        </activity>
+        <activity
+            android:name=".ui.appsfrg.childmodel.examination.copydetail.ProcurementDetailCopyActivity"
+            android:label="@string/app_name"
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar">
+        </activity>
+
+        <!-- 01 招聘14-->
+        <activity
+            android:name=".ui.appsfrg.childmodel.examination.applicationdetail.RecruitmentDetailAplActivity"
+            android:label="@string/app_name"
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar">
+        </activity>
+        <activity
+            android:name=".ui.appsfrg.childmodel.examination.approvaldetail.RecruitmentDetailApvlActivity"
+            android:label="@string/app_name"
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar">
+        </activity>
+        <activity
+            android:name=".ui.appsfrg.childmodel.examination.copydetail.RecruitmentDetailCopyActivity"
+            android:label="@string/app_name"
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar">
+        </activity>
+
+        <!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~本app不适用的功能~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+        <!-- 借阅-->
+        <activity
+            android:name=".ui.appsfrg.childmodel.examination.create.BorrowActivity"
+            android:label="@string/app_name"
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar">
+        </activity>
+        <activity
+            android:name=".ui.appsfrg.childmodel.examination.applicationdetail.BorrowDetailAplActivity"
+            android:label="@string/app_name"
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar">
+        </activity>
+        <activity
+            android:name=".ui.appsfrg.childmodel.examination.approvaldetail.BorrowDetailApvlActivity"
+            android:label="@string/app_name"
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar">
+        </activity>
+        <activity
+            android:name=".ui.appsfrg.childmodel.examination.copydetail.BorrowDetailCopyActivity"
+            android:label="@string/app_name"
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar">
+        </activity>
+
+
+        <!-- 调薪-->
+        <activity
+            android:name=".ui.appsfrg.childmodel.examination.create.SalaryadjustActivity"
+            android:label="@string/app_name"
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar">
+        </activity>i
+        <activity
+            android:name=".ui.appsfrg.childmodel.examination.applicationdetail.SalaryadjustDetailAplActivity"
+            android:label="@string/app_name"
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar">
+        </activity>
+        <activity
+            android:name=".ui.appsfrg.childmodel.examination.approvaldetail.SalaryadjustDetailApvlActivity"
+            android:label="@string/app_name"
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar">
+        </activity>
+        <activity
+            android:name=".ui.appsfrg.childmodel.examination.copydetail.SalaryadjustDetailCopyActivity"
+            android:label="@string/app_name"
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar">
+        </activity>
+        <!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+
+
+        <!-- 05-13  通知公告详情-->
+        <activity
+            android:name=".ui.appsfrg.childmodel.examination.applicationdetail.NotificationAndNoticeDetailAplActivity"
+            android:label="@string/app_name"
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar">
+        </activity>
+        <activity
+            android:name=".ui.appsfrg.childmodel.examination.applicationdetail.NotificationAndNoticeDetailAplActivity2"
+            android:label="@string/app_name"
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar">
+        </activity>
+        <activity
+            android:name=".ui.appsfrg.childmodel.examination.approvaldetail.NotificationAndNoticeDetailApvlActivity"
+            android:label="@string/app_name"
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar">
+        </activity>
+        <activity
+            android:name=".ui.appsfrg.childmodel.examination.approvaldetail.NotificationAndNoticeDetailApvlActivity2"
+            android:label="@string/app_name"
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar">
+        </activity>
+        <activity
+            android:name=".ui.appsfrg.childmodel.examination.copydetail.NotificationAndNoticeDetailCopyActivity"
+            android:label="@string/app_name"
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar">
+        </activity>
+
+
+        <!-- 05-14  通知公告详情-->
+        <activity
+            android:name=".ui.appsfrg.childmodel.examination.applicationdetail.OfficeDetailAplActivity"
+            android:label="@string/app_name"
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar">
+        </activity>
+        <activity
+            android:name=".ui.appsfrg.childmodel.examination.approvaldetail.OfficeDetailApvlActivity"
+            android:label="@string/app_name"
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar">
+        </activity>
+        <activity
+            android:name=".ui.appsfrg.childmodel.examination.copydetail.OfficeDetailCopyActivity"
+            android:label="@string/app_name"
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar">
+        </activity>
+
+
+        <!-- 05-15  领用详情-->
+        <activity
+            android:name=".ui.appsfrg.childmodel.examination.applicationdetail.ReceiveDetailAplActivity"
+            android:label="@string/app_name"
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar">
+        </activity>
+        <activity
+            android:name=".ui.appsfrg.childmodel.examination.approvaldetail.ReceiveDetailApvlActivity"
+            android:label="@string/app_name"
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar">
+        </activity>
+        <activity
+            android:name=".ui.appsfrg.childmodel.examination.copydetail.ReceiveDetailCopyActivity"
+            android:label="@string/app_name"
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar">
+        </activity>
+
+
+        <!-- 05-16  合同文件详情-->
+        <activity
+            android:name=".ui.appsfrg.childmodel.examination.applicationdetail.ContractFileDetailAplActivity"
+            android:label="@string/app_name"
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar">
+        </activity>
+        <activity
+            android:name=".ui.appsfrg.childmodel.examination.approvaldetail.ContractFileDetailApvlActivity"
+            android:label="@string/app_name"
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar">
+        </activity>
+        <activity
+            android:name=".ui.appsfrg.childmodel.examination.copydetail.ContractFileDetailCopyActivity"
+            android:label="@string/app_name"
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar">
+        </activity>
+
+
+        <!-- 05-17  外出详情-->
+        <activity
+            android:name=".ui.appsfrg.childmodel.examination.applicationdetail.OutGoingDetailAplActivity"
+            android:label="@string/app_name"
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar">
+        </activity>
+        <activity
+            android:name=".ui.appsfrg.childmodel.examination.approvaldetail.OutGoingDetailApvlActivity"
+            android:label="@string/app_name"
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar">
+        </activity>
+        <activity
+            android:name=".ui.appsfrg.childmodel.examination.copydetail.OutGoingDetailCopyActivity"
+            android:label="@string/app_name"
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar">
+        </activity>
+
+
+        <!-- 05-18  复试详情-->
+        <activity
+            android:name=".ui.appsfrg.childmodel.examination.applicationdetail.RetestDetailAplActivity"
+            android:label="@string/app_name"
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar">
+        </activity>
+        <activity
+            android:name=".ui.appsfrg.childmodel.examination.approvaldetail.RetestDetailApvlActivity"
+            android:label="@string/app_name"
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar">
+        </activity>
+        <activity
+            android:name=".ui.appsfrg.childmodel.examination.copydetail.RetestDetailCopyActivity"
+            android:label="@string/app_name"
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar">
+        </activity>
+
+
+        <!-- 05-19  会议详情-->
+        <activity
+            android:name=".ui.appsfrg.childmodel.examination.applicationdetail.ConferenceDetailAplActivity"
+            android:label="@string/app_name"
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar">
+        </activity>
+        <activity
+            android:name=".ui.appsfrg.childmodel.examination.approvaldetail.ConferenceDetailApvlActivity"
+            android:label="@string/app_name"
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar">
+        </activity>
+        <activity
+            android:name=".ui.appsfrg.childmodel.examination.copydetail.ConferenceDetailCopyActivity"
+            android:label="@string/app_name"
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar">
+        </activity>
+
+
+        <!-- 个人信息-->
+        <activity
+            android:name="com.huirong.ui.mine.PersonalInfoActivity"
+            android:label="@string/app_name"
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar">
+        </activity>
+
+        <!-- 修改密码-->
+        <activity
+            android:name="com.huirong.ui.mine.ChangePassWordActivity"
+            android:label="@string/app_name"
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar">
+        </activity>
+
+        <!-- 意见反馈-->
+
+        <!--02 业绩管理 -->
+        <activity
+            android:name="com.huirong.ui.appsfrg.PerformanceManagerActivity"
+            android:label="@string/app_name"
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar">
+        </activity>
+
+        <!-- 03 外出考勤-->
+        <activity
+            android:name="com.huirong.ui.appsfrg.MapAttendAcitivity"
+            android:label="@string/app_name"
+            android:screenOrientation="portrait"
+            android:theme="@style/Anim_style2">
+        </activity>
+
+        <!-- 03-01地图定位-->
+        <activity
+            android:name="com.huirong.ui.appsfrg.childmodel.mapattend.MapLocationActivity"
+            android:label="@string/app_name"
+            android:screenOrientation="portrait"
+            android:theme="@style/Anim_style2">
+        </activity>
+
+        <!-- 03-02考勤记录 spinner样式-->
+        <activity
+            android:name="com.huirong.ui.appsfrg.childmodel.mapattend.MapAttendRecordListActivity"
+            android:label="@string/app_name"
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar">
+        </activity>
+
+        <!-- 04 公告列表界面-->
+        <activity
+            android:name="com.huirong.ui.appsfrg.NoticeListActivity"
+            android:label="@string/app_name"
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar">
+        </activity>
+
+        <!-- 04 公告详情界面-->
+        <activity
+            android:name="com.huirong.ui.appsfrg.childmodel.notice.NoticeDetailActivity"
+            android:label="@string/app_name"
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar">
+        </activity>
+
+        <!--05 通知列表界面 -->
+        <activity
+            android:name="com.huirong.ui.appsfrg.NotificationListActivity"
+            android:label="@string/app_name"
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar">
+        </activity>
+
+
+        <!--05 通知详情界面 -->
+        <activity
+            android:name="com.huirong.ui.appsfrg.childmodel.notification.NotificationDetailActivity"
+            android:label="@string/app_name"
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar">
+        </activity>
+
+        <!-- 06 财务列表界面-->
+        <activity
+            android:name="com.huirong.ui.appsfrg.FinancialListAcitivity"
+            android:label="@string/app_name"
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar">
+        </activity>
+
+        <!-- 06-01 财务列表界面-借款详情  -->
+        <activity
+            android:name="com.huirong.ui.appsfrg.childmodel.finance.FinancialLoanDetailActivity"
+            android:label="@string/app_name"
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar">
+        </activity>
+
+        <!-- 06-02 财务列表界面-报销详情  -->
+        <activity
+            android:name="com.huirong.ui.appsfrg.childmodel.finance.FinancialRemburseDetailActivity"
+            android:label="@string/app_name"
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar">
+        </activity>
+
+        <!-- 06-04 财务列表界面-付款详情  -->
+        <activity
+            android:name="com.huirong.ui.appsfrg.childmodel.finance.FinancialPayDetailActivity"
+            android:label="@string/app_name"
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar">
+        </activity>
+
+        <!-- 07 日程界面-->
+        <activity
+            android:name="com.huirong.ui.appsfrg.ScheduleMainActivity"
+            android:label="@string/app_name"
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar">
+        </activity>
+
+        <!-- 07-01日程记录-->
+        <activity
+            android:name="com.huirong.ui.appsfrg.childmodel.shedule.ScheduleListActivity"
+            android:label="@string/app_name"
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar">
+        </activity>
+
+        <!-- 07-02item详情列表-->
+        <activity
+            android:name="com.huirong.ui.appsfrg.childmodel.shedule.ScheduleAddActivity"
+            android:label="@string/app_name"
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar">
+        </activity>
+
+        <!-- 07-03当日多日程详情-->
+        <activity
+            android:name="com.huirong.ui.appsfrg.childmodel.shedule.ScheduleMultDetailActivity"
+            android:label="@string/app_name"
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar">
+        </activity>
+
+        <!-- 07-04当日但日程详情-->
+        <activity
+            android:name="com.huirong.ui.appsfrg.childmodel.shedule.ScheduleSingleDetailActivity"
+            android:label="@string/app_name"
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar">
+        </activity>
+
+        <!--08 会议列表 -->
+        <activity
+            android:name="com.huirong.ui.appsfrg.ConferenceListActivity"
+            android:label="@string/app_name"
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar">
+        </activity>
+
+        <!--08-02 会议详情 -->
+        <activity
+            android:name="com.huirong.ui.appsfrg.childmodel.coference.ConferenceDetailActivity"
+            android:label="@string/app_name"
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar">
+        </activity>
+
+        <!--09 采购领用 -->
+        <activity
+            android:name="com.huirong.ui.appsfrg.ProcureMainActivity"
+            android:label="@string/app_name"
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar">
+        </activity>
+
+        <!--09-01 采购详情 -->
+        <activity
+            android:name=".ui.appsfrg.childmodel.performance.ProcurementDetailActivity"
+            android:label="@string/app_name"
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar">
+        </activity>
+        <!--09-02 领用详情 -->
+        <activity
+            android:name=".ui.appsfrg.childmodel.performance.ReceiveDetailActivity"
+            android:label="@string/app_name"
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar">
+        </activity>
+
+
+        <!--010 交车 记录界面01 -->
+        <activity
+            android:name="com.huirong.ui.appsfrg.VehicleReturnListActivity"
+            android:label="@string/app_name"
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar">
+        </activity>
+
+        <!--010 交车 用车-未交车02 -->
+        <activity
+            android:name=".ui.appsfrg.childmodel.vehiclereturn.VehicleReturnUseUncompleteActivity"
+            android:label="@string/app_name"
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar">
+        </activity>
+
+        <!--010 交车 用车-交车提交03 -->
+        <activity
+            android:name=".ui.appsfrg.childmodel.vehiclereturn.VehicleReturnUseToCompleteActivity"
+            android:label="@string/app_name"
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar">
+        </activity>
+
+        <!--010 交车 用车-已交车详情04 -->
+        <activity
+            android:name=".ui.appsfrg.childmodel.vehiclereturn.VehicleReturnUseCompleteActivity"
+            android:label="@string/app_name"
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar">
+        </activity>
+
+        <!--010 交车 未维保-未交车05 -->
+        <activity
+            android:name=".ui.appsfrg.childmodel.vehiclereturn.VehicleReturnMaintenanceUncompleteActivity"
+            android:label="@string/app_name"
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar">
+        </activity>
+
+        <!--010 交车 维保-交车提交界面05 -->
+        <activity
+            android:name=".ui.appsfrg.childmodel.vehiclereturn.VehicleReturnMaintenanceToCompleteActivity"
+            android:label="@string/app_name"
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar">
+        </activity>
+
+        <!--010 交车 维保-已交车详情06 -->
+        <activity
+            android:name=".ui.appsfrg.childmodel.vehiclereturn.VehicleReturnMaintenanceCompleteActivity"
+            android:label="@string/app_name"
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar">
+        </activity>
+
+        <!--通讯录-子公司01 -->
+        <activity
+            android:name="com.huirong.ui.contractsfrg.ContactsDeptOfSonActivity"
+            android:label="@string/app_name"
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar">
+        </activity>
+
+        <!--通讯录-部门02 -->
+        <activity
+            android:name="com.huirong.ui.contractsfrg.ContactsEplOfDeptActivity"
+            android:label="@string/app_name"
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar">
+        </activity>
+
+        <!--通讯录-员工详情03 -->
+        <activity
+            android:name="com.huirong.ui.contractsfrg.ContactsEplDetailActivity"
+            android:label="@string/app_name"
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar">
+        </activity>
+
+        <!--通讯录-申请-选择审批人 -->
+        <activity
+            android:name="com.huirong.ui.contractsfrg.ContactsSelectActivity"
+            android:label="@string/app_name"
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar">
+        </activity>
+
+        <!-- ATTENTION: This was auto-generated to add Google Play services to your project for
+     App Indexing.  See https://g.co/AppIndexing/AndroidStudio for more information. -->
+        <meta-data
+            android:name="com.google.android.gms.version"
+            android:value="@integer/google_play_services_version"/>
+
+    </application>
+
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"/>
+    <uses-permission android:name="android.permission.CHANGE_WIFI_STATE"/>
+    <uses-permission android:name="android.permission.ACCESS_LOCATION_EXTRA_COMMANDS"/>
+
+    <uses-permission android:name="android.permission.CHANGE_NETWORK_STATE"/>
+
+</manifest>

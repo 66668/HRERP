@@ -1,0 +1,161 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:alpha="20"
+              android:background="@mipmap/login_background"
+              android:orientation="vertical"
+              android:weightSum="1">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="0.35">
+
+        <ImageView
+            android:id="@+id/imageView"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:layout_centerHorizontal="true"
+            android:layout_centerVertical="true"
+            android:background="@mipmap/zologo"/>
+    </RelativeLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="0.4"
+        android:orientation="vertical">
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:orientation="horizontal"
+            >
+
+            <View
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.14"/>
+            <!-- 账号-->
+            <EditText
+                android:id="@+id/tv_AdminUserName"
+                android:layout_width="0dp"
+                android:layout_height="@dimen/common_topbar_height40"
+                android:layout_weight="0.72"
+                android:lines="1"
+                android:background="@drawable/et_login_style"
+                android:drawableLeft="@mipmap/login_co"
+                android:drawablePadding="10dp"
+                android:hint="@string/please_input_account"
+                android:paddingLeft="15dp"
+                android:textColor="@color/white"
+                android:textColorHint="@color/white"
+                android:textSize="18sp"/>
+
+            <View
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.14"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:orientation="horizontal"
+            >
+
+            <View
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.14"/>
+            <!-- 账号-->
+            <EditText
+                android:id="@+id/tv_userName"
+                android:layout_width="0dp"
+                android:layout_height="@dimen/common_topbar_height40"
+                android:layout_weight="0.72"
+                android:lines="1"
+                android:background="@drawable/et_login_style"
+                android:drawableLeft="@mipmap/login_user"
+                android:drawablePadding="10dp"
+                android:hint="@string/please_input_uername"
+                android:paddingLeft="15dp"
+                android:textColor="@color/white"
+                android:textColorHint="@color/white"
+                android:textSize="18sp"/>
+
+            <View
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.14"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:orientation="horizontal"
+            >
+
+            <View
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.14"/>
+            <!-- 账号-->
+            <EditText
+                android:id="@+id/tv_password"
+                android:layout_width="0dp"
+                android:layout_height="@dimen/common_topbar_height40"
+                android:layout_weight="0.72"
+                android:lines="1"
+                android:background="@drawable/et_login_style"
+                android:drawableLeft="@mipmap/login_psd"
+                android:drawablePadding="10dp"
+                android:hint="@string/please_input_ps"
+                android:inputType="textPassword"
+                android:paddingLeft="15dp"
+                android:textColor="@color/white"
+                android:textColorHint="@color/white"
+                android:textSize="18sp"/>
+
+            <View
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.14"/>
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="80dp"
+        android:orientation="horizontal"
+        android:weightSum="1">
+
+        <View
+            android:layout_width="0dp"
+            android:layout_height="10dp"
+            android:layout_weight="0.14"/>
+
+        <Button
+            android:id="@+id/btn_login"
+            android:layout_width="0dp"
+            android:layout_height="@dimen/common_topbar_height40"
+            android:layout_weight="0.72"
+            android:background="@drawable/btn_style"
+            android:text="@string/login"
+            android:textColor="@android:color/white"
+            android:textSize="@dimen/common_textSize_default18"
+            />
+
+        <View
+            android:layout_width="0dp"
+            android:layout_height="10dp"
+            android:layout_weight="0.14"/>
+
+    </LinearLayout>
+</LinearLayout>

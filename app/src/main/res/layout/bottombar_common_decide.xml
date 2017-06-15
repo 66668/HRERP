@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:layout_width="match_parent"
+              android:layout_height="@dimen/common_topbar_height"
+              android:layout_alignParentBottom="true"
+              android:layout_marginBottom="0dp"
+              android:orientation="horizontal">
+
+    <Button
+        android:id="@+id/btn_refulse"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:background="@color/exa_disagree"
+        android:gravity="center"
+        android:text="@string/examination_refulse"
+        android:textColor="@color/white"
+        android:textSize="@dimen/common_textSize_default15"
+        />
+
+    <Button
+        android:id="@+id/btn_commit"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:background="@color/exa_agree"
+        android:gravity="center"
+        android:text="@string/examination_commit"
+        android:textColor="@color/white"
+        android:textSize="@dimen/common_textSize_default15"/>
+
+    <Button
+        android:id="@+id/btn_transfer"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:background="@color/exa_transferto"
+        android:gravity="center"
+        android:text="@string/examination_transfer"
+        android:textColor="@color/white"
+        android:textSize="@dimen/common_textSize_default15"/>
+</LinearLayout>

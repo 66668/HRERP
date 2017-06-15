@@ -1,0 +1,129 @@
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:background="@color/common_bg_examination"
+    android:orientation="vertical">
+
+    <include layout="@layout/topbar_common_itt"/>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:focusable="true"
+            android:focusableInTouchMode="true"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:id="@+id/layout_scheduleType"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/common_topbar_height40"
+                android:layout_marginTop="10dp"
+                android:background="@color/white"
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
+                android:weightSum="1">
+
+                <TextView
+                    style="@style/BlackText.standard"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:layout_weight="0.28"
+                    android:gravity="center_vertical"
+                    android:text="日程类型"/>
+
+                <TextView
+                    android:id="@+id/scheduleType"
+                    style="@style/BlackText.standard"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="10dp"
+                    android:layout_weight="0.72"
+                    android:gravity="center_vertical|center_horizontal"
+                    android:paddingRight="20dp"
+                    />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/layout_scheduleRemind"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/common_topbar_height40"
+                android:layout_marginTop="10dp"
+                android:background="@color/white"
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
+                android:weightSum="1">
+
+                <TextView
+                    style="@style/BlackText.standard"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:layout_weight="0.28"
+                    android:gravity="center_vertical"
+                    android:text="提醒次数"/>
+
+                <TextView
+                    android:id="@+id/scheduleRemind"
+                    style="@style/BlackText.standard"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="10dp"
+                    android:layout_weight="0.72"
+                    android:gravity="center_vertical|center_horizontal"
+                    android:paddingRight="20dp"
+                    />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/layout_proTime"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/common_topbar_height40"
+                android:layout_marginTop="10dp"
+                android:background="@color/white"
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
+                android:weightSum="1">
+
+                <TextView
+                    style="@style/BlackText.standard"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:layout_weight="0.28"
+                    android:gravity="center_vertical"
+                    android:text="提醒时间"/>
+
+                <TextView
+                    android:id="@+id/tvProTime"
+                    style="@style/BlackText.standard"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="10dp"
+                    android:layout_weight="0.72"
+                    android:gravity="center_vertical|center_horizontal"
+                    android:paddingRight="20dp"
+                    />
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/scheduleText"
+                style="@style/BlackText.standard"
+                android:layout_width="fill_parent"
+                android:layout_height="240dp"
+                android:layout_marginTop="10dp"
+                android:background="@color/white"
+                android:gravity="top|left"
+                android:padding="10dp"
+                />
+
+
+        </LinearLayout>
+    </ScrollView>
+
+</LinearLayout>
