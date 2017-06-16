@@ -482,41 +482,9 @@ public class UserHelper<T> {
         }
     }
 
-    /**
-     * -02 离职申请 （obj形式上传）
-     * <p></>
-     *
-     * @param context
-     * @param jsonObject
-     * @throws MyException
-     */
-    public static void dimissionPost(Context context, JSONObject jsonObject) throws MyException {
-        if (!NetworkManager.isNetworkAvailable(context)) {
-            throw new MyException(R.string.network_invalid);
-        }
-
-        try {
-            /**
-             * 参数保存成json
-             */
-            jsonObject.put("StoreID", UserHelper.getCurrentUser().getStoreID());
-            jsonObject.put("EmployeeID", UserHelper.getCurrentUser().getEmployeeID());
-
-            HttpResult httpResult = APIUtils.postForObject(WebUrl.AppsManager.DIMISSIONPOST,
-                    HttpParameter.create().add("obj", jsonObject.toString()));
-
-            if (httpResult.hasError()) {
-                throw httpResult.getError();
-            }
-        } catch (JSONException e) {
-            e.printStackTrace();
-        } catch (MyException e) {
-            throw new MyException(e.getMessage());
-        }
-    }
 
     /**
-     * -03 请假申请 （obj形式上传）
+     * -01 请假申请 （obj形式上传）
      * <p></p>
      *
      * @param context
@@ -534,8 +502,9 @@ public class UserHelper<T> {
             jsonObject.put("StoreID", UserHelper.getCurrentUser().getStoreID());
             jsonObject.put("EmployeeID", UserHelper.getCurrentUser().getEmployeeID());
 
-            HttpResult httpResult = APIUtils.postForObject(WebUrl.AppsManager.LEAVEPOST,
-                    HttpParameter.create().add("obj", jsonObject.toString()), picPath);
+            HttpResult httpResult = APIUtils.postForObject(WebUrl.AppsManager.LEAVEPOST
+                    , HttpParameter.create().add("obj", jsonObject.toString())
+                    , picPath);
 
             if (httpResult.hasError()) {
                 throw httpResult.getError();
@@ -549,30 +518,31 @@ public class UserHelper<T> {
     }
 
     /**
-     * -04 加班申请 （obj形式上传）
-     * <p></>
+     * -02 出差申请 （obj形式上传）
+     * <p></p>
      *
      * @param context
-     * @param js
+     * @param jsonObject
      * @throws MyException
      */
-    public static void overApprovalPost(Context context, JSONObject js) throws MyException {
+    public static void beawayPost(Context context, JSONObject jsonObject) throws MyException {
         if (!NetworkManager.isNetworkAvailable(context)) {
             throw new MyException(R.string.network_invalid);
         }
         try {
             /**
-             * 参数保存成json 9参数
+             * 参数保存成json
              */
-            js.put("StoreID", UserHelper.getCurrentUser().getStoreID());
-            js.put("EmployeeID", UserHelper.getCurrentUser().getEmployeeID());
+            jsonObject.put("StoreID", UserHelper.getCurrentUser().getStoreID());
+            jsonObject.put("EmployeeID", UserHelper.getCurrentUser().getEmployeeID());
 
-            HttpResult httpResult = APIUtils.postForObject(WebUrl.AppsManager.OVERAPPROVALPOST,
-                    HttpParameter.create().add("obj", js.toString()));
+            HttpResult httpResult = APIUtils.postForObject(WebUrl.AppsManager.BEAWAY,
+                    HttpParameter.create().add("obj", jsonObject.toString()));
 
             if (httpResult.hasError()) {
                 throw httpResult.getError();
             }
+
         } catch (JSONException e) {
             e.printStackTrace();
         } catch (MyException e) {
@@ -581,108 +551,7 @@ public class UserHelper<T> {
     }
 
     /**
-     * -05 调休申请 （obj形式上传）
-     * <p></>
-     *
-     * @param context
-     * @param js
-     * @throws MyException
-     */
-    public static void takeDaysOffPost(Context context, JSONObject js) throws MyException {
-        if (!NetworkManager.isNetworkAvailable(context)) {
-            throw new MyException(R.string.network_invalid);
-        }
-        try {
-            /**
-             * 参数保存成json 参数
-             */
-
-            js.put("StoreID", UserHelper.getCurrentUser().getStoreID());
-            js.put("EmployeeID", UserHelper.getCurrentUser().getEmployeeID());
-
-            HttpResult httpResult = APIUtils.postForObject(WebUrl.AppsManager.TAKEDAYSOFFPOST,
-                    HttpParameter.create().add("obj", js.toString()));
-
-            if (httpResult.hasError()) {
-                throw httpResult.getError();
-            }
-        } catch (JSONException e) {
-            e.printStackTrace();
-        } catch (MyException e) {
-            throw new MyException(e.getMessage());
-        }
-    }
-
-    /**
-     * -06 借阅申请 （obj形式上传）
-     * <p></>
-     *
-     * @param context
-     * @param js
-     * @throws MyException
-     */
-    public static void borrowPost(Context context, JSONObject js) throws MyException {
-        if (!NetworkManager.isNetworkAvailable(context)) {
-            throw new MyException(R.string.network_invalid);
-        }
-        try {
-            /**
-             * 参数保存成json 参数
-             */
-
-            js.put("CreateTime", Utils.getCurrentTime());
-            js.put("StoreID", UserHelper.getCurrentUser().getStoreID());
-            js.put("EmployeeID", UserHelper.getCurrentUser().getEmployeeID());
-
-            HttpResult httpResult = APIUtils.postForObject(WebUrl.AppsManager.BORROWPOST,
-                    HttpParameter.create().add("obj", js.toString()));
-
-            if (httpResult.hasError()) {
-                throw httpResult.getError();
-            }
-        } catch (JSONException e) {
-            e.printStackTrace();
-        } catch (MyException e) {
-            throw new MyException(e.getMessage());
-        }
-    }
-
-    /**
-     * -07 调薪申请 （obj形式上传）
-     * <p></>
-     *
-     * @param context
-     * @param js
-     * @throws MyException
-     */
-    public static void changeSalary(Context context, JSONObject js) throws MyException {
-        if (!NetworkManager.isNetworkAvailable(context)) {
-            throw new MyException(R.string.network_invalid);
-        }
-        try {
-            /**
-             * 参数保存成json 参数
-             */
-
-            js.put("CreateTime", Utils.getCurrentTime());
-            js.put("StoreID", UserHelper.getCurrentUser().getStoreID());
-            js.put("EmployeeID", UserHelper.getCurrentUser().getEmployeeID());
-
-            HttpResult httpResult = APIUtils.postForObject(WebUrl.AppsManager.CHANGESALARY,
-                    HttpParameter.create().add("obj", js.toString()));
-
-            if (httpResult.hasError()) {
-                throw httpResult.getError();
-            }
-        } catch (JSONException e) {
-            e.printStackTrace();
-        } catch (MyException e) {
-            throw new MyException(e.getMessage());
-        }
-    }
-
-    /**
-     * -08 用车申请 （obj形式上传）
+     * -03 用车申请 （obj形式上传）
      * <p></>
      *
      * @param context
@@ -714,7 +583,7 @@ public class UserHelper<T> {
     }
 
     /**
-     * -09 车辆维护申请 （obj形式上传）
+     * -04 车辆维护申请 （obj形式上传）
      * <p></>
      *
      * @param context
@@ -748,7 +617,39 @@ public class UserHelper<T> {
     }
 
     /**
-     * -10 财务申请 （obj形式上传）
+     * -05 加班申请 （obj形式上传）
+     * <p></>
+     *
+     * @param context
+     * @param js
+     * @throws MyException
+     */
+    public static void workoverTimePost(Context context, JSONObject js) throws MyException {
+        if (!NetworkManager.isNetworkAvailable(context)) {
+            throw new MyException(R.string.network_invalid);
+        }
+        try {
+            /**
+             * 参数保存成json 9参数
+             */
+            js.put("StoreID", UserHelper.getCurrentUser().getStoreID());
+            js.put("EmployeeID", UserHelper.getCurrentUser().getEmployeeID());
+
+            HttpResult httpResult = APIUtils.postForObject(WebUrl.AppsManager.OVERAPPROVALPOST,
+                    HttpParameter.create().add("obj", js.toString()));
+
+            if (httpResult.hasError()) {
+                throw httpResult.getError();
+            }
+        } catch (JSONException e) {
+            e.printStackTrace();
+        } catch (MyException e) {
+            throw new MyException(e.getMessage());
+        }
+    }
+
+    /**
+     * -06 财务申请 （obj形式上传）
      * 借款 报销 费用申请 付款
      *
      * @param context
@@ -784,6 +685,239 @@ public class UserHelper<T> {
             throw new MyException(e.getMessage());
         }
         return null;
+    }
+
+    /**
+     * -07 离职申请 （obj形式上传）
+     * <p></>
+     *
+     * @param context
+     * @param jsonObject
+     * @throws MyException
+     */
+    public static void dimissionPost(Context context, JSONObject jsonObject) throws MyException {
+        if (!NetworkManager.isNetworkAvailable(context)) {
+            throw new MyException(R.string.network_invalid);
+        }
+
+        try {
+            /**
+             * 参数保存成json
+             */
+            jsonObject.put("StoreID", UserHelper.getCurrentUser().getStoreID());
+            jsonObject.put("EmployeeID", UserHelper.getCurrentUser().getEmployeeID());
+
+            HttpResult httpResult = APIUtils.postForObject(WebUrl.AppsManager.DIMISSIONPOST,
+                    HttpParameter.create().add("obj", jsonObject.toString()));
+
+            if (httpResult.hasError()) {
+                throw httpResult.getError();
+            }
+        } catch (JSONException e) {
+            e.printStackTrace();
+        } catch (MyException e) {
+            throw new MyException(e.getMessage());
+        }
+    }
+
+    /**
+     * -08 订票申请 （obj形式上传）
+     * <p></>
+     *
+     * @param context
+     * @param jsonObject
+     * @throws MyException
+     */
+    public static void bookTicketsPost(Context context, JSONObject jsonObject) throws MyException {
+        if (!NetworkManager.isNetworkAvailable(context)) {
+            throw new MyException(R.string.network_invalid);
+        }
+
+        try {
+            /**
+             * 参数保存成json
+             */
+            jsonObject.put("StoreID", UserHelper.getCurrentUser().getStoreID());
+            jsonObject.put("EmployeeID", UserHelper.getCurrentUser().getEmployeeID());
+
+            HttpResult httpResult = APIUtils.postForObject(WebUrl.AppsManager.BOOKTICKET,
+                    HttpParameter.create().add("obj", jsonObject.toString()));
+
+            if (httpResult.hasError()) {
+                throw httpResult.getError();
+            }
+        } catch (JSONException e) {
+            e.printStackTrace();
+        } catch (MyException e) {
+            throw new MyException(e.getMessage());
+        }
+    }
+
+    /**
+     * -09 调休申请 （obj形式上传）
+     * <p></>
+     *
+     * @param context
+     * @param js
+     * @throws MyException
+     */
+    public static void takeDaysOffPost(Context context, JSONObject js) throws MyException {
+        if (!NetworkManager.isNetworkAvailable(context)) {
+            throw new MyException(R.string.network_invalid);
+        }
+        try {
+            /**
+             * 参数保存成json 参数
+             */
+
+            js.put("StoreID", UserHelper.getCurrentUser().getStoreID());
+            js.put("EmployeeID", UserHelper.getCurrentUser().getEmployeeID());
+
+            HttpResult httpResult = APIUtils.postForObject(WebUrl.AppsManager.TAKEDAYSOFFPOST,
+                    HttpParameter.create().add("obj", js.toString()));
+
+            if (httpResult.hasError()) {
+                throw httpResult.getError();
+            }
+        } catch (JSONException e) {
+            e.printStackTrace();
+        } catch (MyException e) {
+            throw new MyException(e.getMessage());
+        }
+    }
+
+    /**
+     * -10 印章申请 （obj形式上传）
+     * <p></>
+     *
+     * @param context
+     * @param js
+     * @throws MyException
+     */
+    public static void signetPost(Context context, JSONObject js) throws MyException {
+        if (!NetworkManager.isNetworkAvailable(context)) {
+            throw new MyException(R.string.network_invalid);
+        }
+        try {
+            /**
+             * 参数保存成json 参数
+             */
+
+            js.put("StoreID", UserHelper.getCurrentUser().getStoreID());
+            js.put("EmployeeID", UserHelper.getCurrentUser().getEmployeeID());
+
+            HttpResult httpResult = APIUtils.postForObject(WebUrl.AppsManager.SIGNET,
+                    HttpParameter.create().add("obj", js.toString()));
+
+            if (httpResult.hasError()) {
+                throw httpResult.getError();
+            }
+        } catch (JSONException e) {
+            e.printStackTrace();
+        } catch (MyException e) {
+            throw new MyException(e.getMessage());
+        }
+    }
+
+    /**
+     * -11 培训申请 （obj形式上传）
+     * <p></>
+     *
+     * @param context
+     * @param js
+     * @throws MyException
+     */
+    public static void trainingPost(Context context, JSONObject js) throws MyException {
+        if (!NetworkManager.isNetworkAvailable(context)) {
+            throw new MyException(R.string.network_invalid);
+        }
+        try {
+            /**
+             * 参数保存成json 参数
+             */
+
+            js.put("StoreID", UserHelper.getCurrentUser().getStoreID());
+            js.put("EmployeeID", UserHelper.getCurrentUser().getEmployeeID());
+
+            HttpResult httpResult = APIUtils.postForObject(WebUrl.AppsManager.TRAINING,
+                    HttpParameter.create().add("obj", js.toString()));
+
+            if (httpResult.hasError()) {
+                throw httpResult.getError();
+            }
+        } catch (JSONException e) {
+            e.printStackTrace();
+        } catch (MyException e) {
+            throw new MyException(e.getMessage());
+        }
+    }
+
+    /**
+     * -慧荣不使用 借阅申请 （obj形式上传）
+     * <p></>
+     *
+     * @param context
+     * @param js
+     * @throws MyException
+     */
+    public static void borrowPost(Context context, JSONObject js) throws MyException {
+        if (!NetworkManager.isNetworkAvailable(context)) {
+            throw new MyException(R.string.network_invalid);
+        }
+        try {
+            /**
+             * 参数保存成json 参数
+             */
+
+            js.put("CreateTime", Utils.getCurrentTime());
+            js.put("StoreID", UserHelper.getCurrentUser().getStoreID());
+            js.put("EmployeeID", UserHelper.getCurrentUser().getEmployeeID());
+
+            HttpResult httpResult = APIUtils.postForObject(WebUrl.AppsManager.BORROWPOST,
+                    HttpParameter.create().add("obj", js.toString()));
+
+            if (httpResult.hasError()) {
+                throw httpResult.getError();
+            }
+        } catch (JSONException e) {
+            e.printStackTrace();
+        } catch (MyException e) {
+            throw new MyException(e.getMessage());
+        }
+    }
+
+    /**
+     * -慧荣不使用 调薪申请 （obj形式上传）
+     * <p></>
+     *
+     * @param context
+     * @param js
+     * @throws MyException
+     */
+    public static void changeSalary(Context context, JSONObject js) throws MyException {
+        if (!NetworkManager.isNetworkAvailable(context)) {
+            throw new MyException(R.string.network_invalid);
+        }
+        try {
+            /**
+             * 参数保存成json 参数
+             */
+
+            js.put("CreateTime", Utils.getCurrentTime());
+            js.put("StoreID", UserHelper.getCurrentUser().getStoreID());
+            js.put("EmployeeID", UserHelper.getCurrentUser().getEmployeeID());
+
+            HttpResult httpResult = APIUtils.postForObject(WebUrl.AppsManager.CHANGESALARY,
+                    HttpParameter.create().add("obj", js.toString()));
+
+            if (httpResult.hasError()) {
+                throw httpResult.getError();
+            }
+        } catch (JSONException e) {
+            e.printStackTrace();
+        } catch (MyException e) {
+            throw new MyException(e.getMessage());
+        }
     }
 
 

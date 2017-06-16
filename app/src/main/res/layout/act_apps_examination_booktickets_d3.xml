@@ -150,7 +150,7 @@
                     android:layout_marginLeft="10dp"
                     android:layout_weight="0.28"
                     android:gravity="center_vertical"
-                    android:text="@string/book_endPlace"
+                    android:text="@string/book_endplace"
                     android:textColor="@color/cl_text_common"/>
 
                 <TextView

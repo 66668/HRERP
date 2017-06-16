@@ -152,7 +152,7 @@
                     android:textColor="@color/cl_text_common"/>
 
                 <EditText
-                    android:id="@+id/et_BorrowThings"
+                    android:id="@+id/et_company"
                     style="@style/BlackText.standard"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
@@ -161,6 +161,49 @@
                     android:background="@drawable/et_white_stroke"
                     android:gravity="center_vertical"
                     android:hint="@string/signet_name_hint"
+                    android:textColorHint="@color/cl_hint_common"
+                    />
+            </LinearLayout>
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dip"
+                android:background="@color/common_bg_examination_line"/>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dip"
+                android:layout_marginTop="10dp"
+                android:background="@color/common_bg_examination_line"/>
+
+            <LinearLayout
+
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/common_topbar_height"
+                android:background="@color/white"
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
+                android:weightSum="1">
+
+                <TextView
+                    style="@style/BlackText.standard"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:layout_weight="0.28"
+                    android:gravity="center_vertical"
+                    android:text="@string/signet_num"
+                    android:textColor="@color/cl_text_common"/>
+
+                <EditText
+                    android:id="@+id/et_num"
+                    style="@style/BlackText.standard"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="10dp"
+                    android:layout_weight="0.72"
+                    android:background="@drawable/et_white_stroke"
+                    android:gravity="center_vertical"
+                    android:hint="@string/signet_num_hint"
                     android:textColorHint="@color/cl_hint_common"
                     />
             </LinearLayout>
@@ -193,7 +236,7 @@
                     android:textColor="@color/cl_text_common"/>
 
                 <EditText
-                    android:id="@+id/et_reason"
+                    android:id="@+id/et_use"
                     style="@style/BlackText.standard"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
@@ -202,6 +245,7 @@
                     android:background="@drawable/et_white_stroke"
                     android:gravity="top|left"
                     android:hint="@string/signet_name_hint"
+                    android:maxLength="300"
                     android:paddingTop="10dp"
                     />
             </LinearLayout>
@@ -243,6 +287,7 @@
                     android:background="@drawable/et_white_stroke"
                     android:gravity="top|left"
                     android:hint="@string/hint_remark_all_apl"
+                    android:maxLength="300"
                     android:paddingTop="10dp"
                     android:textColorHint="@color/cl_hint_common"/>
             </LinearLayout>

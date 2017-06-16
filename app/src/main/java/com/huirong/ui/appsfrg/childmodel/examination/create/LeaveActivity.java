@@ -38,7 +38,7 @@ import java.util.List;
 
 
 /**
- * 请假
+ * 请假 有附件
  */
 
 public class LeaveActivity extends BaseActivity implements CameraGalleryUtils.ChoosePicCallBack {

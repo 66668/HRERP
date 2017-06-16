@@ -326,8 +326,8 @@
     <string name="book_endTime">返回时间</string>
     <string name="book_startPlace">出发地</string>
     <string name="book_startPlace_hint">请输入出发地</string>
-    <string name="book_endPlace">目的地</string>
-    <string name="book_endPlace_hint">请输入目的地</string>
+    <string name="book_endplace">目的地</string>
+    <string name="book_endplace_hint">请输入目的地</string>
     <string name="book_reason">订票事由</string>
     <string name="book_reason_hint">请输入订票事由</string>
     <string name="book_remark">备注</string>
@@ -376,6 +376,7 @@
     <string name="signet_name">印章单位名称</string>
     <string name="signet_name_hint">请输入印章单位名称</string>
     <string name="signet_num">份数</string>
+    <string name="signet_num_hint">请输入印章份数</string>
     <string name="signet_use">用途</string>
     <string name="signet_use_hint">请输入用途</string>
 
@@ -391,6 +392,22 @@
     <string name="train_fee_hint">请输入培训费用</string>
     <string name="train_place">培训地址</string>
     <string name="train_place_hint">请输入培训地址</string>
+    <string name="train_mode_title">培训方式</string>
+    <string name="train_form_title">培训形式</string>
+
+    <string-array name="mode">
+        <item>业余</item>
+        <item>脱产</item>
+        <item>其他</item>
+    </string-array>
+
+    <string-array name="form">
+        <item>授课</item>
+        <item>参观</item>
+        <item>试听</item>
+        <item>其他</item>
+    </string-array>
+
     <!--   薪资调整-->
     <string name="salaryAdjust">调薪申请</string>
     <string name="salaryAdjust_d">调薪详情</string>

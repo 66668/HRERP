@@ -6,13 +6,12 @@ import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.PaintFlagsDrawFilter;
 import android.util.AttributeSet;
-import android.widget.TextView;
 
 /**
  * Created by sjy on 2017/2/6.
  */
 
-public class CircleTextView extends TextView {
+public class CircleTextView extends android.support.v7.widget.AppCompatTextView {
 
     private Paint mBgPaint = new Paint();
 

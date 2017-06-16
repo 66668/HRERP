@@ -193,7 +193,7 @@ public class VehicleMaintainActivity extends BaseActivity {
                     js.put("MaintenanceTime", maintenanceTimeStart);
                     js.put("MaintenanceEndTime", maintenanceTimeEnd);
                     js.put("MaintenanceProject", maintenanceProject);
-                    js.put("Number", vehicleNumber);
+                    js.put("MaintenanceNumber", vehicleNumber);
                     js.put("TravelKilmetre", maintenanceMiles);
                     js.put("VehicleState", maintenanceState);
                     js.put("MaintenancePlace", maintenancePlace);

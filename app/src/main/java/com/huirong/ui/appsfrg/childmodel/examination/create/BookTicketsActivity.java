@@ -3,16 +3,12 @@ package com.huirong.ui.appsfrg.childmodel.examination.create;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-import android.net.Uri;
 import android.os.Bundle;
 import android.os.Message;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
-import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -27,14 +23,11 @@ import com.huirong.inject.ViewInject;
 import com.huirong.model.ContactsEmployeeModel;
 import com.huirong.ui.appsfrg.childmodel.examination.ZOAplicationListActivity;
 import com.huirong.ui.contractsfrg.ContactsSelectActivity;
-import com.huirong.utils.CameraGalleryUtils;
-import com.huirong.utils.ImageUtils;
 import com.huirong.utils.PageUtil;
 
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -42,7 +35,7 @@ import java.util.List;
  * 订票
  */
 
-public class BookTicketsActivity extends BaseActivity implements CameraGalleryUtils.ChoosePicCallBack {
+public class BookTicketsActivity extends BaseActivity {
 
     //back
     @ViewInject(id = R.id.layout_back, click = "forBack")
@@ -61,9 +54,18 @@ public class BookTicketsActivity extends BaseActivity implements CameraGalleryUt
     @ViewInject(id = R.id.et_reason)
     EditText et_reason;
 
-    //备注
-    @ViewInject(id = R.id.et_remark)
-    EditText et_remark;
+
+    //交通工具
+    @ViewInject(id = R.id.tv_type, click = "chooseType")
+    TextView tv_type;
+
+    //出发地
+    @ViewInject(id = R.id.et_place)
+    EditText et_place;
+
+    //目的地
+    @ViewInject(id = R.id.et_endPlace)
+    EditText et_endPlace;
 
     //开始时间
     @ViewInject(id = R.id.layout_startTime, click = "startTime")
@@ -78,13 +80,6 @@ public class BookTicketsActivity extends BaseActivity implements CameraGalleryUt
     @ViewInject(id = R.id.tv_timeEnd)
     TextView tv_timeEnd;
 
-    //交通工具
-    @ViewInject(id = R.id.tv_type, click = "chooseType")
-    TextView tv_type;
-
-    //添加图片
-    @ViewInject(id = R.id.addPicture, click = "ForAddPicture")
-    RelativeLayout addPicture;
 
     //添加审批人
     @ViewInject(id = R.id.AddApprover, click = "forAddApprover")
@@ -94,41 +89,20 @@ public class BookTicketsActivity extends BaseActivity implements CameraGalleryUt
     @ViewInject(id = R.id.tv_Requester)
     TextView tv_Requester;
 
-    //图片1
-    @ViewInject(id = R.id.layout_img_01, click = "showDetailImg")
-    RelativeLayout layout_img_01;
-    @ViewInject(id = R.id.img_01)
-    ImageView img_01;
-
-    //图片2
-    @ViewInject(id = R.id.layout_img_02, click = "showDetailImg")
-    RelativeLayout layout_img_02;
-    @ViewInject(id = R.id.img_02)
-    ImageView img_02;
-
-    //图片3
-    @ViewInject(id = R.id.layout_img_03, click = "showDetailImg")
-    RelativeLayout layout_img_03;
-    @ViewInject(id = R.id.img_03)
-    ImageView img_03;
-
 
     //变量
     private String startDate;
     private String endDates;
+    private String startPlace;
+    private String endPlace;
     private String reason;
     String Way;
     private String remark = "";
     private String approvalID = "";
-    private CameraGalleryUtils cameraGalleryUtils;// 头像上传工具
-    private String picPath;
-    private File filePicPath;
-    private List<Bitmap> listPic;
 
     //常量
     public static final int POST_SUCCESS = 15;
     public static final int POST_FAILED = 16;
-    public static final int PIC_SHOW = 17;//图片展示
 
 
     @Override
@@ -141,13 +115,12 @@ public class BookTicketsActivity extends BaseActivity implements CameraGalleryUt
 
     private void initMyView() {
         tv_title.setText(getResources().getString(R.string.beaway));
-        cameraGalleryUtils = new CameraGalleryUtils(this, this);
-        listPic = new ArrayList<>();
     }
 
     public void forCommit(View view) {
         reason = et_reason.getText().toString();
-        remark = et_remark.getText().toString();
+        startPlace = et_place.getText().toString();
+        endPlace = et_endPlace.getText().toString();
 
         if (TextUtils.isEmpty(startDate) || TextUtils.isEmpty(endDates)) {
             PageUtil.DisplayToast("请假时间不能为空");
@@ -168,14 +141,15 @@ public class BookTicketsActivity extends BaseActivity implements CameraGalleryUt
 
 
                     JSONObject js = new JSONObject();
-                    js.put("Content", reason);
-                    js.put("StartDate", startDate);
-                    js.put("EndDate", endDates);
-                    js.put("Remark", remark);
-                    js.put("Reason", remark);
+                    js.put("Traffic", Way);
+                    js.put("StartTime", startDate);
+                    js.put("EndTime", endDates);
+                    js.put("StartAddress", startPlace);
+                    js.put("EndAddress", endPlace);
+                    js.put("Reason", reason);
                     js.put("ApprovalIDList", approvalID);
 
-                    UserHelper.leavePost(BookTicketsActivity.this, js, filePicPath);
+                    UserHelper.bookTicketsPost(BookTicketsActivity.this, js);
                     sendMessage(POST_SUCCESS);
                 } catch (MyException e) {
                     sendMessage(POST_FAILED, e.getMessage());
@@ -201,43 +175,11 @@ public class BookTicketsActivity extends BaseActivity implements CameraGalleryUt
             case POST_FAILED:
                 PageUtil.DisplayToast((String) msg.obj);
                 break;
-            case PIC_SHOW://添加图片后，展示
-                List<Bitmap> listpic = (List<Bitmap>) msg.obj;
-
-                if (listpic.size() == 3) {
-                    img_01.setVisibility(View.VISIBLE);
-                    img_02.setVisibility(View.VISIBLE);
-                    img_03.setVisibility(View.VISIBLE);
-
-                    img_01.setImageBitmap(listpic.get(0));
-                    img_02.setImageBitmap(listpic.get(1));
-                    img_03.setImageBitmap(listpic.get(2));
-                }
-                if (listpic.size() == 2) {
-                    img_01.setVisibility(View.VISIBLE);
-                    img_02.setVisibility(View.VISIBLE);
-                    img_03.setVisibility(View.INVISIBLE);
-
-                    img_01.setImageBitmap(listpic.get(0));
-
-                    img_02.setImageBitmap(listpic.get(1));
-
-                }
-
-                if (listpic.size() == 1) {
-                    img_01.setVisibility(View.VISIBLE);
-                    img_02.setVisibility(View.INVISIBLE);
-                    img_03.setVisibility(View.INVISIBLE);
-
-                    img_01.setImageBitmap(listpic.get(0));
-                }
-                break;
         }
     }
 
     private void clear() {
         et_reason.setText("");
-        et_remark.setText("");
         tv_timeStart.setText("");
         tv_timeEnd.setText("");
         tv_type.setText("");
@@ -245,10 +187,6 @@ public class BookTicketsActivity extends BaseActivity implements CameraGalleryUt
         startDate = null;
         endDates = null;
         approvalID = null;
-        listPic.clear();//清空数据展示
-        img_01.setImageBitmap(null);
-        img_02.setImageBitmap(null);
-        img_03.setImageBitmap(null);
     }
 
     /**
@@ -274,6 +212,7 @@ public class BookTicketsActivity extends BaseActivity implements CameraGalleryUt
         });
         buidler.show();
     }
+
     /**
      * 开始时间
      *
@@ -321,21 +260,11 @@ public class BookTicketsActivity extends BaseActivity implements CameraGalleryUt
         myStartForResult(ContactsSelectActivity.class, 0);
     }
 
-    /**
-     * 添加图片
-     */
-    public void ForAddPicture(View view) {
-        if (listPic.size() >= 1) {
-            PageUtil.DisplayToast("最多添加1张图片");
-            return;
-        }
-        cameraGalleryUtils.showChoosePhotoDialog(CameraGalleryUtils.IMG_TYPE_CAMERA);
-    }
-
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if (requestCode == 0 && resultCode == 0) {
+        if (requestCode == 0 && resultCode == 0)//通过请求码(去SActivity)和回传码（回传数据到第一个页面）判断回传的页面
+        {
             //判断返回值是否为空
             List<ContactsEmployeeModel> list = new ArrayList<>();
             if (data != null && (List<ContactsEmployeeModel>) data.getSerializableExtra("data") != null) {
@@ -354,13 +283,11 @@ public class BookTicketsActivity extends BaseActivity implements CameraGalleryUt
             Log.d("SJY", "approvalID=" + approvalID);
             tv_Requester.setText(name);
         }
-        //相册
-        cameraGalleryUtils.onActivityResultAction(requestCode, resultCode, data);
-    }
 
+    }
     /*
-     *处理字符串，去除末尾逗号
-     */
+   *处理字符串，去除末尾逗号
+   */
     private String getApprovalID(String str) {
         if (str.length() > 1) {
             return str.substring(0, str.length() - 1);
@@ -368,7 +295,6 @@ public class BookTicketsActivity extends BaseActivity implements CameraGalleryUt
             return "";
         }
     }
-
     /**
      * back
      *
@@ -379,26 +305,5 @@ public class BookTicketsActivity extends BaseActivity implements CameraGalleryUt
     }
 
 
-    @Override
-    public void updateAvatarSuccess(int updateType, String picpath, String avatarBase64) {
-        picPath = picpath;
-
-        Bitmap bitmap = BitmapFactory.decodeFile(picPath);
-        Uri uri = ImageUtils.savePicture(this, bitmap);
-        filePicPath = new File(ImageUtils.getImageAbsolutePath(this, uri));
-
-        listPic.add(bitmap);
-        sendMessage(PIC_SHOW, listPic);
-    }
-
-    @Override
-    public void updateAvatarFailed(int updateType) {
-
-    }
-
-    @Override
-    public void cancel() {
-
-    }
 }
 

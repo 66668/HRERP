@@ -3,16 +3,12 @@ package com.huirong.ui.appsfrg.childmodel.examination.create;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-import android.net.Uri;
 import android.os.Bundle;
 import android.os.Message;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
-import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -27,14 +23,11 @@ import com.huirong.inject.ViewInject;
 import com.huirong.model.ContactsEmployeeModel;
 import com.huirong.ui.appsfrg.childmodel.examination.ZOAplicationListActivity;
 import com.huirong.ui.contractsfrg.ContactsSelectActivity;
-import com.huirong.utils.CameraGalleryUtils;
-import com.huirong.utils.ImageUtils;
 import com.huirong.utils.PageUtil;
 
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -42,7 +35,7 @@ import java.util.List;
  * 培训申请
  */
 
-public class TrainingActivity extends BaseActivity implements CameraGalleryUtils.ChoosePicCallBack {
+public class TrainingActivity extends BaseActivity {
 
     //back
     @ViewInject(id = R.id.layout_back, click = "forBack")
@@ -57,13 +50,34 @@ public class TrainingActivity extends BaseActivity implements CameraGalleryUtils
     TextView forCommit;
 
 
-    //原因
-    @ViewInject(id = R.id.et_reason)
-    EditText et_reason;
-
     //备注
     @ViewInject(id = R.id.et_remark)
     EditText et_remark;
+
+    //培训人员
+    @ViewInject(id = R.id.et_person)
+    EditText et_person;
+
+    //培训费用
+    @ViewInject(id = R.id.et_fee)
+    EditText et_fee;
+
+    //培训地址
+    @ViewInject(id = R.id.et_place)
+    EditText et_place;
+
+    //培训方式
+    @ViewInject(id = R.id.layout_type, click = "forMode")
+    LinearLayout layout_type;
+    @ViewInject(id = R.id.tv_mode)
+    TextView tv_mode;
+
+
+    //培训形式
+    @ViewInject(id = R.id.layout_way, click = "forForm")
+    LinearLayout layout_way;
+    @ViewInject(id = R.id.tv_form)
+    TextView tv_form;
 
     //开始时间
     @ViewInject(id = R.id.layout_startTime, click = "startTime")
@@ -78,9 +92,6 @@ public class TrainingActivity extends BaseActivity implements CameraGalleryUtils
     @ViewInject(id = R.id.tv_timeEnd)
     TextView tv_timeEnd;
 
-    //交通工具
-    @ViewInject(id = R.id.tv_type, click = "chooseType")
-    TextView tv_type;
 
     //添加图片
     @ViewInject(id = R.id.addPicture, click = "ForAddPicture")
@@ -94,41 +105,22 @@ public class TrainingActivity extends BaseActivity implements CameraGalleryUtils
     @ViewInject(id = R.id.tv_Requester)
     TextView tv_Requester;
 
-    //图片1
-    @ViewInject(id = R.id.layout_img_01, click = "showDetailImg")
-    RelativeLayout layout_img_01;
-    @ViewInject(id = R.id.img_01)
-    ImageView img_01;
-
-    //图片2
-    @ViewInject(id = R.id.layout_img_02, click = "showDetailImg")
-    RelativeLayout layout_img_02;
-    @ViewInject(id = R.id.img_02)
-    ImageView img_02;
-
-    //图片3
-    @ViewInject(id = R.id.layout_img_03, click = "showDetailImg")
-    RelativeLayout layout_img_03;
-    @ViewInject(id = R.id.img_03)
-    ImageView img_03;
-
 
     //变量
+    private String mode;
+    private String form;
     private String startDate;
     private String endDates;
-    private String reason;
+    private String person;
+    private String fee;
+    private String place;
     String Way;
     private String remark = "";
     private String approvalID = "";
-    private CameraGalleryUtils cameraGalleryUtils;// 头像上传工具
-    private String picPath;
-    private File filePicPath;
-    private List<Bitmap> listPic;
 
     //常量
     public static final int POST_SUCCESS = 15;
     public static final int POST_FAILED = 16;
-    public static final int PIC_SHOW = 17;//图片展示
 
 
     @Override
@@ -137,24 +129,36 @@ public class TrainingActivity extends BaseActivity implements CameraGalleryUtils
         setContentView(R.layout.act_apps_examination_training);
 
         initMyView();
+        initListener();
     }
 
     private void initMyView() {
         tv_title.setText(getResources().getString(R.string.beaway));
-        cameraGalleryUtils = new CameraGalleryUtils(this, this);
-        listPic = new ArrayList<>();
+    }
+
+    private void initListener() {
+
     }
 
     public void forCommit(View view) {
-        reason = et_reason.getText().toString();
+        remark = et_remark.getText().toString();
+        person = et_person.getText().toString();
+        fee = et_fee.getText().toString();
+        place = et_place.getText().toString();
         remark = et_remark.getText().toString();
 
         if (TextUtils.isEmpty(startDate) || TextUtils.isEmpty(endDates)) {
-            PageUtil.DisplayToast("请假时间不能为空");
+            PageUtil.DisplayToast("培训时间不能为空");
             return;
         }
-        if (TextUtils.isEmpty(reason)) {
-            PageUtil.DisplayToast("请假原因不能为空");
+
+        if (TextUtils.isEmpty(mode)) {
+            PageUtil.DisplayToast("培训方式不能为空");
+            return;
+        }
+
+        if (TextUtils.isEmpty(form)) {
+            PageUtil.DisplayToast("培形式不能为空");
             return;
         }
         if (TextUtils.isEmpty(approvalID)) {
@@ -168,14 +172,17 @@ public class TrainingActivity extends BaseActivity implements CameraGalleryUtils
 
 
                     JSONObject js = new JSONObject();
-                    js.put("Content", reason);
-                    js.put("StartDate", startDate);
-                    js.put("EndDate", endDates);
+                    js.put("TrainingMode", mode);
+                    js.put("TrainingForm", form);
+                    js.put("BeginTime", startDate);
+                    js.put("FinishTime", endDates);
+                    js.put("Cost", fee);
+                    js.put("Person", person);
+                    js.put("TrainingSite", place);
                     js.put("Remark", remark);
-                    js.put("Reason", remark);
                     js.put("ApprovalIDList", approvalID);
 
-                    UserHelper.leavePost(TrainingActivity.this, js, filePicPath);
+                    UserHelper.trainingPost(TrainingActivity.this, js);
                     sendMessage(POST_SUCCESS);
                 } catch (MyException e) {
                     sendMessage(POST_FAILED, e.getMessage());
@@ -201,60 +208,30 @@ public class TrainingActivity extends BaseActivity implements CameraGalleryUtils
             case POST_FAILED:
                 PageUtil.DisplayToast((String) msg.obj);
                 break;
-            case PIC_SHOW://添加图片后，展示
-                List<Bitmap> listpic = (List<Bitmap>) msg.obj;
 
-                if (listpic.size() == 3) {
-                    img_01.setVisibility(View.VISIBLE);
-                    img_02.setVisibility(View.VISIBLE);
-                    img_03.setVisibility(View.VISIBLE);
-
-                    img_01.setImageBitmap(listpic.get(0));
-                    img_02.setImageBitmap(listpic.get(1));
-                    img_03.setImageBitmap(listpic.get(2));
-                }
-                if (listpic.size() == 2) {
-                    img_01.setVisibility(View.VISIBLE);
-                    img_02.setVisibility(View.VISIBLE);
-                    img_03.setVisibility(View.INVISIBLE);
-
-                    img_01.setImageBitmap(listpic.get(0));
-
-                    img_02.setImageBitmap(listpic.get(1));
-
-                }
-
-                if (listpic.size() == 1) {
-                    img_01.setVisibility(View.VISIBLE);
-                    img_02.setVisibility(View.INVISIBLE);
-                    img_03.setVisibility(View.INVISIBLE);
-
-                    img_01.setImageBitmap(listpic.get(0));
-                }
-                break;
         }
     }
 
     private void clear() {
-        et_reason.setText("");
+        et_person.setText("");
+        et_fee.setText("");
+        et_place.setText("");
         et_remark.setText("");
         tv_timeStart.setText("");
         tv_timeEnd.setText("");
-        tv_type.setText("");
         tv_Requester.setText("");
         startDate = null;
         endDates = null;
         approvalID = null;
-        listPic.clear();//清空数据展示
-        img_01.setImageBitmap(null);
-        img_02.setImageBitmap(null);
-        img_03.setImageBitmap(null);
     }
 
+
     /**
-     * 选择交通工具
+     * 培训方式
+     *
+     * @param view
      */
-    public void chooseType(View view) {
+    public void forMode(View view) {
         //    设置一个单项选择下拉框
         /**
          * 第一个参数指定我们要显示的一组下拉单选框的数据集合
@@ -262,13 +239,39 @@ public class TrainingActivity extends BaseActivity implements CameraGalleryUtils
          * 第三个参数给每一个单选项绑定一个监听器
          */
         AlertDialog.Builder buidler = new AlertDialog.Builder(this);
-        buidler.setTitle(getResources().getString(R.string.financial_pay_style));
-        final String[] data = getResources().getStringArray(R.array.beawayarray);
+        buidler.setTitle(getResources().getString(R.string.train_mode_title));
+        final String[] data = getResources().getStringArray(R.array.mode);
         buidler.setSingleChoiceItems(data, -1, new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
-                Way = data[which];
-                tv_type.setText(data[which].trim());
+                mode = data[which];
+                tv_mode.setText(data[which].trim());
+                dialog.dismiss();
+            }
+        });
+        buidler.show();
+    }
+
+    /**
+     * 培训形式
+     *
+     * @param view
+     */
+    public void forForm(View view) {
+        //    设置一个单项选择下拉框
+        /**
+         * 第一个参数指定我们要显示的一组下拉单选框的数据集合
+         * 第二个参数代表索引，指定默认哪一个单选框被勾选上，1表示默认'女' 会被勾选上
+         * 第三个参数给每一个单选项绑定一个监听器
+         */
+        AlertDialog.Builder buidler = new AlertDialog.Builder(this);
+        buidler.setTitle(getResources().getString(R.string.train_form_title));
+        final String[] data = getResources().getStringArray(R.array.form);
+        buidler.setSingleChoiceItems(data, -1, new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                form = data[which];
+                tv_form.setText(data[which].trim());
                 dialog.dismiss();
             }
         });
@@ -322,16 +325,6 @@ public class TrainingActivity extends BaseActivity implements CameraGalleryUtils
         myStartForResult(ContactsSelectActivity.class, 0);
     }
 
-    /**
-     * 添加图片
-     */
-    public void ForAddPicture(View view) {
-        if (listPic.size() >= 1) {
-            PageUtil.DisplayToast("最多添加1张图片");
-            return;
-        }
-        cameraGalleryUtils.showChoosePhotoDialog(CameraGalleryUtils.IMG_TYPE_CAMERA);
-    }
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
@@ -355,8 +348,6 @@ public class TrainingActivity extends BaseActivity implements CameraGalleryUtils
             Log.d("SJY", "approvalID=" + approvalID);
             tv_Requester.setText(name);
         }
-        //相册
-        cameraGalleryUtils.onActivityResultAction(requestCode, resultCode, data);
     }
 
     /*
@@ -380,26 +371,5 @@ public class TrainingActivity extends BaseActivity implements CameraGalleryUtils
     }
 
 
-    @Override
-    public void updateAvatarSuccess(int updateType, String picpath, String avatarBase64) {
-        picPath = picpath;
-
-        Bitmap bitmap = BitmapFactory.decodeFile(picPath);
-        Uri uri = ImageUtils.savePicture(this, bitmap);
-        filePicPath = new File(ImageUtils.getImageAbsolutePath(this, uri));
-
-        listPic.add(bitmap);
-        sendMessage(PIC_SHOW, listPic);
-    }
-
-    @Override
-    public void updateAvatarFailed(int updateType) {
-
-    }
-
-    @Override
-    public void cancel() {
-
-    }
 }
 

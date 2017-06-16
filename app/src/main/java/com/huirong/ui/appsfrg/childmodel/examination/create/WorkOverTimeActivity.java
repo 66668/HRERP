@@ -135,7 +135,7 @@ public class WorkOverTimeActivity extends BaseActivity {
                     js.put("EndOverTime", endDates);
                     js.put("ApprovalIDList", approvalID);
 
-                    UserHelper.overApprovalPost(WorkOverTimeActivity.this, js);
+                    UserHelper.workoverTimePost(WorkOverTimeActivity.this, js);
                     sendMessage(POST_SUCCESS);
                 } catch (MyException e) {
                     sendMessage(POST_FAILED, e.getMessage());

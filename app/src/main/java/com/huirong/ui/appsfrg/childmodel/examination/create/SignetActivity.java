@@ -1,7 +1,5 @@
 package com.huirong.ui.appsfrg.childmodel.examination.create;
 
-import android.app.AlertDialog;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Message;
@@ -49,23 +47,6 @@ public class SignetActivity extends BaseActivity {
     @ViewInject(id = R.id.tv_right, click = "forCommit")
     TextView forCommit;
 
-    //说明
-    @ViewInject(id = R.id.et_reason)
-    EditText et_reason;
-
-    //备注
-    @ViewInject(id = R.id.et_remark)
-    EditText et_remark;
-
-    //类型
-    @ViewInject(id = R.id.layout_borrowType, click = "borrowType")
-    LinearLayout layout_borrowType;
-    @ViewInject(id = R.id.tv_borrowType)
-    TextView tv_borrowType;
-
-    //借阅名称
-    @ViewInject(id = R.id.et_BorrowThings)
-    EditText et_BorrowThings;
 
     //开始时间
     @ViewInject(id = R.id.layout_startTime, click = "startTime")
@@ -80,6 +61,23 @@ public class SignetActivity extends BaseActivity {
     @ViewInject(id = R.id.tv_timeEnd)
     TextView tv_timeEnd;
 
+
+    //公司
+    @ViewInject(id = R.id.et_company)
+    EditText et_company;
+
+    //份数
+    @ViewInject(id = R.id.et_num)
+    EditText et_num;
+
+    //用途
+    @ViewInject(id = R.id.et_use)
+    EditText et_use;
+
+    //备注
+    @ViewInject(id = R.id.et_remark)
+    EditText et_remark;
+
     //添加审批人
     @ViewInject(id = R.id.AddApprover, click = "forAddApprover")
     RelativeLayout AddApprover;
@@ -90,11 +88,11 @@ public class SignetActivity extends BaseActivity {
 
 
     //变量
-    public String BorrowThings;
-    public String BorrowType;
+    public String company;
+    public String num;
     public String startDate;
     public String endDates;
-    public String reason;
+    public String use;
     public String remark = "";
     public String applicationTitle = "";
     private String approvalID = "";
@@ -124,25 +122,27 @@ public class SignetActivity extends BaseActivity {
 
     public void forCommit(View view) {
         //        approvalID = "0280c9c5-870c-46cf-aa95-cdededc7d86c,88dd7959-cb2f-40c6-947a-4d6801fc4765";
-        BorrowThings = et_BorrowThings.getText().toString();
-        reason = et_reason.getText().toString();
+        use = et_use.getText().toString();
         remark = et_remark.getText().toString();
-        if (TextUtils.isEmpty(BorrowThings)) {
-            PageUtil.DisplayToast("借阅名称不能为空");
-            return;
-        }
-        if (TextUtils.isEmpty(BorrowType)) {
-            PageUtil.DisplayToast("借阅类型不能为空");
-            return;
-        }
+        company = et_company.getText().toString();
+        num = et_num.getText().toString();
         if (TextUtils.isEmpty(startDate) || TextUtils.isEmpty(endDates)) {
             PageUtil.DisplayToast("时间不能为空");
             return;
         }
-        if (TextUtils.isEmpty(reason)) {
-            PageUtil.DisplayToast("借阅说明不能为空");
+        if (TextUtils.isEmpty(company)) {
+            PageUtil.DisplayToast("盖章单位名称不能为空");
             return;
         }
+        if (TextUtils.isEmpty(num)) {
+            PageUtil.DisplayToast("份数不能为空");
+            return;
+        }
+        if (TextUtils.isEmpty(use)) {
+            PageUtil.DisplayToast("用途不能为空");
+            return;
+        }
+
         if (TextUtils.isEmpty(approvalID)) {
             PageUtil.DisplayToast("审批人不能为空");
             return;
@@ -153,15 +153,15 @@ public class SignetActivity extends BaseActivity {
             public void run() {
                 try {
                     JSONObject js = new JSONObject();
-                    js.put("BorrowThings", BorrowThings);
-                    js.put("BorrowType", BorrowType);
+                    js.put("SignatureName", startDate);
+                   js.put("Copies", num);
                     js.put("StartTime", startDate);
-                    js.put("FinishTime", endDates);
+                    js.put("EndTime", endDates);
+                    js.put("Purpose", use);
                     js.put("Remark", remark);
-                    js.put("Reason", reason);
                     js.put("ApprovalIDList", approvalID);
 
-                    UserHelper.borrowPost(SignetActivity.this, js);
+                    UserHelper.signetPost(SignetActivity.this, js);
                     sendMessage(POST_SUCCESS);
                 } catch (MyException e) {
                     sendMessage(POST_FAILED, e.getMessage());
@@ -191,9 +191,9 @@ public class SignetActivity extends BaseActivity {
     }
 
     private void clear() {
-        et_BorrowThings.setText("");
-        tv_borrowType.setText("");
-        et_reason.setText("");
+        et_num.setText("");
+        et_use.setText("");
+        et_company.setText("");
         et_remark.setText("");
         tv_timeStart.setText("");
         startDate = null;
@@ -204,31 +204,6 @@ public class SignetActivity extends BaseActivity {
 
     }
 
-    /**
-     * 类型
-     *
-     * @param
-     */
-    public void borrowType(View view) {
-        AlertDialog.Builder buidler = new AlertDialog.Builder(SignetActivity.this);
-        buidler.setTitle(getResources().getString(R.string.borrowsType));
-        //    设置一个单项选择下拉框
-        /**
-         * 第一个参数指定我们要显示的一组下拉单选框的数据集合
-         * 第二个参数代表索引，指定默认哪一个单选框被勾选上，1表示默认'女' 会被勾选上
-         * 第三个参数给每一个单选项绑定一个监听器
-         */
-        final String[] data = getResources().getStringArray(R.array.spBorrowType);
-        buidler.setSingleChoiceItems(data, -1, new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                BorrowType = data[which];
-                tv_borrowType.setText(BorrowType.trim());
-                dialog.dismiss();
-            }
-        });
-        buidler.show();
-    }
 
     /**
      * 开始时间

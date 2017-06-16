@@ -37,8 +37,16 @@ public class WebUrl {
 
     }
 
+    /**
+     * 应用主接口
+     */
     public class AppsManager {
 
+        /**
+         * 应用-审批接口
+         *  我的申请 我的审批 抄送 及详情 接口
+         * #############################################################################################
+         */
 
         /**
          * 01-01获取 我的申请 记录
@@ -85,58 +93,83 @@ public class WebUrl {
          */
         public static final String GETCOPYDETAIL = LOGIN_URL + LOGIN_FLODER_USER + "AllCopyListInfo/GetAllCopyListInfo";
 
-
+        /**应用-审批接口
+         *  申请接口
+         * #############################################################################################
+         */
         /**
          * 01-04-01 请假申请
          */
         public static final String LEAVEPOST = LOGIN_URL + LOGIN_FLODER_USER + "Leave/LeavePost";
 
         /**
-         * 01-04-01 招聘申请
+         * 01-04-02 出差申请
          */
-        public static final String RECRUITMENTPOST = LOGIN_URL + LOGIN_FLODER_USER + "Recruitment/RecruitmentPost";
+        public static final String BEAWAY = LOGIN_URL + LOGIN_FLODER_USER + "BusinessTrip/BusinessTripPost";
 
+        /*
+         * 01-04-03 用车申请
+         */
+        public static final String VEHICLEPOST = LOGIN_URL + LOGIN_FLODER_USER + "Vehicle/VehiclePost";
+
+        /*
+         * 01-04-04 车辆维护申请
+         */
+        public static final String MAINTENANCE = LOGIN_URL + LOGIN_FLODER_USER + "Maintenance/MaintenancePost";
 
         /**
-         * 01-04-04 加班申请
+         * 01-04-05 加班申请
          */
         public static final String OVERAPPROVALPOST = LOGIN_URL + LOGIN_FLODER_USER + "OverApproval/OverApprovalPost";
 
+        /*
+                * 01-04-6 财务申请
+                */
+        public static final String LRAPPLICATIONPOST = LOGIN_URL + LOGIN_FLODER_USER + "LRApplication/LRApplicationPost";
         /**
          * 01-04-07 离职申请
          */
         public static final String DIMISSIONPOST = LOGIN_URL + LOGIN_FLODER_USER + "Dimission/DimissionPost";
 
         /**
-         * 01-04-09 调休申请
+         * 01-04-08 订票申请
+         */
+        public static final String BOOKTICKET = LOGIN_URL + LOGIN_FLODER_USER + "OrderTickets/OrderTicketsPost";
+
+        /**
+         * 01-04-09 09调休申请
          */
         public static final String TAKEDAYSOFFPOST = LOGIN_URL + LOGIN_FLODER_USER + "TakeDaysOff/TakeDaysOffPost";
 
+        /**
+         * 01-04-010 印章申请
+         */
+        public static final String SIGNET = LOGIN_URL + LOGIN_FLODER_USER + "Stamprecord/StamprecordPost";
+
+        /**
+         * 01-04-11 培训申请
+         */
+        public static final String TRAINING = LOGIN_URL + LOGIN_FLODER_USER + "TrainingInfo/TrainingInfoPost";
+
+
+        /**
+         * 不适用 招聘申请
+         */
+        public static final String RECRUITMENTPOST = LOGIN_URL + LOGIN_FLODER_USER + "Recruitment/RecruitmentPost";
         /*
-         * 01-04-06 借阅申请
+         * 不适用 借阅申请
          */
         public static final String BORROWPOST = LOGIN_URL + LOGIN_FLODER_USER + "Borrow/BorrowPost";
 
         /*
-         * 01-04-07 调薪申请
+         * 不适用 调薪申请
          */
         public static final String CHANGESALARY = LOGIN_URL + LOGIN_FLODER_USER + "ChangeSalary/ChangeSalaryPost";
 
-        /*
-         * 01-04-08 用车申请
+        /**
+         * 地图签到接口
+         * #############################################################################################
          */
-        public static final String VEHICLEPOST = LOGIN_URL + LOGIN_FLODER_USER + "Vehicle/VehiclePost";
-
-        /*
-         * 01-04-09 车辆维护申请
-         */
-        public static final String MAINTENANCE = LOGIN_URL + LOGIN_FLODER_USER + "Maintenance/MaintenancePost";
-
-        /*
-         * 01-04-10 报销申请
-         */
-        public static final String LRAPPLICATIONPOST = LOGIN_URL + LOGIN_FLODER_USER + "LRApplication/LRApplicationPost";
-
 
         /**
          * 03地图签到
@@ -147,6 +180,10 @@ public class WebUrl {
          * 03-02获取地图考勤记录
          */
         public static final String GETATTENDRECORD = LOGIN_URL + LOGIN_FLODER_USER + "AttenceRecord/GetAttenceRecord";
+        /**
+         *
+         * #############################################################################################
+         */
 
         /**
          * 04 应用 公告 获取列表
