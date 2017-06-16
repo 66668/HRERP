@@ -81,6 +81,6 @@ public class ImageDialog extends Dialog {
     // 接口
     public interface Callback {
         // 接口方法
-        public void update();
+        void update();
     }
 }

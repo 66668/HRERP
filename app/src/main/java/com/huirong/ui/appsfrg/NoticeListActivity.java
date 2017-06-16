@@ -224,11 +224,11 @@ public class NoticeListActivity extends BaseActivity implements RefreshListView.
     }
 
     public void setIMaxTime(ArrayList<NoticeListModel> list) {
-        IMaxtime = list.get(0).getPublishTime();
+        IMaxtime = list.get(0).getCreateTime();
     }
 
     public void setIMinTime(ArrayList<NoticeListModel> list) {
-        IMinTime = list.get(list.size() - 1).getPublishTime();
+        IMinTime = list.get(list.size() - 1).getCreateTime();
     }
 
     /**

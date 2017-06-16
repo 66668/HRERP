@@ -57,7 +57,7 @@ public class NoticeLoadMoreListAdapter extends BaseLoadMoreListAdapter {
         WidgetHolder holder = (WidgetHolder) convertView.getTag();//获取控件管理实例
         //获取一条信息
         NoticeListModel model = (NoticeListModel) entityList.get(position);
-        holder.tvTime.setText(model.getPublishTime());
+        holder.tvTime.setText(model.getCreateTime());
         holder.tvType.setText(model.getApplicationTitle());
         holder.tvContent.setText(model.getAbstract());
         if(model.getIsRead().contains("1")){

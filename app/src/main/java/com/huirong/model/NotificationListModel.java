@@ -13,11 +13,11 @@ public class NotificationListModel implements Serializable {
 
     private String ApplicationID;//
     private String Abstract;//内容
-    private String PublishTime;//发布时间
+    private String CreateTime;//发布时间
     private String ApplicationTitle;//标题
-    private String EmployeeName ;//发布人
-    private String PublishDeptName ;
-    private String IsRead ;
+    private String EmployeeName;//发布人
+    private String PublishDeptName;
+    private String IsRead;
 
     public String getPublishDeptName() {
         return PublishDeptName;
@@ -26,7 +26,6 @@ public class NotificationListModel implements Serializable {
     public void setPublishDeptName(String publishDeptName) {
         PublishDeptName = publishDeptName;
     }
-
 
 
     public String getIsRead() {
@@ -65,12 +64,12 @@ public class NotificationListModel implements Serializable {
         ApplicationID = applicationID;
     }
 
-    public String getPublishTime() {
-        return PublishTime;
+    public String getCreateTime() {
+        return CreateTime;
     }
 
-    public void setPublishTime(String publishTime) {
-        PublishTime = publishTime;
+    public void setCreateTime(String CreateTime) {
+        this.CreateTime = CreateTime;
     }
 
     public String getAbstract() {

@@ -3,8 +3,10 @@ package com.huirong.common;
 import java.util.HashMap;
 
 /**
- * UserHelper用户登录，将用户名和密码封装到map中 UserHelper用户注册，将用户名和密码封装到map中
- * UserHelper完善个人信息，将用户信息封装到map中
+ * 封装类
+ *
+ * 将用户名和密码封装到map中
+ *
  * @author JackSong
  */
 

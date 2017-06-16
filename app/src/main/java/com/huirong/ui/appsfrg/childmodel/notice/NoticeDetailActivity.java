@@ -70,7 +70,7 @@ public class NoticeDetailActivity extends BaseActivity {
 
     private void setShow() {
         tv_notice_title.setText(model.getApplicationTitle());
-        tv_time.setText(model.getPublishTime());
+        tv_time.setText(model.getCreateTime());
         tv_name.setText(model.getPublishDeptName()+"\t\t"+model.getEmployeeName());
         tv_content.setText(model.getAbstract());
     }

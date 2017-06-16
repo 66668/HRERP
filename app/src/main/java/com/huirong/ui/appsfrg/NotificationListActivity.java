@@ -234,11 +234,11 @@ public class NotificationListActivity extends BaseActivity implements RefreshLis
     }
 
     public void setIMaxTime(ArrayList<NotificationListModel> list) {
-        IMaxtime = list.get(0).getPublishTime();
+        IMaxtime = list.get(0).getCreateTime();
     }
 
     public void setIMinTime(ArrayList<NotificationListModel> list) {
-        IMinTime = list.get(list.size() - 1).getPublishTime();
+        IMinTime = list.get(list.size() - 1).getCreateTime();
     }
 
     /**

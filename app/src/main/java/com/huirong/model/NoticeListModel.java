@@ -13,25 +13,29 @@ public class NoticeListModel implements Serializable {
 
     private String ApplicationID;//
     private String Abstract;//内容
-    private String PublishTime;//发布时间
+    private String CreateTime;//发布时间
     private String ApplicationTitle;//标题
-    private String EmployeeName ;//发布人
-    private String IsRead ;
-    private String PublishDeptName ;
+    private String EmployeeName;//发布人
+    private String IsRead;
+
+
+    private String PublishDeptName;
+
 
     public String getPublishDeptName() {
         return PublishDeptName;
     }
 
     public void setPublishDeptName(String publishDeptName) {
-        PublishDeptName = publishDeptName;
+        this.PublishDeptName = publishDeptName;
     }
+
     public String getIsRead() {
         return IsRead;
     }
 
     public void setIsRead(String isRead) {
-        IsRead = isRead;
+        this.IsRead = isRead;
     }
 
     public String getEmployeeName() {
@@ -39,7 +43,7 @@ public class NoticeListModel implements Serializable {
     }
 
     public void setEmployeeName(String employeeName) {
-        EmployeeName = employeeName;
+        this.EmployeeName = employeeName;
     }
 
     public String getApplicationTitle() {
@@ -47,7 +51,7 @@ public class NoticeListModel implements Serializable {
     }
 
     public void setApplicationTitle(String applicationTitle) {
-        ApplicationTitle = applicationTitle;
+        this.ApplicationTitle = applicationTitle;
     }
 
     public static long getSerialVersionUID() {
@@ -59,15 +63,15 @@ public class NoticeListModel implements Serializable {
     }
 
     public void setApplicationID(String applicationID) {
-        ApplicationID = applicationID;
+        this.ApplicationID = applicationID;
     }
 
-    public String getPublishTime() {
-        return PublishTime;
+    public String getCreateTime() {
+        return CreateTime;
     }
 
-    public void setPublishTime(String publishTime) {
-        PublishTime = publishTime;
+    public void setCreateTime(String CreateTime) {
+        this.CreateTime = CreateTime;
     }
 
     public String getAbstract() {

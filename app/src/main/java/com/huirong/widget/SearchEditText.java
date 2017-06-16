@@ -15,7 +15,7 @@ import android.widget.EditText;
 
 import com.huirong.R;
 
-public class SearchEditText extends EditText implements
+public class SearchEditText extends android.support.v7.widget.AppCompatEditText implements
         OnFocusChangeListener, TextWatcher { 
 	/**
 	 * 删除按钮的引用

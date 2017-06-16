@@ -14,6 +14,9 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.huirong.R;
+import com.huirong.helper.UserHelper;
+import com.huirong.model.NoticeListModel;
+import com.huirong.model.NotificationListModel;
 import com.huirong.ui.appsfrg.ConferenceListActivity;
 import com.huirong.ui.appsfrg.NoticeListActivity;
 import com.huirong.ui.appsfrg.NotificationListActivity;
@@ -284,6 +287,7 @@ public class MessageFragment extends com.huirong.base.BaseFragment {
         com.huirong.dialog.Loading.noDialogRun(getActivity(), new Runnable() {
             @Override
             public void run() {
+
                 //日程表
                 dao = new com.huirong.db.sqlite.SQLiteScheduledb(getActivity(), com.huirong.helper.UserHelper.getCurrentUser().getEmployeeID() + ".db");
                 ArrayList<com.huirong.model.ScheduleModel> listSchedule = dao.getAllSchedule();
@@ -302,18 +306,15 @@ public class MessageFragment extends com.huirong.base.BaseFragment {
 
                 //公告未读
                 try {
-                    List<com.huirong.model.NoticeListModel> visitorModelList = com.huirong.helper.UserHelper.GetAppNoticeList(
+                    List<NoticeListModel> visitorModelList = UserHelper.GetAppNoticeList(
                             getActivity(),
                             "",//iMaxTime
                             "");
-                    if (visitorModelList == null) {
+
+                    if (visitorModelList == null || visitorModelList.size() <= 0) {
                         handler.sendMessage(handler.obtainMessage(NONE_NOTICE_DATA, "没有最新公告"));
-                    } else {
-                        if (visitorModelList.size() <= 0) {
-                            handler.sendMessage(handler.obtainMessage(NONE_NOTICE_DATA, "没有最新公告"));
-                        } else {
-                            handler.sendMessage(handler.obtainMessage(GET_NOTICE_DATA, visitorModelList));
-                        }
+                    } else if (visitorModelList.size() > 0) {
+                        handler.sendMessage(handler.obtainMessage(GET_NOTICE_DATA, visitorModelList));
                     }
                 } catch (com.huirong.common.MyException e) {
                     Log.d("SJY", "公告异常= " + e.getMessage());
@@ -322,7 +323,7 @@ public class MessageFragment extends com.huirong.base.BaseFragment {
 
                 //通知未读
                 try {
-                    List<com.huirong.model.NotificationListModel> visitorModelList = com.huirong.helper.UserHelper.GetAppNotificationList(
+                    List<NotificationListModel> visitorModelList = UserHelper.GetAppNotificationList(
                             getActivity(),
                             "",//iMaxTime
                             "");
@@ -396,7 +397,7 @@ public class MessageFragment extends com.huirong.base.BaseFragment {
             // 调用下边的方法处理信息
             switch (msg.what) {
                 case GET_NOTICE_DATA://公告
-                    List<com.huirong.model.NoticeListModel> noticeList = (List<com.huirong.model.NoticeListModel>) msg.obj;
+                    List<NoticeListModel> noticeList = (List<NoticeListModel>) msg.obj;
                     int noticeSize = splitNoticeDate(noticeList);
                     if (noticeSize == 0) {
                         handler.sendMessage(handler.obtainMessage(NONE_NOTICE_DATA, "没有最新公告"));
@@ -409,7 +410,7 @@ public class MessageFragment extends com.huirong.base.BaseFragment {
 
                         //时间
                         notice_time.setVisibility(View.VISIBLE);
-                        notice_time.setText(noticeList.get(0).getPublishTime());
+                        notice_time.setText(noticeList.get(0).getCreateTime());
                         //个数
                         notice_number.setVisibility(View.VISIBLE);
                         notice_number.setText("" + noticeSize);
@@ -419,7 +420,7 @@ public class MessageFragment extends com.huirong.base.BaseFragment {
                         notice_content.setText("您有 10+  条公告未阅读");
                         //时间
                         notice_time.setVisibility(View.VISIBLE);
-                        notice_time.setText(noticeList.get(0).getPublishTime());
+                        notice_time.setText(noticeList.get(0).getCreateTime());
 
                         //个数
                         notice_time.setVisibility(View.VISIBLE);
@@ -441,7 +442,7 @@ public class MessageFragment extends com.huirong.base.BaseFragment {
 
                         //时间
                         msg_time.setVisibility(View.VISIBLE);
-                        msg_time.setText(notificationList.get(0).getPublishTime());
+                        msg_time.setText(notificationList.get(0).getCreateTime());
 
                         //个数
                         msg_number.setVisibility(View.VISIBLE);
@@ -452,7 +453,7 @@ public class MessageFragment extends com.huirong.base.BaseFragment {
                         msg_content.setText("您有 10+  条通知未阅读");
                         //时间
                         msg_time.setVisibility(View.VISIBLE);
-                        msg_time.setText(notificationList.get(0).getPublishTime());
+                        msg_time.setText(notificationList.get(0).getCreateTime());
 
                         //个数
                         msg_number.setVisibility(View.VISIBLE);
@@ -633,9 +634,9 @@ public class MessageFragment extends com.huirong.base.BaseFragment {
 
     }
 
-    //获取公告! = 0的list
-    private int splitNoticeDate(List<com.huirong.model.NoticeListModel> list) {
-        List<com.huirong.model.NoticeListModel> NoticeList = new ArrayList<com.huirong.model.NoticeListModel>();
+    //截取未读公告的list
+    private int splitNoticeDate(List<NoticeListModel> list) {
+        List<NoticeListModel> NoticeList = new ArrayList<NoticeListModel>();
         for (int i = 0; i < list.size(); i++) {
             if (list.get(i).getIsRead().contains("0")) {
                 NoticeList.add(list.get(i));

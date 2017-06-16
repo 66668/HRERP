@@ -22,7 +22,6 @@ import android.widget.AdapterView;
 import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.PopupWindow;
-import android.widget.TextView;
 
 import com.huirong.R;
 import com.huirong.adapter.NiceSpinnerAdapter;
@@ -36,7 +35,7 @@ import java.util.List;
  *
  */
 @SuppressWarnings("unused")
-public class NiceSpinner extends TextView {
+public class NiceSpinner extends android.support.v7.widget.AppCompatTextView {
 
     private static final int MAX_LEVEL = 10000;
     private static final int DEFAULT_ELEVATION = 16;
