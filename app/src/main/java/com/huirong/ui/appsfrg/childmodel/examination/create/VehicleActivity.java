@@ -68,7 +68,7 @@ public class VehicleActivity extends BaseActivity {
     @ViewInject(id = R.id.et_purpose)
     EditText et_purpose;
 
-    //申请备注
+    //说明
     @ViewInject(id = R.id.et_remark)
     EditText et_remark;
 

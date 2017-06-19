@@ -52,7 +52,7 @@ public class AppsFragment extends BaseFragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.act_apps, container, false);
+        View view = inflater.inflate(R.layout.fragment_apps, container, false);
         initView(view);
         return view;
     }

@@ -36,10 +36,6 @@ public class TakeDaysOffDetailApvlActivity extends BaseActivity {
     @ViewInject(id = R.id.tv_right)
     TextView tv_right;
 
-    //标题
-    @ViewInject(id = R.id.tv_startOffTitle)
-    TextView tv_startOffTitle;
-
     //调休开始时间
     @ViewInject(id = R.id.tv_offStartTime)
     TextView tv_offStartTime;
@@ -59,11 +55,6 @@ public class TakeDaysOffDetailApvlActivity extends BaseActivity {
     //说明
     @ViewInject(id = R.id.tv_reason, click = "ReasonExpended")
     TextView tv_reason;
-
-    //备注
-    @ViewInject(id = R.id.tv_remark, click = "RemarkExpended")
-    TextView tv_remark;
-
 
     //申请人
     @ViewInject(id = R.id.tv_ApprovalPerson)
@@ -137,13 +128,11 @@ public class TakeDaysOffDetailApvlActivity extends BaseActivity {
         tv_approvalCo.setText(model.getStoreName());
         tv_approvalTime.setText(model.getApplicationCreateTime());
 
-        tv_startOffTitle.setText(model.getApplicationTitle());
         tv_offStartTime.setText(model.getStartOffDate());
         tv_offEndTime.setText(model.getEndOffDate());
         tv_orgStartTime.setText(model.getStartTakeDate());
         tv_orgEndTime.setText(model.getEndTakeDate());
-        tv_reason.setText(model.getReason());
-        tv_remark.setText(model.getRemark());
+        tv_reason.setText(model.getRemark());
 
     }
 
@@ -242,20 +231,6 @@ public class TakeDaysOffDetailApvlActivity extends BaseActivity {
         } else {
             tv_reason.setLines(3);
             isExpend = false;
-        }
-
-    }
-
-    private boolean isRemarkExpend = false;
-
-    public void RemarkExpended(View view) {
-        if (!isRemarkExpend) {
-            tv_remark.setMinLines(0);
-            tv_remark.setMaxLines(Integer.MAX_VALUE);
-            isRemarkExpend = true;
-        } else {
-            tv_remark.setLines(3);
-            isRemarkExpend = false;
         }
 
     }

@@ -87,9 +87,6 @@ public class LeaveDetailApvlActivity extends BaseActivity {
     Button btn_copytp;
 
 
-    //请假标题
-    @ViewInject(id = R.id.tv_leaveTitle)
-    TextView tv_leaveTitle;
 
     //开始时间
     @ViewInject(id = R.id.tv_startTime)
@@ -103,9 +100,6 @@ public class LeaveDetailApvlActivity extends BaseActivity {
     @ViewInject(id = R.id.tv_reason)
     TextView tv_reason;
 
-    //备注
-    @ViewInject(id = R.id.tv_remark)
-    TextView tv_remark;
 
     //图片1
     @ViewInject(id = R.id.img_01, click = "imgDetail01")
@@ -178,11 +172,9 @@ public class LeaveDetailApvlActivity extends BaseActivity {
         tv_approvalCo.setText(model.getStoreName());
         tv_approvalTime.setText(model.getApplicationCreateTime());
 
-        tv_leaveTitle.setText(model.getApplicationTitle());
         tv_startTime.setText(model.getStartDate());
         tv_endTime.setText(model.getEndDate());
         tv_reason.setText(model.getContent());
-        tv_remark.setText(model.getRemark());
 
     }
 

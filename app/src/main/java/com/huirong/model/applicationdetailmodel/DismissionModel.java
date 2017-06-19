@@ -11,7 +11,7 @@ import java.util.List;
 public class DismissionModel implements Serializable {
     private static final long serialVersionUID = 1L;
 
-    public String EntryDate;
+    public String StrartDate;
     public String DimissionDate;//离职时间
     public String DimissionID;//离职类型
     public String Content;//离职原因
@@ -123,12 +123,12 @@ public class DismissionModel implements Serializable {
         DimissionDate = dimissionDate;
     }
 
-    public String getEntryDate() {
-        return EntryDate;
+    public String getStrartDate() {
+        return StrartDate;
     }
 
-    public void setEntryDate(String entryDate) {
-        EntryDate = entryDate;
+    public void setStrartDate(String strartDate) {
+        StrartDate = strartDate;
     }
 
     public static long getSerialVersionUID() {

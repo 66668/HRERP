@@ -13,9 +13,6 @@ import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
-import com.nostra13.universalimageloader.core.DisplayImageOptions;
-import com.nostra13.universalimageloader.core.ImageLoader;
-import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
 import com.huirong.R;
 import com.huirong.base.BaseActivity;
 import com.huirong.common.ImageLoadingConfig;
@@ -27,6 +24,9 @@ import com.huirong.inject.ViewInject;
 import com.huirong.model.MyApplicationModel;
 import com.huirong.model.applicationdetailmodel.LeaveModel;
 import com.huirong.utils.PageUtil;
+import com.nostra13.universalimageloader.core.DisplayImageOptions;
+import com.nostra13.universalimageloader.core.ImageLoader;
+import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -53,9 +53,6 @@ public class LeaveDetailAplActivity extends BaseActivity {
     @ViewInject(id = R.id.tv_reason)
     TextView tv_reason;
 
-    //备注
-    @ViewInject(id = R.id.tv_remark)
-    TextView tv_remark;
 
     //开始时间
     @ViewInject(id = R.id.tv_startTime)
@@ -65,9 +62,6 @@ public class LeaveDetailAplActivity extends BaseActivity {
     @ViewInject(id = R.id.tv_endTime)
     TextView tv_endTime;
 
-    //标题
-    @ViewInject(id = R.id.tv_ApplicationTitle)
-    TextView tv_ApplicationTitle;
 
     //审批人
     @ViewInject(id = R.id.tv_Requester)
@@ -155,11 +149,9 @@ public class LeaveDetailAplActivity extends BaseActivity {
             imgLoader.displayImage(model.getImageLists().get(2), img_03, imgOptions);
         }
 
-        tv_ApplicationTitle.setText(model.getApplicationTitle());
         tv_startTime.setText(model.getStartDate());
         tv_endTime.setText(model.getEndDate());
         tv_reason.setText(model.getContent());
-        tv_remark.setText(model.getRemark());
 
         modelList = model.getApprovalInfoLists();
         // 审批人

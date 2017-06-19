@@ -7,7 +7,6 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.os.Message;
 import android.text.TextUtils;
-import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -27,6 +26,7 @@ import com.huirong.ui.appsfrg.childmodel.examination.ZOAplicationListActivity;
 import com.huirong.ui.contractsfrg.ContactsSelectActivity;
 import com.huirong.utils.CameraGalleryUtils;
 import com.huirong.utils.ImageUtils;
+import com.huirong.utils.LogUtils;
 import com.huirong.utils.PageUtil;
 
 import org.json.JSONException;
@@ -122,6 +122,7 @@ public class LeaveActivity extends BaseActivity implements CameraGalleryUtils.Ch
     public static final int POST_SUCCESS = 15;
     public static final int POST_FAILED = 16;
     public static final int PIC_SHOW = 17;//图片展示
+    public static final String TAG = "LeavActivity";
 
 
     @Override
@@ -173,7 +174,7 @@ public class LeaveActivity extends BaseActivity implements CameraGalleryUtils.Ch
                     sendMessage(POST_FAILED, e.getMessage());
 
                 } catch (JSONException e) {
-                    Log.d("SJY", e.getMessage());
+                    LogUtils.e(TAG, e.getMessage());
                 }
             }
         });
@@ -255,8 +256,8 @@ public class LeaveActivity extends BaseActivity implements CameraGalleryUtils.Ch
                         tv_timeStart.setText(time);
                     }
                 });
-        //        endDateChooseDialog.setTimePickerGone(true);
         endDateChooseDialog.setDateDialogTitle("开始时间");
+        endDateChooseDialog.setTimePickerGone(true);
         endDateChooseDialog.showDateChooseDialog();
     }
 
@@ -274,8 +275,8 @@ public class LeaveActivity extends BaseActivity implements CameraGalleryUtils.Ch
                         tv_timeEnd.setText(time);
                     }
                 });
-        //        endDateChooseDialog.setTimePickerGone(true);
         endDateChooseDialog.setDateDialogTitle("结束时间");
+        endDateChooseDialog.setTimePickerGone(true);
         endDateChooseDialog.showDateChooseDialog();
     }
 
@@ -318,7 +319,7 @@ public class LeaveActivity extends BaseActivity implements CameraGalleryUtils.Ch
             }
             //            approvalID = "0280c9c5-870c-46cf-aa95-cdededc7d86c,88dd7959-cb2f-40c6-947a-4d6801fc4765";
             approvalID = getApprovalID(employeeId.toString());
-            Log.d("SJY", "approvalID=" + approvalID);
+            LogUtils.d(TAG, "approvalID=" + approvalID);
             tv_Requester.setText(name);
         }
         //相册

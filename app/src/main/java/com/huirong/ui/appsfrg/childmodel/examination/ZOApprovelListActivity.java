@@ -16,24 +16,19 @@ import com.huirong.dialog.Loading;
 import com.huirong.helper.UserHelper;
 import com.huirong.inject.ViewInject;
 import com.huirong.model.MyApprovalModel;
-import com.huirong.ui.appsfrg.childmodel.examination.approvaldetail.BorrowDetailApvlActivity;
-import com.huirong.ui.appsfrg.childmodel.examination.approvaldetail.ConferenceDetailApvlActivity;
-import com.huirong.ui.appsfrg.childmodel.examination.approvaldetail.ContractFileDetailApvlActivity;
+import com.huirong.ui.appsfrg.childmodel.examination.approvaldetail.BeawayDetailApvlActivity;
+import com.huirong.ui.appsfrg.childmodel.examination.approvaldetail.BookTicketesDetailApvlActivity;
 import com.huirong.ui.appsfrg.childmodel.examination.approvaldetail.DimissionDetailApvlActivity;
 import com.huirong.ui.appsfrg.childmodel.examination.approvaldetail.FinancialLoanDetailApvlActivity;
 import com.huirong.ui.appsfrg.childmodel.examination.approvaldetail.FinancialPayDetailApvlActivity;
 import com.huirong.ui.appsfrg.childmodel.examination.approvaldetail.FinancialReimburseDetailApvlActivity;
 import com.huirong.ui.appsfrg.childmodel.examination.approvaldetail.LeaveDetailApvlActivity;
-import com.huirong.ui.appsfrg.childmodel.examination.approvaldetail.NotificationAndNoticeDetailApvlActivity;
-import com.huirong.ui.appsfrg.childmodel.examination.approvaldetail.OfficeDetailApvlActivity;
-import com.huirong.ui.appsfrg.childmodel.examination.approvaldetail.OutGoingDetailApvlActivity;
 import com.huirong.ui.appsfrg.childmodel.examination.approvaldetail.PositionReplaceDetailApvlActivity;
 import com.huirong.ui.appsfrg.childmodel.examination.approvaldetail.ProcurementDetailApvlActivity;
-import com.huirong.ui.appsfrg.childmodel.examination.approvaldetail.ReceiveDetailApvlActivity;
 import com.huirong.ui.appsfrg.childmodel.examination.approvaldetail.RecruitmentDetailApvlActivity;
-import com.huirong.ui.appsfrg.childmodel.examination.approvaldetail.RetestDetailApvlActivity;
-import com.huirong.ui.appsfrg.childmodel.examination.approvaldetail.SalaryadjustDetailApvlActivity;
+import com.huirong.ui.appsfrg.childmodel.examination.approvaldetail.SignetDetailApvlActivity;
 import com.huirong.ui.appsfrg.childmodel.examination.approvaldetail.TakeDaysOffDetailApvlActivity;
+import com.huirong.ui.appsfrg.childmodel.examination.approvaldetail.TrainingDetailApvlActivity;
 import com.huirong.ui.appsfrg.childmodel.examination.approvaldetail.VehicleDetailApvlActivity;
 import com.huirong.ui.appsfrg.childmodel.examination.approvaldetail.VehicleMaintainDetailApvlActivity;
 import com.huirong.ui.appsfrg.childmodel.examination.approvaldetail.WorkOverTimeDetailApvlActivity;
@@ -93,11 +88,9 @@ public class ZOApprovelListActivity extends BaseActivity implements RefreshAndLo
 
     private ArrayList<MyApprovalModel> listDONEALL = new ArrayList<>();//记录已审批的总数据
     private ArrayList<MyApprovalModel> listUNDOALL = new ArrayList<>();//记录未审批的总数据
-    private ArrayList<MyApprovalModel> listDOINGALL = new ArrayList<>();//记录审批中的总数据
 
     private ArrayList<MyApprovalModel> listDONE;//每次获取的已审批的数据段
     private ArrayList<MyApprovalModel> listUNDO;//每次获取的未审批的数据段
-    private ArrayList<MyApprovalModel> listDOING;//每次获取的审批中的数据段
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -118,7 +111,7 @@ public class ZOApprovelListActivity extends BaseActivity implements RefreshAndLo
         myListView.setAdapter(vAdapter);
 
         //spinner数据
-        spinnerData = new LinkedList<>(Arrays.asList("我的审批", "已审批", "未审批", "审批中"));
+        spinnerData = new LinkedList<>(Arrays.asList("我的审批", "已审批", "未审批"));
         myLastSelectState = spinnerData.get(0);//默认为 我的审批
         niceSpinner.attachDataSource(spinnerData);//绑定数据
     }
@@ -264,7 +257,6 @@ public class ZOApprovelListActivity extends BaseActivity implements RefreshAndLo
 
                 //重新获取数据，需要清空数据
                 listAll.clear();
-                listDOINGALL.clear();
                 listDONEALL.clear();
                 listUNDOALL.clear();
 
@@ -333,15 +325,12 @@ public class ZOApprovelListActivity extends BaseActivity implements RefreshAndLo
         //每次来新数据，重新赋值spinner子状态
         listUNDO = new ArrayList<>();
         listDONE = new ArrayList<>();
-        listDOING = new ArrayList<>();
         //数据正常拼接
         for (int i = 0; i < list.size(); i++) {
             if (list.get(i).getApprovalStatus().contains("0")) {//未审批
                 listUNDO.add(list.get(i));
             } else if (list.get(i).getApprovalStatus().contains("1")) {//已审批
                 listDONE.add(list.get(i));
-            } else {
-                listDOING.add(list.get(i));
             }
         }
         switch (STATE) {
@@ -350,7 +339,6 @@ public class ZOApprovelListActivity extends BaseActivity implements RefreshAndLo
 
                 //总数据拼接
                 listAll.addAll(list);// 总记录数据
-                listDOINGALL.addAll(listDOING);
                 listUNDOALL.addAll(listUNDO);
                 listDONEALL.addAll(listDONE);
                 break;
@@ -367,9 +355,7 @@ public class ZOApprovelListActivity extends BaseActivity implements RefreshAndLo
                 if (listDONE.size() > 0) {
                     listDONEALL.addAll(0, listDONE);
                 }
-                if (listDOING.size() > 0) {
-                    listDOINGALL.addAll(0, listDOING);
-                }
+
                 if (listUNDO.size() > 0) {
                     listUNDOALL.addAll(0, listUNDO);
                 }
@@ -381,7 +367,6 @@ public class ZOApprovelListActivity extends BaseActivity implements RefreshAndLo
                 Log.d("SJY", "GET_MORE_DATA筛选");
                 //总数据拼接
                 listAll.addAll(list);// 总记录数据
-                listDOINGALL.addAll(listDOING);
                 listUNDOALL.addAll(listUNDO);
                 listDONEALL.addAll(listDONE);
                 break;
@@ -454,25 +439,6 @@ public class ZOApprovelListActivity extends BaseActivity implements RefreshAndLo
 
                 }
                 break;
-
-            case "审批中":
-
-
-                if (STATE == GET_NEW_DATA) {
-                    vAdapter.setEntityList(listDOINGALL);
-
-                } else if (STATE == GET_REFRESH_DATA) {
-                    vAdapter.insertEntityList(listDOING);
-                    myListView.loadAndFreshComplete();
-
-                } else if (STATE == GET_MORE_DATA) {
-                    vAdapter.addEntityList(listDOING);
-                    myListView.loadAndFreshComplete();
-
-                } else if (STATE == GET_NONE_NEWDATA) {
-
-                }
-                break;
             default:
                 PageUtil.DisplayToast("数组出错了！");
                 break;
@@ -482,6 +448,8 @@ public class ZOApprovelListActivity extends BaseActivity implements RefreshAndLo
 
     /**
      * 申请跳转详细
+     * <p>
+     * 基于BaseActivity简化方法的bundle跳转传值
      */
 
     private void myApprovalTransfer(String type, MyApprovalModel myApprovalModel) {
@@ -490,36 +458,27 @@ public class ZOApprovelListActivity extends BaseActivity implements RefreshAndLo
         bundle.putSerializable("MyApprovalModel", myApprovalModel);
 
         switch (type) {
-            case "招聘申请"://01
-
-                startActivity(RecruitmentDetailApvlActivity.class, bundle);
-                break;
-            case "离职申请"://02
-                startActivity(DimissionDetailApvlActivity.class, bundle);
-                break;
-            case "请假申请"://03
-
+            case "请假申请"://01
                 startActivity(LeaveDetailApvlActivity.class, bundle);
                 break;
-            case "加班申请"://04
-                startActivity(WorkOverTimeDetailApvlActivity.class, bundle);
+
+            case "出差申请"://02
+                startActivity(BeawayDetailApvlActivity.class, bundle);
                 break;
-            case "调休申请"://05
-                startActivity(TakeDaysOffDetailApvlActivity.class, bundle);
-                break;
-            case "借阅申请"://06
-                startActivity(BorrowDetailApvlActivity.class, bundle);
-                break;
-            case "调薪申请"://07
-                startActivity(SalaryadjustDetailApvlActivity.class, bundle);
-                break;
-            case "用车申请"://08
+
+            case "用车申请"://03
                 startActivity(VehicleDetailApvlActivity.class, bundle);
                 break;
-            case "车辆维保"://09
+
+            case "车辆维保"://04
                 startActivity(VehicleMaintainDetailApvlActivity.class, bundle);
                 break;
-            case "财务申请"://10
+
+            case "加班申请"://05
+                startActivity(WorkOverTimeDetailApvlActivity.class, bundle);
+                break;
+
+            case "财务申请"://06
                 //根据type决定跳转到具体界面
                 if (myApprovalModel.getApplicationTitle().contains("借款")) {
 
@@ -529,7 +488,7 @@ public class ZOApprovelListActivity extends BaseActivity implements RefreshAndLo
 
                     startActivity(FinancialPayDetailApvlActivity.class, bundle);
 
-                }  else if (myApprovalModel.getApplicationTitle().contains("报销")) {
+                } else if (myApprovalModel.getApplicationTitle().contains("报销")) {
 
                     startActivity(FinancialReimburseDetailApvlActivity.class, bundle);
 
@@ -538,33 +497,65 @@ public class ZOApprovelListActivity extends BaseActivity implements RefreshAndLo
                 }
                 break;
 
-            case "调动申请"://11
+            case "离职申请"://07
+                startActivity(DimissionDetailApvlActivity.class, bundle);
+                break;
+
+            case "订票申请"://08
+                startActivity(BookTicketesDetailApvlActivity.class, bundle);
+                break;
+
+
+            case "调休申请"://09
+                startActivity(TakeDaysOffDetailApvlActivity.class, bundle);
+                break;
+
+            case "印章申请"://10
+                startActivity(SignetDetailApvlActivity.class, bundle);
+                break;
+
+            case "培训申请"://11
+                startActivity(TrainingDetailApvlActivity.class, bundle);
+                break;
+
+            case "调动申请"://12
                 startActivity(PositionReplaceDetailApvlActivity.class, bundle);
                 break;
-            case "采购申请"://12
+
+            case "招聘申请"://13
+
+                startActivity(RecruitmentDetailApvlActivity.class, bundle);
+                break;
+
+            case "采购申请"://14
                 startActivity(ProcurementDetailApvlActivity.class, bundle);
                 break;
-            case "通知公告申请"://13
-                startActivity(NotificationAndNoticeDetailApvlActivity.class, bundle);
-                break;
-            case "办公室申请"://14
-                startActivity(OfficeDetailApvlActivity.class, bundle);
-                break;
-            case "领用申请"://15
-                startActivity(ReceiveDetailApvlActivity.class, bundle);
-                break;
-            case "合同文件申请"://16
-                startActivity(ContractFileDetailApvlActivity.class, bundle);
-                break;
-            case "外出申请"://17
-                startActivity(OutGoingDetailApvlActivity.class, bundle);
-                break;
-            case "复试申请"://18
-                startActivity(RetestDetailApvlActivity.class, bundle);
-                break;
-            case "会议申请"://19
-                startActivity(ConferenceDetailApvlActivity.class, bundle);
-                break;
+
+
+//            case "借阅申请"://06
+//                startActivity(BorrowDetailApvlActivity.class, bundle);
+//                break;
+//            case "调薪申请"://07
+//                startActivity(SalaryadjustDetailApvlActivity.class, bundle);
+//                break;
+//            case "通知公告申请"://13
+//                startActivity(NotificationAndNoticeDetailApvlActivity.class, bundle);
+//                break;
+//            case "办公室申请"://14
+//                startActivity(OfficeDetailApvlActivity.class, bundle);
+//                break;
+//            case "领用申请"://15
+//                startActivity(ReceiveDetailApvlActivity.class, bundle);
+//                break;
+//            case "合同文件申请"://16
+//                startActivity(ContractFileDetailApvlActivity.class, bundle);
+//                break;
+//            case "复试申请"://18
+//                startActivity(RetestDetailApvlActivity.class, bundle);
+//                break;
+//            case "会议申请"://19
+//                startActivity(ConferenceDetailApvlActivity.class, bundle);
+//                break;
         }
     }
 

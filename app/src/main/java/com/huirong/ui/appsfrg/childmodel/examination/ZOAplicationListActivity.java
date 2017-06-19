@@ -17,27 +17,23 @@ import com.huirong.dialog.Loading;
 import com.huirong.helper.UserHelper;
 import com.huirong.inject.ViewInject;
 import com.huirong.model.MyApplicationModel;
-import com.huirong.ui.appsfrg.childmodel.examination.applicationdetail.BorrowDetailAplActivity;
-import com.huirong.ui.appsfrg.childmodel.examination.applicationdetail.ConferenceDetailAplActivity;
-import com.huirong.ui.appsfrg.childmodel.examination.applicationdetail.ContractFileDetailAplActivity;
+import com.huirong.ui.appsfrg.childmodel.examination.applicationdetail.BeawayDetailAplActivity;
+import com.huirong.ui.appsfrg.childmodel.examination.applicationdetail.BookTicketsDetailAplActivity;
 import com.huirong.ui.appsfrg.childmodel.examination.applicationdetail.DimissionDetailAplActivity;
 import com.huirong.ui.appsfrg.childmodel.examination.applicationdetail.FinancialLoanDetailAplActivity;
 import com.huirong.ui.appsfrg.childmodel.examination.applicationdetail.FinancialPayDetailAplActivity;
 import com.huirong.ui.appsfrg.childmodel.examination.applicationdetail.FinancialReimburseDetailAplActivity;
 import com.huirong.ui.appsfrg.childmodel.examination.applicationdetail.LeaveDetailAplActivity;
-import com.huirong.ui.appsfrg.childmodel.examination.applicationdetail.NotificationAndNoticeDetailAplActivity;
-import com.huirong.ui.appsfrg.childmodel.examination.applicationdetail.OfficeDetailAplActivity;
-import com.huirong.ui.appsfrg.childmodel.examination.applicationdetail.OutGoingDetailAplActivity;
 import com.huirong.ui.appsfrg.childmodel.examination.applicationdetail.PositionReplaceDetailAplActivity;
 import com.huirong.ui.appsfrg.childmodel.examination.applicationdetail.ProcurementDetailAplActivity;
-import com.huirong.ui.appsfrg.childmodel.examination.applicationdetail.ReceiveDetailAplActivity;
 import com.huirong.ui.appsfrg.childmodel.examination.applicationdetail.RecruitmentDetailAplActivity;
-import com.huirong.ui.appsfrg.childmodel.examination.applicationdetail.RetestDetailAplActivity;
-import com.huirong.ui.appsfrg.childmodel.examination.applicationdetail.SalaryadjustDetailAplActivity;
+import com.huirong.ui.appsfrg.childmodel.examination.applicationdetail.SignetDetailAplActivity;
 import com.huirong.ui.appsfrg.childmodel.examination.applicationdetail.TakeDaysOffDetailAplActivity;
+import com.huirong.ui.appsfrg.childmodel.examination.applicationdetail.TrainingDetailAplActivity;
 import com.huirong.ui.appsfrg.childmodel.examination.applicationdetail.VehicleDetailAplActivity;
 import com.huirong.ui.appsfrg.childmodel.examination.applicationdetail.VehicleMaintainDetailAplActivity;
 import com.huirong.ui.appsfrg.childmodel.examination.applicationdetail.WorkOverTimeDetailAplActivity;
+import com.huirong.utils.LogUtils;
 import com.huirong.utils.PageUtil;
 import com.huirong.widget.NiceSpinner;
 import com.huirong.widget.RefreshAndLoadListView;
@@ -91,11 +87,13 @@ public class ZOAplicationListActivity extends BaseActivity implements RefreshAnd
     private ArrayList<MyApplicationModel> list = null;//获取数据 每次20条
     private ArrayList<MyApplicationModel> listAll = new ArrayList<>();//记录所有数据
 
-    private ArrayList<MyApplicationModel> listDONEALL = new ArrayList<>();//记录已审批的总数据
+    private ArrayList<MyApplicationModel> listDONEALL = new ArrayList<>();//记录已通过的总数据
+    private ArrayList<MyApplicationModel> listREFUSEALL = new ArrayList<>();//记录已拒绝的总数据
     private ArrayList<MyApplicationModel> listUNDOALL = new ArrayList<>();//记录未审批的总数据
     private ArrayList<MyApplicationModel> listDOINGALL = new ArrayList<>();//记录审批中的总数据
 
-    private ArrayList<MyApplicationModel> listDONE;//每次获取的已审批的数据段
+    private ArrayList<MyApplicationModel> listDONE;//每次获取的已通过的数据段
+    private ArrayList<MyApplicationModel> listREFUSE;//每次获取的已拒绝的数据段
     private ArrayList<MyApplicationModel> listUNDO;//每次获取的未审批的数据段
     private ArrayList<MyApplicationModel> listDOING;//每次获取的审批中的数据段
 
@@ -118,7 +116,7 @@ public class ZOAplicationListActivity extends BaseActivity implements RefreshAnd
         myListView.setAdapter(vAdapter);
 
         //spinner绑定数据
-        spinnerData = new LinkedList<>(Arrays.asList("我的申请", "已审批", "未审批", "审批中"));
+        spinnerData = new LinkedList<>(Arrays.asList("我的申请", "已通过", "已拒绝", "未审批", "审批中"));
         myLastSelectState = spinnerData.get(0);//默认为 我的申请
         niceSpinner.attachDataSource(spinnerData);//绑定数据
     }
@@ -261,6 +259,7 @@ public class ZOAplicationListActivity extends BaseActivity implements RefreshAnd
                 listAll.clear();
                 listDOINGALL.clear();
                 listDONEALL.clear();
+                listREFUSEALL.clear();
                 listUNDOALL.clear();
 
                 SplitListState(list, GET_NEW_DATA);//筛选数据状态
@@ -331,25 +330,32 @@ public class ZOAplicationListActivity extends BaseActivity implements RefreshAnd
         //每次来新数据，重新赋值spinner子状态
         listUNDO = new ArrayList<>();
         listDONE = new ArrayList<>();
+        listREFUSE = new ArrayList<>();
         listDOING = new ArrayList<>();
+        /**
+         * 审批的四种状态  未审批 已通过 已拒绝 审批中
+         */
         for (int i = 0; i < list.size(); i++) {
             if (list.get(i).getApprovalStatus().contains("0")) {//未审批
                 listUNDO.add(list.get(i));
-            } else if (list.get(i).getApprovalStatus().contains("1")) {//已审批
+            } else if (list.get(i).getApprovalStatus().contains("1")) {//已通过
                 listDONE.add(list.get(i));
-            } else {
+            } else if (list.get(i).getApprovalStatus().contains("1")) {//已拒绝
+                listREFUSE.add(list.get(i));
+            } else {//审批中
                 listDOING.add(list.get(i));
             }
         }
         switch (STATE) {
             case GET_NEW_DATA:
-                Log.d("SJY", "GET_NEW_DATA筛选");
+                LogUtils.d("SJY", "GET_NEW_DATA筛选");
                 //数据正常拼接
                 //总数据拼接
                 listAll.addAll(list);// 总记录数据
                 listDOINGALL.addAll(listDOING);
                 listUNDOALL.addAll(listUNDO);
                 listDONEALL.addAll(listDONE);
+                listREFUSEALL.addAll(listREFUSE);
                 break;
 
 
@@ -364,9 +370,15 @@ public class ZOAplicationListActivity extends BaseActivity implements RefreshAnd
                 if (listDONE.size() > 0) {
                     listDONEALL.addAll(0, listDONE);
                 }
+
+                if (listREFUSE.size() > 0) {
+                    listREFUSEALL.addAll(0, listREFUSE);
+                }
+
                 if (listDOING.size() > 0) {
                     listDOINGALL.addAll(0, listDOING);
                 }
+
                 if (listUNDO.size() > 0) {
                     listUNDOALL.addAll(0, listUNDO);
                 }
@@ -378,9 +390,11 @@ public class ZOAplicationListActivity extends BaseActivity implements RefreshAnd
                 Log.d("SJY", "GET_MORE_DATA筛选");
                 //总数据拼接
                 listAll.addAll(list);// 总记录数据
+
                 listDOINGALL.addAll(listDOING);
                 listUNDOALL.addAll(listUNDO);
                 listDONEALL.addAll(listDONE);
+                listREFUSEALL.addAll(listREFUSE);
                 break;
 
             default:
@@ -416,7 +430,7 @@ public class ZOAplicationListActivity extends BaseActivity implements RefreshAnd
                 }
 
                 break;
-            case "已审批":
+            case "已通过":
 
                 if (STATE == GET_NEW_DATA) {
                     vAdapter.setEntityList(listDONEALL);
@@ -434,6 +448,26 @@ public class ZOAplicationListActivity extends BaseActivity implements RefreshAnd
                 }
 
                 break;
+
+            case "已拒绝":
+
+                if (STATE == GET_NEW_DATA) {
+                    vAdapter.setEntityList(listREFUSEALL);
+
+                } else if (STATE == GET_REFRESH_DATA) {
+                    vAdapter.insertEntityList(listREFUSE);
+                    myListView.loadAndFreshComplete();
+
+                } else if (STATE == GET_MORE_DATA) {
+                    vAdapter.addEntityList(listREFUSE);
+                    myListView.loadAndFreshComplete();
+
+                } else if (STATE == GET_NONE_NEWDATA) {
+
+                }
+
+                break;
+
             case "未审批":
 
                 if (STATE == GET_NEW_DATA) {
@@ -477,48 +511,44 @@ public class ZOAplicationListActivity extends BaseActivity implements RefreshAnd
         }
     }
 
-    //申请跳转详细
+    /**
+     *     申请跳转详细
+     *
+     *     正常方式intent跳转传值
+     */
+
     private void myApplicationDetail(String type, MyApplicationModel model) {
+
         Intent intent = new Intent();
         intent.putExtra("MyApplicationModel", model);
         switch (type) {
-            case "招聘申请"://01
-                intent.setClass(this, RecruitmentDetailAplActivity.class);
-                startActivity(intent);
-                break;
-            case "离职申请"://02
-                intent.setClass(this, DimissionDetailAplActivity.class);
-                startActivity(intent);
-                break;
-            case "请假申请"://03
+            case "请假申请"://01
                 intent.setClass(this, LeaveDetailAplActivity.class);
                 startActivity(intent);
                 break;
-            case "加班申请"://04
-                intent.setClass(this, WorkOverTimeDetailAplActivity.class);
+
+            case "出差申请"://02
+                intent.setClass(this, BeawayDetailAplActivity.class);
                 startActivity(intent);
                 break;
-            case "调休申请"://05
-                intent.setClass(this, TakeDaysOffDetailAplActivity.class);
-                startActivity(intent);
-                break;
-            case "借阅申请"://06
-                intent.setClass(this, BorrowDetailAplActivity.class);
-                startActivity(intent);
-                break;
-            case "调薪申请"://07
-                intent.setClass(this, SalaryadjustDetailAplActivity.class);
-                startActivity(intent);
-                break;
-            case "用车申请"://08
+
+            case "用车申请"://03
                 intent.setClass(this, VehicleDetailAplActivity.class);
                 startActivity(intent);
                 break;
-            case "车辆维保"://09
+
+            case "车辆维保"://04
                 intent.setClass(this, VehicleMaintainDetailAplActivity.class);
                 startActivity(intent);
                 break;
-            case "财务申请"://10
+
+            case "加班申请"://05
+                intent.setClass(this, WorkOverTimeDetailAplActivity.class);
+                startActivity(intent);
+                break;
+
+
+            case "财务申请"://06
 
                 /**
                  * 该接口不同于其他接口，数据需要再本activiy中获取后才做跳转
@@ -537,42 +567,79 @@ public class ZOAplicationListActivity extends BaseActivity implements RefreshAnd
                 }
 
                 break;
-            case "调动申请"://11
+
+            case "离职申请"://07
+                intent.setClass(this, DimissionDetailAplActivity.class);
+                startActivity(intent);
+                break;
+
+            case "订票申请"://08
+                intent.setClass(this, BookTicketsDetailAplActivity.class);
+                startActivity(intent);
+                break;
+
+            case "调休申请"://09
+                intent.setClass(this, TakeDaysOffDetailAplActivity.class);
+                startActivity(intent);
+                break;
+
+            case "印章申请"://10
+                intent.setClass(this, SignetDetailAplActivity.class);
+                startActivity(intent);
+                break;
+
+            case "培训申请"://11
+                intent.setClass(this, TrainingDetailAplActivity.class);
+                startActivity(intent);
+                break;
+
+            case "调动申请"://12
                 intent.setClass(this, PositionReplaceDetailAplActivity.class);
                 startActivity(intent);
                 break;
-            case "采购申请"://12
+
+            case "招聘申请"://13
+                intent.setClass(this, RecruitmentDetailAplActivity.class);
+                startActivity(intent);
+                break;
+
+            case "采购申请"://14
                 intent.setClass(this, ProcurementDetailAplActivity.class);
                 startActivity(intent);
                 break;
-            case "通知公告申请"://13
-                intent.setClass(this, NotificationAndNoticeDetailAplActivity.class);
-                startActivity(intent);
-                break;
-            case "办公室申请"://14
-                intent.setClass(this, OfficeDetailAplActivity.class);
-                startActivity(intent);
-                break;
-            case "领用申请"://15
-                intent.setClass(this, ReceiveDetailAplActivity.class);
-                startActivity(intent);
-                break;
-            case "合同文件申请"://16
-                intent.setClass(this, ContractFileDetailAplActivity.class);
-                startActivity(intent);
-                break;
-            case "外出申请"://17
-                intent.setClass(this, OutGoingDetailAplActivity.class);
-                startActivity(intent);
-                break;
-            case "复试申请"://18
-                intent.setClass(this, RetestDetailAplActivity.class);
-                startActivity(intent);
-                break;
-            case "会议申请"://19
-                intent.setClass(this, ConferenceDetailAplActivity.class);
-                startActivity(intent);
-                break;
+
+//            case "借阅申请"://06
+//                intent.setClass(this, BorrowDetailAplActivity.class);
+//                startActivity(intent);
+//                break;
+//            case "调薪申请"://07
+//                intent.setClass(this, SalaryadjustDetailAplActivity.class);
+//                startActivity(intent);
+//                break;
+//            case "通知公告申请"://13
+//                intent.setClass(this, NotificationAndNoticeDetailAplActivity.class);
+//                startActivity(intent);
+//                break;
+//            case "办公室申请"://14
+//                intent.setClass(this, OfficeDetailAplActivity.class);
+//                startActivity(intent);
+//                break;
+//            case "领用申请"://15
+//                intent.setClass(this, ReceiveDetailAplActivity.class);
+//                startActivity(intent);
+//                break;
+//            case "合同文件申请"://16
+//                intent.setClass(this, ContractFileDetailAplActivity.class);
+//                startActivity(intent);
+//                break;
+//            case "复试申请"://18
+//                intent.setClass(this, RetestDetailAplActivity.class);
+//                startActivity(intent);
+//                break;
+//            case "会议申请"://19
+//                intent.setClass(this, ConferenceDetailAplActivity.class);
+//                startActivity(intent);
+//                break;
         }
     }
 

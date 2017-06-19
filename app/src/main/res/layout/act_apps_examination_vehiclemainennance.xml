@@ -193,7 +193,9 @@
                     android:layout_height="wrap_content"
                     android:background="@color/white"
                     android:src="@mipmap/et_forword"/>
-            </LinearLayout> <View
+            </LinearLayout>
+
+ <View
                 android:layout_width="match_parent"
                 android:layout_height="1dip"
                 android:background="@color/common_bg_examination_line"/>
@@ -445,7 +447,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="10dp"
                     android:layout_weight="0.28"
-                    android:text="@string/remark_all_apl"
+                    android:text="@string/vehicleMainennanceReason"
                     android:textColor="@color/cl_text_common"
                     android:textColorHint="@color/cl_hint_common"/>
 
@@ -457,7 +459,7 @@
                     android:layout_weight="0.72"
                     android:background="@drawable/et_white_stroke"
                     android:gravity="top|left"
-                    android:hint="@string/hint_remark_all_apl"
+                    android:hint="@string/hint_vehicleMainennanceReason"
                     android:paddingTop="10dp"
                     android:textColor="@color/cl_text_common"
                     android:textColorHint="@color/cl_hint_common"/>

@@ -841,24 +841,6 @@
 
 
         <!-- 05-17  外出详情-->
-        <activity
-            android:name=".ui.appsfrg.childmodel.examination.applicationdetail.OutGoingDetailAplActivity"
-            android:label="@string/app_name"
-            android:screenOrientation="portrait"
-            android:theme="@style/Theme.AppCompat.Light.NoActionBar">
-        </activity>
-        <activity
-            android:name=".ui.appsfrg.childmodel.examination.approvaldetail.OutGoingDetailApvlActivity"
-            android:label="@string/app_name"
-            android:screenOrientation="portrait"
-            android:theme="@style/Theme.AppCompat.Light.NoActionBar">
-        </activity>
-        <activity
-            android:name=".ui.appsfrg.childmodel.examination.copydetail.OutGoingDetailCopyActivity"
-            android:label="@string/app_name"
-            android:screenOrientation="portrait"
-            android:theme="@style/Theme.AppCompat.Light.NoActionBar">
-        </activity>
 
 
         <!-- 05-18  复试详情-->

@@ -56,9 +56,6 @@ public class DimissionDetailAplActivity extends BaseActivity {
     @ViewInject(id = R.id.tv_reason, click = "ReasonExpended")
     TextView tv_reason;
 
-    //备注
-    @ViewInject(id = R.id.tv_remark, click = "RemarkExpended")
-    TextView tv_remark;
 
     //离职类型
     @ViewInject(id = R.id.tv_dimissionType)
@@ -110,11 +107,10 @@ public class DimissionDetailAplActivity extends BaseActivity {
     }
 
     private void setShow(DismissionModel model) {
-        tv_startTime.setText(model.getEntryDate());
+        tv_startTime.setText(model.getStrartDate());
         tv_dimissionType.setText(model.getDimissionID());
         tv_endTime.setText(model.getDimissionDate());
         tv_reason.setText(model.getContent());
-        tv_remark.setText(model.getRemark());
 
         modelList = model.getApprovalInfoLists();
         // 审批人
@@ -141,7 +137,7 @@ public class DimissionDetailAplActivity extends BaseActivity {
         if (dismissionModel.getApprovalStatus().contains("1") || dismissionModel.getApprovalStatus().contains("2")) {
             //插入意见
             for (int i = 0, mark = layout_ll.getChildCount(); i < modelList.size(); i++, mark++) {//mark是布局插入位置，放在mark位置的后边（从1开始计数）
-                ViewHolder vh = AddView(this,mark);//添加布局
+                ViewHolder vh = AddView(this, mark);//添加布局
                 vh.tv_name.setText(modelList.get(i).getApprovalEmployeeName());
                 vh.tv_time.setText(modelList.get(i).getApprovalDate());
                 vh.tv_contains.setText(modelList.get(i).getComment());
@@ -149,13 +145,13 @@ public class DimissionDetailAplActivity extends BaseActivity {
                 if (modelList.get(i).getYesOrNo().contains("0")) {
                     vh.tv_yesOrNo.setText("不同意");
                     vh.tv_yesOrNo.setTextColor(getResources().getColor(R.color.red));
-                }else if(TextUtils.isEmpty(modelList.get(i).getYesOrNo())){
+                } else if (TextUtils.isEmpty(modelList.get(i).getYesOrNo())) {
                     vh.tv_yesOrNo.setText("未审批");
                     vh.tv_yesOrNo.setTextColor(getResources().getColor(R.color.red));
                 } else if ((modelList.get(i).getYesOrNo().contains("1"))) {
                     vh.tv_yesOrNo.setText("同意");
                     vh.tv_yesOrNo.setTextColor(getResources().getColor(R.color.green));
-                } else{
+                } else {
                     vh.tv_yesOrNo.setText("yesOrNo为null");
                 }
             }
@@ -239,6 +235,7 @@ public class DimissionDetailAplActivity extends BaseActivity {
     public void forBack(View view) {
         this.finish();
     }
+
     private boolean isExpend = false;
 
     public void ReasonExpended(View view) {
@@ -252,19 +249,4 @@ public class DimissionDetailAplActivity extends BaseActivity {
         }
 
     }
-
-    private boolean isRemarkExpend = false;
-
-    public void RemarkExpended(View view) {
-        if (!isRemarkExpend) {
-            tv_remark.setMinLines(0);
-            tv_remark.setMaxLines(Integer.MAX_VALUE);
-            isRemarkExpend = true;
-        } else {
-            tv_remark.setLines(3);
-            isRemarkExpend = false;
-        }
-
-    }
-
 }

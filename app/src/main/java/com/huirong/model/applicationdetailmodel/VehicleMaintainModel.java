@@ -11,26 +11,31 @@ public class VehicleMaintainModel implements Serializable {
     private static final long serialVersionUID = 1L;
 
     public String EstimateFee;//
-    public String StartMileage;//
-    public String FinishMileage;//
-    public String Number;//
-    public String Purpose;//
-    public String MaintenanceType;//
-    public String PlanBorrowTime;//维保时间
-    public String MaintenanceProject;//
-    public String VehicleState;//车辆状态
-    public String Destination;//维保地点
-
-
-    public String ApprovalStatus;//状态
+    public String TravelKilmetre;//
+    public String MaintenanceTime;//
+    public String MaintenanceEndTime;//
+    public String Remark;
+    public String MaintenanceNumber;
     public String StoreName;
+    public String ApprovalStatus;
     public String DepartmentName;
     public String EmployeeName;
     public String ApplicationCreateTime;
+
+
+    public String MaintenanceType;//状态
+    public String MaintenanceProject;
+    public String VehicleState;
+    public String MaintenancePlace;
+    public String CopyTime;
+    public String ActualBorrowTime;
+    public String ActualReturnTime;
+    public String Passenger;
+    public String BackRemark;
+    public String Purpose;
+
     public List<VehicleMaintainModel.ApprovalInfoLists> ApprovalInfoLists;
 
-    public String Remark;//申请备注
-    public String BackRemark;//交车备注
 
     public String getRemark() {
         return Remark;
@@ -40,13 +45,6 @@ public class VehicleMaintainModel implements Serializable {
         Remark = remark;
     }
 
-    public String getBackRemark() {
-        return BackRemark;
-    }
-
-    public void setBackRemark(String backRemark) {
-        BackRemark = backRemark;
-    }
 
     public static class ApprovalInfoLists implements Serializable{
         public String Comment;
@@ -113,13 +111,6 @@ public class VehicleMaintainModel implements Serializable {
         EstimateFee = estimateFee;
     }
 
-    public String getPlanBorrowTime() {
-        return PlanBorrowTime;
-    }
-
-    public void setPlanBorrowTime(String planBorrowTime) {
-        PlanBorrowTime = planBorrowTime;
-    }
 
     public String getMaintenanceProject() {
         return MaintenanceProject;
@@ -127,14 +118,6 @@ public class VehicleMaintainModel implements Serializable {
 
     public void setMaintenanceProject(String maintenanceProject) {
         MaintenanceProject = maintenanceProject;
-    }
-
-    public String getNumber() {
-        return Number;
-    }
-
-    public void setNumber(String number) {
-        Number = number;
     }
 
     public String getVehicleState() {
@@ -145,29 +128,6 @@ public class VehicleMaintainModel implements Serializable {
         VehicleState = vehicleState;
     }
 
-    public String getDestination() {
-        return Destination;
-    }
-
-    public void setDestination(String destination) {
-        Destination = destination;
-    }
-
-    public String getStartMileage() {
-        return StartMileage;
-    }
-
-    public void setStartMileage(String startMileage) {
-        StartMileage = startMileage;
-    }
-
-    public String getFinishMileage() {
-        return FinishMileage;
-    }
-
-    public void setFinishMileage(String finishMileage) {
-        FinishMileage = finishMileage;
-    }
 
     public String getStoreID() {
         return StoreID;
@@ -227,5 +187,114 @@ public class VehicleMaintainModel implements Serializable {
 
     public void setApplicationCreateTime(String applicationCreateTime) {
         ApplicationCreateTime = applicationCreateTime;
+    }
+
+    public String getTravelKilmetre() {
+        return TravelKilmetre;
+    }
+
+    public void setTravelKilmetre(String travelKilmetre) {
+        TravelKilmetre = travelKilmetre;
+    }
+
+    public String getMaintenanceTime() {
+        return MaintenanceTime;
+    }
+
+    public void setMaintenanceTime(String maintenanceTime) {
+        MaintenanceTime = maintenanceTime;
+    }
+
+    public String getMaintenanceEndTime() {
+        return MaintenanceEndTime;
+    }
+
+    public void setMaintenanceEndTime(String maintenanceEndTime) {
+        MaintenanceEndTime = maintenanceEndTime;
+    }
+
+    public String getMaintenanceNumber() {
+        return MaintenanceNumber;
+    }
+
+    public void setMaintenanceNumber(String maintenanceNumber) {
+        MaintenanceNumber = maintenanceNumber;
+    }
+
+    public String getMaintenancePlace() {
+        return MaintenancePlace;
+    }
+
+    public void setMaintenancePlace(String maintenancePlace) {
+        MaintenancePlace = maintenancePlace;
+    }
+
+    public String getCopyTime() {
+        return CopyTime;
+    }
+
+    public void setCopyTime(String copyTime) {
+        CopyTime = copyTime;
+    }
+
+    public String getActualBorrowTime() {
+        return ActualBorrowTime;
+    }
+
+    public void setActualBorrowTime(String actualBorrowTime) {
+        ActualBorrowTime = actualBorrowTime;
+    }
+
+    public String getActualReturnTime() {
+        return ActualReturnTime;
+    }
+
+    public void setActualReturnTime(String actualReturnTime) {
+        ActualReturnTime = actualReturnTime;
+    }
+
+    public String getPassenger() {
+        return Passenger;
+    }
+
+    public void setPassenger(String passenger) {
+        Passenger = passenger;
+    }
+
+    public String getBackRemark() {
+        return BackRemark;
+    }
+
+    public void setBackRemark(String backRemark) {
+        BackRemark = backRemark;
+    }
+
+    @Override
+    public String toString() {
+        return "VehicleMaintainModel{" +
+                "EstimateFee='" + EstimateFee + '\'' +
+                ", TravelKilmetre='" + TravelKilmetre + '\'' +
+                ", MaintenanceTime='" + MaintenanceTime + '\'' +
+                ", MaintenanceEndTime='" + MaintenanceEndTime + '\'' +
+                ", Remark='" + Remark + '\'' +
+                ", MaintenanceNumber='" + MaintenanceNumber + '\'' +
+                ", StoreName='" + StoreName + '\'' +
+                ", ApprovalStatus='" + ApprovalStatus + '\'' +
+                ", DepartmentName='" + DepartmentName + '\'' +
+                ", EmployeeName='" + EmployeeName + '\'' +
+                ", ApplicationCreateTime='" + ApplicationCreateTime + '\'' +
+                ", MaintenanceType='" + MaintenanceType + '\'' +
+                ", MaintenanceProject='" + MaintenanceProject + '\'' +
+                ", VehicleState='" + VehicleState + '\'' +
+                ", MaintenancePlace='" + MaintenancePlace + '\'' +
+                ", CopyTime='" + CopyTime + '\'' +
+                ", ActualBorrowTime='" + ActualBorrowTime + '\'' +
+                ", ActualReturnTime='" + ActualReturnTime + '\'' +
+                ", Passenger='" + Passenger + '\'' +
+                ", BackRemark='" + BackRemark + '\'' +
+                ", Purpose='" + Purpose + '\'' +
+                ", ApprovalInfoLists=" + ApprovalInfoLists +
+                ", StoreID='" + StoreID + '\'' +
+                '}';
     }
 }

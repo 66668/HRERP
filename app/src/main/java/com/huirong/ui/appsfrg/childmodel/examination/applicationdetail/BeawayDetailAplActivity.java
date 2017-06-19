@@ -18,7 +18,7 @@ import com.huirong.dialog.Loading;
 import com.huirong.helper.UserHelper;
 import com.huirong.inject.ViewInject;
 import com.huirong.model.MyApplicationModel;
-import com.huirong.model.applicationdetailmodel.BorrowModel;
+import com.huirong.model.applicationdetailmodel.BeawayModel;
 import com.huirong.utils.PageUtil;
 
 import java.util.ArrayList;
@@ -44,21 +44,13 @@ public class BeawayDetailAplActivity extends BaseActivity {
     @ViewInject(id = R.id.tv_right)
     TextView tv_right;
 
-    //说明
-    @ViewInject(id = R.id.tv_reason, click = "ReasonExpended")
-    TextView tv_reason;
 
-    //备注
-    @ViewInject(id = R.id.tv_remark, click = "RemarkExpended")
-    TextView tv_remark;
 
-    //类型
-    @ViewInject(id = R.id.tv_borrowType)
-    TextView tv_borrowType;
 
-    //借阅名称
-    @ViewInject(id = R.id.tv_BorrowThings)
-    TextView tv_BorrowThings;
+
+    //交通工具
+    @ViewInject(id = R.id.tv_type)
+    TextView tv_type;
 
     //开始时间
     @ViewInject(id = R.id.tv_startTime)
@@ -67,6 +59,17 @@ public class BeawayDetailAplActivity extends BaseActivity {
     //结束时间
     @ViewInject(id = R.id.tv_endTime)
     TextView tv_endTime;
+
+    //出差地点
+    @ViewInject(id = R.id.tv_place)
+    TextView tv_place;
+
+    //出差事由
+    @ViewInject(id = R.id.tv_reason, click = "ReasonExpended")
+    TextView tv_reason;
+    //备注
+    @ViewInject(id = R.id.tv_remark, click = "RemarkExpended")
+    TextView tv_remark;
 
     //审批人
     @ViewInject(id = R.id.tv_Requester)
@@ -83,9 +86,9 @@ public class BeawayDetailAplActivity extends BaseActivity {
     LinearLayout layout_ll;
 
     private Intent intent = null;
-    private BorrowModel borrowModel;
+    private BeawayModel BeawayModel;
     private MyApplicationModel model;
-    private List<BorrowModel.ApprovalInfoLists> modelList;
+    private List<BeawayModel.ApprovalInfoLists> modelList;
 
     //动态添加view
     private List<View> ls_childView;//用于保存动态添加进来的View
@@ -114,13 +117,13 @@ public class BeawayDetailAplActivity extends BaseActivity {
         model = (MyApplicationModel) intent.getSerializableExtra("MyApplicationModel");
     }
 
-    private void setShow(BorrowModel model) {
-        tv_BorrowThings.setText(model.getBorrowThings());
-        tv_startTime.setText(model.getStartTime());
-        tv_endTime.setText(model.getFinishTime());
+    private void setShow(BeawayModel model) {
+        tv_type.setText(model.getTraffic());
+        tv_startTime.setText(model.getStartTripDate());
+        tv_endTime.setText(model.getEndTripDate());
+        tv_place.setText(model.getTripAddress());
         tv_reason.setText(model.getReason());
         tv_remark.setText(model.getRemark());
-        tv_borrowType.setText(model.getBorrowType());
 
         modelList = model.getApprovalInfoLists();
         // 审批人
@@ -131,20 +134,20 @@ public class BeawayDetailAplActivity extends BaseActivity {
         tv_Requester.setText(nameBuilder);
 
         //审批状态
-        if (borrowModel.getApprovalStatus().contains("0")) {
+        if (BeawayModel.getApprovalStatus().contains("0")) {
             tv_state_result.setText("未审批");
             tv_state_result.setTextColor(getResources().getColor(R.color.red));
-        } else if (borrowModel.getApprovalStatus().contains("1")) {
+        } else if (BeawayModel.getApprovalStatus().contains("1")) {
             tv_state_result.setText("已审批");
             tv_state_result.setTextColor(getResources().getColor(R.color.green));
-        } else if (borrowModel.getApprovalStatus().contains("2")) {
+        } else if (BeawayModel.getApprovalStatus().contains("2")) {
             tv_state_result.setText("审批中...");
             tv_state_result.setTextColor(getResources().getColor(R.color.black));
         } else {
             tv_state_result.setText("你猜猜！");
         }
 
-        if (borrowModel.getApprovalStatus().contains("1") || borrowModel.getApprovalStatus().contains("2")) {
+        if (BeawayModel.getApprovalStatus().contains("1") || BeawayModel.getApprovalStatus().contains("2")) {
             //插入意见
             for (int i = 0, mark = layout_ll.getChildCount(); i < modelList.size(); i++, mark++) {//mark是布局插入位置，放在mark位置的后边（从1开始计数）
                 ViewHolder vh = AddView(this, mark);//添加布局
@@ -179,7 +182,7 @@ public class BeawayDetailAplActivity extends BaseActivity {
 
                 //泛型
                 try {
-                    BorrowModel model1 = new UserHelper<BorrowModel>(BorrowModel.class).applicationDetailPost(BeawayDetailAplActivity.this,
+                    BeawayModel model1 = new UserHelper<BeawayModel>(BeawayModel.class).applicationDetailPost(BeawayDetailAplActivity.this,
                             model.getApplicationID(),
                             model.getApplicationType());
                     sendMessage(POST_SUCCESS, model1);
@@ -196,8 +199,8 @@ public class BeawayDetailAplActivity extends BaseActivity {
         super.handleMessage(msg);
         switch (msg.what) {
             case POST_SUCCESS: // 1001
-                borrowModel = (BorrowModel) msg.obj;
-                setShow(borrowModel);
+                BeawayModel = (BeawayModel) msg.obj;
+                setShow(BeawayModel);
                 break;
             case POST_FAILED: // 1001
                 PageUtil.DisplayToast((String) msg.obj);

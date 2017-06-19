@@ -10,30 +10,22 @@ import java.util.List;
 public class WorkOverTimeModel implements Serializable {
     private static final long serialVersionUID = 1L;
 
-    public String OverEmployee;
-    public String OverCause;//
-    public String Reason;//
-    public String Remark;//
-    public String StratOverTime;//
-    public String EndOverTime;//
-
-
     public String ApprovalStatus;
-    public String StoreName;
-    public String DepartmentName;
-    public String EmployeeName;
-    public String ApplicationCreateTime;
+    public String StoreName;//
+    public String Remark;//
+    public String DepartmentName;//
+    public String EmployeeName;//
+    public String ApplicationCreateTime;//
+
+
+    public String OverEmployee;
+    public String OverCause;
+    public String StratOverTime;
+    public String EndOverTime;
 
 
     public List<WorkOverTimeModel.ApprovalInfoLists> ApprovalInfoLists;
 
-    public String getReason() {
-        return Reason;
-    }
-
-    public void setReason(String reason) {
-        Reason = reason;
-    }
 
     public String getRemark() {
         return Remark;

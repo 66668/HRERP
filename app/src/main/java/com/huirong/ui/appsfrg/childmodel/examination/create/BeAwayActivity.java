@@ -23,6 +23,7 @@ import com.huirong.inject.ViewInject;
 import com.huirong.model.ContactsEmployeeModel;
 import com.huirong.ui.appsfrg.childmodel.examination.ZOAplicationListActivity;
 import com.huirong.ui.contractsfrg.ContactsSelectActivity;
+import com.huirong.utils.LogUtils;
 import com.huirong.utils.PageUtil;
 
 import org.json.JSONException;
@@ -47,7 +48,7 @@ public class BeAwayActivity extends BaseActivity {
 
     //
     @ViewInject(id = R.id.tv_right, click = "forCommit")
-    TextView forCommit;
+    TextView tv_right;
 
 
     //交通工具
@@ -55,7 +56,7 @@ public class BeAwayActivity extends BaseActivity {
     TextView tv_type;
 
 
-    //目的地
+    //出差地点
     @ViewInject(id = R.id.et_place)
     TextView et_place;
 
@@ -95,7 +96,7 @@ public class BeAwayActivity extends BaseActivity {
     private String place;
     private String reason;
     private String remark = "";
-    String Way;
+    private String Way;
 
     private String approvalID = "";
 
@@ -117,6 +118,7 @@ public class BeAwayActivity extends BaseActivity {
     }
 
     public void forCommit(View view) {
+        LogUtils.d("出差", "提交");
         reason = et_reason.getText().toString();
         remark = et_remark.getText().toString();
         place = et_place.getText().toString();
@@ -144,16 +146,15 @@ public class BeAwayActivity extends BaseActivity {
             PageUtil.DisplayToast("审批人不能为空");
             return;
         }
+
         Loading.run(BeAwayActivity.this, new Runnable() {
             @Override
             public void run() {
                 try {
 
-
                     JSONObject js = new JSONObject();
                     js.put("Traffic", Way);
                     js.put("TripAddress", place);
-                    js.put("TripAddress", Way);
                     js.put("StartTripDate", startDate);
                     js.put("EndTripDate", endDates);
                     js.put("Remark", remark);
@@ -241,8 +242,8 @@ public class BeAwayActivity extends BaseActivity {
                         tv_timeStart.setText(time);
                     }
                 });
-        //        endDateChooseDialog.setTimePickerGone(true);
         endDateChooseDialog.setDateDialogTitle("开始时间");
+        endDateChooseDialog.setTimePickerGone(true);//具体到 天
         endDateChooseDialog.showDateChooseDialog();
     }
 
@@ -260,8 +261,8 @@ public class BeAwayActivity extends BaseActivity {
                         tv_timeEnd.setText(time);
                     }
                 });
-        //        endDateChooseDialog.setTimePickerGone(true);
         endDateChooseDialog.setDateDialogTitle("结束时间");
+        endDateChooseDialog.setTimePickerGone(true);//具体到 天
         endDateChooseDialog.showDateChooseDialog();
     }
 

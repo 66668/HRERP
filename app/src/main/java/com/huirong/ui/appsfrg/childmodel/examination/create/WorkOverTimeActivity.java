@@ -20,8 +20,8 @@ import com.huirong.helper.UserHelper;
 import com.huirong.inject.ViewInject;
 import com.huirong.model.ContactsEmployeeModel;
 import com.huirong.ui.appsfrg.childmodel.examination.ZOAplicationListActivity;
-import com.huirong.utils.PageUtil;
 import com.huirong.ui.contractsfrg.ContactsSelectActivity;
+import com.huirong.utils.PageUtil;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -64,10 +64,6 @@ public class WorkOverTimeActivity extends BaseActivity {
     @ViewInject(id = R.id.et_reason)
     EditText et_reason;
 
-    //备注
-    @ViewInject(id = R.id.et_remark)
-    EditText et_remark;
-
     //人员
     @ViewInject(id = R.id.et_OverEmployee)
     EditText et_OverEmployee;
@@ -106,7 +102,6 @@ public class WorkOverTimeActivity extends BaseActivity {
      */
     public void forCommit(View view) {
         reason = et_reason.getText().toString();
-        remark = et_remark.getText().toString();
         overEmployee = et_OverEmployee.getText().toString().trim();
         if (TextUtils.isEmpty(startDate) || TextUtils.isEmpty(endDates)) {
             PageUtil.DisplayToast("请假时间不能为空");
@@ -169,7 +164,6 @@ public class WorkOverTimeActivity extends BaseActivity {
         et_OverEmployee.setText("");
         et_reason.setText("");
         tv_Requester.setText("");
-        et_remark.setText("");
         approvalID = null;
         startDate = null;
         endDates = null;

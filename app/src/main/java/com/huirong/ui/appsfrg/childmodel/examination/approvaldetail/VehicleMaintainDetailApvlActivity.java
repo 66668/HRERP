@@ -21,6 +21,8 @@ import com.huirong.model.approvaldetailmodel.VehicleMaintainApvlModel;
 import com.huirong.utils.PageUtil;
 
 /**
+ * 维保 审批详情
+ *
  * Created by sjy on 2016/12/2.
  */
 
@@ -90,6 +92,10 @@ public class VehicleMaintainDetailApvlActivity extends BaseActivity {
     @ViewInject(id = R.id.tv_startTime)
     TextView tv_startTime;
 
+    //维修完成时间
+    @ViewInject(id = R.id.tv_endTime)
+    TextView tv_endTime;
+
     //车牌号
     @ViewInject(id = R.id.vehicleNumber)
     TextView vehicleNumber;
@@ -102,9 +108,9 @@ public class VehicleMaintainDetailApvlActivity extends BaseActivity {
     @ViewInject(id = R.id.tv_address)
     TextView tv_address;
 
-    //费用
-    @ViewInject(id = R.id.tv_fee)
-    TextView tv_fee;
+    //公里
+    @ViewInject(id = R.id.tv_miles)
+    TextView tv_miles;
 
     //备注
     @ViewInject(id = R.id.tv_remark, click = "RemarkExpended")
@@ -148,10 +154,11 @@ public class VehicleMaintainDetailApvlActivity extends BaseActivity {
         vehicleNumber.setText(model.getNumber());
         tv_stateType.setText(model.getVehicleState());
         tv_startTime.setText(model.getPlanBorrowTime());
+        tv_endTime.setText(model.getPlanBorrowTime());
         tv_project.setText(model.getMaintenanceProject());
         tv_address.setText(model.getDestination());
         tv_remark.setText(model.getRemark());
-        tv_fee.setText(model.getEstimateFee());
+        tv_miles.setText(model.getEstimateFee());
     }
 
     private void bottomType() {

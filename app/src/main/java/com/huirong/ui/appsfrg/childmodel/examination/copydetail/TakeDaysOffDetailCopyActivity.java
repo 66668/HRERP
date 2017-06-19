@@ -59,19 +59,9 @@ public class TakeDaysOffDetailCopyActivity extends BaseActivity {
     @ViewInject(id = R.id.tv_endNarmalTime)
     TextView tv_endNarmalTime;
 
-
-    //标题
-    @ViewInject(id = R.id.tv_startOffTitle)
-    TextView tv_startOffTitle;
-
     //说明
     @ViewInject(id = R.id.tv_reason, click = "ReasonExpended")
     TextView tv_reason;
-
-    //备注
-    @ViewInject(id = R.id.tv_remark, click = "RemarkExpended")
-    TextView tv_remark;
-
 
     //审批人
     @ViewInject(id = R.id.tv_Requester)
@@ -125,13 +115,11 @@ public class TakeDaysOffDetailCopyActivity extends BaseActivity {
         tv_copyer.setText(model.getEmployeeName());
         tv_copyTime.setText(model.getApplicationCreateTime());
         //
-        tv_startOffTitle.setText(model.getApplicationTitle());
         tv_startOffTime.setText(model.getStartOffDate());
         tv_endOffTime.setText(model.getEndOffDate());
         tv_startNarmalTime.setText(model.getStartTakeDate());
         tv_endNarmalTime.setText(model.getEndTakeDate());
-        tv_reason.setText(model.getReason());
-        tv_remark.setText(model.getRemark());
+        tv_reason.setText(model.getRemark());
 
         // 审批人
         modelList = model.getApprovalInfoLists();
@@ -272,17 +260,4 @@ public class TakeDaysOffDetailCopyActivity extends BaseActivity {
 
     }
 
-    private boolean isRemarkExpend = false;
-
-    public void RemarkExpended(View view) {
-        if (!isRemarkExpend) {
-            tv_remark.setMinLines(0);
-            tv_remark.setMaxLines(Integer.MAX_VALUE);
-            isRemarkExpend = true;
-        } else {
-            tv_remark.setLines(3);
-            isRemarkExpend = false;
-        }
-
-    }
 }

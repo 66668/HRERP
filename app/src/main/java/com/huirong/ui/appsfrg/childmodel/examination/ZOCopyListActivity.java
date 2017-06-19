@@ -17,24 +17,19 @@ import com.huirong.dialog.Loading;
 import com.huirong.helper.UserHelper;
 import com.huirong.inject.ViewInject;
 import com.huirong.model.MyCopyModel;
-import com.huirong.ui.appsfrg.childmodel.examination.copydetail.BorrowDetailCopyActivity;
-import com.huirong.ui.appsfrg.childmodel.examination.copydetail.ConferenceDetailCopyActivity;
-import com.huirong.ui.appsfrg.childmodel.examination.copydetail.ContractFileDetailCopyActivity;
+import com.huirong.ui.appsfrg.childmodel.examination.copydetail.BeawayDetailCopyActivity;
+import com.huirong.ui.appsfrg.childmodel.examination.copydetail.BookTicketsDetailCopyActivity;
 import com.huirong.ui.appsfrg.childmodel.examination.copydetail.DimissionDetailCopyActivity;
 import com.huirong.ui.appsfrg.childmodel.examination.copydetail.FinancialLoanDetailCopyActivity;
 import com.huirong.ui.appsfrg.childmodel.examination.copydetail.FinancialPayDetailCopyActivity;
 import com.huirong.ui.appsfrg.childmodel.examination.copydetail.FinancialReimburseDetailCopyActivity;
 import com.huirong.ui.appsfrg.childmodel.examination.copydetail.LeaveDetailCopyActivity;
-import com.huirong.ui.appsfrg.childmodel.examination.copydetail.NotificationAndNoticeDetailCopyActivity;
-import com.huirong.ui.appsfrg.childmodel.examination.copydetail.OfficeDetailCopyActivity;
-import com.huirong.ui.appsfrg.childmodel.examination.copydetail.OutGoingDetailCopyActivity;
 import com.huirong.ui.appsfrg.childmodel.examination.copydetail.PositionReplaceDetailCopyActivity;
 import com.huirong.ui.appsfrg.childmodel.examination.copydetail.ProcurementDetailCopyActivity;
-import com.huirong.ui.appsfrg.childmodel.examination.copydetail.ReceiveDetailCopyActivity;
 import com.huirong.ui.appsfrg.childmodel.examination.copydetail.RecruitmentDetailCopyActivity;
-import com.huirong.ui.appsfrg.childmodel.examination.copydetail.RetestDetailCopyActivity;
-import com.huirong.ui.appsfrg.childmodel.examination.copydetail.SalaryadjustDetailCopyActivity;
+import com.huirong.ui.appsfrg.childmodel.examination.copydetail.SignetDetailCopyActivity;
 import com.huirong.ui.appsfrg.childmodel.examination.copydetail.TakeDaysOffDetailCopyActivity;
+import com.huirong.ui.appsfrg.childmodel.examination.copydetail.TrainingDetailCopyActivity;
 import com.huirong.ui.appsfrg.childmodel.examination.copydetail.VehicleDetailCopyActivity;
 import com.huirong.ui.appsfrg.childmodel.examination.copydetail.VehicleMaintainDetailCopyActivity;
 import com.huirong.ui.appsfrg.childmodel.examination.copydetail.WorkOverTimeDetailCopyActivity;
@@ -270,34 +265,30 @@ public class ZOCopyListActivity extends BaseActivity implements RefreshListView.
         Bundle bundle = new Bundle();
         bundle.putSerializable("MyCopyModel", model);
         switch (type) {
-            case "招聘申请"://01
-                startActivity(RecruitmentDetailCopyActivity.class, bundle);
-                break;
-            case "离职申请"://02
-                startActivity(DimissionDetailCopyActivity.class, bundle);
-                break;
-            case "请假申请"://03
+
+            case "请假申请"://01
                 startActivity(LeaveDetailCopyActivity.class, bundle);
+                ;
                 break;
-            case "加班申请"://04
-                startActivity(WorkOverTimeDetailCopyActivity.class, bundle);
+
+            case "出差申请"://02
+                startActivity(BeawayDetailCopyActivity.class, bundle);
                 break;
-            case "调休申请"://05
-                startActivity(TakeDaysOffDetailCopyActivity.class, bundle);
-                break;
-            case "借阅申请"://06
-                startActivity(BorrowDetailCopyActivity.class, bundle);
-                break;
-            case "调薪申请"://07
-                startActivity(SalaryadjustDetailCopyActivity.class, bundle);
-                break;
-            case "用车申请"://08
+
+            case "用车申请"://03
                 startActivity(VehicleDetailCopyActivity.class, bundle);
+                ;
                 break;
-            case "车辆维保"://09
+
+            case "车辆维保"://04
                 startActivity(VehicleMaintainDetailCopyActivity.class, bundle);
                 break;
-            case "财务申请"://10
+
+            case "加班申请"://05
+                startActivity(WorkOverTimeDetailCopyActivity.class, bundle);
+                break;
+
+            case "财务申请"://06
                 //根据type决定跳转到具体界面
                 if (model.getApplicationTitle().contains("借款")) {
                     startActivity(FinancialLoanDetailCopyActivity.class, bundle);
@@ -310,33 +301,64 @@ public class ZOCopyListActivity extends BaseActivity implements RefreshListView.
                 }
                 break;
 
-            case "调动申请"://11
+
+            case "离职申请"://07
+                startActivity(DimissionDetailCopyActivity.class, bundle);
+                break;
+
+            case "订票申请"://08
+                startActivity(BookTicketsDetailCopyActivity.class, bundle);
+                break;
+
+            case "调休申请"://09
+                startActivity(TakeDaysOffDetailCopyActivity.class, bundle);
+                break;
+
+            case "印章申请"://10
+                startActivity(SignetDetailCopyActivity.class, bundle);
+                break;
+
+            case "培训申请"://11
+                startActivity(TrainingDetailCopyActivity.class, bundle);
+                break;
+
+            case "调动申请"://12
                 startActivity(PositionReplaceDetailCopyActivity.class, bundle);
                 break;
-            case "采购申请"://12
+
+            case "招聘申请"://13
+                startActivity(RecruitmentDetailCopyActivity.class, bundle);
+                break;
+
+            case "采购申请"://14
                 startActivity(ProcurementDetailCopyActivity.class, bundle);
                 break;
-            case "通知公告申请"://13
-                startActivity(NotificationAndNoticeDetailCopyActivity.class, bundle);
-                break;
-            case "办公室申请"://14
-                startActivity(OfficeDetailCopyActivity.class, bundle);
-                break;
-            case "领用申请"://15
-                startActivity(ReceiveDetailCopyActivity.class, bundle);
-                break;
-            case "合同文件申请"://16
-                startActivity(ContractFileDetailCopyActivity.class, bundle);
-                break;
-            case "外出申请"://17
-                startActivity(OutGoingDetailCopyActivity.class, bundle);
-                break;
-            case "复试申请"://18
-                startActivity(RetestDetailCopyActivity.class, bundle);
-                break;
-            case "会议申请"://19
-                startActivity(ConferenceDetailCopyActivity.class, bundle);
-                break;
+
+
+//            case "借阅申请"://06
+//                startActivity(BorrowDetailCopyActivity.class, bundle);
+//                break;
+//            case "调薪申请"://07
+//                startActivity(SalaryadjustDetailCopyActivity.class, bundle);
+//                break;
+//            case "通知公告申请"://13
+//                startActivity(NotificationAndNoticeDetailCopyActivity.class, bundle);
+//                break;
+//            case "办公室申请"://14
+//                startActivity(OfficeDetailCopyActivity.class, bundle);
+//                break;
+//            case "领用申请"://15
+//                startActivity(ReceiveDetailCopyActivity.class, bundle);
+//                break;
+//            case "合同文件申请"://16
+//                startActivity(ContractFileDetailCopyActivity.class, bundle);
+//                break;
+//            case "复试申请"://18
+//                startActivity(RetestDetailCopyActivity.class, bundle);
+//                break;
+//            case "会议申请"://19
+//                startActivity(ConferenceDetailCopyActivity.class, bundle);
+//                break;
         }
     }
 

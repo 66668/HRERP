@@ -166,7 +166,7 @@
                         android:text="@string/beaway_type"/>
 
                     <TextView
-                        android:id="@+id/tv_borrowThings"
+                        android:id="@+id/tv_type"
                         style="@style/BlackText.standard"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
@@ -194,7 +194,7 @@
                         android:text="@string/beaway_place"/>
 
                     <TextView
-                        android:id="@+id/tv_borrowType"
+                        android:id="@+id/tv_place"
                         style="@style/BlackText.standard"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
@@ -279,8 +279,6 @@
 
 
                     <TextView
-                        android:paddingRight="10dp"
-                        android:paddingTop="10dp"
                         android:id="@+id/tv_reason"
                         style="@style/BlackText.standard"
                         android:layout_width="0dp"
@@ -289,6 +287,8 @@
                         android:ellipsize="end"
                         android:gravity="top|left"
                         android:lines="3"
+                        android:paddingRight="10dp"
+                        android:paddingTop="10dp"
                         />
 
                 </LinearLayout>
@@ -311,8 +311,6 @@
                         android:textColor="@color/cl_text_common"/>
 
                     <TextView
-                        android:paddingRight="10dp"
-                        android:paddingTop="10dp"
                         android:id="@+id/tv_remark"
                         style="@style/BlackText.standard"
                         android:layout_width="0dp"
@@ -321,6 +319,8 @@
                         android:ellipsize="end"
                         android:gravity="top|left"
                         android:lines="3"
+                        android:paddingRight="10dp"
+                        android:paddingTop="10dp"
                         />
 
                 </LinearLayout>

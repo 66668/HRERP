@@ -18,7 +18,7 @@ import com.huirong.dialog.Loading;
 import com.huirong.helper.UserHelper;
 import com.huirong.inject.ViewInject;
 import com.huirong.model.MyApplicationModel;
-import com.huirong.model.applicationdetailmodel.BorrowModel;
+import com.huirong.model.applicationdetailmodel.BookTicketsModel;
 import com.huirong.utils.PageUtil;
 
 import java.util.ArrayList;
@@ -27,7 +27,7 @@ import java.util.List;
 import static com.huirong.R.id.tv_contains;
 
 /**
- * 出差详情
+ * 订票详情
  * Created by sjy on 2016/12/29.
  */
 
@@ -44,21 +44,21 @@ public class BookTicketsDetailAplActivity extends BaseActivity {
     @ViewInject(id = R.id.tv_right)
     TextView tv_right;
 
-    //说明
+    //交通工具
+    @ViewInject(id = R.id.tv_type)
+    TextView tv_type;
+
+    //出发地
+    @ViewInject(id = R.id.tv_startPlace)
+    TextView tv_startPlace;
+
+    //目的地
+    @ViewInject(id = R.id.tv_endPlace)
+    TextView tv_endPlace;
+
+    //订票事由
     @ViewInject(id = R.id.tv_reason, click = "ReasonExpended")
     TextView tv_reason;
-
-    //备注
-    @ViewInject(id = R.id.tv_remark, click = "RemarkExpended")
-    TextView tv_remark;
-
-    //类型
-    @ViewInject(id = R.id.tv_borrowType)
-    TextView tv_borrowType;
-
-    //借阅名称
-    @ViewInject(id = R.id.tv_BorrowThings)
-    TextView tv_BorrowThings;
 
     //开始时间
     @ViewInject(id = R.id.tv_startTime)
@@ -83,9 +83,9 @@ public class BookTicketsDetailAplActivity extends BaseActivity {
     LinearLayout layout_ll;
 
     private Intent intent = null;
-    private BorrowModel borrowModel;
+    private BookTicketsModel borrowModel;
     private MyApplicationModel model;
-    private List<BorrowModel.ApprovalInfoLists> modelList;
+    private List<BookTicketsModel.ApprovalInfoLists> modelList;
 
     //动态添加view
     private List<View> ls_childView;//用于保存动态添加进来的View
@@ -108,19 +108,22 @@ public class BookTicketsDetailAplActivity extends BaseActivity {
     }
 
     private void initMyView() {
-        tv_title.setText(getResources().getString(R.string.beaway_title_d));
+        tv_title.setText(getResources().getString(R.string.book_title_d));
         tv_right.setText("");
         intent = getIntent();
         model = (MyApplicationModel) intent.getSerializableExtra("MyApplicationModel");
     }
 
-    private void setShow(BorrowModel model) {
-        tv_BorrowThings.setText(model.getBorrowThings());
+    private void setShow(BookTicketsModel model) {
+
+        tv_type.setText(model.getTraffic());
+
+        tv_startPlace.setText(model.getStartAddress());
+        tv_endPlace.setText(model.getEndAddress());
+
         tv_startTime.setText(model.getStartTime());
-        tv_endTime.setText(model.getFinishTime());
+        tv_endTime.setText(model.getEndTime());
         tv_reason.setText(model.getReason());
-        tv_remark.setText(model.getRemark());
-        tv_borrowType.setText(model.getBorrowType());
 
         modelList = model.getApprovalInfoLists();
         // 审批人
@@ -179,7 +182,7 @@ public class BookTicketsDetailAplActivity extends BaseActivity {
 
                 //泛型
                 try {
-                    BorrowModel model1 = new UserHelper<BorrowModel>(BorrowModel.class).applicationDetailPost(BookTicketsDetailAplActivity.this,
+                    BookTicketsModel model1 = new UserHelper<BookTicketsModel>(BookTicketsModel.class).applicationDetailPost(BookTicketsDetailAplActivity.this,
                             model.getApplicationID(),
                             model.getApplicationType());
                     sendMessage(POST_SUCCESS, model1);
@@ -196,7 +199,7 @@ public class BookTicketsDetailAplActivity extends BaseActivity {
         super.handleMessage(msg);
         switch (msg.what) {
             case POST_SUCCESS: // 1001
-                borrowModel = (BorrowModel) msg.obj;
+                borrowModel = (BookTicketsModel) msg.obj;
                 setShow(borrowModel);
                 break;
             case POST_FAILED: // 1001
@@ -257,20 +260,6 @@ public class BookTicketsDetailAplActivity extends BaseActivity {
         } else {
             tv_reason.setLines(3);
             isExpend = false;
-        }
-
-    }
-
-    private boolean isRemarkExpend = false;
-
-    public void RemarkExpended(View view) {
-        if (!isRemarkExpend) {
-            tv_remark.setMinLines(0);
-            tv_remark.setMaxLines(Integer.MAX_VALUE);
-            isRemarkExpend = true;
-        } else {
-            tv_remark.setLines(3);
-            isRemarkExpend = false;
         }
 
     }

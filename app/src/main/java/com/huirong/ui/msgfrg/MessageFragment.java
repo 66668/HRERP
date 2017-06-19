@@ -132,7 +132,7 @@ public class MessageFragment extends com.huirong.base.BaseFragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.act_message, container, false);
+        View view = inflater.inflate(R.layout.fragment_message, container, false);
         return view;
     }
 
@@ -341,46 +341,46 @@ public class MessageFragment extends com.huirong.base.BaseFragment {
                     handler.sendMessage(handler.obtainMessage(NONE_NOTIFICATION_DATA, "没有最新通知"));
                 }
 
-                //未办事项
-                try {
-                    List<com.huirong.model.MyApprovalModel> visitorModelList = com.huirong.helper.UserHelper.getApprovalSearchResults(
-                            getActivity(),
-                            "",//iMaxTime
-                            "");
-
-                    if (visitorModelList == null) {
-                        handler.sendMessage(handler.obtainMessage(NONE_UNDO_DATA, "没有未审批申请"));
-                    } else {
-                        if (visitorModelList.size() <= 0) {
-                            handler.sendMessage(handler.obtainMessage(NONE_UNDO_DATA, "没有未审批申请"));
-                        } else {
-                            handler.sendMessage(handler.obtainMessage(GET_UNDO_DATA, visitorModelList));
-                        }
-                    }
-                } catch (com.huirong.common.MyException e) {
-                    handler.sendMessage(handler.obtainMessage(NONE_UNDO_DATA, "没有未审批申请"));
-                }
-
-
-                //会议
-                try {
-                    List<com.huirong.model.ConferenceMSGModel> conferenceModelList = com.huirong.helper.UserHelper.GetAppConferenceList(
-                            getActivity(),
-                            "",//iMaxTime
-                            "");
-
-                    if (conferenceModelList == null) {
-                        handler.sendMessage(handler.obtainMessage(NONE_CONFERENCE_DATA, "没有最新会议"));
-                    } else {
-                        if (conferenceModelList.size() <= 0) {
-                            handler.sendMessage(handler.obtainMessage(NONE_CONFERENCE_DATA, "没有最新会议"));
-                        } else {
-                            handler.sendMessage(handler.obtainMessage(GET_CONFERENCE_DATA, conferenceModelList));
-                        }
-                    }
-                } catch (com.huirong.common.MyException e) {
-                    handler.sendMessage(handler.obtainMessage(NONE_CONFERENCE_DATA, "没有最新会议"));
-                }
+//                //未办事项
+//                try {
+//                    List<com.huirong.model.MyApprovalModel> visitorModelList = com.huirong.helper.UserHelper.getApprovalSearchResults(
+//                            getActivity(),
+//                            "",//iMaxTime
+//                            "");
+//
+//                    if (visitorModelList == null) {
+//                        handler.sendMessage(handler.obtainMessage(NONE_UNDO_DATA, "没有未审批申请"));
+//                    } else {
+//                        if (visitorModelList.size() <= 0) {
+//                            handler.sendMessage(handler.obtainMessage(NONE_UNDO_DATA, "没有未审批申请"));
+//                        } else {
+//                            handler.sendMessage(handler.obtainMessage(GET_UNDO_DATA, visitorModelList));
+//                        }
+//                    }
+//                } catch (com.huirong.common.MyException e) {
+//                    handler.sendMessage(handler.obtainMessage(NONE_UNDO_DATA, "没有未审批申请"));
+//                }
+//
+//
+//                //会议
+//                try {
+//                    List<com.huirong.model.ConferenceMSGModel> conferenceModelList = com.huirong.helper.UserHelper.GetAppConferenceList(
+//                            getActivity(),
+//                            "",//iMaxTime
+//                            "");
+//
+//                    if (conferenceModelList == null) {
+//                        handler.sendMessage(handler.obtainMessage(NONE_CONFERENCE_DATA, "没有最新会议"));
+//                    } else {
+//                        if (conferenceModelList.size() <= 0) {
+//                            handler.sendMessage(handler.obtainMessage(NONE_CONFERENCE_DATA, "没有最新会议"));
+//                        } else {
+//                            handler.sendMessage(handler.obtainMessage(GET_CONFERENCE_DATA, conferenceModelList));
+//                        }
+//                    }
+//                } catch (com.huirong.common.MyException e) {
+//                    handler.sendMessage(handler.obtainMessage(NONE_CONFERENCE_DATA, "没有最新会议"));
+//                }
 
 
             }

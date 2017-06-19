@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">慧荣ERP</string>
+    <string name="app_name">惠荣ERP-OA-SaaS办公系统</string>
     <string name="action_settings">Settings</string>
     <string name="network_invalid">网络不给力，请检查网络连接！</string>
 
@@ -168,8 +168,8 @@
     <string name="addPicture">添加图片</string>
 
     <!-- 04-02出差-->
-    <string name="beaway_type">交通工具</string>
     <string name="beaway_title_d">出差详情</string>
+    <string name="beaway_type">交通工具</string>
     <string name="beaway_startTime">出发时间</string>
     <string name="beaway_endTime">返回时间</string>
     <string name="beaway_place">出差地点</string>
@@ -177,6 +177,7 @@
     <string name="beaway_reason">出差事由</string>
     <string name="beaway_reason_hint">请输入出差事由</string>
     <string name="beaway_remark">备注</string>
+    <string name="beaway_remark_hint">请输入备注</string>
     <array name="beawayarray">
         <item>飞机</item>
         <item>高铁</item>
@@ -190,15 +191,16 @@
     <string name="carUsed_d">用车详情</string>
     <string name="carUser">驾驶人</string>
     <string name="hint_carUser">请输入驾驶人</string>
-    <string name="carUsedStart">出发时间</string>
-    <string name="carUsedEnd">返回时间</string>
+    <string name="carUsedStart">用车时间</string>
+    <string name="carUsedEnd">归还时间</string>
     <string name="carUsedDestination">目的地</string>
     <string name="hint_carUsedDestination">请输入目的地</string>
     <string name="carUsedReason">用车原因</string>
     <string name="hint_carUsedReason">请输入用车说明</string>
     <string name="carUsedpurpose">用车原因</string>
     <string name="hint_carUsedpurpose">请输入用车原因</string>
-    <string name="carUsedOther">申请备注</string>
+    <string name="carUsed_remark">用车说明</string>
+    <string name="carUsed_remark_hint">请输入用车说明</string>
 
     <!-- 04-04  车辆维护04-->
     <string name="vehicleMainennance">车辆维保申请</string>
@@ -219,8 +221,8 @@
     <string name="hint_vehicleMainennanceAddress">请输入维保地点</string>
     <string name="vehicleMainennanceMoney">预计金额</string>
     <string name="hint_vehicleMainennanceMoney">请输入预计金额（/元）</string>
-    <string name="vehicleMainennanceReason">申请备注</string>
-    <string name="hint_vehicleMainennanceReason">请输入维保申请备注</string>
+    <string name="vehicleMainennanceReason">维保说明</string>
+    <string name="hint_vehicleMainennanceReason">请输入维保说明</string>
     <array name="spMaintenanceType">
         <item>维修</item>
         <item>保养</item>
@@ -388,6 +390,8 @@
     <string name="train_end">结束时间</string>
     <string name="train_person">培训人员</string>
     <string name="train_person_hint">请输入培训人员</string>
+    <string name="train_content">培训内容</string>
+    <string name="train_content_hint">请输入培训内容</string>
     <string name="train_fee">培训费用</string>
     <string name="train_fee_hint">请输入培训费用</string>
     <string name="train_place">培训地址</string>

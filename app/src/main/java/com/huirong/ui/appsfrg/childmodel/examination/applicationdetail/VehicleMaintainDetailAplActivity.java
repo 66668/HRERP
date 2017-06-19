@@ -56,6 +56,10 @@ public class VehicleMaintainDetailAplActivity extends BaseActivity {
     @ViewInject(id = R.id.tv_PlanBorrowTime)
     TextView tv_PlanmantainTime;
 
+    //维修完成时间
+    @ViewInject(id = R.id.tv_PlanEndTime)
+    TextView tv_PlanEndTime;
+
     //维修地点
     @ViewInject(id = R.id.tv_Destination)
     TextView tv_Destination;
@@ -64,18 +68,17 @@ public class VehicleMaintainDetailAplActivity extends BaseActivity {
     @ViewInject(id = R.id.tv_project)
     TextView tv_project;
 
-    //费用
-    @ViewInject(id = R.id.tv_EstimateFee)
-    TextView tv_EstimateFee;
-
     //车牌号
     @ViewInject(id = R.id.tv_number)
     TextView tv_number;
 
+    //公里数
+    @ViewInject(id = R.id.tv_miles)
+    TextView tv_miles;
+
     //备注
     @ViewInject(id = R.id.tv_remark, click = "RemarkExpended")
     TextView tv_remark;
-
 
     //审批人
     @ViewInject(id = R.id.tv_Requester)
@@ -122,13 +125,16 @@ public class VehicleMaintainDetailAplActivity extends BaseActivity {
     private void setShow(VehicleMaintainModel model) {
         tv_MaintenanceType.setText(model.getMaintenanceType());
         tv_VehicleState.setText(model.getVehicleState());
-        tv_PlanmantainTime.setText(model.getPlanBorrowTime());
-        tv_number.setText(model.getNumber());
-        tv_project.setText(model.getMaintenanceProject());
-        tv_Destination.setText(model.getDestination());
-        tv_EstimateFee.setText(model.getEstimateFee());
-        tv_remark.setText(model.getRemark());
 
+        tv_PlanmantainTime.setText(model.getMaintenanceTime());
+        tv_PlanEndTime.setText(model.getMaintenanceEndTime());
+
+        tv_number.setText(model.getMaintenanceNumber());
+        tv_miles.setText(model.getTravelKilmetre());
+        tv_project.setText(model.getMaintenanceProject());
+        tv_Destination.setText(model.getMaintenancePlace());
+
+        tv_remark.setText(model.getPurpose());
         modelList = model.getApprovalInfoLists();
 
         // 审批人
@@ -155,20 +161,20 @@ public class VehicleMaintainDetailAplActivity extends BaseActivity {
         if (vehicleMaintenanceModel.getApprovalStatus().contains("1") || vehicleMaintenanceModel.getApprovalStatus().contains("2")) {
             //插入意见
             for (int i = 0, mark = layout_ll.getChildCount(); i < modelList.size(); i++, mark++) {//mark是布局插入位置，放在mark位置的后边（从1开始计数）
-                ViewHolder vh = AddView(this,mark);//添加布局
+                ViewHolder vh = AddView(this, mark);//添加布局
                 vh.tv_name.setText(modelList.get(i).getApprovalEmployeeName());
                 vh.tv_time.setText(modelList.get(i).getApprovalDate());
                 vh.tv_contains.setText(modelList.get(i).getComment());
                 if (modelList.get(i).getYesOrNo().contains("0")) {
                     vh.tv_yesOrNo.setText("不同意");
                     vh.tv_yesOrNo.setTextColor(getResources().getColor(R.color.red));
-                }else if(TextUtils.isEmpty(modelList.get(i).getYesOrNo())){
+                } else if (TextUtils.isEmpty(modelList.get(i).getYesOrNo())) {
                     vh.tv_yesOrNo.setText("未审批");
                     vh.tv_yesOrNo.setTextColor(getResources().getColor(R.color.red));
                 } else if ((modelList.get(i).getYesOrNo().contains("1"))) {
                     vh.tv_yesOrNo.setText("同意");
                     vh.tv_yesOrNo.setTextColor(getResources().getColor(R.color.green));
-                } else{
+                } else {
                     vh.tv_yesOrNo.setText("yesOrNo为null");
                 }
             }
@@ -212,6 +218,7 @@ public class VehicleMaintainDetailAplActivity extends BaseActivity {
                 break;
         }
     }
+
     public class ViewHolder {
         private int id = -1;
         private TextView tv_name;
@@ -242,6 +249,7 @@ public class VehicleMaintainDetailAplActivity extends BaseActivity {
         ls_childView.add(childView);
         return vh;
     }
+
     /**
      * back
      *
@@ -251,6 +259,7 @@ public class VehicleMaintainDetailAplActivity extends BaseActivity {
     public void forBack(View view) {
         this.finish();
     }
+
     private boolean isRemarkExpend = false;
 
     public void RemarkExpended(View view) {

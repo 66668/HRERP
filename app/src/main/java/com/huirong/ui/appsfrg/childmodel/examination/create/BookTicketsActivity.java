@@ -50,18 +50,13 @@ public class BookTicketsActivity extends BaseActivity {
     TextView forCommit;
 
 
-    //原因
-    @ViewInject(id = R.id.et_reason)
-    EditText et_reason;
-
-
     //交通工具
     @ViewInject(id = R.id.tv_type, click = "chooseType")
     TextView tv_type;
 
-    //出发地
-    @ViewInject(id = R.id.et_place)
-    EditText et_place;
+    //始发地
+    @ViewInject(id = R.id.et_startPlace)
+    EditText et_startPlace;
 
     //目的地
     @ViewInject(id = R.id.et_endPlace)
@@ -79,6 +74,11 @@ public class BookTicketsActivity extends BaseActivity {
     LinearLayout layout_end;
     @ViewInject(id = R.id.tv_timeEnd)
     TextView tv_timeEnd;
+
+    //原因
+    @ViewInject(id = R.id.et_reason)
+    EditText et_reason;
+
 
 
     //添加审批人
@@ -108,19 +108,20 @@ public class BookTicketsActivity extends BaseActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.act_apps_examination_beaway);
+        setContentView(R.layout.act_apps_examination_bookticket);
 
         initMyView();
     }
 
     private void initMyView() {
-        tv_title.setText(getResources().getString(R.string.beaway));
+        tv_title.setText(getResources().getString(R.string.bookticket));
     }
 
     public void forCommit(View view) {
+
         reason = et_reason.getText().toString();
-        startPlace = et_place.getText().toString();
         endPlace = et_endPlace.getText().toString();
+        startPlace = et_startPlace.getText().toString();
 
         if (TextUtils.isEmpty(startDate) || TextUtils.isEmpty(endDates)) {
             PageUtil.DisplayToast("请假时间不能为空");

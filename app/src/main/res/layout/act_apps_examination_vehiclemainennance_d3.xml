@@ -265,11 +265,11 @@
                     android:layout_marginLeft="10dp"
                     android:layout_weight="0.28"
                     android:gravity="center_vertical"
-                    android:text="@string/vehicleMainennanceMoney"
+                    android:text="@string/vehicleMainennanceMiles"
                     android:textColor="@color/cl_text_common"/>
 
                 <TextView
-                    android:id="@+id/tv_EstimateFee"
+                    android:id="@+id/tv_miles"
                     style="@style/BlackText.standard"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"

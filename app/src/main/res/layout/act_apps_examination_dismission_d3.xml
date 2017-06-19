@@ -47,6 +47,7 @@
                     android:gravity="center_vertical"
                     />
             </LinearLayout>
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/common_topbar_height40"
@@ -75,6 +76,7 @@
                     android:gravity="center_vertical"
                     />
             </LinearLayout>
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/common_topbar_height40"
@@ -84,14 +86,14 @@
                 android:weightSum="1">
 
                 <TextView
-                    android:textColor="@color/cl_text_common"
                     style="@style/BlackText.standard"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="10dp"
                     android:layout_weight="0.28"
                     android:gravity="center_vertical"
-                    android:text="@string/jobsleavetype"/>
+                    android:text="@string/jobsleavetype"
+                    android:textColor="@color/cl_text_common"/>
 
                 <TextView
                     android:id="@+id/tv_dimissionType"
@@ -113,14 +115,14 @@
                 android:weightSum="1">
 
                 <TextView
-                    android:textColor="@color/cl_text_common"
                     style="@style/BlackText.standard"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="10dp"
                     android:layout_weight="0.28"
                     android:gravity="center_vertical"
-                    android:text="@string/jobsLeaveTimeIn"/>
+                    android:text="@string/jobsLeaveTimeIn"
+                    android:textColor="@color/cl_text_common"/>
 
                 <TextView
                     android:id="@+id/tv_startTime"
@@ -142,14 +144,14 @@
                 android:weightSum="1">
 
                 <TextView
-                    android:textColor="@color/cl_text_common"
                     style="@style/BlackText.standard"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="10dp"
                     android:layout_weight="0.28"
                     android:gravity="center_vertical"
-                    android:text="@string/jobsLeaveTimeOut"/>
+                    android:text="@string/jobsLeaveTimeOut"
+                    android:textColor="@color/cl_text_common"/>
 
                 <TextView
                     android:id="@+id/tv_endTime"
@@ -182,8 +184,6 @@
 
 
                 <TextView
-                    android:paddingRight="10dp"
-                    android:paddingTop="10dp"
                     android:id="@+id/tv_reason"
                     style="@style/BlackText.standard"
                     android:layout_width="0dp"
@@ -193,39 +193,8 @@
                     android:ellipsize="end"
                     android:gravity="top|left"
                     android:lines="3"
-                    />
-
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="@color/white"
-                android:orientation="horizontal"
-                android:weightSum="1">
-
-                <TextView
-                    style="@style/BlackText.standard"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="10dp"
-                    android:layout_marginLeft="10dp"
-                    android:layout_weight="0.28"
-                    android:text="@string/remark_all_apl"
-                    android:textColor="@color/cl_text_common"/>
-
-                <TextView
                     android:paddingRight="10dp"
                     android:paddingTop="10dp"
-                    android:id="@+id/tv_remark"
-                    style="@style/BlackText.standard"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="10dp"
-                    android:layout_weight="0.72"
-                    android:ellipsize="end"
-                    android:gravity="top|left"
-                    android:lines="3"
                     />
 
             </LinearLayout>
@@ -239,14 +208,14 @@
                 android:weightSum="1">
 
                 <TextView
-                    android:textColor="@color/cl_text_common"
                     style="@style/BlackText.standard"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="10dp"
                     android:layout_weight="0.28"
                     android:gravity="center_vertical"
-                    android:text="@string/Requester"/>
+                    android:text="@string/Requester"
+                    android:textColor="@color/cl_text_common"/>
 
                 <TextView
                     android:id="@+id/tv_Requester"
@@ -258,6 +227,7 @@
                     android:gravity="center_vertical"
                     />
             </LinearLayout>
+
             <LinearLayout
                 android:id="@+id/layout_state"
                 android:layout_width="match_parent"

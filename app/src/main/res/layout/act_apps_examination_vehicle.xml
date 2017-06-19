@@ -199,6 +199,7 @@
                     android:background="@drawable/et_white_stroke"
                     android:gravity="top|left"
                     android:hint="@string/hint_carUsedpurpose"
+                    android:maxLength="300"
                     android:paddingTop="10dp"/>
             </LinearLayout>
 
@@ -226,7 +227,7 @@
                     android:layout_marginLeft="10dp"
                     android:layout_weight="0.28"
                     android:gravity="top|left"
-                    android:text="@string/remark_all_apl"
+                    android:text="@string/carUsed_remark"
                     android:textColor="@color/cl_text_common"/>
 
                 <EditText
@@ -238,7 +239,8 @@
                     android:layout_weight="0.72"
                     android:background="@drawable/et_white_stroke"
                     android:gravity="top|left"
-                    android:hint="@string/hint_remark_all_apl"
+                    android:hint="@string/carUsed_remark_hint"
+                    android:maxLength="300"
                     android:paddingTop="10dp"/>
             </LinearLayout>
 

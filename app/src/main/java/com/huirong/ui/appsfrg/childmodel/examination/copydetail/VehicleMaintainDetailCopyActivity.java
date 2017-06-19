@@ -62,9 +62,9 @@ public class VehicleMaintainDetailCopyActivity extends BaseActivity {
     @ViewInject(id = R.id.tv_project)
     TextView tv_project;
 
-    //费用
-    @ViewInject(id = R.id.tv_EstimateFee)
-    TextView tv_EstimateFee;
+    //公里数
+    @ViewInject(id = R.id.tv_miles)
+    TextView tv_miles;
 
     //车牌号
     @ViewInject(id = R.id.tv_number)
@@ -131,7 +131,7 @@ public class VehicleMaintainDetailCopyActivity extends BaseActivity {
         tv_number.setText(model.getNumber());
         tv_project.setText(model.getMaintenanceProject());
         tv_Destination.setText(model.getDestination());
-        tv_EstimateFee.setText(model.getEstimateFee());
+        tv_miles.setText(model.getEstimateFee());
         tv_remark.setText(model.getRemark());
 
         // 审批人

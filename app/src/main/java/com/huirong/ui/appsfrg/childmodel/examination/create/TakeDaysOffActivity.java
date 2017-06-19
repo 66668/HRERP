@@ -81,9 +81,6 @@ public class TakeDaysOffActivity extends BaseActivity {
     @ViewInject(id = R.id.et_takedaysoffLong)
     EditText et_takedaysoffLong;
 
-    //备注
-    @ViewInject(id = R.id.et_remark)
-    EditText et_remark;
 
     //添加审批人
     @ViewInject(id = R.id.AddApprover, click = "forAddApprover")
@@ -99,7 +96,6 @@ public class TakeDaysOffActivity extends BaseActivity {
     private String StartTakeDate;
     private String EndTakeDate;
     private String reason;
-    private String remark = "";
    private String approvalID = "";
     private String timeLong = "";
     private List<String> approvalIDList = new ArrayList<String>();
@@ -123,7 +119,6 @@ public class TakeDaysOffActivity extends BaseActivity {
     public void forCommit(View view) {
         timeLong = et_takedaysoffLong.getText().toString();
         reason = et_reason.getText().toString();
-        remark = et_remark.getText().toString();
 
 
         if (TextUtils.isEmpty(StartOffDate) || TextUtils.isEmpty(EndOffDate)
@@ -157,7 +152,7 @@ public class TakeDaysOffActivity extends BaseActivity {
                     js.put("EndOffDate", EndOffDate);
 
                     js.put("OffDays", timeLong);
-                    js.put("Remark", remark);
+                    js.put("Remark", reason);
                     js.put("ApprovalIDList", approvalID);
 
                     UserHelper.takeDaysOffPost(TakeDaysOffActivity.this, js);
@@ -196,7 +191,6 @@ public class TakeDaysOffActivity extends BaseActivity {
         tv_timeEndBefore.setText("");
         et_reason.setText("");
         et_takedaysoffLong.setText("");
-        et_remark.setText("");
         tv_Requester.setText("");
         approvalID = null;
         StartOffDate = null;

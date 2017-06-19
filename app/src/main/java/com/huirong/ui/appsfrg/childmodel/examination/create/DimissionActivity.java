@@ -65,10 +65,6 @@ public class DimissionActivity extends BaseActivity {
     @ViewInject(id = R.id.et_reason)
     EditText et_reason;
 
-    //备注
-    @ViewInject(id = R.id.et_remark)
-    EditText et_remark;
-
     //离职类型
     @ViewInject(id = R.id.layout_dismissionType, click = "dismissionType")
     LinearLayout layout_dismissionType;
@@ -87,7 +83,6 @@ public class DimissionActivity extends BaseActivity {
     private String EntryDate;//入职时间
     private String DimissionDate;//离职时间
     private String approvalID = "";
-    private String remark = "";
     private String reason = "";
     private String dimissionID = "";//离职类型
     private List<String> approvalIDList = new ArrayList<String>();
@@ -112,7 +107,6 @@ public class DimissionActivity extends BaseActivity {
      */
     public void forCommit(View v) {
         reason = et_reason.getText().toString();
-        remark = et_remark.getText().toString();
         if (TextUtils.isEmpty(dimissionID)) {
             PageUtil.DisplayToast("离职类型不能为空");
             return;
@@ -175,7 +169,6 @@ public class DimissionActivity extends BaseActivity {
         tv_jobsLeaveTimeIn.setText("");
         tv_jobsLeavetimeOut.setText("");
         et_reason.setText("");
-        et_remark.setText("");
         tv_dismissiontype.setText("");
         tv_Requester.setText("");
         EntryDate = null;

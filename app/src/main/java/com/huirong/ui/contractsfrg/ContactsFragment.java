@@ -89,7 +89,7 @@ public class ContactsFragment extends BaseFragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.act_contacts, container, false);
+        View view = inflater.inflate(R.layout.fragment_contacts, container, false);
         return view;
     }
 
