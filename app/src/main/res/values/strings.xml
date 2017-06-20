@@ -259,19 +259,27 @@
     <string name="financial_fee_apl">费用申请</string>
     <string name="financial_reimburse_apl">报销</string>
 
-    <string name="financial_loan_time">还款日期</string>
-    <string name="financial_loan_reason">借款事由</string>
+
+    <string name="financial_loan_type">方式</string>
+    <string name="financial_loan_reason">备注</string>
+    <string name="financial_loan_reason_hint">请输入备注</string>
+    <string name="financial_loan_use">用途</string>
+    <string name="financial_loan_use_hint">请输入用途</string>
     <string name="loanReimburseMoney">金额</string>
     <string name="hint_loanReimburseMoney">请输入金额 (元)</string>
     <string name="hint_loanReimburseReason">输入借款事由</string>
-
+    <array name="loanType">
+        <item>网银</item>
+        <item>现金</item>
+        <item>支票</item>
+    </array>
 
     <string name="financial_reimburse_fee1">金额一</string>
     <string name="financial_reimburse_fee2">金额二</string>
     <string name="financial_reimburse_fee3">金额三</string>
-    <string name="financial_reimburse_useage1">用途一</string>
-    <string name="financial_reimburse_useage2">用途二</string>
-    <string name="financial_reimburse_useage3">用途三</string>
+    <string name="financial_reimburse_useage1">摘要一</string>
+    <string name="financial_reimburse_useage2">摘要二</string>
+    <string name="financial_reimburse_useage3">摘要三</string>
     <string name="financial_reimburse_useage">请简要输入用途</string>
     <string name="financial_reimburse_other">备注</string>
     <string name="financial_reimburse_other_hint">请输入需要备注事项</string>
@@ -384,6 +392,7 @@
 
     <!-- 01 培训11-->
     <string name="train_apl">培训申请</string>
+    <string name="train_apl_d">培训详情</string>
     <string name="train_type">培训方式</string>
     <string name="train_way">培训形式</string>
     <string name="train_start">开始时间</string>

@@ -9,13 +9,16 @@ import com.huirong.R;
 import com.huirong.application.MyApplication;
 import com.huirong.base.BaseActivity;
 import com.huirong.inject.ViewInject;
+import com.huirong.ui.appsfrg.childmodel.examination.create.financial.FinancialLoanActivity;
+import com.huirong.ui.appsfrg.childmodel.examination.create.financial.FinancialPayActivity;
+import com.huirong.ui.appsfrg.childmodel.examination.create.financial.FinancialReimburseActivity;
 
 /**
  * 财务申请
  * Created by sjy on 2016/12/2.
  */
 
-public class FinancialMenuActivity extends BaseActivity {
+public class FinancialMainActivity extends BaseActivity {
 
     //back
     @ViewInject(id = R.id.layout_back, click = "forBack")

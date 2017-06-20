@@ -33,7 +33,7 @@
                 android:background="@color/common_bg_examination_line"/>
 
             <LinearLayout
-                android:id="@+id/layout_loanReturnTime"
+                android:id="@+id/layout_type"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/common_topbar_height"
                 android:background="@color/white"
@@ -48,11 +48,11 @@
                     android:layout_marginLeft="10dp"
                     android:layout_weight="0.28"
                     android:gravity="center_vertical"
-                    android:text="@string/financial_loan_time"
+                    android:text="@string/financial_loan_type"
                     android:textColor="@color/cl_text_common"/>
 
                 <TextView
-                    android:id="@+id/tv_startTime"
+                    android:id="@+id/tv_type"
                     style="@style/BlackText.standard"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
@@ -71,6 +71,48 @@
                     android:src="@mipmap/et_forword"/>
             </LinearLayout>
 
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dip"
+                android:background="@color/common_bg_examination_line"/>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dip"
+                android:layout_marginTop="10dp"
+                android:background="@color/common_bg_examination_line"/>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/common_topbar_height"
+                android:background="@color/white"
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
+                android:weightSum="1">
+
+                <TextView
+                    style="@style/BlackText.standard"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:layout_weight="0.28"
+                    android:gravity="center_vertical"
+                    android:text="@string/financial_loan_use"
+                    android:textColor="@color/cl_text_common"/>
+
+                <EditText
+                    android:id="@+id/et_use"
+                    style="@style/BlackText.standard"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.72"
+                    android:background="@drawable/et_white_stroke"
+                    android:gravity="center_vertical"
+                    android:hint="@string/financial_loan_use_hint"
+                    android:textColorHint="@color/cl_hint_common"
+                    />
+            </LinearLayout>
 
             <View
                 android:layout_width="match_parent"
@@ -126,6 +168,7 @@
                 android:layout_height="1dip"
                 android:layout_marginTop="10dp"
                 android:background="@color/common_bg_examination_line"/>
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="100dp"
@@ -151,9 +194,112 @@
                     android:layout_weight="0.72"
                     android:background="@drawable/et_white_stroke"
                     android:gravity="left|top"
-                    android:hint="@string/hint_loanReimburseReason"
+                    android:hint="@string/financial_loan_reason_hint"
                     android:padding="10dp"
                     android:textColorHint="@color/cl_hint_common"/>
+            </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dip"
+                android:background="@color/common_bg_examination_line"/>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dip"
+                android:layout_marginTop="10dp"
+                android:background="@color/common_bg_examination_line"/>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="100dp"
+                android:background="@color/white"
+                android:gravity="center_vertical"
+                android:orientation="vertical"
+                android:weightSum="1">
+
+
+                <TextView
+                    style="@style/BlackText.standard"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:gravity="center_vertical"
+                    android:text="@string/picture"
+                    android:textColor="@color/cl_text_common"/>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal"
+                    android:weightSum="1">
+
+
+                    <RelativeLayout
+                        android:id="@+id/addPicture"
+                        android:layout_width="0dp"
+                        android:layout_height="80dp"
+                        android:layout_weight="0.25"
+                        android:gravity="center">
+
+                        <ImageView
+                            android:id="@+id/img_addpicture"
+                            android:layout_width="50dp"
+                            android:layout_height="50dp"
+                            android:src="@mipmap/imgadd"/>
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_below="@+id/img_addpicture"
+                            android:text="@string/addPicture"
+                            />
+                    </RelativeLayout>
+
+                    <RelativeLayout
+                        android:id="@+id/layout_img_01"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="0.25"
+                        android:gravity="center"
+                        android:padding="5dp">
+
+                        <ImageView
+                            android:id="@+id/img_01"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"/>
+                    </RelativeLayout>
+
+                    <RelativeLayout
+                        android:id="@+id/layout_img_02"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="0.25"
+                        android:gravity="center">
+
+                        <ImageView
+                            android:id="@+id/img_02"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:padding="5dp"/>
+                    </RelativeLayout>
+
+                    <RelativeLayout
+                        android:id="@+id/layout_img_03"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="0.25"
+                        android:gravity="center">
+
+                        <ImageView
+                            android:id="@+id/img_03"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:padding="5dp"/>
+                    </RelativeLayout>
+
+                </LinearLayout>
             </LinearLayout>
 
             <View

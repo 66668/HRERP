@@ -133,6 +133,7 @@
                 android:background="@color/common_bg_examination_line"/>
 
             <LinearLayout
+                android:id="@+id/layout_startTime"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/common_topbar_height"
                 android:background="@color/white"
@@ -151,7 +152,7 @@
                     android:textColor="@color/cl_text_common"/>
 
                 <TextView
-                    android:id="@+id/tv_startTime"
+                    android:id="@+id/tv_timeStart"
                     style="@style/BlackText.standard"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
@@ -182,6 +183,7 @@
                 android:background="@color/common_bg_examination_line"/>
 
             <LinearLayout
+                android:id="@+id/layout_endTime"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/common_topbar_height"
                 android:background="@color/white"

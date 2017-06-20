@@ -18,7 +18,7 @@ import com.huirong.dialog.Loading;
 import com.huirong.helper.UserHelper;
 import com.huirong.inject.ViewInject;
 import com.huirong.model.MyApplicationModel;
-import com.huirong.model.applicationdetailmodel.BorrowModel;
+import com.huirong.model.applicationdetailmodel.SignetModel;
 import com.huirong.utils.PageUtil;
 
 import java.util.ArrayList;
@@ -44,21 +44,24 @@ public class SignetDetailAplActivity extends BaseActivity {
     @ViewInject(id = R.id.tv_right)
     TextView tv_right;
 
-    //说明
+
+
+
+    //公司名称
+    @ViewInject(id = R.id.tv_company)
+    TextView tv_company;
+
+    //份数
+    @ViewInject(id = R.id.tv_copies)
+    TextView tv_copies;
+
+    //用途
     @ViewInject(id = R.id.tv_reason, click = "ReasonExpended")
     TextView tv_reason;
 
     //备注
     @ViewInject(id = R.id.tv_remark, click = "RemarkExpended")
     TextView tv_remark;
-
-    //类型
-    @ViewInject(id = R.id.tv_borrowType)
-    TextView tv_borrowType;
-
-    //借阅名称
-    @ViewInject(id = R.id.tv_BorrowThings)
-    TextView tv_BorrowThings;
 
     //开始时间
     @ViewInject(id = R.id.tv_startTime)
@@ -83,9 +86,9 @@ public class SignetDetailAplActivity extends BaseActivity {
     LinearLayout layout_ll;
 
     private Intent intent = null;
-    private BorrowModel borrowModel;
+    private SignetModel signetModel;
     private MyApplicationModel model;
-    private List<BorrowModel.ApprovalInfoLists> modelList;
+    private List<SignetModel.ApprovalInfoLists> modelList;
 
     //动态添加view
     private List<View> ls_childView;//用于保存动态添加进来的View
@@ -114,13 +117,14 @@ public class SignetDetailAplActivity extends BaseActivity {
         model = (MyApplicationModel) intent.getSerializableExtra("MyApplicationModel");
     }
 
-    private void setShow(BorrowModel model) {
-        tv_BorrowThings.setText(model.getBorrowThings());
+    private void setShow(SignetModel model) {
+        tv_company.setText(model.getSignatureName());
+
         tv_startTime.setText(model.getStartTime());
-        tv_endTime.setText(model.getFinishTime());
-        tv_reason.setText(model.getReason());
+        tv_endTime.setText(model.getEndTime());
+        tv_copies.setText(model.getCopies());
+        tv_reason.setText(model.getPurpose());
         tv_remark.setText(model.getRemark());
-        tv_borrowType.setText(model.getBorrowType());
 
         modelList = model.getApprovalInfoLists();
         // 审批人
@@ -131,20 +135,20 @@ public class SignetDetailAplActivity extends BaseActivity {
         tv_Requester.setText(nameBuilder);
 
         //审批状态
-        if (borrowModel.getApprovalStatus().contains("0")) {
+        if (signetModel.getApprovalStatus().contains("0")) {
             tv_state_result.setText("未审批");
             tv_state_result.setTextColor(getResources().getColor(R.color.red));
-        } else if (borrowModel.getApprovalStatus().contains("1")) {
+        } else if (signetModel.getApprovalStatus().contains("1")) {
             tv_state_result.setText("已审批");
             tv_state_result.setTextColor(getResources().getColor(R.color.green));
-        } else if (borrowModel.getApprovalStatus().contains("2")) {
+        } else if (signetModel.getApprovalStatus().contains("2")) {
             tv_state_result.setText("审批中...");
             tv_state_result.setTextColor(getResources().getColor(R.color.black));
         } else {
             tv_state_result.setText("你猜猜！");
         }
 
-        if (borrowModel.getApprovalStatus().contains("1") || borrowModel.getApprovalStatus().contains("2")) {
+        if (signetModel.getApprovalStatus().contains("1") || signetModel.getApprovalStatus().contains("2")) {
             //插入意见
             for (int i = 0, mark = layout_ll.getChildCount(); i < modelList.size(); i++, mark++) {//mark是布局插入位置，放在mark位置的后边（从1开始计数）
                 ViewHolder vh = AddView(this, mark);//添加布局
@@ -179,7 +183,7 @@ public class SignetDetailAplActivity extends BaseActivity {
 
                 //泛型
                 try {
-                    BorrowModel model1 = new UserHelper<BorrowModel>(BorrowModel.class).applicationDetailPost(SignetDetailAplActivity.this,
+                    SignetModel model1 = new UserHelper<SignetModel>(SignetModel.class).applicationDetailPost(SignetDetailAplActivity.this,
                             model.getApplicationID(),
                             model.getApplicationType());
                     sendMessage(POST_SUCCESS, model1);
@@ -196,8 +200,8 @@ public class SignetDetailAplActivity extends BaseActivity {
         super.handleMessage(msg);
         switch (msg.what) {
             case POST_SUCCESS: // 1001
-                borrowModel = (BorrowModel) msg.obj;
-                setShow(borrowModel);
+                signetModel = (SignetModel) msg.obj;
+                setShow(signetModel);
                 break;
             case POST_FAILED: // 1001
                 PageUtil.DisplayToast((String) msg.obj);

@@ -413,7 +413,7 @@
 
         <!--01 财务申请06-->
         <activity
-            android:name=".ui.appsfrg.childmodel.examination.create.FinancialMenuActivity"
+            android:name=".ui.appsfrg.childmodel.examination.create.FinancialMainActivity"
             android:label="@string/app_name"
             android:screenOrientation="portrait"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar">
@@ -421,7 +421,7 @@
 
         <!-- 财务-借款申请06-01 -->
         <activity
-            android:name=".ui.appsfrg.childmodel.examination.create.FinancialLoanActivity"
+            android:name=".ui.appsfrg.childmodel.examination.create.financial.FinancialLoanActivity"
             android:label="@string/app_name"
             android:screenOrientation="portrait"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar">
@@ -446,7 +446,7 @@
         </activity>
         <!-- 财务-报销申请06-02 -->
         <activity
-            android:name=".ui.appsfrg.childmodel.examination.create.FinancialReimburseActivity"
+            android:name=".ui.appsfrg.childmodel.examination.create.financial.FinancialReimburseActivity"
             android:label="@string/app_name"
             android:screenOrientation="portrait"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar">
@@ -471,7 +471,7 @@
         </activity>
         <!-- 财务-付款申请06-03 -->
         <activity
-            android:name=".ui.appsfrg.childmodel.examination.create.FinancialPayActivity"
+            android:name=".ui.appsfrg.childmodel.examination.create.financial.FinancialPayActivity"
             android:label="@string/app_name"
             android:screenOrientation="portrait"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar">

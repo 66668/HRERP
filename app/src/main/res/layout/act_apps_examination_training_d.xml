@@ -39,7 +39,7 @@
                     android:textColor="@color/cl_text_common"/>
 
                 <TextView
-                    android:id="@+id/tv_BorrowThings"
+                    android:id="@+id/tv_mode"
                     style="@style/BlackText.standard"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
@@ -68,7 +68,7 @@
                     android:textColor="@color/cl_text_common"/>
 
                 <TextView
-                    android:id="@+id/tv_borrowType"
+                    android:id="@+id/tv_form"
                     style="@style/BlackText.standard"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
@@ -154,7 +154,7 @@
                     android:textColor="@color/cl_text_common"/>
 
                 <TextView
-                    android:id="@+id/tv_endPlace"
+                    android:id="@+id/tv_person"
                     style="@style/BlackText.standard"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
@@ -163,6 +163,39 @@
                     android:gravity="center_vertical"
                     />
             </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/white"
+                android:orientation="horizontal"
+                android:weightSum="1">
+
+                <TextView
+                    style="@style/BlackText.standard"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="10dp"
+                    android:layout_marginLeft="10dp"
+                    android:layout_weight="0.28"
+                    android:text="@string/train_content"
+                    android:textColor="@color/cl_text_common"/>
+
+                <TextView
+                    android:id="@+id/tv_content"
+                    style="@style/BlackText.standard"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:layout_weight="0.72"
+                    android:ellipsize="end"
+                    android:gravity="top|left"
+                    android:lines="3"
+                    android:paddingRight="10dp"
+                    android:paddingTop="10dp"
+                    />
+
+            </LinearLayout>
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/common_topbar_height40"

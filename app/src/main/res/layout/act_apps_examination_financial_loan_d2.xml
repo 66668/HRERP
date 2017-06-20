@@ -190,7 +190,7 @@
                         android:layout_marginLeft="10dp"
                         android:layout_weight="0.28"
                         android:gravity="center_vertical"
-                        android:text="@string/financial_loan_time"
+                        android:text="@string/financial_loan_type"
                         android:textColor="@color/cl_text_common"/>
 
                     <TextView

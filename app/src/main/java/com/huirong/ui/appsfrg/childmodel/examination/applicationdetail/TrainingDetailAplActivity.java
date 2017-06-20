@@ -18,7 +18,7 @@ import com.huirong.dialog.Loading;
 import com.huirong.helper.UserHelper;
 import com.huirong.inject.ViewInject;
 import com.huirong.model.MyApplicationModel;
-import com.huirong.model.applicationdetailmodel.BorrowModel;
+import com.huirong.model.applicationdetailmodel.TrainingModel;
 import com.huirong.utils.PageUtil;
 
 import java.util.ArrayList;
@@ -44,21 +44,16 @@ public class TrainingDetailAplActivity extends BaseActivity {
     @ViewInject(id = R.id.tv_right)
     TextView tv_right;
 
-    //说明
-    @ViewInject(id = R.id.tv_reason, click = "ReasonExpended")
-    TextView tv_reason;
 
-    //备注
-    @ViewInject(id = R.id.tv_remark, click = "RemarkExpended")
-    TextView tv_remark;
 
-    //类型
-    @ViewInject(id = R.id.tv_borrowType)
-    TextView tv_borrowType;
+    //培训方式
+    @ViewInject(id = R.id.tv_mode)
+    TextView tv_mode;
 
-    //借阅名称
-    @ViewInject(id = R.id.tv_BorrowThings)
-    TextView tv_BorrowThings;
+    //培训形式
+    @ViewInject(id = R.id.tv_form)
+    TextView tv_form;
+
 
     //开始时间
     @ViewInject(id = R.id.tv_startTime)
@@ -67,6 +62,26 @@ public class TrainingDetailAplActivity extends BaseActivity {
     //结束时间
     @ViewInject(id = R.id.tv_endTime)
     TextView tv_endTime;
+
+    //培训人员
+    @ViewInject(id = R.id.tv_person)
+    TextView tv_person;
+
+    //费用
+    @ViewInject(id = R.id.tv_fee)
+    TextView tv_fee;
+
+    //培训地址
+    @ViewInject(id = R.id.tv_place)
+    TextView tv_place;
+
+    //培训内容
+    @ViewInject(id = R.id.tv_content, click = "ReasonExpended")
+    TextView tv_content;
+
+    //备注
+    @ViewInject(id = R.id.tv_remark, click = "RemarkExpended")
+    TextView tv_remark;
 
     //审批人
     @ViewInject(id = R.id.tv_Requester)
@@ -83,9 +98,9 @@ public class TrainingDetailAplActivity extends BaseActivity {
     LinearLayout layout_ll;
 
     private Intent intent = null;
-    private BorrowModel borrowModel;
+    private TrainingModel trainingModel;
     private MyApplicationModel model;
-    private List<BorrowModel.ApprovalInfoLists> modelList;
+    private List<TrainingModel.ApprovalInfoLists> modelList;
 
     //动态添加view
     private List<View> ls_childView;//用于保存动态添加进来的View
@@ -108,19 +123,25 @@ public class TrainingDetailAplActivity extends BaseActivity {
     }
 
     private void initMyView() {
-        tv_title.setText(getResources().getString(R.string.beaway_title_d));
+        tv_title.setText(getResources().getString(R.string.train_apl_d));
         tv_right.setText("");
         intent = getIntent();
         model = (MyApplicationModel) intent.getSerializableExtra("MyApplicationModel");
     }
 
-    private void setShow(BorrowModel model) {
-        tv_BorrowThings.setText(model.getBorrowThings());
-        tv_startTime.setText(model.getStartTime());
+    private void setShow(TrainingModel model) {
+
+        tv_mode.setText(model.getTrainingMode());
+        tv_form.setText(model.getTrainingForm());
+
+        tv_startTime.setText(model.getBeginTime());
         tv_endTime.setText(model.getFinishTime());
-        tv_reason.setText(model.getReason());
+
         tv_remark.setText(model.getRemark());
-        tv_borrowType.setText(model.getBorrowType());
+        tv_person.setText(model.getPerson());
+        tv_fee.setText(model.getCost());
+        tv_content.setText(model.getContent());
+        tv_place.setText(model.getTrainingSite());
 
         modelList = model.getApprovalInfoLists();
         // 审批人
@@ -131,20 +152,20 @@ public class TrainingDetailAplActivity extends BaseActivity {
         tv_Requester.setText(nameBuilder);
 
         //审批状态
-        if (borrowModel.getApprovalStatus().contains("0")) {
+        if (trainingModel.getApprovalStatus().contains("0")) {
             tv_state_result.setText("未审批");
             tv_state_result.setTextColor(getResources().getColor(R.color.red));
-        } else if (borrowModel.getApprovalStatus().contains("1")) {
+        } else if (trainingModel.getApprovalStatus().contains("1")) {
             tv_state_result.setText("已审批");
             tv_state_result.setTextColor(getResources().getColor(R.color.green));
-        } else if (borrowModel.getApprovalStatus().contains("2")) {
+        } else if (trainingModel.getApprovalStatus().contains("2")) {
             tv_state_result.setText("审批中...");
             tv_state_result.setTextColor(getResources().getColor(R.color.black));
         } else {
             tv_state_result.setText("你猜猜！");
         }
 
-        if (borrowModel.getApprovalStatus().contains("1") || borrowModel.getApprovalStatus().contains("2")) {
+        if (trainingModel.getApprovalStatus().contains("1") || trainingModel.getApprovalStatus().contains("2")) {
             //插入意见
             for (int i = 0, mark = layout_ll.getChildCount(); i < modelList.size(); i++, mark++) {//mark是布局插入位置，放在mark位置的后边（从1开始计数）
                 ViewHolder vh = AddView(this, mark);//添加布局
@@ -179,7 +200,7 @@ public class TrainingDetailAplActivity extends BaseActivity {
 
                 //泛型
                 try {
-                    BorrowModel model1 = new UserHelper<BorrowModel>(BorrowModel.class).applicationDetailPost(TrainingDetailAplActivity.this,
+                    TrainingModel model1 = new UserHelper<TrainingModel>(TrainingModel.class).applicationDetailPost(TrainingDetailAplActivity.this,
                             model.getApplicationID(),
                             model.getApplicationType());
                     sendMessage(POST_SUCCESS, model1);
@@ -196,8 +217,8 @@ public class TrainingDetailAplActivity extends BaseActivity {
         super.handleMessage(msg);
         switch (msg.what) {
             case POST_SUCCESS: // 1001
-                borrowModel = (BorrowModel) msg.obj;
-                setShow(borrowModel);
+                trainingModel = (TrainingModel) msg.obj;
+                setShow(trainingModel);
                 break;
             case POST_FAILED: // 1001
                 PageUtil.DisplayToast((String) msg.obj);
@@ -251,11 +272,11 @@ public class TrainingDetailAplActivity extends BaseActivity {
 
     public void ReasonExpended(View view) {
         if (!isExpend) {
-            tv_reason.setMinLines(0);
-            tv_reason.setMaxLines(Integer.MAX_VALUE);
+            tv_content.setMinLines(0);
+            tv_content.setMaxLines(Integer.MAX_VALUE);
             isExpend = true;
         } else {
-            tv_reason.setLines(3);
+            tv_content.setLines(3);
             isExpend = false;
         }
 

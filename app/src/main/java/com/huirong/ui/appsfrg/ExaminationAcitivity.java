@@ -15,7 +15,7 @@ import com.huirong.ui.appsfrg.childmodel.examination.ZOCopyListActivity;
 import com.huirong.ui.appsfrg.childmodel.examination.create.BeAwayActivity;
 import com.huirong.ui.appsfrg.childmodel.examination.create.BookTicketsActivity;
 import com.huirong.ui.appsfrg.childmodel.examination.create.DimissionActivity;
-import com.huirong.ui.appsfrg.childmodel.examination.create.FinancialMenuActivity;
+import com.huirong.ui.appsfrg.childmodel.examination.create.FinancialMainActivity;
 import com.huirong.ui.appsfrg.childmodel.examination.create.LeaveActivity;
 import com.huirong.ui.appsfrg.childmodel.examination.create.SignetActivity;
 import com.huirong.ui.appsfrg.childmodel.examination.create.TakeDaysOffActivity;
@@ -228,7 +228,7 @@ public class ExaminationAcitivity extends BaseActivity {
      * @param view
      */
     public void forLoanReimbursement(View view) {
-        startActivity(FinancialMenuActivity.class);
+        startActivity(FinancialMainActivity.class);
     }
 
     /**

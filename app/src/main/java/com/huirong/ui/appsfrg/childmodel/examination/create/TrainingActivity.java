@@ -50,28 +50,11 @@ public class TrainingActivity extends BaseActivity {
     TextView forCommit;
 
 
-    //备注
-    @ViewInject(id = R.id.et_remark)
-    EditText et_remark;
-
-    //培训人员
-    @ViewInject(id = R.id.et_person)
-    EditText et_person;
-
-    //培训费用
-    @ViewInject(id = R.id.et_fee)
-    EditText et_fee;
-
-    //培训地址
-    @ViewInject(id = R.id.et_place)
-    EditText et_place;
-
     //培训方式
     @ViewInject(id = R.id.layout_type, click = "forMode")
     LinearLayout layout_type;
     @ViewInject(id = R.id.tv_mode)
     TextView tv_mode;
-
 
     //培训形式
     @ViewInject(id = R.id.layout_way, click = "forForm")
@@ -87,10 +70,30 @@ public class TrainingActivity extends BaseActivity {
 
 
     //结束时间
-    @ViewInject(id = R.id.layout_end, click = "endTime")
+    @ViewInject(id = R.id.layout_endTime, click = "endTime")
     LinearLayout layout_end;
-    @ViewInject(id = R.id.tv_timeEnd)
-    TextView tv_timeEnd;
+    @ViewInject(id = R.id.tv_endTime)
+    TextView tv_endTime;
+
+    //备注
+    @ViewInject(id = R.id.et_remark)
+    EditText et_remark;
+
+    //内容
+    @ViewInject(id = R.id.et_content)
+    EditText et_content;
+
+    //培训人员
+    @ViewInject(id = R.id.et_person)
+    EditText et_person;
+
+    //培训费用
+    @ViewInject(id = R.id.et_fee)
+    EditText et_fee;
+
+    //培训地址
+    @ViewInject(id = R.id.et_place)
+    EditText et_place;
 
 
     //添加图片
@@ -114,7 +117,7 @@ public class TrainingActivity extends BaseActivity {
     private String person;
     private String fee;
     private String place;
-    String Way;
+    private String content;
     private String remark = "";
     private String approvalID = "";
 
@@ -141,16 +144,13 @@ public class TrainingActivity extends BaseActivity {
     }
 
     public void forCommit(View view) {
+        content = et_content.getText().toString();
         remark = et_remark.getText().toString();
         person = et_person.getText().toString();
         fee = et_fee.getText().toString();
         place = et_place.getText().toString();
         remark = et_remark.getText().toString();
 
-        if (TextUtils.isEmpty(startDate) || TextUtils.isEmpty(endDates)) {
-            PageUtil.DisplayToast("培训时间不能为空");
-            return;
-        }
 
         if (TextUtils.isEmpty(mode)) {
             PageUtil.DisplayToast("培训方式不能为空");
@@ -161,6 +161,16 @@ public class TrainingActivity extends BaseActivity {
             PageUtil.DisplayToast("培形式不能为空");
             return;
         }
+        if (TextUtils.isEmpty(content)) {
+            PageUtil.DisplayToast("培形式不能为空");
+            return;
+        }
+
+        if (TextUtils.isEmpty(startDate) || TextUtils.isEmpty(endDates)) {
+            PageUtil.DisplayToast("培训时间不能为空");
+            return;
+        }
+
         if (TextUtils.isEmpty(approvalID)) {
             PageUtil.DisplayToast("审批人不能为空");
             return;
@@ -178,6 +188,7 @@ public class TrainingActivity extends BaseActivity {
                     js.put("FinishTime", endDates);
                     js.put("Cost", fee);
                     js.put("Person", person);
+                    js.put("Content", content);
                     js.put("TrainingSite", place);
                     js.put("Remark", remark);
                     js.put("ApprovalIDList", approvalID);
@@ -218,7 +229,7 @@ public class TrainingActivity extends BaseActivity {
         et_place.setText("");
         et_remark.setText("");
         tv_timeStart.setText("");
-        tv_timeEnd.setText("");
+        tv_endTime.setText("");
         tv_Requester.setText("");
         startDate = null;
         endDates = null;
@@ -308,7 +319,7 @@ public class TrainingActivity extends BaseActivity {
                     @Override
                     public void getDateTime(String time, boolean longTimeChecked) {
                         endDates = time;
-                        tv_timeEnd.setText(time);
+                        tv_endTime.setText(time);
                     }
                 });
         //        endDateChooseDialog.setTimePickerGone(true);

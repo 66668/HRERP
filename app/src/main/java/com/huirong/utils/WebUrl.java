@@ -123,9 +123,9 @@ public class WebUrl {
         public static final String OVERAPPROVALPOST = LOGIN_URL + LOGIN_FLODER_USER + "OverApproval/OverApprovalPost";
 
         /*
-                * 01-04-6 财务申请
+                * 01-04-6 费用申请
                 */
-        public static final String LRAPPLICATIONPOST = LOGIN_URL + LOGIN_FLODER_USER + "LRApplication/LRApplicationPost";
+        public static final String LRAPPLICATIONPOST = LOGIN_URL + LOGIN_FLODER_USER + "LRApplicationInfo/LRApplicationInfoPost";
         /**
          * 01-04-07 离职申请
          */

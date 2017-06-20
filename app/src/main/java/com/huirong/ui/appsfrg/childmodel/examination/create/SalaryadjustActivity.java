@@ -28,6 +28,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
+ * 薪资调整
  * Created by sjy on 2016/12/2.
  */
 

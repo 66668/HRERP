@@ -1,4 +1,4 @@
-package com.huirong.ui.appsfrg.childmodel.examination.create;
+package com.huirong.ui.appsfrg.childmodel.examination.create.financial;
 
 import android.content.Intent;
 import android.graphics.Bitmap;
