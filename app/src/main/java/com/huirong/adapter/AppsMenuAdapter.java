@@ -111,7 +111,7 @@ public class AppsMenuAdapter extends BaseAdapter {
                         Intent intent5 = new Intent(mContext, NotificationListActivity.class);
                         mContext.startActivity(intent5);
                         break;
-                    case 6://财务
+                    case 6://费用申请
                         Intent intent6 = new Intent(mContext, FinancialListAcitivity.class);
                         mContext.startActivity(intent6);
                         break;
@@ -123,10 +123,6 @@ public class AppsMenuAdapter extends BaseAdapter {
                     //                    case 8://采购领用
                     //                        Intent intent8 = new Intent(mContext, ProcureMainActivity.class);
                     //                        mContext.startActivity(intent8);
-                    //                        break;
-                    //                    case 9://交车
-                    //                        Intent intent9 = new Intent(mContext, VehicleReturnListActivity.class);
-                    //                        mContext.startActivity(intent9);
                     //                        break;
                     //                    case 10://会议
                     //                        Intent intent10 = new Intent(mContext, ConferenceListActivity.class);

@@ -16,7 +16,7 @@ import com.huirong.dialog.Loading;
 import com.huirong.helper.UserHelper;
 import com.huirong.inject.ViewInject;
 import com.huirong.model.MyApprovalModel;
-import com.huirong.model.approvaldetailmodel.BorrowApvlModel;
+import com.huirong.model.approvaldetailmodel.TrainingApvlModel;
 import com.huirong.utils.PageUtil;
 
 
@@ -54,29 +54,43 @@ public class TrainingDetailApvlActivity extends BaseActivity {
     TextView tv_approvalTime;
 
 
-    //借阅名称
-    @ViewInject(id = R.id.tv_borrowThings)
-    TextView tv_borrowThings;
+    //培训方式
+    @ViewInject(id = R.id.tv_mode)
+    TextView tv_mode;
 
-    //借阅类型
-    @ViewInject(id = R.id.tv_borrowType)
-    TextView tv_borrowType;
+    //培训形式
+    @ViewInject(id = R.id.tv_form)
+    TextView tv_form;
 
-    //使用时间
-    @ViewInject(id = R.id.tv_StartTime)
-    TextView tv_StartTime;
 
-    //归还时间
+    //开始时间
+    @ViewInject(id = R.id.tv_startTime)
+    TextView tv_startTime;
+
+    //结束时间
     @ViewInject(id = R.id.tv_endTime)
     TextView tv_endTime;
 
-    //说明
-    @ViewInject(id = R.id.tv_reason, click = "ReasonExpended")
-    TextView tv_reason;
+    //培训人员
+    @ViewInject(id = R.id.tv_person)
+    TextView tv_person;
+
+    //费用
+    @ViewInject(id = R.id.tv_fee)
+    TextView tv_fee;
+
+    //培训地址
+    @ViewInject(id = R.id.tv_place)
+    TextView tv_place;
+
+    //培训内容
+    @ViewInject(id = R.id.tv_content, click = "ReasonExpended")
+    TextView tv_content;
 
     //备注
     @ViewInject(id = R.id.tv_remark, click = "RemarkExpended")
     TextView tv_remark;
+
 
     //未审批bottom
     @ViewInject(id = R.id.laytout_decide)
@@ -104,7 +118,7 @@ public class TrainingDetailApvlActivity extends BaseActivity {
 
     //变量
     private MyApprovalModel myApprovalModel;
-    private BorrowApvlModel model;
+    private TrainingApvlModel model;
     //常量
     public static final int POST_SUCCESS = 21;
     public static final int POST_FAILED = 22;
@@ -126,18 +140,21 @@ public class TrainingDetailApvlActivity extends BaseActivity {
         MyApplication.getInstance().addACT(this);
     }
 
-    private void setShow(BorrowApvlModel model) {
+    private void setShow(TrainingApvlModel model) {
         tv_ApprovalPerson.setText(model.getEmployeeName());
         tv_approvaldept.setText(model.getDepartmentName());
         tv_approvalCo.setText(model.getStoreName());
         tv_approvalTime.setText(model.getApplicationCreateTime());
 
-        tv_borrowThings.setText(model.getBorrowThings());
-        tv_borrowType.setText(model.getBorrowType());
-        tv_StartTime.setText(model.getStartTime());
+        tv_mode.setText(model.getTrainingMode());
+        tv_form.setText(model.getTrainingForm());
+        tv_startTime.setText(model.getBeginTime());
         tv_endTime.setText(model.getFinishTime());
-        tv_reason.setText(model.getReason());
-        tv_remark.setText(model.getReason());
+        tv_remark.setText(model.getRemark());
+        tv_person.setText(model.getPerson());
+        tv_fee.setText(model.getCost());
+        tv_content.setText(model.getContent());
+        tv_place.setText(model.getTrainingSite());
 
     }
 
@@ -161,7 +178,7 @@ public class TrainingDetailApvlActivity extends BaseActivity {
 
                 //泛型
                 try {
-                    BorrowApvlModel model1 = new UserHelper<>(BorrowApvlModel.class).approvalDetailPost(TrainingDetailApvlActivity.this,
+                    TrainingApvlModel model1 = new UserHelper<>(TrainingApvlModel.class).approvalDetailPost(TrainingDetailApvlActivity.this,
                             myApprovalModel.getApplicationID(),
                             myApprovalModel.getApplicationType());
                     sendMessage(POST_SUCCESS, model1);
@@ -178,7 +195,7 @@ public class TrainingDetailApvlActivity extends BaseActivity {
         super.handleMessage(msg);
         switch (msg.what) {
             case POST_SUCCESS:
-                model = (BorrowApvlModel) msg.obj;
+                model = (TrainingApvlModel) msg.obj;
                 setShow(model);
                 break;
             case POST_FAILED:
@@ -224,20 +241,6 @@ public class TrainingDetailApvlActivity extends BaseActivity {
      */
     public void forBack(View view) {
         this.finish();
-    }
-
-    private boolean isExpend = false;
-
-    public void ReasonExpended(View view) {
-        if (!isExpend) {
-            tv_reason.setMinLines(0);
-            tv_reason.setMaxLines(Integer.MAX_VALUE);
-            isExpend = true;
-        } else {
-            tv_reason.setLines(3);
-            isExpend = false;
-        }
-
     }
 
     private boolean isRemarkExpend = false;

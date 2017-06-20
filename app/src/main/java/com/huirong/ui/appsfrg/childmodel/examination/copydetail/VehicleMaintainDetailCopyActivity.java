@@ -54,6 +54,10 @@ public class VehicleMaintainDetailCopyActivity extends BaseActivity {
     @ViewInject(id = R.id.tv_PlanBorrowTime)
     TextView tv_PlanmantainTime;
 
+    //维修完成时间
+    @ViewInject(id = R.id.tv_PlanEndTime)
+    TextView tv_PlanEndTime;
+
     //维修地点
     @ViewInject(id = R.id.tv_Destination)
     TextView tv_Destination;
@@ -62,17 +66,18 @@ public class VehicleMaintainDetailCopyActivity extends BaseActivity {
     @ViewInject(id = R.id.tv_project)
     TextView tv_project;
 
-    //公里数
-    @ViewInject(id = R.id.tv_miles)
-    TextView tv_miles;
-
     //车牌号
     @ViewInject(id = R.id.tv_number)
     TextView tv_number;
 
+    //公里数
+    @ViewInject(id = R.id.tv_miles)
+    TextView tv_miles;
+
     //备注
     @ViewInject(id = R.id.tv_remark, click = "RemarkExpended")
     TextView tv_remark;
+    ;
 
     //审批人
     @ViewInject(id = R.id.tv_Requester)
@@ -127,12 +132,13 @@ public class VehicleMaintainDetailCopyActivity extends BaseActivity {
         //
         tv_MaintenanceType.setText(model.getMaintenanceType());
         tv_VehicleState.setText(model.getVehicleState());
-        tv_PlanmantainTime.setText(model.getPlanBorrowTime());
-        tv_number.setText(model.getNumber());
+        tv_PlanmantainTime.setText(model.getMaintenanceTime());
+        tv_PlanEndTime.setText(model.getMaintenanceEndTime());
+        tv_number.setText(model.getMaintenanceNumber());
+        tv_miles.setText(model.getTravelKilmetre());
         tv_project.setText(model.getMaintenanceProject());
-        tv_Destination.setText(model.getDestination());
-        tv_miles.setText(model.getEstimateFee());
-        tv_remark.setText(model.getRemark());
+        tv_Destination.setText(model.getMaintenancePlace());
+        tv_remark.setText(model.getPurpose());
 
         // 审批人
         modelList = model.getApprovalInfoLists();

@@ -36,9 +36,11 @@ public class WorkOverTimeDetailApvlActivity extends BaseActivity {
     @ViewInject(id = R.id.tv_right)
     TextView tv_right;
 
+
+
     //加班人员
-    @ViewInject(id = R.id.tv_workoverTimePerson)
-    TextView tv_workoverTimePerson;
+    @ViewInject(id = R.id.tv_OverEmployee)
+    TextView tv_OverEmployee;
 
     //开始时间
     @ViewInject(id = R.id.tv_startTime)
@@ -51,6 +53,7 @@ public class WorkOverTimeDetailApvlActivity extends BaseActivity {
     //说明
     @ViewInject(id = R.id.tv_reason, click = "ReasonExpended")
     TextView tv_reason;
+
 
 
     //申请人
@@ -123,7 +126,7 @@ public class WorkOverTimeDetailApvlActivity extends BaseActivity {
         tv_approvalCo.setText(model.getStoreName());
         tv_approvalTime.setText(model.getApplicationCreateTime());
 
-        tv_workoverTimePerson.setText(model.getOverEmployee());
+        tv_OverEmployee.setText(model.getOverEmployee());
         tv_startTime.setText(model.getStratOverTime());
         tv_endTime.setText(model.getEndOverTime());
         tv_reason.setText(model.getOverCause());

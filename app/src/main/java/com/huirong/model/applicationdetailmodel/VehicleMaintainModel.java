@@ -33,18 +33,8 @@ public class VehicleMaintainModel implements Serializable {
     public String Passenger;
     public String BackRemark;
     public String Purpose;
-
+    public String StoreID;
     public List<VehicleMaintainModel.ApprovalInfoLists> ApprovalInfoLists;
-
-
-    public String getRemark() {
-        return Remark;
-    }
-
-    public void setRemark(String remark) {
-        Remark = remark;
-    }
-
 
     public static class ApprovalInfoLists implements Serializable{
         public String Comment;
@@ -92,8 +82,14 @@ public class VehicleMaintainModel implements Serializable {
     public void setApprovalInfoLists(List<VehicleMaintainModel.ApprovalInfoLists> ApprovalInfoLists) {
         this.ApprovalInfoLists = ApprovalInfoLists;
     }
+    public String getRemark() {
+        return Remark;
+    }
 
-    public String StoreID;
+    public void setRemark(String remark) {
+        Remark = remark;
+    }
+
 
     public String getMaintenanceType() {
         return MaintenanceType;

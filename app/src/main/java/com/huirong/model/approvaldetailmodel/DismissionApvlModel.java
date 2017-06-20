@@ -22,7 +22,7 @@ public class DismissionApvlModel implements Serializable {
     public String Remark;
     public String DimissionID;
     public String DimissionDate;
-    public String EntryDate;
+    public String StrartDate;
 
 
     public List<DismissionApvlModel.ApprovalInfoLists> ApprovalInfoLists;
@@ -122,12 +122,12 @@ public class DismissionApvlModel implements Serializable {
         DimissionDate = dimissionDate;
     }
 
-    public String getEntryDate() {
-        return EntryDate;
+    public String getStrartDate() {
+        return StrartDate;
     }
 
-    public void setEntryDate(String entryDate) {
-        EntryDate = entryDate;
+    public void setStrartDate(String strartDate) {
+        StrartDate = strartDate;
     }
 
     public static long getSerialVersionUID() {

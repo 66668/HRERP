@@ -98,9 +98,9 @@ public class FinancialPayDetailActivity extends BaseActivity {
 
         //
         tv_feeType.setText(model.getWay());
-        tv_payOfficial.setText(model.getCollectionUnit());
-        tv_Account.setText(model.getAccountNumber());
-        tv_bank.setText(model.getBankAccount());
+        tv_payOfficial.setText(model.getCollectionunit());
+        tv_Account.setText(model.getAccountnumber());
+        tv_bank.setText(model.getBankaccount());
         tv_fee.setText(model.getFee());
         tv_remark.setText(model.getRemark());
 

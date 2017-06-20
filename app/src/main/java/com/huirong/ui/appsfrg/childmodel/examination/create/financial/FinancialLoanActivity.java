@@ -64,8 +64,10 @@ public class FinancialLoanActivity extends BaseActivity implements CameraGallery
     TextView tv_type;
 
     //用途
-    @ViewInject(id = R.id.et_use)
-    EditText et_use;
+    @ViewInject(id = R.id.layout_use, click = "loanUse")
+    LinearLayout layout_use;
+    @ViewInject(id = R.id.tv_use)
+    TextView tv_use;
 
     //金额
     @ViewInject(id = R.id.et_Fee)
@@ -140,7 +142,6 @@ public class FinancialLoanActivity extends BaseActivity implements CameraGallery
      * @param view
      */
     public void forCommit(View view) {
-        use = et_use.getText().toString().trim();
         fee = et_Fee.getText().toString().trim();
         reason = et_Reason.getText().toString();
         if (TextUtils.isEmpty(type)) {
@@ -325,6 +326,32 @@ public class FinancialLoanActivity extends BaseActivity implements CameraGallery
             public void onClick(DialogInterface dialog, int which) {
                 type = data[which];
                 tv_type.setText(data[which].trim());
+                dialog.dismiss();
+            }
+        });
+        buidler.show();
+    }
+
+    /**
+     * 用途
+     *
+     * @param view
+     */
+    public void loanUse(View view) {
+        //    设置一个单项选择下拉框
+        /**
+         * 第一个参数指定我们要显示的一组下拉单选框的数据集合
+         * 第二个参数代表索引，指定默认哪一个单选框被勾选上，1表示默认'女' 会被勾选上
+         * 第三个参数给每一个单选项绑定一个监听器
+         */
+        AlertDialog.Builder buidler = new AlertDialog.Builder(this);
+        buidler.setTitle(getResources().getString(R.string.financial_loan_use));
+        final String[] data = getResources().getStringArray(R.array.loanUse);
+        buidler.setSingleChoiceItems(data, -1, new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                use = data[which];
+                tv_use.setText(data[which].trim());
                 dialog.dismiss();
             }
         });

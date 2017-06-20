@@ -97,7 +97,7 @@ public class AppsFragment extends BaseFragment {
 
 
         HashMap<String, Object> map7 = new HashMap<String, Object>();
-        map7.put("name", "财务");
+        map7.put("name", "费用申请");
         map7.put("icon", R.mipmap.app_finance);
         list.add(map7);
 

@@ -80,17 +80,20 @@ public class FinancialLoanDetailApvlActivity extends BaseActivity {
     @ViewInject(id = R.id.btn_copytp, click = "forCopyto")
     Button btn_copytp;
 
+
+    //方式
+    @ViewInject(id = R.id.tv_type)
+    TextView tv_type;
+    //用途
+    @ViewInject(id = R.id.tv_use)
+    TextView tv_use;
     //金额
     @ViewInject(id = R.id.tv_fee)
     TextView tv_fee;
-
-    //还款时间
-    @ViewInject(id = R.id.tv_PlanbackTime)
-    TextView tv_PlanbackTime;
-
     //说明
     @ViewInject(id = R.id.tv_reason, click = "ReasonExpended")
     TextView tv_reason;
+
 
     //常量
     public static final int POST_SUCCESS = 21;
@@ -123,9 +126,10 @@ public class FinancialLoanDetailApvlActivity extends BaseActivity {
         tv_approvalTime.setText(model.getApplicationCreateTime());
 
         //
-        tv_reason.setText(model.getReason());
         tv_fee.setText(model.getFee());
-        tv_PlanbackTime.setText(model.getPlanbackTime());
+        tv_type.setText(model.getWay());
+        tv_use.setText(model.getUseage());
+        tv_reason.setText(model.getRemark());
     }
 
     private void bottomType() {

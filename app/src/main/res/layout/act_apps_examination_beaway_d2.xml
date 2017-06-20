@@ -163,7 +163,8 @@
                         android:layout_marginLeft="10dp"
                         android:layout_weight="0.28"
                         android:gravity="center_vertical"
-                        android:text="@string/beaway_type"/>
+                        android:text="@string/beaway_type"
+                        android:textColor="@color/cl_text_common"/>
 
                     <TextView
                         android:id="@+id/tv_type"
@@ -176,6 +177,7 @@
                         />
                 </LinearLayout>
 
+
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/common_topbar_height40"
@@ -191,10 +193,11 @@
                         android:layout_marginLeft="10dp"
                         android:layout_weight="0.28"
                         android:gravity="center_vertical"
-                        android:text="@string/beaway_place"/>
+                        android:text="@string/beaway_startTime"
+                        android:textColor="@color/cl_text_common"/>
 
                     <TextView
-                        android:id="@+id/tv_place"
+                        android:id="@+id/tv_startTime"
                         style="@style/BlackText.standard"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
@@ -219,38 +222,39 @@
                         android:layout_marginLeft="10dp"
                         android:layout_weight="0.28"
                         android:gravity="center_vertical"
-                        android:text="@string/beaway_startTime"/>
-
-                    <TextView
-                        android:id="@+id/tv_StartTime"
-                        style="@style/BlackText.standard"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_marginLeft="10dp"
-                        android:layout_weight="0.72"
-                        android:gravity="center_vertical"
-                        />
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="@dimen/common_topbar_height40"
-                    android:background="@color/white"
-                    android:gravity="center_vertical"
-                    android:orientation="horizontal"
-                    android:weightSum="1">
-
-                    <TextView
-                        style="@style/BlackText.standard"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_marginLeft="10dp"
-                        android:layout_weight="0.28"
-                        android:gravity="center_vertical"
-                        android:text="@string/beaway_endTime"/>
+                        android:text="@string/beaway_endTime"
+                        android:textColor="@color/cl_text_common"/>
 
                     <TextView
                         android:id="@+id/tv_endTime"
+                        style="@style/BlackText.standard"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="10dp"
+                        android:layout_weight="0.72"
+                        android:gravity="center_vertical"
+                        />
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/common_topbar_height40"
+                    android:background="@color/white"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal"
+                    android:weightSum="1">
+
+                    <TextView
+                        style="@style/BlackText.standard"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="10dp"
+                        android:layout_weight="0.28"
+                        android:gravity="center_vertical"
+                        android:text="@string/beaway_place"
+                        android:textColor="@color/cl_text_common"/>
+
+                    <TextView
+                        android:id="@+id/tv_place"
                         style="@style/BlackText.standard"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
@@ -283,6 +287,7 @@
                         style="@style/BlackText.standard"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
+                        android:layout_marginLeft="10dp"
                         android:layout_weight="0.72"
                         android:ellipsize="end"
                         android:gravity="top|left"
@@ -315,6 +320,7 @@
                         style="@style/BlackText.standard"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
+                        android:layout_marginLeft="10dp"
                         android:layout_weight="0.72"
                         android:ellipsize="end"
                         android:gravity="top|left"

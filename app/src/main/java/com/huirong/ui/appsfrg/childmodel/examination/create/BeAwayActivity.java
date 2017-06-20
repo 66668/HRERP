@@ -158,7 +158,7 @@ public class BeAwayActivity extends BaseActivity {
                     js.put("StartTripDate", startDate);
                     js.put("EndTripDate", endDates);
                     js.put("Remark", remark);
-                    js.put("Reason", remark);
+                    js.put("Reason", reason);
                     js.put("ApprovalIDList", approvalID);
 
                     UserHelper.beawayPost(BeAwayActivity.this, js);

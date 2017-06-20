@@ -87,7 +87,6 @@ public class FinancialLoanDetailActivity extends BaseActivity {
         //
         tv_fee.setText(model.getFee());
         tv_reason.setText(model.getReason());
-        tv_PlanbackTime.setText(model.getPlanbackTime());
     }
     /**
      * back

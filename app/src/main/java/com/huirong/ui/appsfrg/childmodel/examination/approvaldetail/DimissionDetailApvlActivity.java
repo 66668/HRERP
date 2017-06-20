@@ -125,8 +125,8 @@ public class DimissionDetailApvlActivity extends BaseActivity {
         tv_approvalTime.setText(model.getApplicationCreateTime());
 
         tv_dismissiontype.setText(model.getDimissionID());
-        tv_startTime.setText(model.getEntryDate());
-        tv_endTime.setText(model.getDimissionID());
+        tv_startTime.setText(model.getStrartDate());
+        tv_endTime.setText(model.getDimissionDate());
         tv_reason.setText(model.getContent());
     }
 

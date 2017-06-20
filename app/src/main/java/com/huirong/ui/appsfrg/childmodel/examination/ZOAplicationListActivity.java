@@ -128,7 +128,7 @@ public class ZOAplicationListActivity extends BaseActivity implements RefreshAnd
         niceSpinner.addOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Log.d("SJY", "spinner监听--" + spinnerData.get(position));
+                LogUtils.d("我的申请", "spinner监听--" + spinnerData.get(position));
 
                 //清空adapter的list长度 isHanging状态改变
 
@@ -153,6 +153,7 @@ public class ZOAplicationListActivity extends BaseActivity implements RefreshAnd
 
                 MyApplicationModel myApplicationModel = (MyApplicationModel) vAdapter.getItem(newPosition);//
                 String type = myApplicationModel.getApplicationType();//申请类型
+                LogUtils.d("申请类型", type);
                 myApplicationDetail(type, myApplicationModel);
             }
         });
@@ -512,9 +513,9 @@ public class ZOAplicationListActivity extends BaseActivity implements RefreshAnd
     }
 
     /**
-     *     申请跳转详细
-     *
-     *     正常方式intent跳转传值
+     * 申请跳转详细
+     * <p>
+     * 正常方式intent跳转传值
      */
 
     private void myApplicationDetail(String type, MyApplicationModel model) {
@@ -548,18 +549,17 @@ public class ZOAplicationListActivity extends BaseActivity implements RefreshAnd
                 break;
 
 
-            case "财务申请"://06
-
+            case "费用申请"://06
                 /**
                  * 该接口不同于其他接口，数据需要再本activiy中获取后才做跳转
                  */
-                if (model.getApplicationTitle().contains("借款")) {
+                if (model.getDetail().contains("借款")) {
                     intent.setClass(this, FinancialLoanDetailAplActivity.class);
                     startActivity(intent);
-                } else if (model.getApplicationTitle().contains("付款")) {
+                } else if (model.getDetail().contains("付款")) {
                     intent.setClass(this, FinancialPayDetailAplActivity.class);
                     startActivity(intent);
-                } else if (model.getApplicationTitle().contains("报销")) {
+                } else if (model.getDetail().contains("报销")) {
                     intent.setClass(this, FinancialReimburseDetailAplActivity.class);
                     startActivity(intent);
                 } else {
@@ -608,38 +608,38 @@ public class ZOAplicationListActivity extends BaseActivity implements RefreshAnd
                 startActivity(intent);
                 break;
 
-//            case "借阅申请"://06
-//                intent.setClass(this, BorrowDetailAplActivity.class);
-//                startActivity(intent);
-//                break;
-//            case "调薪申请"://07
-//                intent.setClass(this, SalaryadjustDetailAplActivity.class);
-//                startActivity(intent);
-//                break;
-//            case "通知公告申请"://13
-//                intent.setClass(this, NotificationAndNoticeDetailAplActivity.class);
-//                startActivity(intent);
-//                break;
-//            case "办公室申请"://14
-//                intent.setClass(this, OfficeDetailAplActivity.class);
-//                startActivity(intent);
-//                break;
-//            case "领用申请"://15
-//                intent.setClass(this, ReceiveDetailAplActivity.class);
-//                startActivity(intent);
-//                break;
-//            case "合同文件申请"://16
-//                intent.setClass(this, ContractFileDetailAplActivity.class);
-//                startActivity(intent);
-//                break;
-//            case "复试申请"://18
-//                intent.setClass(this, RetestDetailAplActivity.class);
-//                startActivity(intent);
-//                break;
-//            case "会议申请"://19
-//                intent.setClass(this, ConferenceDetailAplActivity.class);
-//                startActivity(intent);
-//                break;
+            //            case "借阅申请"://06
+            //                intent.setClass(this, BorrowDetailAplActivity.class);
+            //                startActivity(intent);
+            //                break;
+            //            case "调薪申请"://07
+            //                intent.setClass(this, SalaryadjustDetailAplActivity.class);
+            //                startActivity(intent);
+            //                break;
+            //            case "通知公告申请"://13
+            //                intent.setClass(this, NotificationAndNoticeDetailAplActivity.class);
+            //                startActivity(intent);
+            //                break;
+            //            case "办公室申请"://14
+            //                intent.setClass(this, OfficeDetailAplActivity.class);
+            //                startActivity(intent);
+            //                break;
+            //            case "领用申请"://15
+            //                intent.setClass(this, ReceiveDetailAplActivity.class);
+            //                startActivity(intent);
+            //                break;
+            //            case "合同文件申请"://16
+            //                intent.setClass(this, ContractFileDetailAplActivity.class);
+            //                startActivity(intent);
+            //                break;
+            //            case "复试申请"://18
+            //                intent.setClass(this, RetestDetailAplActivity.class);
+            //                startActivity(intent);
+            //                break;
+            //            case "会议申请"://19
+            //                intent.setClass(this, ConferenceDetailAplActivity.class);
+            //                startActivity(intent);
+            //                break;
         }
     }
 

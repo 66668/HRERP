@@ -81,34 +81,34 @@ public class VehicleMaintainDetailApvlActivity extends BaseActivity {
 
 
     //维修类型
-    @ViewInject(id = R.id.maintenanceType)
-    TextView maintenanceType;
+    @ViewInject(id = R.id.tv_MaintenanceType)
+    TextView tv_MaintenanceType;
 
     //车辆状态
-    @ViewInject(id = R.id.tv_stateType)
-    TextView tv_stateType;
+    @ViewInject(id = R.id.tv_VehicleState)
+    TextView tv_VehicleState;
 
     //维修时间
-    @ViewInject(id = R.id.tv_startTime)
-    TextView tv_startTime;
+    @ViewInject(id = R.id.tv_PlanBorrowTime)
+    TextView tv_PlanmantainTime;
 
     //维修完成时间
-    @ViewInject(id = R.id.tv_endTime)
-    TextView tv_endTime;
+    @ViewInject(id = R.id.tv_PlanEndTime)
+    TextView tv_PlanEndTime;
 
-    //车牌号
-    @ViewInject(id = R.id.vehicleNumber)
-    TextView vehicleNumber;
+    //维修地点
+    @ViewInject(id = R.id.tv_Destination)
+    TextView tv_Destination;
 
     //维修项目
     @ViewInject(id = R.id.tv_project)
     TextView tv_project;
 
-    //维修地点
-    @ViewInject(id = R.id.tv_address)
-    TextView tv_address;
+    //车牌号
+    @ViewInject(id = R.id.tv_number)
+    TextView tv_number;
 
-    //公里
+    //公里数
     @ViewInject(id = R.id.tv_miles)
     TextView tv_miles;
 
@@ -150,15 +150,16 @@ public class VehicleMaintainDetailApvlActivity extends BaseActivity {
         tv_approvalCo.setText(model.getStoreName());
         tv_approvalTime.setText(model.getApplicationCreateTime());
 
-        maintenanceType.setText(model.getMaintenanceType());
-        vehicleNumber.setText(model.getNumber());
-        tv_stateType.setText(model.getVehicleState());
-        tv_startTime.setText(model.getPlanBorrowTime());
-        tv_endTime.setText(model.getPlanBorrowTime());
+
+        tv_MaintenanceType.setText(model.getMaintenanceType());
+        tv_VehicleState.setText(model.getVehicleState());
+        tv_PlanmantainTime.setText(model.getMaintenanceTime());
+        tv_PlanEndTime.setText(model.getMaintenanceEndTime());
+        tv_number.setText(model.getMaintenanceNumber());
+        tv_miles.setText(model.getTravelKilmetre());
         tv_project.setText(model.getMaintenanceProject());
-        tv_address.setText(model.getDestination());
-        tv_remark.setText(model.getRemark());
-        tv_miles.setText(model.getEstimateFee());
+        tv_Destination.setText(model.getMaintenancePlace());
+        tv_remark.setText(model.getPurpose());
     }
 
     private void bottomType() {

@@ -42,6 +42,8 @@ public class WorkOverTimeDetailCopyActivity extends BaseActivity {
     @ViewInject(id = R.id.tv_right)
     TextView tv_right;
 
+
+
     //加班人员
     @ViewInject(id = R.id.tv_OverEmployee)
     TextView tv_OverEmployee;
@@ -54,10 +56,11 @@ public class WorkOverTimeDetailCopyActivity extends BaseActivity {
     @ViewInject(id = R.id.tv_endTime)
     TextView tv_endTime;
 
-
     //说明
     @ViewInject(id = R.id.tv_reason, click = "ReasonExpended")
     TextView tv_reason;
+
+
 
     //审批人
     @ViewInject(id = R.id.tv_Requester)

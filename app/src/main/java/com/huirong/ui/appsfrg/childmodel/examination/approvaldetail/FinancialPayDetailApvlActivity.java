@@ -2,9 +2,9 @@ package com.huirong.ui.appsfrg.childmodel.examination.approvaldetail;
 
 import android.os.Bundle;
 import android.os.Message;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -12,6 +12,7 @@ import android.widget.TextView;
 import com.huirong.R;
 import com.huirong.application.MyApplication;
 import com.huirong.base.BaseActivity;
+import com.huirong.common.ImageLoadingConfig;
 import com.huirong.common.MyException;
 import com.huirong.dialog.Loading;
 import com.huirong.helper.UserHelper;
@@ -19,6 +20,9 @@ import com.huirong.inject.ViewInject;
 import com.huirong.model.MyApprovalModel;
 import com.huirong.model.applicationdetailmodel.FinancialAllModel;
 import com.huirong.utils.PageUtil;
+import com.nostra13.universalimageloader.core.DisplayImageOptions;
+import com.nostra13.universalimageloader.core.ImageLoader;
+import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
 
 /**
  * 审批 付款
@@ -105,6 +109,21 @@ public class FinancialPayDetailApvlActivity extends BaseActivity {
     @ViewInject(id = R.id.tv_remark, click = "RemarkExpended")
     TextView tv_remark;
 
+    //获取子控件个数的父控件
+    @ViewInject(id = R.id.layout_ll)
+    LinearLayout layout_ll;
+
+    //图片1
+    @ViewInject(id = R.id.img_01, click = "imgDetail01")
+    ImageView img_01;
+
+    //图片2
+    @ViewInject(id = R.id.img_02, click = "imgDetail02")
+    ImageView img_02;
+
+    //图片3
+    @ViewInject(id = R.id.img_03, click = "imgDetail03")
+    ImageView img_03;
     //常量
     public static final int POST_SUCCESS = 21;
     public static final int POST_FAILED = 22;
@@ -112,23 +131,36 @@ public class FinancialPayDetailApvlActivity extends BaseActivity {
     //变量
     private MyApprovalModel myApprovalModel;
     private FinancialAllModel model;
+
+    //imageLoader图片缓存
+    private ImageLoader imgLoader;
+    private DisplayImageOptions imgOptions;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.act_apps_examination_financial_pay_d2);
+        initMyView();
+
+        //
+        getDetailData();
+
+    }
+    private void initMyView() {
         tv_title.setText(getResources().getString(R.string.financial_pay_title_d));
         tv_right.setText("");
 
+        MyApplication.getInstance().addACT(this);
+
+        imgLoader = ImageLoader.getInstance();
+        imgLoader.init(ImageLoaderConfiguration.createDefault(this));
+        imgOptions = ImageLoadingConfig.generateDisplayImageOptions(R.mipmap.ic_launcher);
+
         Bundle bundle = this.getIntent().getExtras();
         myApprovalModel = (MyApprovalModel) bundle.getSerializable("MyApprovalModel");
-        Log.d("SJY", "详情MyApprovalModel");
 
         bottomType();
-        //
-        getDetailData();
-        MyApplication.getInstance().addACT(this);
     }
-
     private void setShow(FinancialAllModel model) {
         //
         tv_ApprovalPerson.setText(model.getEmployeeName());
@@ -137,10 +169,10 @@ public class FinancialPayDetailApvlActivity extends BaseActivity {
         tv_approvalTime.setText(model.getApplicationCreateTime());
 
         //
-        tv_feeType.setText(model.getWay());
-        tv_payOfficial.setText(model.getCollectionUnit());
-        tv_Account.setText(model.getAccountNumber());
-        tv_bank.setText(model.getBankAccount());
+        tv_feeType.setText(model.getPaymentmethod());
+        tv_payOfficial.setText(model.getCollectionunit());
+        tv_Account.setText(model.getAccountnumber());
+        tv_bank.setText(model.getBankaccount());
         tv_fee.setText(model.getFee());
         tv_remark.setText(model.getRemark());
 

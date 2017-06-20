@@ -3,12 +3,15 @@ package com.huirong.ui.appsfrg.childmodel.examination.create.financial;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.net.Uri;
 import android.os.Bundle;
 import android.os.Message;
 import android.text.TextUtils;
-import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -23,11 +26,15 @@ import com.huirong.inject.ViewInject;
 import com.huirong.model.ContactsEmployeeModel;
 import com.huirong.ui.appsfrg.childmodel.examination.ZOAplicationListActivity;
 import com.huirong.ui.contractsfrg.ContactsSelectActivity;
+import com.huirong.utils.CameraGalleryUtils;
+import com.huirong.utils.ImageUtils;
+import com.huirong.utils.LogUtils;
 import com.huirong.utils.PageUtil;
 
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -36,7 +43,7 @@ import java.util.List;
  * Created by sjy on 2016/12/2.
  */
 
-public class FinancialPayActivity extends BaseActivity {
+public class FinancialPayActivity extends BaseActivity implements CameraGalleryUtils.ChoosePicCallBack {
     //back
     @ViewInject(id = R.id.layout_back, click = "forBack")
     RelativeLayout layout_back;
@@ -75,6 +82,28 @@ public class FinancialPayActivity extends BaseActivity {
     @ViewInject(id = R.id.et_Remark)
     EditText et_remark;
 
+    //添加图片
+    @ViewInject(id = R.id.addPicture, click = "ForAddPicture")
+    RelativeLayout addPicture;
+
+    //图片1
+    @ViewInject(id = R.id.layout_img_01, click = "showDetailImg")
+    RelativeLayout layout_img_01;
+    @ViewInject(id = R.id.img_01)
+    ImageView img_01;
+
+    //图片2
+    @ViewInject(id = R.id.layout_img_02, click = "showDetailImg")
+    RelativeLayout layout_img_02;
+    @ViewInject(id = R.id.img_02)
+    ImageView img_02;
+
+    //图片3
+    @ViewInject(id = R.id.layout_img_03, click = "showDetailImg")
+    RelativeLayout layout_img_03;
+    @ViewInject(id = R.id.img_03)
+    ImageView img_03;
+
     //添加审批人
     @ViewInject(id = R.id.AddApprover, click = "forAddApprover")
     RelativeLayout AddApprover;
@@ -86,6 +115,7 @@ public class FinancialPayActivity extends BaseActivity {
     //常量
     public static final int POST_SUCCESS = 21;
     public static final int POST_FAILED = 22;
+    public static final int PIC_SHOW = 17;//图片展示
 
     //变量
     private String approvalID = "";
@@ -96,12 +126,18 @@ public class FinancialPayActivity extends BaseActivity {
     private String AccountNumber = "";//账号
     private String Way = "";//
 
+    private CameraGalleryUtils cameraGalleryUtils;// 头像上传工具
+    private String picPath;
+    private File filePicPath;
+    private List<Bitmap> listPic;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.act_apps_examination_financial_pay);
         tv_title.setText(getResources().getString(R.string.financial_pay));
+        cameraGalleryUtils = new CameraGalleryUtils(this, this);
+        listPic = new ArrayList<>();
         //多页面finish使用
         MyApplication.getInstance().addACT(this);
     }
@@ -150,11 +186,11 @@ public class FinancialPayActivity extends BaseActivity {
                     js.put("BankAccount", BankAccount);
                     js.put("CollectionUnit", CollectionUnit);
                     js.put("AccountNumber", AccountNumber);
-                    js.put("Way", Way);
+                    js.put("Paymentmethod", Way);
                     js.put("Remark", remark);
                     js.put("ApprovalIDList", approvalID);
 
-                    UserHelper.LRApplicationPost(FinancialPayActivity.this, js,null);
+                    UserHelper.LRApplicationPost(FinancialPayActivity.this, js,filePicPath);
                     sendMessage(POST_SUCCESS);
                 } catch (MyException e) {
                     sendMessage(POST_FAILED, e.getMessage());
@@ -180,6 +216,37 @@ public class FinancialPayActivity extends BaseActivity {
             case POST_FAILED:
                 PageUtil.DisplayToast((String) msg.obj);
                 break;
+            case PIC_SHOW://添加图片后，展示
+                List<Bitmap> listpic = (List<Bitmap>) msg.obj;
+
+                if (listpic.size() == 3) {
+                    img_01.setVisibility(View.VISIBLE);
+                    img_02.setVisibility(View.VISIBLE);
+                    img_03.setVisibility(View.VISIBLE);
+
+                    img_01.setImageBitmap(listpic.get(0));
+                    img_02.setImageBitmap(listpic.get(1));
+                    img_03.setImageBitmap(listpic.get(2));
+                }
+                if (listpic.size() == 2) {
+                    img_01.setVisibility(View.VISIBLE);
+                    img_02.setVisibility(View.VISIBLE);
+                    img_03.setVisibility(View.INVISIBLE);
+
+                    img_01.setImageBitmap(listpic.get(0));
+
+                    img_02.setImageBitmap(listpic.get(1));
+
+                }
+
+                if (listpic.size() == 1) {
+                    img_01.setVisibility(View.VISIBLE);
+                    img_02.setVisibility(View.INVISIBLE);
+                    img_03.setVisibility(View.INVISIBLE);
+
+                    img_01.setImageBitmap(listpic.get(0));
+                }
+                break;
         }
     }
 
@@ -203,8 +270,8 @@ public class FinancialPayActivity extends BaseActivity {
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if (requestCode == 0 && resultCode == 0)//通过请求码(去SActivity)和回传码（回传数据到第一个页面）判断回传的页面
-        {
+        //添加审批人 回调处理 待修改 0220
+        if (requestCode == 0 && resultCode == 0) {
             //判断返回值是否为空
             List<ContactsEmployeeModel> list = new ArrayList<>();
             if (data != null && (List<ContactsEmployeeModel>) data.getSerializableExtra("data") != null) {
@@ -212,7 +279,6 @@ public class FinancialPayActivity extends BaseActivity {
             } else {
 
             }
-
             StringBuilder name = new StringBuilder();
             StringBuilder employeeId = new StringBuilder();
             for (int i = 0; i < list.size(); i++) {
@@ -221,10 +287,11 @@ public class FinancialPayActivity extends BaseActivity {
             }
             //            approvalID = "0280c9c5-870c-46cf-aa95-cdededc7d86c,88dd7959-cb2f-40c6-947a-4d6801fc4765";
             approvalID = getApprovalID(employeeId.toString());
-            Log.d("SJY", "approvalID=" + approvalID);
+            LogUtils.d("借款申请", "approvalID=" + approvalID);
             tv_Requester.setText(name);
         }
-
+        //相册
+        cameraGalleryUtils.onActivityResultAction(requestCode, resultCode, data);
     }
 
     /*
@@ -262,8 +329,37 @@ public class FinancialPayActivity extends BaseActivity {
         });
         buidler.show();
     }
+    /**
+     * 添加图片
+     */
+    public void ForAddPicture(View view) {
+        if (listPic.size() >= 1) {
+            PageUtil.DisplayToast("最多添加1张图片");
+            return;
+        }
+        cameraGalleryUtils.showChoosePhotoDialog(CameraGalleryUtils.IMG_TYPE_CAMERA);
+    }
+    @Override
+    public void updateAvatarSuccess(int updateType, String picpath, String avatarBase64) {
+        picPath = picpath;
 
+        Bitmap bitmap = BitmapFactory.decodeFile(picPath);
+        Uri uri = ImageUtils.savePicture(this, bitmap);
+        filePicPath = new File(ImageUtils.getImageAbsolutePath(this, uri));
 
+        listPic.add(bitmap);
+        sendMessage(PIC_SHOW, listPic);
+    }
+
+    @Override
+    public void updateAvatarFailed(int updateType) {
+
+    }
+
+    @Override
+    public void cancel() {
+
+    }
     /**
      * back
      *

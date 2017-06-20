@@ -7,19 +7,25 @@ import android.os.Message;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.huirong.R;
 import com.huirong.base.BaseActivity;
+import com.huirong.common.ImageLoadingConfig;
 import com.huirong.common.MyException;
 import com.huirong.dialog.Loading;
 import com.huirong.helper.UserHelper;
 import com.huirong.inject.ViewInject;
 import com.huirong.model.MyApplicationModel;
 import com.huirong.model.applicationdetailmodel.FinancialAllModel;
+import com.huirong.utils.LogUtils;
 import com.huirong.utils.PageUtil;
+import com.nostra13.universalimageloader.core.DisplayImageOptions;
+import com.nostra13.universalimageloader.core.ImageLoader;
+import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -81,11 +87,27 @@ public class FinancialPayDetailAplActivity extends BaseActivity {
     @ViewInject(id = R.id.layout_ll)
     LinearLayout layout_ll;
 
+    //图片1
+    @ViewInject(id = R.id.img_01, click = "imgDetail01")
+    ImageView img_01;
+
+    //图片2
+    @ViewInject(id = R.id.img_02, click = "imgDetail02")
+    ImageView img_02;
+
+    //图片3
+    @ViewInject(id = R.id.img_03, click = "imgDetail03")
+    ImageView img_03;
+
     //变量
     private Intent intent = null;
     private FinancialAllModel financialAllModel;
     private MyApplicationModel model;
     private List<FinancialAllModel.ApprovalInfoLists> modelList;
+
+    //imageLoader图片缓存
+    private ImageLoader imgLoader;
+    private DisplayImageOptions imgOptions;
 
     //动态添加view 变量
     private List<View> ls_childView;//用于保存动态添加进来的View
@@ -101,23 +123,53 @@ public class FinancialPayDetailAplActivity extends BaseActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.act_apps_examination_financial_pay_d);
+
+
+        initMyView();
+
+
+        getDetailModel(model);
+    }
+    private void initMyView() {
         tv_title.setText(getResources().getString(R.string.financial_pay));
         tv_right.setText("");
+
+        imgLoader = ImageLoader.getInstance();
+        imgLoader.init(ImageLoaderConfiguration.createDefault(this));
+        imgOptions = ImageLoadingConfig.generateDisplayImageOptions(R.mipmap.ic_launcher);
 
         intent = getIntent();
         model = (MyApplicationModel) intent.getSerializableExtra("MyApplicationModel");
 
-        getDetailModel(model);
     }
-
     private void setShow(FinancialAllModel model) {
 
-        tv_feeType.setText(model.getWay());
-        tv_payOfficial.setText(model.getCollectionUnit());
-        tv_Account.setText(model.getAccountNumber());
-        tv_bank.setText(model.getBankAccount());
+        LogUtils.d("SJY", "图片size=" + model.getImageLists().size());
+
+        if (model.getImageLists().size() == 1) {
+            imgLoader.displayImage(model.getImageLists().get(0), img_01, imgOptions);
+        }
+
+        if (model.getImageLists().size() == 2) {
+            imgLoader.displayImage(model.getImageLists().get(0), img_01, imgOptions);
+            imgLoader.displayImage(model.getImageLists().get(1), img_02, imgOptions);
+        }
+
+        if (model.getImageLists().size() == 3) {
+            imgLoader.displayImage(model.getImageLists().get(0), img_01, imgOptions);
+            imgLoader.displayImage(model.getImageLists().get(1), img_02, imgOptions);
+            imgLoader.displayImage(model.getImageLists().get(2), img_03, imgOptions);
+        }
+
+
+        tv_feeType.setText(model.getPaymentmethod());
+        tv_payOfficial.setText(model.getCollectionunit());
+        tv_Account.setText(model.getAccountnumber());
+        tv_bank.setText(model.getBankaccount());
         tv_fee.setText(model.getFee());
         tv_remark.setText(model.getRemark());
+
+
 
         modelList = model.getApprovalInfoLists();
         // 审批人

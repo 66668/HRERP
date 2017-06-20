@@ -136,7 +136,7 @@ public class TrainingActivity extends BaseActivity {
     }
 
     private void initMyView() {
-        tv_title.setText(getResources().getString(R.string.beaway));
+        tv_title.setText(getResources().getString(R.string.training));
     }
 
     private void initListener() {

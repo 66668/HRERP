@@ -1081,12 +1081,6 @@
 
 
         <!--010 交车 记录界面01 -->
-        <activity
-            android:name="com.huirong.ui.appsfrg.VehicleReturnListActivity"
-            android:label="@string/app_name"
-            android:screenOrientation="portrait"
-            android:theme="@style/Theme.AppCompat.Light.NoActionBar">
-        </activity>
 
         <!--010 交车 用车-未交车02 -->
         <activity

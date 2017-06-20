@@ -30,10 +30,10 @@ public class ZOAplicationListAdapter extends BaseListAdapter {
     private DisplayImageOptions imgOptions;
 
     public class WidgetHolder {
-        public TextView tvTitle;
+        public TextView tvType;
         public CircleTextView tvName;
         public TextView tvTime;
-        public TextView tvType;
+        public TextView tvdetail;
         public TextView tvComment;
     }
 
@@ -51,9 +51,9 @@ public class ZOAplicationListAdapter extends BaseListAdapter {
         //该布局上的控件
         WidgetHolder holder = new WidgetHolder();
         holder.tvName = (CircleTextView) view.findViewById(R.id.tv_name);
-        holder.tvTitle = (TextView) view.findViewById(R.id.tv_title);
-        holder.tvTime = (TextView) view.findViewById(R.id.tv_time);
         holder.tvType = (TextView) view.findViewById(R.id.tv_type);
+        holder.tvdetail = (TextView) view.findViewById(R.id.tv_detail);
+        holder.tvTime = (TextView) view.findViewById(R.id.tv_time);
         holder.tvComment = (TextView) view.findViewById(R.id.tv_Comment);
         view.setTag(holder);
         return view;
@@ -66,16 +66,16 @@ public class ZOAplicationListAdapter extends BaseListAdapter {
         //?java.lang.ClassCastException: java.util.ArrayList cannot be cast to com.yvision.model.VisitorBModel
         MyApplicationModel model = (MyApplicationModel) entityList.get(position);
         holder.tvName.setText(model.getEmployeeName());
-        holder.tvName.setBackgroundColor(ContextCompat.getColor(MyApplication.getInstance(),randomColor()));
+        holder.tvName.setBackgroundColor(ContextCompat.getColor(MyApplication.getInstance(), randomColor()));
 
         holder.tvTime.setText(model.getCreateTime());
         holder.tvType.setText(model.getApplicationType());
-        holder.tvTitle.setText(model.getApplicationTitle());
-        if (!TextUtils.isEmpty(model.getApprovalStatus())){
+        holder.tvdetail.setText(model.getDetail());
+        if (!TextUtils.isEmpty(model.getApprovalStatus())) {
             if (model.getApprovalStatus().contains("1")) {
                 holder.tvComment.setText(MyApplication.getInstance().getResources().getString(R.string.examination_yes));
                 holder.tvComment.setTextColor(MyApplication.getInstance().getResources().getColor(R.color.common_color));
-            }else if(model.getApprovalStatus().contains("2")){
+            } else if (model.getApprovalStatus().contains("2")) {
                 holder.tvComment.setText(MyApplication.getInstance().getResources().getString(R.string.examination_going));
                 holder.tvComment.setTextColor(MyApplication.getInstance().getResources().getColor(R.color.common_color));
             } else {
@@ -83,15 +83,15 @@ public class ZOAplicationListAdapter extends BaseListAdapter {
                 holder.tvComment.setTextColor(MyApplication.getInstance().getResources().getColor(R.color.red));
             }
 
-        }else{
+        } else {
             holder.tvComment.setText("无法判断");
         }
 
     }
 
     //设置一条记录的随机颜色
-    private int randomColor(){
-        int [] colorArray = new int[]{R.color.pink,R.color.lightgreen,R.color.gray,R.color.yellow,R.color.common_color,R.color.aquamarine,R.color.brown};
+    private int randomColor() {
+        int[] colorArray = new int[]{R.color.pink, R.color.lightgreen, R.color.gray, R.color.yellow, R.color.common_color, R.color.aquamarine, R.color.brown};
         return colorArray[new Random().nextInt(6)];
     }
 

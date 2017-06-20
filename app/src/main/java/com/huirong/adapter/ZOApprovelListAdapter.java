@@ -30,10 +30,10 @@ public class ZOApprovelListAdapter extends BaseListAdapter {
 
 
     public class WidgetHolder {
-        public TextView tvTitle;
+        public TextView tvType;//类型
+        public TextView tvdetail;
         public CircleTextView tvName;
         public TextView tvTime;
-        public TextView tvType;//类型
         public TextView tvComment;//审批状态
     }
 
@@ -51,7 +51,7 @@ public class ZOApprovelListAdapter extends BaseListAdapter {
         //该布局上的控件
         WidgetHolder holder = new WidgetHolder();
         holder.tvName = (CircleTextView) view.findViewById(R.id.tv_name);
-        holder.tvTitle = (TextView) view.findViewById(R.id.tv_title);
+        holder.tvdetail = (TextView) view.findViewById(R.id.tv_detail);
         holder.tvTime = (TextView) view.findViewById(R.id.tv_time);
         holder.tvType = (TextView) view.findViewById(R.id.tv_type);
         holder.tvComment = (TextView) view.findViewById(R.id.tv_Comment);
@@ -68,7 +68,7 @@ public class ZOApprovelListAdapter extends BaseListAdapter {
         holder.tvName.setBackgroundColor(ContextCompat.getColor(MyApplication.getInstance(),randomColor()));
         holder.tvTime.setText(model.getCreateTime());
         holder.tvType.setText(model.getApplicationType());
-        holder.tvTitle.setText(model.getApplicationTitle());
+        holder.tvdetail.setText(model.getDetail());
 
         if (model.getApprovalStatus().contains("1")) {
             holder.tvComment.setText(MyApplication.getInstance().getResources().getString(R.string.examination_yes));

@@ -157,16 +157,18 @@
                     android:weightSum="1">
 
                     <TextView
+                        android:id="@+id/textView8"
                         style="@style/BlackText.standard"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="10dp"
                         android:layout_weight="0.28"
                         android:gravity="center_vertical"
-                        android:text="@string/signetStart"/>
+                        android:text="@string/signetStart"
+                        android:textColor="@color/cl_text_common"/>
 
                     <TextView
-                        android:id="@+id/tv_StartTime"
+                        android:id="@+id/tv_startTime"
                         style="@style/BlackText.standard"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
@@ -191,7 +193,8 @@
                         android:layout_marginLeft="10dp"
                         android:layout_weight="0.28"
                         android:gravity="center_vertical"
-                        android:text="@string/signetEnd"/>
+                        android:text="@string/signetEnd"
+                        android:textColor="@color/cl_text_common"/>
 
                     <TextView
                         android:id="@+id/tv_endTime"
@@ -219,10 +222,11 @@
                         android:layout_marginLeft="10dp"
                         android:layout_weight="0.28"
                         android:gravity="center_vertical"
-                        android:text="@string/signet_name"/>
+                        android:text="@string/signet_name"
+                        android:textColor="@color/cl_text_common"/>
 
                     <TextView
-                        android:id="@+id/tv_borrowThings"
+                        android:id="@+id/tv_company"
                         style="@style/BlackText.standard"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
@@ -247,10 +251,11 @@
                         android:layout_marginLeft="10dp"
                         android:layout_weight="0.28"
                         android:gravity="center_vertical"
-                        android:text="@string/signet_num"/>
+                        android:text="@string/signet_num"
+                        android:textColor="@color/cl_text_common"/>
 
                     <TextView
-                        android:id="@+id/tv_borrowType"
+                        android:id="@+id/tv_copies"
                         style="@style/BlackText.standard"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
@@ -284,6 +289,7 @@
                         style="@style/BlackText.standard"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
+                        android:layout_marginLeft="10dp"
                         android:layout_weight="0.72"
                         android:ellipsize="end"
                         android:gravity="top|left"
@@ -293,7 +299,6 @@
                         />
 
                 </LinearLayout>
-
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"

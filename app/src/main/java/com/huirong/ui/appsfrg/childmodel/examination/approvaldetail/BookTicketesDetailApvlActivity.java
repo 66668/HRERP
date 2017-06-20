@@ -16,7 +16,7 @@ import com.huirong.dialog.Loading;
 import com.huirong.helper.UserHelper;
 import com.huirong.inject.ViewInject;
 import com.huirong.model.MyApprovalModel;
-import com.huirong.model.approvaldetailmodel.BorrowApvlModel;
+import com.huirong.model.approvaldetailmodel.BookTicketsApvlModel;
 import com.huirong.utils.PageUtil;
 
 
@@ -54,29 +54,32 @@ public class BookTicketesDetailApvlActivity extends BaseActivity {
     TextView tv_approvalTime;
 
 
-    //借阅名称
-    @ViewInject(id = R.id.tv_borrowThings)
-    TextView tv_borrowThings;
 
-    //借阅类型
-    @ViewInject(id = R.id.tv_borrowType)
-    TextView tv_borrowType;
+    //交通工具
+    @ViewInject(id = R.id.tv_type)
+    TextView tv_type;
 
-    //使用时间
-    @ViewInject(id = R.id.tv_StartTime)
-    TextView tv_StartTime;
+    //出发地
+    @ViewInject(id = R.id.tv_startPlace)
+    TextView tv_startPlace;
 
-    //归还时间
-    @ViewInject(id = R.id.tv_endTime)
-    TextView tv_endTime;
+    //目的地
+    @ViewInject(id = R.id.tv_endPlace)
+    TextView tv_endPlace;
 
-    //说明
+    //订票事由
     @ViewInject(id = R.id.tv_reason, click = "ReasonExpended")
     TextView tv_reason;
 
-    //备注
-    @ViewInject(id = R.id.tv_remark, click = "RemarkExpended")
-    TextView tv_remark;
+    //开始时间
+    @ViewInject(id = R.id.tv_startTime)
+    TextView tv_startTime;
+
+    //结束时间
+    @ViewInject(id = R.id.tv_endTime)
+    TextView tv_endTime;
+
+
 
     //未审批bottom
     @ViewInject(id = R.id.laytout_decide)
@@ -104,7 +107,7 @@ public class BookTicketesDetailApvlActivity extends BaseActivity {
 
     //变量
     private MyApprovalModel myApprovalModel;
-    private BorrowApvlModel model;
+    private BookTicketsApvlModel model;
     //常量
     public static final int POST_SUCCESS = 21;
     public static final int POST_FAILED = 22;
@@ -126,18 +129,18 @@ public class BookTicketesDetailApvlActivity extends BaseActivity {
         MyApplication.getInstance().addACT(this);
     }
 
-    private void setShow(BorrowApvlModel model) {
+    private void setShow(BookTicketsApvlModel model) {
         tv_ApprovalPerson.setText(model.getEmployeeName());
         tv_approvaldept.setText(model.getDepartmentName());
         tv_approvalCo.setText(model.getStoreName());
         tv_approvalTime.setText(model.getApplicationCreateTime());
 
-        tv_borrowThings.setText(model.getBorrowThings());
-        tv_borrowType.setText(model.getBorrowType());
-        tv_StartTime.setText(model.getStartTime());
-        tv_endTime.setText(model.getFinishTime());
+        tv_type.setText(model.getTraffic());
+        tv_startPlace.setText(model.getStartAddress());
+        tv_endPlace.setText(model.getEndAddress());
+        tv_startTime.setText(model.getStartTime());
+        tv_endTime.setText(model.getEndTime());
         tv_reason.setText(model.getReason());
-        tv_remark.setText(model.getReason());
 
     }
 
@@ -161,7 +164,7 @@ public class BookTicketesDetailApvlActivity extends BaseActivity {
 
                 //泛型
                 try {
-                    BorrowApvlModel model1 = new UserHelper<>(BorrowApvlModel.class).approvalDetailPost(BookTicketesDetailApvlActivity.this,
+                    BookTicketsApvlModel model1 = new UserHelper<>(BookTicketsApvlModel.class).approvalDetailPost(BookTicketesDetailApvlActivity.this,
                             myApprovalModel.getApplicationID(),
                             myApprovalModel.getApplicationType());
                     sendMessage(POST_SUCCESS, model1);
@@ -178,7 +181,7 @@ public class BookTicketesDetailApvlActivity extends BaseActivity {
         super.handleMessage(msg);
         switch (msg.what) {
             case POST_SUCCESS:
-                model = (BorrowApvlModel) msg.obj;
+                model = (BookTicketsApvlModel) msg.obj;
                 setShow(model);
                 break;
             case POST_FAILED:
@@ -236,20 +239,6 @@ public class BookTicketesDetailApvlActivity extends BaseActivity {
         } else {
             tv_reason.setLines(3);
             isExpend = false;
-        }
-
-    }
-
-    private boolean isRemarkExpend = false;
-
-    public void RemarkExpended(View view) {
-        if (!isRemarkExpend) {
-            tv_remark.setMinLines(0);
-            tv_remark.setMaxLines(Integer.MAX_VALUE);
-            isRemarkExpend = true;
-        } else {
-            tv_remark.setLines(3);
-            isRemarkExpend = false;
         }
 
     }

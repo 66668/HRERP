@@ -28,6 +28,7 @@ import com.huirong.ui.appsfrg.childmodel.examination.ZOAplicationListActivity;
 import com.huirong.ui.contractsfrg.ContactsSelectActivity;
 import com.huirong.utils.CameraGalleryUtils;
 import com.huirong.utils.ImageUtils;
+import com.huirong.utils.LogUtils;
 import com.huirong.utils.PageUtil;
 
 import org.json.JSONException;
@@ -210,20 +211,20 @@ public class FinancialReimburseActivity extends BaseActivity implements CameraGa
                     //
                     JSONObject js = new JSONObject();
                     js.put("Type", getResources().getString(R.string.financial_reimburse_apl));//
-                    js.put("Total", total);//
+                    js.put("heji", total);//
                     js.put("Remark", remark);//
                     js.put("ApprovalIDList", approvalID);//
-                    js.put("Useageone", useage1);//
-                    js.put("Feeone", fee1);//
+                    js.put("zhaiyao1", useage1);//
+                    js.put("jine1", fee1);//
 
                     if (!TextUtils.isEmpty(fee2)) {
-                        js.put("Useagetwo", useage2);//
-                        js.put("Feetwo", fee2);//
+                        js.put("zhaiyao2", useage2);//
+                        js.put("jine2", fee2);//
                     }
 
                     if (!TextUtils.isEmpty(fee3)) {
-                        js.put("Useagethree", useage3);//
-                        js.put("Feethree", fee3);//
+                        js.put("zhaiyao3", useage3);//
+                        js.put("jine3", fee3);//
                     }
 
                     UserHelper.LRApplicationPost(FinancialReimburseActivity.this, js,filePicPath);
@@ -343,7 +344,7 @@ public class FinancialReimburseActivity extends BaseActivity implements CameraGa
             }
             //            approvalID = "0280c9c5-870c-46cf-aa95-cdededc7d86c,88dd7959-cb2f-40c6-947a-4d6801fc4765";
             approvalID = getApprovalID(employeeId.toString());
-            Log.d("SJY", "approvalID=" + approvalID);
+            LogUtils.d("SJY", "approvalID=" + approvalID);
             tv_Requester.setText(name);
         }
 
@@ -372,19 +373,19 @@ public class FinancialReimburseActivity extends BaseActivity implements CameraGa
 
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-                Log.d("SJY", "ET_beforeTextChanged1");
+                LogUtils.d("SJY", "ET_beforeTextChanged1");
                 fee2 = et_FeeOne.getText().toString();
                 fee3 = et_FeeTwo.getText().toString();
             }
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-                Log.d("SJY", "ET_onTextChanged1");
+                LogUtils.d("SJY", "ET_onTextChanged1");
             }
 
             @Override
             public void afterTextChanged(Editable s) {
-                Log.d("SJY", "ET_afterTextChanged1");
+                LogUtils.d("SJY", "ET_afterTextChanged1");
                 fee1 = et_FeeThree.getText().toString().trim();
                 setTotal(fee1, fee2, fee3);
 
@@ -405,12 +406,12 @@ public class FinancialReimburseActivity extends BaseActivity implements CameraGa
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-                Log.d("SJY", "ET_onTextChanged2");
+                LogUtils.d("SJY", "ET_onTextChanged2");
             }
 
             @Override
             public void afterTextChanged(Editable s) {
-                Log.d("SJY", "ET_afterTextChanged3");
+                LogUtils.d("SJY", "ET_afterTextChanged3");
                 fee2 = et_FeeTwo.getText().toString().trim();
                 setTotal(fee1, fee2, fee3);
             }
@@ -423,19 +424,19 @@ public class FinancialReimburseActivity extends BaseActivity implements CameraGa
 
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-                Log.d("SJY", "ET_beforeTextChanged3");
+                LogUtils.d("SJY", "ET_beforeTextChanged3");
                 fee1 = et_FeeOne.getText().toString();
                 fee2 = et_FeeTwo.getText().toString();
             }
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-                Log.d("SJY", "ET_onTextChanged3");
+                LogUtils.d("SJY", "ET_onTextChanged3");
             }
 
             @Override
             public void afterTextChanged(Editable s) {
-                Log.d("SJY", "ET_afterTextChanged3");
+                LogUtils.d("SJY", "ET_afterTextChanged3");
                 fee3 = et_FeeThree.getText().toString().trim();
                 setTotal(fee1, fee2, fee3);
 

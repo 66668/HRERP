@@ -118,8 +118,8 @@ public class DimissionDetailCopyActivity extends BaseActivity {
         tv_copyTime.setText(model.getApplicationCreateTime());
 
         //
-        tv_startTime.setText(model.getEntryDate());
         tv_dimissionType.setText(model.getDimissionID());
+        tv_startTime.setText(model.getStrartDate());
         tv_endTime.setText(model.getDimissionDate());
         tv_reason.setText(model.getContent());
 

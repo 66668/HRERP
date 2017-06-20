@@ -36,6 +36,7 @@ public class TakeDaysOffDetailApvlActivity extends BaseActivity {
     @ViewInject(id = R.id.tv_right)
     TextView tv_right;
 
+
     //调休开始时间
     @ViewInject(id = R.id.tv_offStartTime)
     TextView tv_offStartTime;

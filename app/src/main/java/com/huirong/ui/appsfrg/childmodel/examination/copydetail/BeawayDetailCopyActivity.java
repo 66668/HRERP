@@ -18,8 +18,7 @@ import com.huirong.dialog.Loading;
 import com.huirong.helper.UserHelper;
 import com.huirong.inject.ViewInject;
 import com.huirong.model.MyCopyModel;
-import com.huirong.model.applicationdetailmodel.BeawayModel;
-import com.huirong.model.copydetailmodel.BorrowCopyModel;
+import com.huirong.model.copydetailmodel.BeawayCopyModel;
 import com.huirong.utils.PageUtil;
 
 import java.util.ArrayList;
@@ -43,21 +42,11 @@ public class BeawayDetailCopyActivity extends BaseActivity {
     @ViewInject(id = R.id.tv_right)
     TextView tv_right;
 
-    //说明
-    @ViewInject(id = R.id.tv_reason, click = "ReasonExpended")
-    TextView tv_reason;
 
-    //备注
-    @ViewInject(id = R.id.tv_remark, click = "RemarkExpended")
-    TextView tv_remark;
 
     //交通工具
     @ViewInject(id = R.id.tv_type)
     TextView tv_type;
-
-    //出差地点
-    @ViewInject(id = R.id.tv_place)
-    TextView tv_place;
 
     //开始时间
     @ViewInject(id = R.id.tv_startTime)
@@ -66,6 +55,19 @@ public class BeawayDetailCopyActivity extends BaseActivity {
     //结束时间
     @ViewInject(id = R.id.tv_endTime)
     TextView tv_endTime;
+
+    //出差地点
+    @ViewInject(id = R.id.tv_place)
+    TextView tv_place;
+
+    //出差事由
+    @ViewInject(id = R.id.tv_reason, click = "ReasonExpended")
+    TextView tv_reason;
+    //备注
+    @ViewInject(id = R.id.tv_remark, click = "RemarkExpended")
+    TextView tv_remark;
+
+
 
     //审批人
     @ViewInject(id = R.id.tv_Requester)
@@ -91,9 +93,9 @@ public class BeawayDetailCopyActivity extends BaseActivity {
     TextView tv_copyTime;
 
     private Intent intent = null;
-    private BeawayModel borrowModel;
+    private BeawayCopyModel borrowModel;
     private MyCopyModel model;
-    private List<BeawayModel.ApprovalInfoLists> modelList;
+    private List<BeawayCopyModel.ApprovalInfoLists> modelList;
 
     //动态添加view
     private List<View> ls_childView;//用于保存动态添加进来的ViewA
@@ -119,16 +121,16 @@ public class BeawayDetailCopyActivity extends BaseActivity {
         getDetailModel(model);
     }
 
-    private void setShow(BeawayModel model) {
+    private void setShow(BeawayCopyModel model) {
         tv_copyer.setText(model.getEmployeeName());
         tv_copyTime.setText(model.getApplicationCreateTime());
 
         tv_type.setText(model.getTraffic());
         tv_startTime.setText(model.getStartTripDate());
         tv_endTime.setText(model.getEndTripDate());
+        tv_place.setText(model.getTripAddress());
         tv_reason.setText(model.getReason());
         tv_remark.setText(model.getRemark());
-        tv_place.setText(model.getTripAddress());
 
         // 审批人
         modelList = model.getApprovalInfoLists();
@@ -183,7 +185,7 @@ public class BeawayDetailCopyActivity extends BaseActivity {
             public void run() {
                 //泛型
                 try {
-                    BorrowCopyModel model1 = new UserHelper<>(BorrowCopyModel.class)
+                    BeawayCopyModel model1 = new UserHelper<>(BeawayCopyModel.class)
                             .copyDetailPost(BeawayDetailCopyActivity.this,
                                     model.getApplicationID(),
                                     model.getApplicationType());
@@ -201,7 +203,7 @@ public class BeawayDetailCopyActivity extends BaseActivity {
         super.handleMessage(msg);
         switch (msg.what) {
             case POST_SUCCESS: // 1001
-                borrowModel = (BeawayModel) msg.obj;
+                borrowModel = (BeawayCopyModel) msg.obj;
                 setShow(borrowModel);
                 break;
             case POST_FAILED: // 1001

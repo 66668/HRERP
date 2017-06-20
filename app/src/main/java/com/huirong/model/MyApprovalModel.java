@@ -12,30 +12,29 @@ import java.io.Serializable;
 public class MyApprovalModel implements Serializable {
     private static final long serialVersionUID = 1L;
 
-    private String Temp;
-    private String ApprovalInfomodel;
+    private String YesOrNo;//审批人是否同意
+    private String EmployeeID;
+    private String EmployeeName;
+    private String DepartmentID;
+    private String DepartmentName;//
+    private String Detail;//
+
+    private String ApprovalDepartmentName;
+    private String ApprovalDepartmentID;//审批部门（编号）
+    private String ApprovalEmployeeID;//审批人
+    private String ApprovalEmployeeName;
+    private String ApprovalDate;//审批时间
+    private String ApprovalStatus;
+    private String Comment;
+
+    private String CreateTimeForApp;//申请时间
+    private String CreateTime;//申请时间
+    private String StoreID;
     private String ApprovalID;
     private String ApplicationID;
     private String ApplicationTitle;
     private String ApplicationType;
-    private String YesOrNo;
-
-    private String EmployeeID;
-    private String EmployeeName;
-    private String DepartmentID;
-    private String DepartmentName;
-    private String ApprovalDepartmentID;
-    private String ApprovalDepartmentName;
-    private String ApprovalEmployeeID;
-    private String ApprovalEmployeeName;
-
-    private String ApprovalDate;
-    private String ApprovalStatus;
-    private String Comment;
-    private String ActiveFlg;
-    private String CreateTimeForApp;
-    private String CreateTime;
-    private String StoreID;
+    private String Remark;
 
     public String getYesOrNo() {
         return YesOrNo;
@@ -133,13 +132,7 @@ public class MyApprovalModel implements Serializable {
         Comment = comment;
     }
 
-    public String getActiveFlg() {
-        return ActiveFlg;
-    }
 
-    public void setActiveFlg(String activeFlg) {
-        ActiveFlg = activeFlg;
-    }
 
     public String getCreateTimeForApp() {
         return CreateTimeForApp;
@@ -201,19 +194,46 @@ public class MyApprovalModel implements Serializable {
         return serialVersionUID;
     }
 
-    public String getTemp() {
-        return Temp;
+    public String getDetail() {
+        return Detail;
     }
 
-    public void setTemp(String temp) {
-        Temp = temp;
+    public void setDetail(String detail) {
+        Detail = detail;
     }
 
-    public String getApprovalInfomodel() {
-        return ApprovalInfomodel;
+    public String getRemark() {
+        return Remark;
     }
 
-    public void setApprovalInfomodel(String approvalInfomodel) {
-        ApprovalInfomodel = approvalInfomodel;
+    public void setRemark(String remark) {
+        Remark = remark;
+    }
+
+    @Override
+    public String toString() {
+        return "MyApprovalModel{" +
+                "YesOrNo='" + YesOrNo + '\'' +
+                ", EmployeeID='" + EmployeeID + '\'' +
+                ", EmployeeName='" + EmployeeName + '\'' +
+                ", DepartmentID='" + DepartmentID + '\'' +
+                ", DepartmentName='" + DepartmentName + '\'' +
+                ", Detail='" + Detail + '\'' +
+                ", ApprovalDepartmentName='" + ApprovalDepartmentName + '\'' +
+                ", ApprovalDepartmentID='" + ApprovalDepartmentID + '\'' +
+                ", ApprovalEmployeeID='" + ApprovalEmployeeID + '\'' +
+                ", ApprovalEmployeeName='" + ApprovalEmployeeName + '\'' +
+                ", ApprovalDate='" + ApprovalDate + '\'' +
+                ", ApprovalStatus='" + ApprovalStatus + '\'' +
+                ", Comment='" + Comment + '\'' +
+                ", CreateTimeForApp='" + CreateTimeForApp + '\'' +
+                ", CreateTime='" + CreateTime + '\'' +
+                ", StoreID='" + StoreID + '\'' +
+                ", ApprovalID='" + ApprovalID + '\'' +
+                ", ApplicationID='" + ApplicationID + '\'' +
+                ", ApplicationTitle='" + ApplicationTitle + '\'' +
+                ", ApplicationType='" + ApplicationType + '\'' +
+                ", Remark='" + Remark + '\'' +
+                '}';
     }
 }

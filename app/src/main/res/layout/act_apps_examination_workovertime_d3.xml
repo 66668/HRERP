@@ -164,7 +164,6 @@
                     />
             </LinearLayout>
 
-
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -184,6 +183,8 @@
 
 
                 <TextView
+                    android:paddingRight="10dp"
+                    android:paddingTop="10dp"
                     android:id="@+id/tv_reason"
                     style="@style/BlackText.standard"
                     android:layout_width="0dp"
@@ -193,8 +194,6 @@
                     android:ellipsize="end"
                     android:gravity="top|left"
                     android:lines="3"
-                    android:paddingRight="10dp"
-                    android:paddingTop="10dp"
                     />
 
             </LinearLayout>

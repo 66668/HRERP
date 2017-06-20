@@ -44,6 +44,7 @@ public class BookTicketsDetailAplActivity extends BaseActivity {
     @ViewInject(id = R.id.tv_right)
     TextView tv_right;
 
+
     //交通工具
     @ViewInject(id = R.id.tv_type)
     TextView tv_type;
@@ -117,10 +118,8 @@ public class BookTicketsDetailAplActivity extends BaseActivity {
     private void setShow(BookTicketsModel model) {
 
         tv_type.setText(model.getTraffic());
-
         tv_startPlace.setText(model.getStartAddress());
         tv_endPlace.setText(model.getEndAddress());
-
         tv_startTime.setText(model.getStartTime());
         tv_endTime.setText(model.getEndTime());
         tv_reason.setText(model.getReason());

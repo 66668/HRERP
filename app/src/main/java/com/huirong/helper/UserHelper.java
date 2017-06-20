@@ -24,9 +24,6 @@ import com.huirong.model.NoticeListModel;
 import com.huirong.model.NotificationListModel;
 import com.huirong.model.ProcurementListModel;
 import com.huirong.model.ReceiveListModel;
-import com.huirong.model.VehicleReturnModel;
-import com.huirong.model.VehicleReturnPostMaintenanceModel;
-import com.huirong.model.VehicleReturnPostUseModel;
 import com.huirong.model.applicationdetailmodel.FinancialAllModel;
 import com.huirong.utils.APIUtils;
 import com.huirong.utils.ConfigUtil;
@@ -667,7 +664,7 @@ public class UserHelper<T> {
              */
 
             //            js.put("CreateTime", Utils.getCurrentTime());
-            //            js.put("StoreID", mCurrentUser.getStoreID());
+            js.put("StoreID", mCurrentUser.getStoreID());
             js.put("EmployeeID", UserHelper.getCurrentUser().getEmployeeID());
 
             HttpResult httpResult = APIUtils.postForObject(WebUrl.AppsManager.LRAPPLICATIONPOST
@@ -1207,115 +1204,6 @@ public class UserHelper<T> {
         //方式二：
         return (List<ReceiveListModel>) JSONUtils.fromJson(hr.jsonArray.toString(), new TypeToken<List<ReceiveListModel>>() {
         }.getType());
-    }
-
-    /**
-     * 09-01交车记录
-     */
-    public static List<VehicleReturnModel> GetVehicleReturnResults(Context context, String iMaxTime, String iMinTime) throws MyException {
-        if (!NetworkManager.isNetworkAvailable(context)) {
-            throw new MyException(R.string.network_invalid);
-        }
-
-        HttpResult hr = APIUtils.postForObject(WebUrl.AppsManager.VEHICLERETURNLIST,
-                HttpParameter.create()
-                        .add("iMaxTime", iMaxTime)
-                        .add("iMinTime", iMinTime)
-                        .add("storeID", UserHelper.getCurrentUser().getStoreID())
-                        .add("employeeId", UserHelper.getCurrentUser().getEmployeeID())
-                        .add("pageSize", "20"));
-
-        if (hr.hasError()) {
-            throw hr.getError();
-        }
-
-        //1
-        //        return (new Gson()).fromJson(hr.jsonArray.toString(), new TypeToken<List<VehicleReturnModel>>() {
-        //        }.getType());
-
-        //方式二：
-        return (List<VehicleReturnModel>) JSONUtils.fromJson(hr.jsonArray.toString(), new TypeToken<List<VehicleReturnModel>>() {
-        }.getType());
-    }
-
-    /**
-     * 09-02交车详情
-     * 泛型
-     */
-    public T getVehicleReturnDetail(Context context, String ApplicationID, String ApplicationType) throws MyException {
-
-        if (!NetworkManager.isNetworkAvailable(context)) {
-            throw new MyException(R.string.network_invalid);
-        }
-
-        try {
-
-            HttpResult httpResult = APIUtils.postForObject(WebUrl.AppsManager.VEHICLERETURNDETAIL,
-                    HttpParameter.create()
-                            .add("ApplicationID", ApplicationID)
-                            .add("ApplicationType", ApplicationType)
-                            .add("StoreID", UserHelper.getCurrentUser().getStoreID())
-                            .add("EmployeeID", UserHelper.getCurrentUser().getEmployeeID()));
-            if (httpResult.hasError()) {
-                throw httpResult.getError();
-            }
-
-            LogUtils.d("HTTP", httpResult.jsonObject.toString());
-
-            return (new Gson()).fromJson(httpResult.jsonObject.toString(), clz);
-        } catch (MyException e) {
-            throw new MyException(e.getMessage());
-        }
-    }
-
-
-    /**
-     * 09-03-01交车-用车提交(obj形式)
-     */
-    public static String postVehicleReturnUse(Context context, VehicleReturnPostUseModel model) throws MyException {
-        if (!NetworkManager.isNetworkAvailable(context)) {
-            throw new MyException(R.string.network_invalid);
-        }
-
-        String toJsondata = new Gson().toJson(model);
-        LogUtils.d("SJY", "转换成js=" + toJsondata);
-        try {
-            HttpResult hr = APIUtils.postForObject(WebUrl.AppsManager.VEHICLERETURNDPOST,
-                    HttpParameter.create().add("obj", toJsondata));
-
-            if (hr.hasError()) {
-                throw hr.getError();
-            }
-
-            return hr.Message;
-        } catch (MyException e) {
-            throw new MyException(e.getMessage());
-        }
-    }
-
-
-    /**
-     * 09-03-02交车-维保提交(obj形式)
-     */
-    public static String postVehicleReturnMaintenance(Context context, VehicleReturnPostMaintenanceModel model) throws MyException {
-        if (!NetworkManager.isNetworkAvailable(context)) {
-            throw new MyException(R.string.network_invalid);
-        }
-        model.setEmployeeID(UserHelper.getCurrentUser().getEmployeeID());
-        String toJsondata = new Gson().toJson(model);
-        LogUtils.d("SJY", "转换成js=" + toJsondata);
-        try {
-            HttpResult hr = APIUtils.postForObject(WebUrl.AppsManager.VEHICLERETURNDPOST,
-                    HttpParameter.create().add("obj", toJsondata));
-
-            if (hr.hasError()) {
-                throw hr.getError();
-            }
-
-            return hr.Message;
-        } catch (MyException e) {
-            throw new MyException(e.getMessage());
-        }
     }
 
 

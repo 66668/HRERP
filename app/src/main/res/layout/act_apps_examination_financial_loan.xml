@@ -84,6 +84,7 @@
                 android:background="@color/common_bg_examination_line"/>
 
             <LinearLayout
+                android:id="@+id/layout_use"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/common_topbar_height"
                 android:background="@color/white"
@@ -101,17 +102,23 @@
                     android:text="@string/financial_loan_use"
                     android:textColor="@color/cl_text_common"/>
 
-                <EditText
-                    android:id="@+id/et_use"
+                <TextView
+                    android:id="@+id/tv_use"
                     style="@style/BlackText.standard"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_weight="0.72"
-                    android:background="@drawable/et_white_stroke"
-                    android:gravity="center_vertical"
-                    android:hint="@string/financial_loan_use_hint"
+                    android:layout_weight="0.66"
+                    android:gravity="center_vertical|right"
+                    android:hint="@string/hint_choose"
+                    android:paddingRight="10dp"
+                    android:textColor="@color/cl_text_common"
                     android:textColorHint="@color/cl_hint_common"
                     />
+                <ImageButton
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@color/white"
+                    android:src="@mipmap/et_forword"/>
             </LinearLayout>
 
             <View
@@ -126,6 +133,7 @@
                 android:background="@color/common_bg_examination_line"/>
 
             <LinearLayout
+
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/common_topbar_height"
                 android:background="@color/white"
@@ -372,4 +380,9 @@
                 android:background="@color/common_bg_examination_line"/>
         </LinearLayout>
     </ScrollView>
+
+    <include
+        android:id="@+id/topbar"
+        layout="@layout/topbar_common_itt"/>
+
 </LinearLayout>

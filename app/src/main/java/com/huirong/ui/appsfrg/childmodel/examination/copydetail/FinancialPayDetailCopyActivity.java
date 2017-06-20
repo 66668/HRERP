@@ -7,12 +7,14 @@ import android.os.Message;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.huirong.R;
 import com.huirong.base.BaseActivity;
+import com.huirong.common.ImageLoadingConfig;
 import com.huirong.common.MyException;
 import com.huirong.dialog.Loading;
 import com.huirong.helper.UserHelper;
@@ -20,6 +22,9 @@ import com.huirong.inject.ViewInject;
 import com.huirong.model.MyCopyModel;
 import com.huirong.model.applicationdetailmodel.FinancialAllModel;
 import com.huirong.utils.PageUtil;
+import com.nostra13.universalimageloader.core.DisplayImageOptions;
+import com.nostra13.universalimageloader.core.ImageLoader;
+import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -76,9 +81,6 @@ public class FinancialPayDetailCopyActivity extends BaseActivity {
     @ViewInject(id = R.id.layout_state, click = "forState")
     LinearLayout layout_state;
 
-    //获取子控件个数的父控件
-    @ViewInject(id = R.id.layout_ll)
-    LinearLayout layout_ll;
 
     //抄送人
     @ViewInject(id = R.id.tv_copyer)
@@ -88,11 +90,30 @@ public class FinancialPayDetailCopyActivity extends BaseActivity {
     @ViewInject(id = R.id.tv_copyTime)
     TextView tv_copyTime;
 
+    //获取子控件个数的父控件
+    @ViewInject(id = R.id.layout_ll)
+    LinearLayout layout_ll;
+
+    //图片1
+    @ViewInject(id = R.id.img_01, click = "imgDetail01")
+    ImageView img_01;
+
+    //图片2
+    @ViewInject(id = R.id.img_02, click = "imgDetail02")
+    ImageView img_02;
+
+    //图片3
+    @ViewInject(id = R.id.img_03, click = "imgDetail03")
+    ImageView img_03;
+
     //变量
     private Intent intent = null;
     private FinancialAllModel financialAllModel;
     private MyCopyModel model;
     private List<FinancialAllModel.ApprovalInfoLists> modelList;
+    //imageLoader图片缓存
+    private ImageLoader imgLoader;
+    private DisplayImageOptions imgOptions;
 
     //动态添加view
     private List<View> ls_childView;//用于保存动态添加进来的View
@@ -108,12 +129,21 @@ public class FinancialPayDetailCopyActivity extends BaseActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.act_apps_examination_financial_pay_d3);
+        initMyView();
+
+        getDetailModel(model);
+    }
+
+    private void initMyView() {
         tv_title.setText(getResources().getString(R.string.financial_pay));
         tv_right.setText("");
+        imgLoader = ImageLoader.getInstance();
+        imgLoader.init(ImageLoaderConfiguration.createDefault(this));
+        imgOptions = ImageLoadingConfig.generateDisplayImageOptions(R.mipmap.ic_launcher);
+
 
         Bundle bundle = this.getIntent().getExtras();
         model = (MyCopyModel) bundle.getSerializable("MyCopyModel");
-        getDetailModel(model);
     }
 
     private void setShow(FinancialAllModel model) {
@@ -121,10 +151,10 @@ public class FinancialPayDetailCopyActivity extends BaseActivity {
         tv_copyTime.setText(model.getApplicationCreateTime());
 
         //
-        tv_feeType.setText(model.getWay());
-        tv_payOfficial.setText(model.getCollectionUnit());
-        tv_Account.setText(model.getAccountNumber());
-        tv_bank.setText(model.getBankAccount());
+        tv_feeType.setText(model.getPaymentmethod());
+        tv_payOfficial.setText(model.getCollectionunit());
+        tv_Account.setText(model.getAccountnumber());
+        tv_bank.setText(model.getBankaccount());
         tv_fee.setText(model.getFee());
         tv_remark.setText(model.getRemark());
 
@@ -161,13 +191,13 @@ public class FinancialPayDetailCopyActivity extends BaseActivity {
                 if (modelList.get(i).getYesOrNo().contains("0")) {
                     vh.tv_yesOrNo.setText("不同意");
                     vh.tv_yesOrNo.setTextColor(getResources().getColor(R.color.red));
-                }else if(TextUtils.isEmpty(modelList.get(i).getYesOrNo())){
+                } else if (TextUtils.isEmpty(modelList.get(i).getYesOrNo())) {
                     vh.tv_yesOrNo.setText("未审批");
                     vh.tv_yesOrNo.setTextColor(getResources().getColor(R.color.red));
                 } else if ((modelList.get(i).getYesOrNo().contains("1"))) {
                     vh.tv_yesOrNo.setText("同意");
                     vh.tv_yesOrNo.setTextColor(getResources().getColor(R.color.green));
-                } else{
+                } else {
                     vh.tv_yesOrNo.setText("yesOrNo为null");
                 }
             }
@@ -258,6 +288,7 @@ public class FinancialPayDetailCopyActivity extends BaseActivity {
     public void forBack(View view) {
         this.finish();
     }
+
     private boolean isRemarkExpend = false;
 
     public void RemarkExpended(View view) {

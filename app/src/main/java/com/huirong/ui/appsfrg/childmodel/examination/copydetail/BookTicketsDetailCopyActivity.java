@@ -18,6 +18,7 @@ import com.huirong.dialog.Loading;
 import com.huirong.helper.UserHelper;
 import com.huirong.inject.ViewInject;
 import com.huirong.model.MyCopyModel;
+import com.huirong.model.copydetailmodel.BookTicketsCopyModel;
 import com.huirong.model.copydetailmodel.BorrowCopyModel;
 import com.huirong.utils.PageUtil;
 
@@ -42,21 +43,23 @@ public class BookTicketsDetailCopyActivity extends BaseActivity {
     @ViewInject(id = R.id.tv_right)
     TextView tv_right;
 
-    //说明
+
+
+    //交通工具
+    @ViewInject(id = R.id.tv_type)
+    TextView tv_type;
+
+    //出发地
+    @ViewInject(id = R.id.tv_startPlace)
+    TextView tv_startPlace;
+
+    //目的地
+    @ViewInject(id = R.id.tv_endPlace)
+    TextView tv_endPlace;
+
+    //订票事由
     @ViewInject(id = R.id.tv_reason, click = "ReasonExpended")
     TextView tv_reason;
-
-    //备注
-    @ViewInject(id = R.id.tv_remark, click = "RemarkExpended")
-    TextView tv_remark;
-
-    //类型
-    @ViewInject(id = R.id.tv_borrowType)
-    TextView tv_borrowType;
-
-    //借阅名称
-    @ViewInject(id = R.id.tv_BorrowThings)
-    TextView tv_BorrowThings;
 
     //开始时间
     @ViewInject(id = R.id.tv_startTime)
@@ -65,6 +68,8 @@ public class BookTicketsDetailCopyActivity extends BaseActivity {
     //结束时间
     @ViewInject(id = R.id.tv_endTime)
     TextView tv_endTime;
+
+
 
     //审批人
     @ViewInject(id = R.id.tv_Requester)
@@ -90,9 +95,9 @@ public class BookTicketsDetailCopyActivity extends BaseActivity {
     TextView tv_copyTime;
 
     private Intent intent = null;
-    private BorrowCopyModel borrowModel;
+    private BookTicketsCopyModel borrowModel;
     private MyCopyModel model;
-    private List<BorrowCopyModel.ApprovalInfoLists> modelList;
+    private List<BookTicketsCopyModel.ApprovalInfoLists> modelList;
 
     //动态添加view
     private List<View> ls_childView;//用于保存动态添加进来的ViewA
@@ -118,16 +123,16 @@ public class BookTicketsDetailCopyActivity extends BaseActivity {
         getDetailModel(model);
     }
 
-    private void setShow(BorrowCopyModel model) {
+    private void setShow(BookTicketsCopyModel model) {
         tv_copyer.setText(model.getEmployeeName());
         tv_copyTime.setText(model.getApplicationCreateTime());
 
-        tv_BorrowThings.setText(model.getBorrowThings());
+        tv_type.setText(model.getTraffic());
+        tv_startPlace.setText(model.getStartAddress());
+        tv_endPlace.setText(model.getEndAddress());
         tv_startTime.setText(model.getStartTime());
-        tv_endTime.setText(model.getFinishTime());
+        tv_endTime.setText(model.getEndTime());
         tv_reason.setText(model.getReason());
-        tv_remark.setText(model.getRemark());
-        tv_borrowType.setText(model.getBorrowType());
 
         // 审批人
         modelList = model.getApprovalInfoLists();
@@ -200,7 +205,7 @@ public class BookTicketsDetailCopyActivity extends BaseActivity {
         super.handleMessage(msg);
         switch (msg.what) {
             case POST_SUCCESS: // 1001
-                borrowModel = (BorrowCopyModel) msg.obj;
+                borrowModel = (BookTicketsCopyModel) msg.obj;
                 setShow(borrowModel);
                 break;
             case POST_FAILED: // 1001
@@ -265,19 +270,6 @@ public class BookTicketsDetailCopyActivity extends BaseActivity {
 
     }
 
-    private boolean isRemarkExpend = false;
-
-    public void RemarkExpended(View view) {
-        if (!isRemarkExpend) {
-            tv_remark.setMinLines(0);
-            tv_remark.setMaxLines(Integer.MAX_VALUE);
-            isRemarkExpend = true;
-        } else {
-            tv_remark.setLines(3);
-            isRemarkExpend = false;
-        }
-
-    }
 
 
 }

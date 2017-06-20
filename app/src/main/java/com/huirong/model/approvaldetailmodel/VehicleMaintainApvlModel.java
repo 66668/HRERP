@@ -1,5 +1,7 @@
 package com.huirong.model.approvaldetailmodel;
 
+import com.huirong.model.applicationdetailmodel.VehicleMaintainModel;
+
 import java.io.Serializable;
 import java.util.List;
 
@@ -9,58 +11,37 @@ import java.util.List;
 
 public class VehicleMaintainApvlModel implements Serializable {
     private static final long serialVersionUID = 1L;
-    public String MaintenanceType = "";//维保类型
-    public String Purpose = "";//用途
-    public String PlanBorrowTime = "";//维保时间
-    public String MaintenanceProject = "";//维保项目
-    public String VehicleState = "";//车辆状态
-    public String Destination = "";
-
-    public String CopyTime;//抄送时间
-    public String ApprovalStatus;
-    public String EmployeeName;//抄送人
+    public String EstimateFee;//
+    public String TravelKilmetre;//
+    public String MaintenanceTime;//
+    public String MaintenanceEndTime;//
+    public String Remark;
+    public String MaintenanceNumber;
     public String StoreName;
+    public String ApprovalStatus;
     public String DepartmentName;
+    public String EmployeeName;
     public String ApplicationCreateTime;
 
-    public List<ApprovalInfoLists> ApprovalInfoLists;
 
-
-    public String EmployeeID;//申请人ID
-    public String EstimateFee;//费用
-    public String Number;//车牌号
-    public String Driver;//驾驶人
-    public String StartMileage;//开始里程
-    public String FinishMileage;//结束里程
-    public String ActualBorrowTime;//实际维保时间
+    public String MaintenanceType;//状态
+    public String MaintenanceProject;
+    public String VehicleState;
+    public String MaintenancePlace;
+    public String CopyTime;
+    public String ActualBorrowTime;
     public String ActualReturnTime;
-    public String Passenger;//乘车人
-    public String CreateTime;//申请时间
+    public String Passenger;
+    public String BackRemark;
+    public String Purpose;
+    public String StoreID;
+    public List<VehicleMaintainModel.ApprovalInfoLists> ApprovalInfoLists;
 
-    public String Remark;//申请备注
-    public String BackRemark;//交车备注
-
-    public String getRemark() {
-        return Remark;
-    }
-
-    public void setRemark(String remark) {
-        Remark = remark;
-    }
-
-    public String getBackRemark() {
-        return BackRemark;
-    }
-
-    public void setBackRemark(String backRemark) {
-        BackRemark = backRemark;
-    }
-
-    public static class ApprovalInfoLists implements Serializable {
-        public String Comment = "";
-        public String ApprovalDate = "";
-        public String YesOrNo = "";
-        public String ApprovalEmployeeName = "";
+    public static class ApprovalInfoLists implements Serializable{
+        public String Comment;
+        public String ApprovalDate;
+        public String YesOrNo;
+        public String ApprovalEmployeeName;
 
         public String getComment() {
             return Comment;
@@ -95,57 +76,12 @@ public class VehicleMaintainApvlModel implements Serializable {
         }
     }
 
-    public List<ApprovalInfoLists> getApprovalInfoLists() {
+    public List<VehicleMaintainModel.ApprovalInfoLists> getApprovalInfoLists() {
         return ApprovalInfoLists;
     }
 
-    public void setApprovalInfoLists(List<ApprovalInfoLists> approvalInfoLists) {
-        this.ApprovalInfoLists = approvalInfoLists;
-    }
-
-
-    public static long getSerialVersionUID() {
-        return serialVersionUID;
-    }
-
-    public String getApprovalStatus() {
-        return ApprovalStatus;
-    }
-
-    public void setApprovalStatus(String approvalStatus) {
-        ApprovalStatus = approvalStatus;
-    }
-
-    public String getEmployeeName() {
-        return EmployeeName;
-    }
-
-    public void setEmployeeName(String employeeName) {
-        EmployeeName = employeeName;
-    }
-
-    public String getCopyTime() {
-        return CopyTime;
-    }
-
-    public void setCopyTime(String copyTime) {
-        CopyTime = copyTime;
-    }
-
-    public String getStoreName() {
-        return StoreName;
-    }
-
-    public void setStoreName(String storeName) {
-        StoreName = storeName;
-    }
-
-    public String getDepartmentName() {
-        return DepartmentName;
-    }
-
-    public void setDepartmentName(String departmentName) {
-        DepartmentName = departmentName;
+    public void setApprovalInfoLists(List<VehicleMaintainModel.ApprovalInfoLists> ApprovalInfoLists) {
+        this.ApprovalInfoLists = ApprovalInfoLists;
     }
 
     public String getApplicationCreateTime() {
@@ -156,30 +92,7 @@ public class VehicleMaintainApvlModel implements Serializable {
         ApplicationCreateTime = applicationCreateTime;
     }
 
-    public String getPlanBorrowTime() {
-        return PlanBorrowTime;
-    }
 
-    public void setPlanBorrowTime(String planBorrowTime) {
-        PlanBorrowTime = planBorrowTime;
-    }
-
-
-    public String getPurpose() {
-        return Purpose;
-    }
-
-    public void setPurpose(String purpose) {
-        Purpose = purpose;
-    }
-
-    public String getDestination() {
-        return Destination;
-    }
-
-    public void setDestination(String destination) {
-        Destination = destination;
-    }
 
     public String getMaintenanceType() {
         return MaintenanceType;
@@ -205,13 +118,7 @@ public class VehicleMaintainApvlModel implements Serializable {
         VehicleState = vehicleState;
     }
 
-    public String getEmployeeID() {
-        return EmployeeID;
-    }
 
-    public void setEmployeeID(String employeeID) {
-        EmployeeID = employeeID;
-    }
 
     public String getEstimateFee() {
         return EstimateFee;
@@ -221,37 +128,7 @@ public class VehicleMaintainApvlModel implements Serializable {
         EstimateFee = estimateFee;
     }
 
-    public String getNumber() {
-        return Number;
-    }
 
-    public void setNumber(String number) {
-        Number = number;
-    }
-
-    public String getDriver() {
-        return Driver;
-    }
-
-    public void setDriver(String driver) {
-        Driver = driver;
-    }
-
-    public String getStartMileage() {
-        return StartMileage;
-    }
-
-    public void setStartMileage(String startMileage) {
-        StartMileage = startMileage;
-    }
-
-    public String getFinishMileage() {
-        return FinishMileage;
-    }
-
-    public void setFinishMileage(String finishMileage) {
-        FinishMileage = finishMileage;
-    }
 
     public String getActualBorrowTime() {
         return ActualBorrowTime;
@@ -277,11 +154,119 @@ public class VehicleMaintainApvlModel implements Serializable {
         Passenger = passenger;
     }
 
-    public String getCreateTime() {
-        return CreateTime;
+    public static long getSerialVersionUID() {
+        return serialVersionUID;
     }
 
-    public void setCreateTime(String createTime) {
-        CreateTime = createTime;
+    public String getTravelKilmetre() {
+        return TravelKilmetre;
+    }
+
+    public void setTravelKilmetre(String travelKilmetre) {
+        TravelKilmetre = travelKilmetre;
+    }
+
+    public String getMaintenanceTime() {
+        return MaintenanceTime;
+    }
+
+    public void setMaintenanceTime(String maintenanceTime) {
+        MaintenanceTime = maintenanceTime;
+    }
+
+    public String getMaintenanceEndTime() {
+        return MaintenanceEndTime;
+    }
+
+    public void setMaintenanceEndTime(String maintenanceEndTime) {
+        MaintenanceEndTime = maintenanceEndTime;
+    }
+
+    public String getRemark() {
+        return Remark;
+    }
+
+    public void setRemark(String remark) {
+        Remark = remark;
+    }
+
+    public String getMaintenanceNumber() {
+        return MaintenanceNumber;
+    }
+
+    public void setMaintenanceNumber(String maintenanceNumber) {
+        MaintenanceNumber = maintenanceNumber;
+    }
+
+    public String getStoreName() {
+        return StoreName;
+    }
+
+    public void setStoreName(String storeName) {
+        StoreName = storeName;
+    }
+
+    public String getApprovalStatus() {
+        return ApprovalStatus;
+    }
+
+    public void setApprovalStatus(String approvalStatus) {
+        ApprovalStatus = approvalStatus;
+    }
+
+    public String getDepartmentName() {
+        return DepartmentName;
+    }
+
+    public void setDepartmentName(String departmentName) {
+        DepartmentName = departmentName;
+    }
+
+    public String getEmployeeName() {
+        return EmployeeName;
+    }
+
+    public void setEmployeeName(String employeeName) {
+        EmployeeName = employeeName;
+    }
+
+    public String getMaintenancePlace() {
+        return MaintenancePlace;
+    }
+
+    public void setMaintenancePlace(String maintenancePlace) {
+        MaintenancePlace = maintenancePlace;
+    }
+
+    public String getCopyTime() {
+        return CopyTime;
+    }
+
+    public void setCopyTime(String copyTime) {
+        CopyTime = copyTime;
+    }
+
+    public String getBackRemark() {
+        return BackRemark;
+    }
+
+    public void setBackRemark(String backRemark) {
+        BackRemark = backRemark;
+    }
+
+    public String getPurpose() {
+        return Purpose;
+    }
+
+    public void setPurpose(String purpose) {
+        Purpose = purpose;
+    }
+
+    public String getStoreID() {
+        return StoreID;
+    }
+
+    public void setStoreID(String storeID) {
+        StoreID = storeID;
     }
 }

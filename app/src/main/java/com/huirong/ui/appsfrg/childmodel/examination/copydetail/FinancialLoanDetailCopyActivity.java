@@ -7,19 +7,25 @@ import android.os.Message;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.huirong.R;
 import com.huirong.base.BaseActivity;
+import com.huirong.common.ImageLoadingConfig;
 import com.huirong.common.MyException;
 import com.huirong.dialog.Loading;
 import com.huirong.helper.UserHelper;
 import com.huirong.inject.ViewInject;
 import com.huirong.model.MyCopyModel;
 import com.huirong.model.applicationdetailmodel.FinancialAllModel;
+import com.huirong.utils.LogUtils;
 import com.huirong.utils.PageUtil;
+import com.nostra13.universalimageloader.core.DisplayImageOptions;
+import com.nostra13.universalimageloader.core.ImageLoader;
+import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -42,17 +48,20 @@ public class FinancialLoanDetailCopyActivity extends BaseActivity {
     @ViewInject(id = R.id.tv_right)
     TextView tv_right;
 
+
+    //方式
+    @ViewInject(id = R.id.tv_type)
+    TextView tv_type;
+    //用途
+    @ViewInject(id = R.id.tv_use)
+    TextView tv_use;
     //金额
     @ViewInject(id = R.id.tv_fee)
     TextView tv_fee;
-
-    //还款时间
-    @ViewInject(id = R.id.tv_PlanbackTime)
-    TextView tv_PlanbackTime;
-
     //说明
     @ViewInject(id = R.id.tv_reason, click = "ReasonExpended")
     TextView tv_reason;
+
 
     //审批人
     @ViewInject(id = R.id.tv_Requester)
@@ -64,9 +73,6 @@ public class FinancialLoanDetailCopyActivity extends BaseActivity {
     @ViewInject(id = R.id.layout_state, click = "forState")
     LinearLayout layout_state;
 
-    //获取子控件个数的父控件
-    @ViewInject(id = R.id.layout_ll)
-    LinearLayout layout_ll;
 
     //抄送人
     @ViewInject(id = R.id.tv_copyer)
@@ -76,11 +82,31 @@ public class FinancialLoanDetailCopyActivity extends BaseActivity {
     @ViewInject(id = R.id.tv_copyTime)
     TextView tv_copyTime;
 
+    //获取子控件个数的父控件
+    @ViewInject(id = R.id.layout_ll)
+    LinearLayout layout_ll;
+
+    //图片1
+    @ViewInject(id = R.id.img_01, click = "imgDetail01")
+    ImageView img_01;
+
+    //图片2
+    @ViewInject(id = R.id.img_02, click = "imgDetail02")
+    ImageView img_02;
+
+    //图片3
+    @ViewInject(id = R.id.img_03, click = "imgDetail03")
+    ImageView img_03;
+
     //变量
     private Intent intent = null;
     private FinancialAllModel financialAllModel;
     private MyCopyModel model;
     private List<FinancialAllModel.ApprovalInfoLists> modelList;
+
+    //imageLoader图片缓存
+    private ImageLoader imgLoader;
+    private DisplayImageOptions imgOptions;
 
     //动态添加view
     private List<View> ls_childView;//用于保存动态添加进来的View
@@ -96,21 +122,49 @@ public class FinancialLoanDetailCopyActivity extends BaseActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.act_apps_examination_financial_loan_d3);
+
+        initMyView();
+
+        getDetailModel(model);
+    }
+
+    private void initMyView() {
         tv_title.setText(getResources().getString(R.string.financial_loan));
         tv_right.setText("");
 
         Bundle bundle = this.getIntent().getExtras();
         model = (MyCopyModel) bundle.getSerializable("MyCopyModel");
-        getDetailModel(model);
+
+        imgLoader = ImageLoader.getInstance();
+        imgLoader.init(ImageLoaderConfiguration.createDefault(this));
+        imgOptions = ImageLoadingConfig.generateDisplayImageOptions(R.mipmap.ic_launcher);
     }
 
     private void setShow(FinancialAllModel model) {
+
+        LogUtils.d("SJY", "图片size=" + model.getImageLists().size());
+
+        if (model.getImageLists().size() == 1) {
+            imgLoader.displayImage(model.getImageLists().get(0), img_01, imgOptions);
+        }
+
+        if (model.getImageLists().size() == 2) {
+            imgLoader.displayImage(model.getImageLists().get(0), img_01, imgOptions);
+            imgLoader.displayImage(model.getImageLists().get(1), img_02, imgOptions);
+        }
+
+        if (model.getImageLists().size() == 3) {
+            imgLoader.displayImage(model.getImageLists().get(0), img_01, imgOptions);
+            imgLoader.displayImage(model.getImageLists().get(1), img_02, imgOptions);
+            imgLoader.displayImage(model.getImageLists().get(2), img_03, imgOptions);
+        }
         tv_copyer.setText(model.getEmployeeName());
         tv_copyTime.setText(model.getApplicationCreateTime());
+        //
         tv_fee.setText(model.getFee());
-        tv_reason.setText(model.getReason());
-        tv_PlanbackTime.setText(model.getPlanbackTime());
-
+        tv_type.setText(model.getWay());
+        tv_use.setText(model.getUseage());
+        tv_reason.setText(model.getRemark());
         // 审批人
         modelList = model.getApprovalInfoLists();
         StringBuilder nameBuilder = new StringBuilder();
@@ -143,13 +197,13 @@ public class FinancialLoanDetailCopyActivity extends BaseActivity {
                 if (modelList.get(i).getYesOrNo().contains("0")) {
                     vh.tv_yesOrNo.setText("不同意");
                     vh.tv_yesOrNo.setTextColor(getResources().getColor(R.color.red));
-                }else if(TextUtils.isEmpty(modelList.get(i).getYesOrNo())){
+                } else if (TextUtils.isEmpty(modelList.get(i).getYesOrNo())) {
                     vh.tv_yesOrNo.setText("未审批");
                     vh.tv_yesOrNo.setTextColor(getResources().getColor(R.color.red));
                 } else if ((modelList.get(i).getYesOrNo().contains("1"))) {
                     vh.tv_yesOrNo.setText("同意");
                     vh.tv_yesOrNo.setTextColor(getResources().getColor(R.color.green));
-                } else{
+                } else {
                     vh.tv_yesOrNo.setText("yesOrNo为null");
                 }
             }
@@ -230,6 +284,7 @@ public class FinancialLoanDetailCopyActivity extends BaseActivity {
         ls_childView.add(childView);
         return vh;
     }
+
     /**
      * back
      *

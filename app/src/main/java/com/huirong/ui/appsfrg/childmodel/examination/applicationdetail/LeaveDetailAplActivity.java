@@ -5,7 +5,6 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.os.Message;
 import android.text.TextUtils;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.ImageView;
@@ -23,6 +22,7 @@ import com.huirong.helper.UserHelper;
 import com.huirong.inject.ViewInject;
 import com.huirong.model.MyApplicationModel;
 import com.huirong.model.applicationdetailmodel.LeaveModel;
+import com.huirong.utils.LogUtils;
 import com.huirong.utils.PageUtil;
 import com.nostra13.universalimageloader.core.DisplayImageOptions;
 import com.nostra13.universalimageloader.core.ImageLoader;
@@ -132,7 +132,7 @@ public class LeaveDetailAplActivity extends BaseActivity {
     }
 
     private void setShow(LeaveModel model) {
-        Log.d("SJY", "图片size=" + model.getImageLists().size());
+        LogUtils.d("SJY", "图片size=" + model.getImageLists().size());
 
         if (model.getImageLists().size() == 1) {
             imgLoader.displayImage(model.getImageLists().get(0), img_01, imgOptions);

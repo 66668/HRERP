@@ -10,37 +10,33 @@ import java.util.List;
 
 public class VehicleMaintainCopyModel implements Serializable {
     private static final long serialVersionUID = 1L;
-
-    public String MaintenanceType= "";//维保类型
-    public String Purpose= "";//用途
-    public String PlanBorrowTime= "";//维保时间
-    public String MaintenanceProject= "";//维保项目
-    public String VehicleState= "";//车来那个状态
-    public String Destination= "";
-
-    public String CopyTime;//抄送时间
-    public String ApprovalStatus;//状态
-    public String EmployeeName;//抄送人
+    public String EstimateFee;//
+    public String TravelKilmetre;//
+    public String MaintenanceTime;//
+    public String MaintenanceEndTime;//
+    public String Remark;
+    public String MaintenanceNumber;
     public String StoreName;
+    public String ApprovalStatus;
     public String DepartmentName;
+    public String EmployeeName;
     public String ApplicationCreateTime;
+
+
+    public String MaintenanceType;//状态
+    public String MaintenanceProject;
+    public String VehicleState;
+    public String MaintenancePlace;
+    public String CopyTime;
+    public String ActualBorrowTime;
+    public String ActualReturnTime;
+    public String Passenger;
+    public String BackRemark;
+    public String Purpose;
+    public String StoreID;
 
     public List<VehicleMaintainCopyModel.ApprovalInfoLists> ApprovalInfoLists ;
 
-
-    public String EmployeeID;//申请人ID
-    public String EstimateFee;//费用
-    public String Number;//车牌号
-    public String Driver;//驾驶人
-    public String StartMileage;//开始里程
-    public String FinishMileage;//结束里程
-    public String ActualBorrowTime;//实际维保时间
-    public String ActualReturnTime;
-    public String Passenger;//乘车人
-    public String CreateTime;//申请时间
-
-    public String Remark;//申请备注
-    public String BackRemark;//交车备注
 
     public String getRemark() {
         return Remark;
@@ -150,15 +146,6 @@ public class VehicleMaintainCopyModel implements Serializable {
         ApplicationCreateTime = applicationCreateTime;
     }
 
-    public String getPlanBorrowTime() {
-        return PlanBorrowTime;
-    }
-
-    public void setPlanBorrowTime(String planBorrowTime) {
-        PlanBorrowTime = planBorrowTime;
-    }
-
-
     public String getPurpose() {
         return Purpose;
     }
@@ -167,13 +154,7 @@ public class VehicleMaintainCopyModel implements Serializable {
         Purpose = purpose;
     }
 
-    public String getDestination() {
-        return Destination;
-    }
 
-    public void setDestination(String destination) {
-        Destination = destination;
-    }
 
     public String getMaintenanceType() {
         return MaintenanceType;
@@ -199,13 +180,7 @@ public class VehicleMaintainCopyModel implements Serializable {
         VehicleState = vehicleState;
     }
 
-    public String getEmployeeID() {
-        return EmployeeID;
-    }
 
-    public void setEmployeeID(String employeeID) {
-        EmployeeID = employeeID;
-    }
 
     public String getEstimateFee() {
         return EstimateFee;
@@ -213,38 +188,6 @@ public class VehicleMaintainCopyModel implements Serializable {
 
     public void setEstimateFee(String estimateFee) {
         EstimateFee = estimateFee;
-    }
-
-    public String getNumber() {
-        return Number;
-    }
-
-    public void setNumber(String number) {
-        Number = number;
-    }
-
-    public String getDriver() {
-        return Driver;
-    }
-
-    public void setDriver(String driver) {
-        Driver = driver;
-    }
-
-    public String getStartMileage() {
-        return StartMileage;
-    }
-
-    public void setStartMileage(String startMileage) {
-        StartMileage = startMileage;
-    }
-
-    public String getFinishMileage() {
-        return FinishMileage;
-    }
-
-    public void setFinishMileage(String finishMileage) {
-        FinishMileage = finishMileage;
     }
 
     public String getActualBorrowTime() {
@@ -271,13 +214,6 @@ public class VehicleMaintainCopyModel implements Serializable {
         Passenger = passenger;
     }
 
-    public String getCreateTime() {
-        return CreateTime;
-    }
-
-    public void setCreateTime(String createTime) {
-        CreateTime = createTime;
-    }
 
     public String getCopyTime() {
         return CopyTime;
@@ -285,5 +221,53 @@ public class VehicleMaintainCopyModel implements Serializable {
 
     public void setCopyTime(String copyTime) {
         CopyTime = copyTime;
+    }
+
+    public String getTravelKilmetre() {
+        return TravelKilmetre;
+    }
+
+    public void setTravelKilmetre(String travelKilmetre) {
+        TravelKilmetre = travelKilmetre;
+    }
+
+    public String getMaintenanceTime() {
+        return MaintenanceTime;
+    }
+
+    public void setMaintenanceTime(String maintenanceTime) {
+        MaintenanceTime = maintenanceTime;
+    }
+
+    public String getMaintenanceEndTime() {
+        return MaintenanceEndTime;
+    }
+
+    public void setMaintenanceEndTime(String maintenanceEndTime) {
+        MaintenanceEndTime = maintenanceEndTime;
+    }
+
+    public String getMaintenanceNumber() {
+        return MaintenanceNumber;
+    }
+
+    public void setMaintenanceNumber(String maintenanceNumber) {
+        MaintenanceNumber = maintenanceNumber;
+    }
+
+    public String getMaintenancePlace() {
+        return MaintenancePlace;
+    }
+
+    public void setMaintenancePlace(String maintenancePlace) {
+        MaintenancePlace = maintenancePlace;
+    }
+
+    public String getStoreID() {
+        return StoreID;
+    }
+
+    public void setStoreID(String storeID) {
+        StoreID = storeID;
     }
 }

@@ -155,10 +155,11 @@
                         android:layout_marginLeft="10dp"
                         android:layout_weight="0.28"
                         android:gravity="center_vertical"
-                        android:text="@string/tv_OverEmployee"/>
+                        android:text="@string/tv_OverEmployee"
+                        android:textColor="@color/cl_text_common"/>
 
                     <TextView
-                        android:id="@+id/tv_workoverTimePerson"
+                        android:id="@+id/tv_OverEmployee"
                         style="@style/BlackText.standard"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
@@ -183,7 +184,8 @@
                         android:layout_marginLeft="10dp"
                         android:layout_weight="0.28"
                         android:gravity="center_vertical"
-                        android:text="@string/workOverTimeStart"/>
+                        android:text="@string/workOverTimeStart"
+                        android:textColor="@color/cl_text_common"/>
 
                     <TextView
                         android:id="@+id/tv_startTime"
@@ -211,7 +213,8 @@
                         android:layout_marginLeft="10dp"
                         android:layout_weight="0.28"
                         android:gravity="center_vertical"
-                        android:text="@string/workOverTimeEnd"/>
+                        android:text="@string/workOverTimeEnd"
+                        android:textColor="@color/cl_text_common"/>
 
                     <TextView
                         android:id="@+id/tv_endTime"
@@ -223,7 +226,6 @@
                         android:gravity="center_vertical"
                         />
                 </LinearLayout>
-
 
                 <LinearLayout
                     android:layout_width="match_parent"

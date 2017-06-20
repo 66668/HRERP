@@ -158,15 +158,15 @@ public class FinancialReimburseDetailAplActivity extends BaseActivity {
             imgLoader.displayImage(model.getImageLists().get(2), img_03, imgOptions);
         }
 
-        tv_feeOne.setText(model.getFeeone());
-        tv_feeTwo.setText(model.getFeetwo());
-        tv_feeThree.setText(model.getFeethree());
+        tv_feeOne.setText(model.getJine1());
+        tv_feeTwo.setText(model.getJine2());
+        tv_feeThree.setText(model.getJine3());
 
-        tv_useageOne.setText(model.getUseageone());
-        tv_useageTwo.setText(model.getUseagetwo());
-        tv_useageThree.setText(model.getFeethree());
+        tv_useageOne.setText(model.getZhaiyao1());
+        tv_useageTwo.setText(model.getZhaiyao2());
+        tv_useageThree.setText(model.getZhaiyao3());
 
-        tv_totle.setText(model.getTotal());
+        tv_totle.setText(model.getHeji());
         tv_remark.setText(model.getRemark());//?
 
         // 审批人

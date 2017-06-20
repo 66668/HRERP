@@ -109,15 +109,15 @@ public class FinancialRemburseDetailActivity extends BaseActivity {
         tv_approvalTime.setText(model.getCreateTime());
 
         //
-        tv_feeOne.setText(TextUtils.isEmpty(model.getFeeone()) ? "无" : model.getFeeone());
-        tv_feeTwo.setText(TextUtils.isEmpty(model.getFeetwo()) ? "无" : model.getFeetwo());
-        tv_feeThree.setText(TextUtils.isEmpty(model.getFeethree()) ? "无" : model.getFeethree());
+        tv_feeOne.setText(TextUtils.isEmpty(model.getJine1()) ? "无" : model.getJine1());
+        tv_feeTwo.setText(TextUtils.isEmpty(model.getJine2()) ? "无" : model.getJine2());
+        tv_feeThree.setText(TextUtils.isEmpty(model.getJine3()) ? "无" : model.getJine3());
 
-        tv_useageOne.setText(TextUtils.isEmpty(model.getUseageone()) ? "无" : model.getUseageone());
-        tv_useageTwo.setText(TextUtils.isEmpty(model.getUseagetwo()) ? "无" : model.getUseagetwo());
-        tv_useageThree.setText(TextUtils.isEmpty(model.getFeethree()) ? "无" : model.getFeethree());
+        tv_useageOne.setText(TextUtils.isEmpty(model.getZhaiyao1()) ? "无" : model.getZhaiyao1());
+        tv_useageTwo.setText(TextUtils.isEmpty(model.getZhaiyao2()) ? "无" : model.getZhaiyao2());
+        tv_useageThree.setText(TextUtils.isEmpty(model.getZhaiyao3()) ? "无" : model.getZhaiyao3());
 
-        tv_totle.setText(model.getTotal());
+        tv_totle.setText(model.getHeji());
         tv_remark.setText(model.getRemark());
 
     }

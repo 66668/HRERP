@@ -16,8 +16,7 @@ import com.huirong.dialog.Loading;
 import com.huirong.helper.UserHelper;
 import com.huirong.inject.ViewInject;
 import com.huirong.model.MyApprovalModel;
-import com.huirong.model.applicationdetailmodel.BeawayModel;
-import com.huirong.model.approvaldetailmodel.BorrowApvlModel;
+import com.huirong.model.approvaldetailmodel.BeawayApvlModel;
 import com.huirong.utils.PageUtil;
 
 
@@ -60,22 +59,21 @@ public class BeawayDetailApvlActivity extends BaseActivity {
     @ViewInject(id = R.id.tv_type)
     TextView tv_type;
 
+    //开始时间
+    @ViewInject(id = R.id.tv_startTime)
+    TextView tv_startTime;
+
+    //结束时间
+    @ViewInject(id = R.id.tv_endTime)
+    TextView tv_endTime;
+
     //出差地点
     @ViewInject(id = R.id.tv_place)
     TextView tv_place;
 
-    //使用时间
-    @ViewInject(id = R.id.tv_StartTime)
-    TextView tv_StartTime;
-
-    //归还时间
-    @ViewInject(id = R.id.tv_endTime)
-    TextView tv_endTime;
-
     //出差事由
     @ViewInject(id = R.id.tv_reason, click = "ReasonExpended")
     TextView tv_reason;
-
     //备注
     @ViewInject(id = R.id.tv_remark, click = "RemarkExpended")
     TextView tv_remark;
@@ -107,7 +105,7 @@ public class BeawayDetailApvlActivity extends BaseActivity {
 
     //变量
     private MyApprovalModel myApprovalModel;
-    private BeawayModel model;
+    private BeawayApvlModel model;
     //常量
     public static final int POST_SUCCESS = 21;
     public static final int POST_FAILED = 22;
@@ -129,7 +127,7 @@ public class BeawayDetailApvlActivity extends BaseActivity {
         MyApplication.getInstance().addACT(this);
     }
 
-    private void setShow(BeawayModel model) {
+    private void setShow(BeawayApvlModel model) {
 
         tv_ApprovalPerson.setText(model.getEmployeeName());
         tv_approvaldept.setText(model.getDepartmentName());
@@ -137,9 +135,9 @@ public class BeawayDetailApvlActivity extends BaseActivity {
         tv_approvalTime.setText(model.getApplicationCreateTime());
 
         tv_type.setText(model.getTraffic());
-        tv_place.setText(model.getTripAddress());
-        tv_StartTime.setText(model.getStartTripDate());
+        tv_startTime.setText(model.getStartTripDate());
         tv_endTime.setText(model.getEndTripDate());
+        tv_place.setText(model.getTripAddress());
         tv_reason.setText(model.getReason());
         tv_remark.setText(model.getRemark());
 
@@ -165,7 +163,7 @@ public class BeawayDetailApvlActivity extends BaseActivity {
 
                 //泛型
                 try {
-                    BorrowApvlModel model1 = new UserHelper<>(BorrowApvlModel.class).approvalDetailPost(BeawayDetailApvlActivity.this,
+                    BeawayApvlModel model1 = new UserHelper<>(BeawayApvlModel.class).approvalDetailPost(BeawayDetailApvlActivity.this,
                             myApprovalModel.getApplicationID(),
                             myApprovalModel.getApplicationType());
                     sendMessage(POST_SUCCESS, model1);
@@ -182,7 +180,7 @@ public class BeawayDetailApvlActivity extends BaseActivity {
         super.handleMessage(msg);
         switch (msg.what) {
             case POST_SUCCESS:
-                model = (BeawayModel) msg.obj;
+                model = (BeawayApvlModel) msg.obj;
                 setShow(model);
                 break;
             case POST_FAILED:

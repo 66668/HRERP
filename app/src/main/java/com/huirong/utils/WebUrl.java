@@ -221,20 +221,6 @@ public class WebUrl {
          */
         public static final String RECEIVELIST = LOGIN_URL + LOGIN_FLODER_USER + "ReceptionRecord/GetReceptionRecord";
 
-        /**
-         * 09-01交车记录
-         */
-        public static final String VEHICLERETURNLIST = LOGIN_URL + LOGIN_FLODER_USER + "MyBackcar/MyBackcarList";
-
-        /**
-         * 09-02交车-详情接口
-         */
-        public static final String VEHICLERETURNDETAIL = LOGIN_URL + LOGIN_FLODER_USER + "MyBack/MyBackInfo";
-        /**
-         * 09-03交车-提交接口
-         */
-        public static final String VEHICLERETURNDPOST = LOGIN_URL + LOGIN_FLODER_USER + "BackCar/BackCarPost";
-
     }
 
     /**

@@ -125,7 +125,6 @@
     <string name="training">培训</string>
     <string name="forLeave">请假</string>
     <string name="beaway">出差</string>
-    <string name="forout">外出</string>
     <string name="overtime">加班</string>
     <string name="forRest">调休</string>
     <string name="borrow">借阅</string>
@@ -133,7 +132,7 @@
     <string name="salaryadjust">薪资调整</string>
     <string name="carused">车辆使用</string>
     <string name="vehicleMaintenance">车辆维保</string>
-    <string name="loanReimbursement">财务</string>
+    <string name="loanReimbursement">费用申请</string>
     <string name="returnCar">交车</string>
     <string name="my_application">我的申请</string>
     <string name="my_approval">我的审批</string>
@@ -264,7 +263,6 @@
     <string name="financial_loan_reason">备注</string>
     <string name="financial_loan_reason_hint">请输入备注</string>
     <string name="financial_loan_use">用途</string>
-    <string name="financial_loan_use_hint">请输入用途</string>
     <string name="loanReimburseMoney">金额</string>
     <string name="hint_loanReimburseMoney">请输入金额 (元)</string>
     <string name="hint_loanReimburseReason">输入借款事由</string>
@@ -272,6 +270,16 @@
         <item>网银</item>
         <item>现金</item>
         <item>支票</item>
+    </array>
+
+    <array name="loanUse">
+        <item>通用</item>
+        <item>办公</item>
+        <item>住宿</item>
+        <item>交通</item>
+        <item>餐饮</item>
+        <item>采购</item>
+        <item>培训</item>
     </array>
 
     <string name="financial_reimburse_fee1">金额一</string>
@@ -305,11 +313,9 @@
     <string name="financial_pay_acountNull">账户不能为空</string>
 
     <array name="financialPayWay">
-        <item>现金</item>
         <item>网银</item>
-        <item>电汇</item>
+        <item>现金</item>
         <item>支票</item>
-        <item>其他</item>
     </array>
 
     <string name="financial_fee_totle">合计</string>
@@ -381,6 +387,7 @@
     </string-array>
     <!-- 01 印章10-->
     <string name="signet_apl">印章申请</string>
+    <string name="signet_apl_d">印章详情</string>
     <string name="signetStart">使用时间</string>
     <string name="signetEnd">归还时间</string>
     <string name="signet_name">印章单位名称</string>

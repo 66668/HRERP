@@ -80,6 +80,7 @@ public class VehicleMaintainDetailAplActivity extends BaseActivity {
     @ViewInject(id = R.id.tv_remark, click = "RemarkExpended")
     TextView tv_remark;
 
+
     //审批人
     @ViewInject(id = R.id.tv_Requester)
     TextView tv_Requester;

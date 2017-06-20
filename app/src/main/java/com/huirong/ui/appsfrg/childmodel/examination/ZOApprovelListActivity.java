@@ -32,6 +32,7 @@ import com.huirong.ui.appsfrg.childmodel.examination.approvaldetail.TrainingDeta
 import com.huirong.ui.appsfrg.childmodel.examination.approvaldetail.VehicleDetailApvlActivity;
 import com.huirong.ui.appsfrg.childmodel.examination.approvaldetail.VehicleMaintainDetailApvlActivity;
 import com.huirong.ui.appsfrg.childmodel.examination.approvaldetail.WorkOverTimeDetailApvlActivity;
+import com.huirong.utils.LogUtils;
 import com.huirong.utils.PageUtil;
 import com.huirong.widget.NiceSpinner;
 import com.huirong.widget.RefreshAndLoadListView;
@@ -173,6 +174,7 @@ public class ZOApprovelListActivity extends BaseActivity implements RefreshAndLo
 
                     sendMessage(GET_NEW_DATA, visitorModelList);
                 } catch (MyException e) {
+                    LogUtils.e("我的审批", e.toString());
                     sendMessage(GET_NONE_NEWDATA, e.getMessage());
                 }
             }
@@ -478,17 +480,18 @@ public class ZOApprovelListActivity extends BaseActivity implements RefreshAndLo
                 startActivity(WorkOverTimeDetailApvlActivity.class, bundle);
                 break;
 
-            case "财务申请"://06
+            case "费用申请"://06
+
                 //根据type决定跳转到具体界面
-                if (myApprovalModel.getApplicationTitle().contains("借款")) {
+                if (myApprovalModel.getDetail().contains("借款")) {
 
                     startActivity(FinancialLoanDetailApvlActivity.class, bundle);
 
-                } else if (myApprovalModel.getApplicationTitle().contains("付款")) {
+                } else if (myApprovalModel.getDetail().contains("付款")) {
 
                     startActivity(FinancialPayDetailApvlActivity.class, bundle);
 
-                } else if (myApprovalModel.getApplicationTitle().contains("报销")) {
+                } else if (myApprovalModel.getDetail().contains("报销")) {
 
                     startActivity(FinancialReimburseDetailApvlActivity.class, bundle);
 
@@ -532,30 +535,30 @@ public class ZOApprovelListActivity extends BaseActivity implements RefreshAndLo
                 break;
 
 
-//            case "借阅申请"://06
-//                startActivity(BorrowDetailApvlActivity.class, bundle);
-//                break;
-//            case "调薪申请"://07
-//                startActivity(SalaryadjustDetailApvlActivity.class, bundle);
-//                break;
-//            case "通知公告申请"://13
-//                startActivity(NotificationAndNoticeDetailApvlActivity.class, bundle);
-//                break;
-//            case "办公室申请"://14
-//                startActivity(OfficeDetailApvlActivity.class, bundle);
-//                break;
-//            case "领用申请"://15
-//                startActivity(ReceiveDetailApvlActivity.class, bundle);
-//                break;
-//            case "合同文件申请"://16
-//                startActivity(ContractFileDetailApvlActivity.class, bundle);
-//                break;
-//            case "复试申请"://18
-//                startActivity(RetestDetailApvlActivity.class, bundle);
-//                break;
-//            case "会议申请"://19
-//                startActivity(ConferenceDetailApvlActivity.class, bundle);
-//                break;
+            //            case "借阅申请"://06
+            //                startActivity(BorrowDetailApvlActivity.class, bundle);
+            //                break;
+            //            case "调薪申请"://07
+            //                startActivity(SalaryadjustDetailApvlActivity.class, bundle);
+            //                break;
+            //            case "通知公告申请"://13
+            //                startActivity(NotificationAndNoticeDetailApvlActivity.class, bundle);
+            //                break;
+            //            case "办公室申请"://14
+            //                startActivity(OfficeDetailApvlActivity.class, bundle);
+            //                break;
+            //            case "领用申请"://15
+            //                startActivity(ReceiveDetailApvlActivity.class, bundle);
+            //                break;
+            //            case "合同文件申请"://16
+            //                startActivity(ContractFileDetailApvlActivity.class, bundle);
+            //                break;
+            //            case "复试申请"://18
+            //                startActivity(RetestDetailApvlActivity.class, bundle);
+            //                break;
+            //            case "会议申请"://19
+            //                startActivity(ConferenceDetailApvlActivity.class, bundle);
+            //                break;
         }
     }
 

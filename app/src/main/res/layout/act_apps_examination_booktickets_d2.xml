@@ -163,10 +163,11 @@
                         android:layout_marginLeft="10dp"
                         android:layout_weight="0.28"
                         android:gravity="center_vertical"
-                        android:text="@string/book_type"/>
+                        android:text="@string/book_type"
+                        android:textColor="@color/cl_text_common"/>
 
                     <TextView
-                        android:id="@+id/tv_borrowThings"
+                        android:id="@+id/tv_type"
                         style="@style/BlackText.standard"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
@@ -191,10 +192,11 @@
                         android:layout_marginLeft="10dp"
                         android:layout_weight="0.28"
                         android:gravity="center_vertical"
-                        android:text="@string/book_startPlace"/>
+                        android:text="@string/book_startPlace"
+                        android:textColor="@color/cl_text_common"/>
 
                     <TextView
-                        android:id="@+id/tv_borrowType"
+                        android:id="@+id/tv_startPlace"
                         style="@style/BlackText.standard"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
@@ -203,7 +205,6 @@
                         android:gravity="center_vertical"
                         />
                 </LinearLayout>
-
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/common_topbar_height40"
@@ -219,7 +220,8 @@
                         android:layout_marginLeft="10dp"
                         android:layout_weight="0.28"
                         android:gravity="center_vertical"
-                        android:text="@string/book_endplace"/>
+                        android:text="@string/book_endplace"
+                        android:textColor="@color/cl_text_common"/>
 
                     <TextView
                         android:id="@+id/tv_endPlace"
@@ -247,10 +249,11 @@
                         android:layout_marginLeft="10dp"
                         android:layout_weight="0.28"
                         android:gravity="center_vertical"
-                        android:text="@string/book_startTime"/>
+                        android:text="@string/book_startTime"
+                        android:textColor="@color/cl_text_common"/>
 
                     <TextView
-                        android:id="@+id/tv_StartTime"
+                        android:id="@+id/tv_startTime"
                         style="@style/BlackText.standard"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
@@ -275,7 +278,8 @@
                         android:layout_marginLeft="10dp"
                         android:layout_weight="0.28"
                         android:gravity="center_vertical"
-                        android:text="@string/book_endTime"/>
+                        android:text="@string/book_endTime"
+                        android:textColor="@color/cl_text_common"/>
 
                     <TextView
                         android:id="@+id/tv_endTime"
@@ -311,38 +315,7 @@
                         style="@style/BlackText.standard"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:layout_weight="0.72"
-                        android:ellipsize="end"
-                        android:gravity="top|left"
-                        android:lines="3"
-                        android:paddingRight="10dp"
-                        android:paddingTop="10dp"
-                        />
-
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:background="@color/white"
-                    android:orientation="horizontal"
-                    android:weightSum="1">
-
-                    <TextView
-                        style="@style/BlackText.standard"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_marginBottom="10dp"
                         android:layout_marginLeft="10dp"
-                        android:layout_weight="0.28"
-                        android:text="@string/remark_all_apl"
-                        android:textColor="@color/cl_text_common"/>
-
-                    <TextView
-                        android:id="@+id/tv_remark"
-                        style="@style/BlackText.standard"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
                         android:layout_weight="0.72"
                         android:ellipsize="end"
                         android:gravity="top|left"
@@ -352,6 +325,7 @@
                         />
 
                 </LinearLayout>
+
 
             </LinearLayout>
         </ScrollView>
