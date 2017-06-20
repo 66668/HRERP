@@ -25,6 +25,7 @@ import com.huirong.model.NotificationListModel;
 import com.huirong.model.ProcurementListModel;
 import com.huirong.model.ReceiveListModel;
 import com.huirong.model.applicationdetailmodel.FinancialAllModel;
+import com.huirong.model.workplan.WorkplanListModel;
 import com.huirong.utils.APIUtils;
 import com.huirong.utils.ConfigUtil;
 import com.huirong.utils.JSONUtils;
@@ -79,7 +80,7 @@ public class UserHelper<T> {
     }
 
     /**
-     * 01 密码登录
+     * -01 密码登录
      *
      * @param context
      * @param storeId
@@ -133,9 +134,46 @@ public class UserHelper<T> {
         mCurrentUser = uEntity;// 将登陆成功的对象信息，赋值给全局变量
     }
 
+    /**
+     * 02-01
+     * 应用 工作计划 记录
+     * <p>
+     *
+     * @param context
+     * @param iMaxTime
+     * @param iMinTime
+     * @return
+     * @throws MyException
+     */
+    public static List<WorkplanListModel> GetWorkPlanList(Context context, String iMaxTime, String iMinTime,String SeeType) throws MyException {
+        if (!NetworkManager.isNetworkAvailable(context)) {
+            throw new MyException(R.string.network_invalid);
+        }
+
+        HttpResult hr = APIUtils.postForObject(WebUrl.AppsManager.WORKPLANLIST,
+                HttpParameter.create()
+                        .add("iMaxTime", iMaxTime)
+                        .add("iMinTime", iMinTime)
+                        .add("pageSize", "20")
+                        .add("SeeType", SeeType)
+                        .add("storeID", mCurrentUser.getStoreID())
+                        .add("employeeId", mCurrentUser.getEmployeeID())
+        );
+
+        if (hr.hasError()) {
+            throw hr.getError();
+        }
+        //方式一：直接调用gson
+        //        return (new Gson()).fromJson(hr.jsonArray.toString(), new TypeToken<List<MyApplicationModel>>() {
+        //        }.getType());
+
+        //方式二:utils工具类
+        return (List<WorkplanListModel>) JSONUtils.fromJson(hr.jsonArray.toString(), new TypeToken<List<WorkplanListModel>>() {
+        }.getType());
+    }
 
     /**
-     * 01-01
+     * 02-04-01
      * 获取 我的申请记录
      * <p>
      *
@@ -172,7 +210,7 @@ public class UserHelper<T> {
     }
 
     /**
-     * 01-01-02 申请详情
+     * 02-04-01-02 申请详情
      * <p>
      * 注：使用泛型
      */
@@ -211,7 +249,7 @@ public class UserHelper<T> {
     }
 
     /**
-     * 01-02 获取 我的审批记录
+     * 02-04-02  我的审批 记录
      * <p></p>
      *
      * @param context
@@ -250,7 +288,7 @@ public class UserHelper<T> {
     }
 
     /**
-     * 01-02-02 审批详情
+     * 02-04-02-02 审批详情
      * <p>
      * 使用泛型
      */
@@ -283,7 +321,7 @@ public class UserHelper<T> {
     }
 
     /**
-     * 01-02-02-01/02审批--同意/驳回接口
+     * 02-04-02-02-01/02审批--同意/驳回接口
      *
      * @param context
      * @param sApprovalid
@@ -320,7 +358,7 @@ public class UserHelper<T> {
     }
 
     /**
-     * 01-02-02-03审批-转交接口
+     * 02-04-02-02-03审批-转交接口
      *
      * @param context
      * @return
@@ -348,7 +386,7 @@ public class UserHelper<T> {
     }
 
     /**
-     * 01-02-02-04审批-抄送接口
+     * 02-04-02-02-04审批-抄送接口
      *
      * @param context
      * @return
@@ -377,7 +415,7 @@ public class UserHelper<T> {
 
 
     /**
-     * 01-03 获取 我的抄送
+     * 02-04-03 获取 我的抄送
      * <p></p>
      *
      * @param context
@@ -418,7 +456,7 @@ public class UserHelper<T> {
     }
 
     /**
-     * 01-03-02抄送详情
+     * 02-04-03-02抄送详情
      * <p>
      * 使用泛型
      */
@@ -446,42 +484,8 @@ public class UserHelper<T> {
     }
 
     /**
-     * -01 招聘申请 （obj形式上传）
-     * <P></>
-     *
-     * @param context
-     * @param jsonObject
-     * @throws MyException
-     */
-    public static void recruitmentPost(Context context, JSONObject jsonObject) throws MyException {
-        if (!NetworkManager.isNetworkAvailable(context)) {
-            throw new MyException(R.string.network_invalid);
-        }
-        try {
-            /**
-             * 参数保存成json
-             */
-            jsonObject.put("CreateTime", Utils.getCurrentTime());//申请时间
-            jsonObject.put("AppEmployeeID", UserHelper.getCurrentUser().getEmployeeID());
-            jsonObject.put("StoreID", UserHelper.getCurrentUser().getStoreID());
-
-            HttpResult httpResult = APIUtils.postForObject(WebUrl.AppsManager.RECRUITMENTPOST,
-                    HttpParameter.create().add("obj", jsonObject.toString())
-            );
-
-            if (httpResult.hasError()) {
-                throw httpResult.getError();
-            }
-        } catch (JSONException e) {
-            e.printStackTrace();
-        } catch (MyException e) {
-            throw new MyException(e.getMessage());
-        }
-    }
-
-
-    /**
-     * -01 请假申请 （obj形式上传）
+     * -02-04
+     * 01 请假申请 （obj形式上传）
      * <p></p>
      *
      * @param context
@@ -646,7 +650,7 @@ public class UserHelper<T> {
     }
 
     /**
-     * -06 财务申请 （obj形式上传）
+     * -06 费用申请 （obj形式上传）
      * 借款 报销 费用申请 付款
      *
      * @param context

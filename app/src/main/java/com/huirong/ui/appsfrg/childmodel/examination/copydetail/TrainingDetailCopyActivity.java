@@ -18,7 +18,7 @@ import com.huirong.dialog.Loading;
 import com.huirong.helper.UserHelper;
 import com.huirong.inject.ViewInject;
 import com.huirong.model.MyCopyModel;
-import com.huirong.model.copydetailmodel.BorrowCopyModel;
+import com.huirong.model.copydetailmodel.TrainingCopyModel;
 import com.huirong.utils.PageUtil;
 
 import java.util.ArrayList;
@@ -42,21 +42,14 @@ public class TrainingDetailCopyActivity extends BaseActivity {
     @ViewInject(id = R.id.tv_right)
     TextView tv_right;
 
-    //说明
-    @ViewInject(id = R.id.tv_reason, click = "ReasonExpended")
-    TextView tv_reason;
 
-    //备注
-    @ViewInject(id = R.id.tv_remark, click = "RemarkExpended")
-    TextView tv_remark;
+    //培训方式
+    @ViewInject(id = R.id.tv_mode)
+    TextView tv_mode;
 
-    //类型
-    @ViewInject(id = R.id.tv_borrowType)
-    TextView tv_borrowType;
-
-    //借阅名称
-    @ViewInject(id = R.id.tv_BorrowThings)
-    TextView tv_BorrowThings;
+    //培训形式
+    @ViewInject(id = R.id.tv_form)
+    TextView tv_form;
 
     //开始时间
     @ViewInject(id = R.id.tv_startTime)
@@ -65,6 +58,28 @@ public class TrainingDetailCopyActivity extends BaseActivity {
     //结束时间
     @ViewInject(id = R.id.tv_endTime)
     TextView tv_endTime;
+
+    //培训人员
+    @ViewInject(id = R.id.tv_person)
+    TextView tv_person;
+
+    //费用
+    @ViewInject(id = R.id.tv_fee)
+    TextView tv_fee;
+
+    //培训地址
+    @ViewInject(id = R.id.tv_place)
+    TextView tv_place;
+
+    //培训内容
+    @ViewInject(id = R.id.tv_content, click = "ReasonExpended")
+    TextView tv_content;
+
+    //备注
+    @ViewInject(id = R.id.tv_remark, click = "RemarkExpended")
+    TextView tv_remark;
+
+
 
     //审批人
     @ViewInject(id = R.id.tv_Requester)
@@ -80,7 +95,6 @@ public class TrainingDetailCopyActivity extends BaseActivity {
     @ViewInject(id = R.id.layout_ll)
     LinearLayout layout_ll;
 
-
     //抄送人
     @ViewInject(id = R.id.tv_copyer)
     TextView tv_copyer;
@@ -90,9 +104,9 @@ public class TrainingDetailCopyActivity extends BaseActivity {
     TextView tv_copyTime;
 
     private Intent intent = null;
-    private BorrowCopyModel borrowModel;
+    private TrainingCopyModel borrowModel;
     private MyCopyModel model;
-    private List<BorrowCopyModel.ApprovalInfoLists> modelList;
+    private List<TrainingCopyModel.ApprovalInfoLists> modelList;
 
     //动态添加view
     private List<View> ls_childView;//用于保存动态添加进来的ViewA
@@ -110,7 +124,7 @@ public class TrainingDetailCopyActivity extends BaseActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.act_apps_examination_training_d3);
-        tv_title.setText(getResources().getString(R.string.borrows_d));
+        tv_title.setText(getResources().getString(R.string.train_apl_d));
         tv_right.setText("");
 
         Bundle bundle = this.getIntent().getExtras();
@@ -118,16 +132,20 @@ public class TrainingDetailCopyActivity extends BaseActivity {
         getDetailModel(model);
     }
 
-    private void setShow(BorrowCopyModel model) {
+    private void setShow(TrainingCopyModel model) {
         tv_copyer.setText(model.getEmployeeName());
         tv_copyTime.setText(model.getApplicationCreateTime());
 
-        tv_BorrowThings.setText(model.getBorrowThings());
-        tv_startTime.setText(model.getStartTime());
+        tv_mode.setText(model.getTrainingMode());
+        tv_form.setText(model.getTrainingForm());
+        tv_startTime.setText(model.getBeginTime());
         tv_endTime.setText(model.getFinishTime());
-        tv_reason.setText(model.getReason());
         tv_remark.setText(model.getRemark());
-        tv_borrowType.setText(model.getBorrowType());
+        tv_person.setText(model.getPerson());
+        tv_fee.setText(model.getCost());
+        tv_content.setText(model.getContent());
+        tv_place.setText(model.getTrainingSite());
+
 
         // 审批人
         modelList = model.getApprovalInfoLists();
@@ -183,7 +201,7 @@ public class TrainingDetailCopyActivity extends BaseActivity {
             public void run() {
                 //泛型
                 try {
-                    BorrowCopyModel model1 = new UserHelper<>(BorrowCopyModel.class)
+                    TrainingCopyModel model1 = new UserHelper<>(TrainingCopyModel.class)
                             .copyDetailPost(TrainingDetailCopyActivity.this,
                                     model.getApplicationID(),
                                     model.getApplicationType());
@@ -201,7 +219,7 @@ public class TrainingDetailCopyActivity extends BaseActivity {
         super.handleMessage(msg);
         switch (msg.what) {
             case POST_SUCCESS: // 1001
-                borrowModel = (BorrowCopyModel) msg.obj;
+                borrowModel = (TrainingCopyModel) msg.obj;
                 setShow(borrowModel);
                 break;
             case POST_FAILED: // 1001
@@ -252,19 +270,6 @@ public class TrainingDetailCopyActivity extends BaseActivity {
         this.finish();
     }
 
-    private boolean isExpend = false;
-
-    public void ReasonExpended(View view) {
-        if (!isExpend) {
-            tv_reason.setMinLines(0);
-            tv_reason.setMaxLines(Integer.MAX_VALUE);
-            isExpend = true;
-        } else {
-            tv_reason.setLines(3);
-            isExpend = false;
-        }
-
-    }
 
     private boolean isRemarkExpend = false;
 

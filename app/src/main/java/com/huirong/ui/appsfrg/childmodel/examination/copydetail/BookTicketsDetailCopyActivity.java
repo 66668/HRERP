@@ -19,7 +19,6 @@ import com.huirong.helper.UserHelper;
 import com.huirong.inject.ViewInject;
 import com.huirong.model.MyCopyModel;
 import com.huirong.model.copydetailmodel.BookTicketsCopyModel;
-import com.huirong.model.copydetailmodel.BorrowCopyModel;
 import com.huirong.utils.PageUtil;
 
 import java.util.ArrayList;
@@ -115,7 +114,7 @@ public class BookTicketsDetailCopyActivity extends BaseActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.act_apps_examination_booktickets_d3);
-        tv_title.setText(getResources().getString(R.string.borrows_d));
+        tv_title.setText(getResources().getString(R.string.book_title_d));
         tv_right.setText("");
 
         Bundle bundle = this.getIntent().getExtras();
@@ -187,7 +186,7 @@ public class BookTicketsDetailCopyActivity extends BaseActivity {
             public void run() {
                 //泛型
                 try {
-                    BorrowCopyModel model1 = new UserHelper<>(BorrowCopyModel.class)
+                    BookTicketsCopyModel model1 = new UserHelper<>(BookTicketsCopyModel.class)
                             .copyDetailPost(BookTicketsDetailCopyActivity.this,
                                     model.getApplicationID(),
                                     model.getApplicationType());

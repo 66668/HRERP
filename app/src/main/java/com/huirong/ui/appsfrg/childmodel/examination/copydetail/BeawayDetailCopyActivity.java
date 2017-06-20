@@ -113,7 +113,7 @@ public class BeawayDetailCopyActivity extends BaseActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.act_apps_examination_beaway_d3);
-        tv_title.setText(getResources().getString(R.string.borrows_d));
+        tv_title.setText(getResources().getString(R.string.beaway_title_d));
         tv_right.setText("");
 
         Bundle bundle = this.getIntent().getExtras();

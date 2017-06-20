@@ -42,6 +42,24 @@ public class WebUrl {
      */
     public class AppsManager {
 
+
+        /**
+         * 应用-工作计划 接口
+         *
+         * #############################################################################################
+         */
+
+        /**
+         * 02-01 工作计划 记录
+         */
+        public static final String WORKPLANLIST = LOGIN_URL + LOGIN_FLODER_USER + "TaskSchedule/TaskScheduleList";
+
+        /**
+         * 02-02 工作计划 添加
+         */
+        public static final String ADDWORKPLAN = LOGIN_URL + LOGIN_FLODER_USER + "TaskSchedule/TaskScheduleAdd";
+
+
         /**
          * 应用-审批接口
          *  我的申请 我的审批 抄送 及详情 接口

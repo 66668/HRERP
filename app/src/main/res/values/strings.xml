@@ -168,6 +168,7 @@
 
     <!-- 04-02出差-->
     <string name="beaway_title_d">出差详情</string>
+    <string name="beaway_title_apl">出差申请</string>
     <string name="beaway_type">交通工具</string>
     <string name="beaway_startTime">出发时间</string>
     <string name="beaway_endTime">返回时间</string>
@@ -369,22 +370,6 @@
     <string name="workRestReason">调休说明</string>
     <string name="hint_workRestReason">请输入调休说明</string>
 
-    <!--   借阅-->
-    <string name="borrows">借阅申请</string>
-    <string name="borrows_d">借阅详情</string>
-    <string name="borrowsName">借阅名称</string>
-    <string name="hint_borrowsName">请输入借阅物品名称</string>
-    <string name="borrowsStart">借用时间</string>
-    <string name="borrowsEnd">归还时间</string>
-    <string name="borrowsType">借阅类型</string>
-    <string name="borrowsReason">借阅用途</string>
-    <string name="hint_borrowsReason">请输入借阅用途</string>
-    <string-array name="spBorrowType">
-        <item>印章</item>
-        <item>电子印章</item>
-        <item>文件</item>
-        <item>其他</item>
-    </string-array>
     <!-- 01 印章10-->
     <string name="signet_apl">印章申请</string>
     <string name="signet_apl_d">印章详情</string>

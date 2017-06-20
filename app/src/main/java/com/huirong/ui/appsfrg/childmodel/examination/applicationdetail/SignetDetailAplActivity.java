@@ -111,7 +111,7 @@ public class SignetDetailAplActivity extends BaseActivity {
     }
 
     private void initMyView() {
-        tv_title.setText(getResources().getString(R.string.borrows_d));
+        tv_title.setText(getResources().getString(R.string.signet_apl_d));
         tv_right.setText("");
         intent = getIntent();
         model = (MyApplicationModel) intent.getSerializableExtra("MyApplicationModel");
