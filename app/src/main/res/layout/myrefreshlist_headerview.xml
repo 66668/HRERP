@@ -30,6 +30,7 @@
             android:textSize="@dimen/common_textSize_default12"/>
 
         <ImageView
+            android:contentDescription="@null"
             android:id="@+id/arrow"
             android:layout_width="20dp"
             android:layout_height="20dp"

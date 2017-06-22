@@ -2,15 +2,16 @@ package com.huirong.adapter;
 
 import android.content.Context;
 import android.view.View;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import com.nostra13.universalimageloader.core.DisplayImageOptions;
-import com.nostra13.universalimageloader.core.ImageLoader;
-import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
 import com.huirong.R;
 import com.huirong.base.BaseLoadMoreListAdapter;
 import com.huirong.common.ImageLoadingConfig;
 import com.huirong.model.NoticeListModel;
+import com.nostra13.universalimageloader.core.DisplayImageOptions;
+import com.nostra13.universalimageloader.core.ImageLoader;
+import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
 
 
 /**
@@ -22,7 +23,7 @@ import com.huirong.model.NoticeListModel;
 public class NoticeLoadMoreListAdapter extends BaseLoadMoreListAdapter {
     private ImageLoader imgLoader;
     private DisplayImageOptions imgOptions;
-
+    private Context context;
 
     public class WidgetHolder {
         public TextView tvTime;
@@ -33,6 +34,7 @@ public class NoticeLoadMoreListAdapter extends BaseLoadMoreListAdapter {
 
     public NoticeLoadMoreListAdapter(Context context, AdapterCallBack callBack) {
         super(context, callBack);
+        this.context = context;
         imgLoader = ImageLoader.getInstance();
         imgLoader.init(ImageLoaderConfiguration.createDefault(context));
         imgOptions = ImageLoadingConfig.generateDisplayImageOptions(R.mipmap.ic_launcher);
@@ -41,7 +43,7 @@ public class NoticeLoadMoreListAdapter extends BaseLoadMoreListAdapter {
     @Override
     protected View inflateConvertView() {
         //一条记录的布局
-        View view = inflater.inflate(R.layout.item_app_notification_notice_common, null);
+        View view = inflater.inflate(R.layout.item_app_notification_notice_common,  new LinearLayout(context), false);
         //该布局上的控件
         WidgetHolder holder = new WidgetHolder();
         holder.tvTime = (TextView) view.findViewById(R.id.tv_time);

@@ -290,7 +290,7 @@
                         android:lines="3"
                         />
 
-                </LinearLayout>s
+                </LinearLayout>
 
             </LinearLayout>
         </ScrollView>

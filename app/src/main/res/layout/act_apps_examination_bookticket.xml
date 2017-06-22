@@ -31,6 +31,7 @@
                 android:layout_height="1dip"
                 android:layout_marginTop="10dp"
                 android:background="@color/common_bg_examination_line"/>
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/common_topbar_height"
@@ -66,6 +67,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:background="@color/white"
+                    android:contentDescription="@null"
                     android:src="@mipmap/et_forword"/>
             </LinearLayout>
 
@@ -123,6 +125,7 @@
                 android:layout_height="1dip"
                 android:layout_marginTop="10dp"
                 android:background="@color/common_bg_examination_line"/>
+
             <LinearLayout
 
                 android:layout_width="match_parent"
@@ -203,6 +206,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:background="@color/white"
+                    android:contentDescription="@null"
                     android:src="@mipmap/et_forword"/>
             </LinearLayout>
 
@@ -253,6 +257,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:background="@color/white"
+                    android:contentDescription="@null"
                     android:src="@mipmap/et_forword"/>
             </LinearLayout>
 
@@ -345,6 +350,7 @@
                             android:id="@+id/img_addrequster"
                             android:layout_width="50dp"
                             android:layout_height="50dp"
+                            android:contentDescription="@null"
                             android:src="@mipmap/imgadd"/>
 
                         <TextView

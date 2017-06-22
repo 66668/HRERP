@@ -2,6 +2,7 @@ package com.huirong.adapter;
 
 import android.content.Context;
 import android.view.View;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.huirong.R;
@@ -38,7 +39,7 @@ public class ConferenceLoadMoreListAdapter extends com.huirong.base.BaseLoadMore
     @Override
     protected View inflateConvertView() {
         //一条记录的布局
-        View view = inflater.inflate(R.layout.item_app_notification_notice_common, null);
+        View view = inflater.inflate(R.layout.item_app_notification_notice_common, new LinearLayout(context), false);
         //该布局上的控件
         WidgetHolder holder = new WidgetHolder();
         holder.tvTime = (TextView) view.findViewById(R.id.tv_time);

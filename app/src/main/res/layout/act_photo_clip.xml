@@ -13,6 +13,7 @@
         android:background="#000000" >
 
         <ImageView
+            android:contentDescription="@null"
             android:id="@+id/src_pic"
             android:layout_width="match_parent"
             android:layout_height="match_parent"

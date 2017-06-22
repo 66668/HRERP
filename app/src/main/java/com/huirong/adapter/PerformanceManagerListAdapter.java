@@ -6,6 +6,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.huirong.R;
@@ -43,7 +44,7 @@ public class PerformanceManagerListAdapter extends BaseAdapter {
         ViewHolder viewHolder;
         if(view==null){
             viewHolder = new ViewHolder();
-            view = LayoutInflater.from(mContext).inflate(R.layout.item_performacemanager, null, false);
+            view = LayoutInflater.from(mContext).inflate(R.layout.item_performacemanager, new RelativeLayout(mContext), false);
             viewHolder.tv_title = (TextView) view.findViewById(R.id.tv_title);
             viewHolder.tv_result = (TextView) view.findViewById(R.id.tv_result);
             viewHolder.imageView = (ImageView)view.findViewById(R.id.img_icon);

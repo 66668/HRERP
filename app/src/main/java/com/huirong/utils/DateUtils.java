@@ -7,6 +7,7 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.Locale;
 
 /**
  * 最简 判断String 是本日 本周 本月
@@ -59,7 +60,7 @@ public class DateUtils {
 
     private static boolean isThisTime(long paramsTime, String pattern) {
         Date date = new Date(paramsTime);
-        SimpleDateFormat sdf = new SimpleDateFormat(pattern);
+        SimpleDateFormat sdf = new SimpleDateFormat(pattern,Locale.getDefault());
         String paramsDate = sdf.format(date);//参数时间
         String curDate = sdf.format(new Date());//当前时间
         Log.d("SJY", "isThisTime--paramsDate=" + paramsDate + "--curDate=" + curDate);
@@ -72,7 +73,7 @@ public class DateUtils {
     // 从字符串, 获取日期, 如time = "2016-3-16 4:12:16"
     public static Date String2Date(String paramsStr) {
         try {
-            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.getDefault());
 
             Date date = sdf.parse(paramsStr);
             return date;

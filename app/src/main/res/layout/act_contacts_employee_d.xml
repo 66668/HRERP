@@ -40,6 +40,7 @@
                 android:text="姓名"/>
 
             <ImageView
+                android:contentDescription="@null"
                 android:id="@+id/imgBack"
                 android:layout_width="30dp"
                 android:layout_height="30dp"

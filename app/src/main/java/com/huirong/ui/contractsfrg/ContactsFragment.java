@@ -254,7 +254,7 @@ public class ContactsFragment extends BaseFragment {
         LayoutInflater inflator = (LayoutInflater) getActivity().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         for (int j = 0; j < listData.size(); j++) {
             //实例化控件
-            LinearLayout hearView = (LinearLayout) inflator.inflate(R.layout.item_contacts, null);
+            LinearLayout hearView = (LinearLayout) inflator.inflate(R.layout.item_contacts, new LinearLayout(getActivity()), false);
             //消除hederView中 公司
             if (j > 0) {
                 TextView tv_letter = (TextView) hearView.findViewById(R.id.tv_letter);

@@ -111,6 +111,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:background="@color/white"
+                    android:contentDescription="@null"
                     android:src="@mipmap/et_forword"/>
             </LinearLayout>
 
@@ -161,6 +162,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:background="@color/white"
+                    android:contentDescription="@null"
                     android:src="@mipmap/et_forword"/>
             </LinearLayout>
 
@@ -253,6 +255,7 @@
                             android:id="@+id/img_addpicture"
                             android:layout_width="50dp"
                             android:layout_height="50dp"
+                            android:contentDescription="@null"
                             android:src="@mipmap/imgadd"/>
 
                         <TextView
@@ -274,7 +277,8 @@
                         <ImageView
                             android:id="@+id/img_01"
                             android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"/>
+                            android:layout_height="wrap_content"
+                            android:contentDescription="@null"/>
                     </RelativeLayout>
 
                     <RelativeLayout
@@ -288,6 +292,7 @@
                             android:id="@+id/img_02"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
+                            android:contentDescription="@null"
                             android:padding="5dp"/>
                     </RelativeLayout>
 
@@ -302,6 +307,7 @@
                             android:id="@+id/img_03"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
+                            android:contentDescription="@null"
                             android:padding="5dp"/>
                     </RelativeLayout>
 
@@ -354,6 +360,7 @@
                             android:id="@+id/img_addrequster"
                             android:layout_width="50dp"
                             android:layout_height="50dp"
+                            android:contentDescription="@null"
                             android:src="@mipmap/imgadd"/>
 
                         <TextView

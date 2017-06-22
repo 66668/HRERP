@@ -242,7 +242,7 @@ public class TrainingDetailCopyActivity extends BaseActivity {
     private ViewHolder AddView(Context context, int marks) {
         ls_childView = new ArrayList<View>();
         inflater = LayoutInflater.from(context);
-        childView = inflater.inflate(R.layout.item_examination_status, null);
+        childView = inflater.inflate(R.layout.item_examination_status, new LinearLayout(this),false);
         childView.setId(marks);
         layout_ll.addView(childView, marks);
         return getViewInstance(childView);

@@ -2,15 +2,16 @@ package com.huirong.adapter;
 
 import android.content.Context;
 import android.view.View;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import com.nostra13.universalimageloader.core.DisplayImageOptions;
-import com.nostra13.universalimageloader.core.ImageLoader;
-import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
 import com.huirong.R;
 import com.huirong.base.BaseListAdapter;
 import com.huirong.common.ImageLoadingConfig;
 import com.huirong.model.ProcurementListModel;
+import com.nostra13.universalimageloader.core.DisplayImageOptions;
+import com.nostra13.universalimageloader.core.ImageLoader;
+import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
 
 /**
  * 应用-采购适配
@@ -37,7 +38,7 @@ public class ProcurementListAdapter extends BaseListAdapter {
     @Override
     protected View inflateConvertView() {
         //一条记录的布局
-        View view = inflater.inflate(R.layout.item_procurementlist, null);
+        View view = inflater.inflate(R.layout.item_procurementlist, new LinearLayout(context), false);
         //该布局上的控件
         WidgetHolder holder = new WidgetHolder();
         holder.tv_Title = (TextView) view.findViewById(R.id.tv_procurementTitle);

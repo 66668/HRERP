@@ -156,7 +156,7 @@ public class ProcurementDetailActivity extends BaseActivity {
     private ViewHolder AddView(int marks) {
         ls_childView = new ArrayList<View>();
         inflater = LayoutInflater.from(getApplicationContext());
-        childView = inflater.inflate(R.layout.item_examination_status, null);
+        childView = inflater.inflate(R.layout.item_examination_status, new LinearLayout(this), false);
         childView.setId(marks);
         layout_ll.addView(childView, marks);
         return getViewInstance(childView);

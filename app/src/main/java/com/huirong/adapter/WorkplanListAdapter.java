@@ -3,6 +3,7 @@ package com.huirong.adapter;
 import android.content.Context;
 import android.support.v4.content.ContextCompat;
 import android.view.View;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.huirong.R;
@@ -28,6 +29,7 @@ import java.util.Random;
 public class WorkplanListAdapter extends BaseListAdapter {
     private ImageLoader imgLoader;
     private DisplayImageOptions imgOptions;
+    private Context context;
 
     public class WidgetHolder {
         public TextView tvType;
@@ -38,6 +40,7 @@ public class WorkplanListAdapter extends BaseListAdapter {
 
     public WorkplanListAdapter(Context context) {
         super(context);
+        this.context= context;
         imgLoader = ImageLoader.getInstance();
         imgLoader.init(ImageLoaderConfiguration.createDefault(context));
         imgOptions = ImageLoadingConfig.generateDisplayImageOptions(R.mipmap.ic_launcher);
@@ -46,7 +49,7 @@ public class WorkplanListAdapter extends BaseListAdapter {
     @Override
     protected View inflateConvertView() {
         //一条记录的布局
-        View view = inflater.inflate(R.layout.item_workplan, null);
+        View view = inflater.inflate(R.layout.item_workplan, new RelativeLayout(context),false);
         //该布局上的控件
         WidgetHolder holder = new WidgetHolder();
 

@@ -24,7 +24,7 @@ import com.huirong.utils.PageUtil;
  * @author JackSong
  */
 
-public class BaseActivity extends FragmentActivity {
+public abstract class BaseActivity extends FragmentActivity {
 
     //	// 关闭程序的类
     //	private ExitAppReceiver exitAppReceiver = new ExitAppReceiver();

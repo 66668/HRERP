@@ -2,6 +2,7 @@ package com.huirong.adapter;
 
 import android.content.Context;
 import android.view.View;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.huirong.R;
@@ -22,6 +23,7 @@ import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
 public class FinanceListAdapter extends BaseListAdapter {
     private ImageLoader imgLoader;
     private DisplayImageOptions imgOptions;
+    private Context context;
 
 
     public class WidgetHolder {
@@ -31,6 +33,7 @@ public class FinanceListAdapter extends BaseListAdapter {
 
     public FinanceListAdapter(Context context) {
         super(context);
+        this.context = context;
         imgLoader = ImageLoader.getInstance();
         imgLoader.init(ImageLoaderConfiguration.createDefault(context));
         imgOptions = ImageLoadingConfig.generateDisplayImageOptions(R.mipmap.ic_launcher);
@@ -39,7 +42,7 @@ public class FinanceListAdapter extends BaseListAdapter {
     @Override
     protected View inflateConvertView() {
         //一条记录的布局
-        View view = inflater.inflate(R.layout.item_finance, null);
+        View view = inflater.inflate(R.layout.item_finance,  new LinearLayout(context), false);
         //该布局上的控件
         WidgetHolder holder = new WidgetHolder();
         holder.tv_finaceTitle = (TextView) view.findViewById(R.id.tv_finace_title);

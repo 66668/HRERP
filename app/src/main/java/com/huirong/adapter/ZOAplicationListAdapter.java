@@ -4,17 +4,18 @@ import android.content.Context;
 import android.support.v4.content.ContextCompat;
 import android.text.TextUtils;
 import android.view.View;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
-import com.nostra13.universalimageloader.core.DisplayImageOptions;
-import com.nostra13.universalimageloader.core.ImageLoader;
-import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
 import com.huirong.R;
 import com.huirong.application.MyApplication;
 import com.huirong.base.BaseListAdapter;
 import com.huirong.common.ImageLoadingConfig;
 import com.huirong.model.MyApplicationModel;
 import com.huirong.widget.CircleTextView;
+import com.nostra13.universalimageloader.core.DisplayImageOptions;
+import com.nostra13.universalimageloader.core.ImageLoader;
+import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
 
 import java.util.Random;
 
@@ -28,6 +29,7 @@ import java.util.Random;
 public class ZOAplicationListAdapter extends BaseListAdapter {
     private ImageLoader imgLoader;
     private DisplayImageOptions imgOptions;
+    private Context context;
 
     public class WidgetHolder {
         public TextView tvType;
@@ -39,6 +41,7 @@ public class ZOAplicationListAdapter extends BaseListAdapter {
 
     public ZOAplicationListAdapter(Context context) {
         super(context);
+        this.context = context;
         imgLoader = ImageLoader.getInstance();
         imgLoader.init(ImageLoaderConfiguration.createDefault(context));
         imgOptions = ImageLoadingConfig.generateDisplayImageOptions(R.mipmap.ic_launcher);
@@ -47,7 +50,7 @@ public class ZOAplicationListAdapter extends BaseListAdapter {
     @Override
     protected View inflateConvertView() {
         //一条记录的布局
-        View view = inflater.inflate(R.layout.item_examination_common, null);
+        View view = inflater.inflate(R.layout.item_examination_common, new RelativeLayout(context),false);
         //该布局上的控件
         WidgetHolder holder = new WidgetHolder();
         holder.tvName = (CircleTextView) view.findViewById(R.id.tv_name);

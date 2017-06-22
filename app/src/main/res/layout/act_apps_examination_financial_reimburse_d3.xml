@@ -48,6 +48,7 @@
                     android:gravity="center_vertical"
                     />
             </LinearLayout>
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/common_topbar_height40"
@@ -282,6 +283,7 @@
                     android:gravity="center_vertical"
                     />
             </LinearLayout>
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="80dp"
@@ -306,10 +308,11 @@
                     android:gravity="center">
 
                     <ImageView
-                        android:padding="5dp"
                         android:id="@+id/img_01"
                         android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"/>
+                        android:layout_height="wrap_content"
+                        android:contentDescription="@null"
+                        android:padding="5dp"/>
                 </RelativeLayout>
 
                 <RelativeLayout
@@ -319,10 +322,11 @@
                     android:gravity="center">
 
                     <ImageView
-                        android:padding="5dp"
                         android:id="@+id/img_02"
                         android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"/>
+                        android:layout_height="wrap_content"
+                        android:contentDescription="@null"
+                        android:padding="5dp"/>
                 </RelativeLayout>
 
                 <RelativeLayout
@@ -332,10 +336,11 @@
                     android:gravity="center">
 
                     <ImageView
-                        android:padding="5dp"
                         android:id="@+id/img_03"
                         android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"/>
+                        android:layout_height="wrap_content"
+                        android:contentDescription="@null"
+                        android:padding="5dp"/>
                 </RelativeLayout>
 
             </LinearLayout>
@@ -358,8 +363,6 @@
                     android:textColor="@color/cl_text_common"/>
 
                 <TextView
-                    android:paddingRight="10dp"
-                    android:paddingTop="10dp"
                     android:id="@+id/tv_remark"
                     style="@style/BlackText.standard"
                     android:layout_width="0dp"
@@ -369,6 +372,8 @@
                     android:ellipsize="end"
                     android:gravity="top|left"
                     android:lines="3"
+                    android:paddingRight="10dp"
+                    android:paddingTop="10dp"
                     />
 
             </LinearLayout>

@@ -2,15 +2,16 @@ package com.huirong.adapter;
 
 import android.content.Context;
 import android.view.View;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import com.nostra13.universalimageloader.core.DisplayImageOptions;
-import com.nostra13.universalimageloader.core.ImageLoader;
-import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
 import com.huirong.R;
 import com.huirong.base.BaseListAdapter;
 import com.huirong.common.ImageLoadingConfig;
 import com.huirong.model.MapAttendModel;
+import com.nostra13.universalimageloader.core.DisplayImageOptions;
+import com.nostra13.universalimageloader.core.ImageLoader;
+import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
 
 import java.util.Random;
 
@@ -24,6 +25,7 @@ import java.util.Random;
 public class MapAttendListAdapter extends BaseListAdapter {
     private ImageLoader imgLoader;
     private DisplayImageOptions imgOptions;
+    private Context context;
 
     public class WidgetHolder {
         TextView tv_local;
@@ -32,6 +34,7 @@ public class MapAttendListAdapter extends BaseListAdapter {
 
     public MapAttendListAdapter(Context context) {
         super(context);
+        this.context = context;
         imgLoader = ImageLoader.getInstance();
         imgLoader.init(ImageLoaderConfiguration.createDefault(context));
         imgOptions = ImageLoadingConfig.generateDisplayImageOptions(R.mipmap.ic_launcher);
@@ -40,7 +43,7 @@ public class MapAttendListAdapter extends BaseListAdapter {
     @Override
     protected View inflateConvertView() {
         //一条记录的布局
-        View view = inflater.inflate(R.layout.item_mapattendrecord, null);
+        View view = inflater.inflate(R.layout.item_mapattendrecord,   new LinearLayout(context), false);
         //该布局上的控件
         WidgetHolder holder = new WidgetHolder();
         holder.tv_local = (TextView) view.findViewById(R.id.tv_local);

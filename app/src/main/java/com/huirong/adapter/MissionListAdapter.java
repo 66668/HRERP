@@ -4,6 +4,7 @@ import android.content.Context;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.huirong.R;
@@ -24,6 +25,7 @@ import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
 public class MissionListAdapter extends BaseListAdapter {
     private ImageLoader imgLoader;
     private DisplayImageOptions imgOptions;
+    private Context context;
 
     public class WidgetHolder {
         public TextView tvTitle;
@@ -33,6 +35,7 @@ public class MissionListAdapter extends BaseListAdapter {
 
     public MissionListAdapter(Context context) {
         super(context);
+        this.context = context;
         imgLoader = ImageLoader.getInstance();
         imgLoader.init(ImageLoaderConfiguration.createDefault(context));
         imgOptions = ImageLoadingConfig.generateDisplayImageOptions(R.mipmap.ic_launcher);
@@ -41,7 +44,7 @@ public class MissionListAdapter extends BaseListAdapter {
     @Override
     protected View inflateConvertView() {
         //一条记录的布局
-        View view = inflater.inflate(R.layout.item_mission, null);
+        View view = inflater.inflate(R.layout.item_mission,  new LinearLayout(context), false);
         //该布局上的控件
         WidgetHolder holder = new WidgetHolder();
 

@@ -13,6 +13,7 @@
         android:layout_weight="0.35">
 
         <ImageView
+            android:contentDescription="@null"
             android:id="@+id/imageView"
             android:layout_width="60dp"
             android:layout_height="60dp"

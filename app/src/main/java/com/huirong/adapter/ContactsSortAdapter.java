@@ -5,6 +5,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.LinearLayout;
 import android.widget.SectionIndexer;
 import android.widget.TextView;
 
@@ -55,7 +56,7 @@ public class ContactsSortAdapter extends BaseAdapter implements SectionIndexer{
 		final ContactsEmployeeModel mContent = list.get(position);
 		if (view == null) {
 			viewHolder = new ViewHolder();
-			view = LayoutInflater.from(mContext).inflate(R.layout.item_contacts, null);
+			view = LayoutInflater.from(mContext).inflate(R.layout.item_contacts, new LinearLayout(mContext), false);
 			viewHolder.tvTitle = (TextView) view.findViewById(R.id.tv_name);
 			viewHolder.tvLetter = (TextView) view.findViewById(R.id.tv_letter);
 			view.setTag(viewHolder);

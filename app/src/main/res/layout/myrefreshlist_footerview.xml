@@ -26,6 +26,7 @@
             android:layout_centerVertical="true"
             android:layout_marginRight="5dp"
             android:layout_toLeftOf="@+id/tv_loadmore"
+            android:contentDescription="@null"
             android:src="@mipmap/uparrow"/>
 
         <ProgressBar

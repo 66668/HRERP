@@ -10,6 +10,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
@@ -62,7 +63,7 @@ public class ChooseItemDialog extends Dialog implements View.OnClickListener{
 	//调用上边的方法，
 	private void init(String item1Text,String item2Text) {
 		//关联布局
-		View dialogView = LayoutInflater.from(context).inflate(R.layout.act_item_choose, null);
+		View dialogView = LayoutInflater.from(context).inflate(R.layout.act_item_choose, new LinearLayout(context), false);
 		//实例化相关控件（1）
 		RelativeLayout item1 = (RelativeLayout) dialogView.findViewById(R.id.item1);
 		RelativeLayout item2 = (RelativeLayout) dialogView.findViewById(R.id.item2);

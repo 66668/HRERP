@@ -39,6 +39,7 @@ import com.huirong.ui.appsfrg.childmodel.shedule.ScheduleSingleDetailActivity;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.Locale;
 
 
 /**
@@ -84,7 +85,7 @@ public class ScheduleMainActivity extends BaseActivity implements GestureDetecto
 
     public ScheduleMainActivity() {
         //获取年 月 日
-        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-M-d");
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-M-d", Locale.getDefault());
         currentDate = sdf.format(new Date());  //当期日期
         year_c = Integer.parseInt(currentDate.split("-")[0]);
         month_c = Integer.parseInt(currentDate.split("-")[1]);

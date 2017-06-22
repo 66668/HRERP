@@ -40,8 +40,8 @@
                     android:layout_height="54dp"
                     android:layout_marginLeft="20dp"
                     android:layout_marginRight="20dp"
-
                     android:adjustViewBounds="true"
+                    android:contentDescription="@null"
                     android:src="@mipmap/myapplication"/>
 
                 <TextView
@@ -68,6 +68,7 @@
                     android:layout_marginBottom="20dp"
                     android:layout_marginTop="20dp"
                     android:background="@mipmap/examinationline"
+                    android:contentDescription="@null"
                     />
 
             </LinearLayout>
@@ -87,8 +88,8 @@
                     android:layout_height="54dp"
                     android:layout_marginLeft="20dp"
                     android:layout_marginRight="20dp"
-
                     android:adjustViewBounds="true"
+                    android:contentDescription="@null"
                     android:src="@mipmap/myapproval"/>
 
                 <TextView
@@ -115,6 +116,7 @@
                     android:layout_marginBottom="20dp"
                     android:layout_marginTop="20dp"
                     android:background="@mipmap/examinationline"
+                    android:contentDescription="@null"
                     />
 
             </LinearLayout>
@@ -134,8 +136,8 @@
                     android:layout_height="54dp"
                     android:layout_marginLeft="20dp"
                     android:layout_marginRight="20dp"
-
                     android:adjustViewBounds="true"
+                    android:contentDescription="@null"
                     android:src="@mipmap/mycopyto"/>
 
                 <TextView
@@ -185,8 +187,8 @@
                         android:layout_height="54dp"
                         android:layout_marginLeft="20dp"
                         android:layout_marginRight="20dp"
-
                         android:adjustViewBounds="true"
+                        android:contentDescription="@null"
                         android:src="@mipmap/forleave"/>
 
                     <TextView
@@ -213,8 +215,8 @@
                         android:layout_height="54dp"
                         android:layout_marginLeft="20dp"
                         android:layout_marginRight="20dp"
-
                         android:adjustViewBounds="true"
+                        android:contentDescription="@null"
                         android:src="@mipmap/forleave"/>
 
                     <TextView
@@ -241,8 +243,8 @@
                         android:layout_height="54dp"
                         android:layout_marginLeft="20dp"
                         android:layout_marginRight="20dp"
-
                         android:adjustViewBounds="true"
+                        android:contentDescription="@null"
                         android:src="@mipmap/carused"/>
 
                     <TextView
@@ -270,6 +272,7 @@
                         android:layout_marginLeft="20dp"
                         android:layout_marginRight="20dp"
                         android:adjustViewBounds="true"
+                        android:contentDescription="@null"
                         android:src="@mipmap/vehiclem"/>
 
                     <TextView
@@ -308,8 +311,8 @@
                         android:layout_height="54dp"
                         android:layout_marginLeft="20dp"
                         android:layout_marginRight="20dp"
-
                         android:adjustViewBounds="true"
+                        android:contentDescription="@null"
                         android:src="@mipmap/workovertime"/>
 
                     <TextView
@@ -337,8 +340,8 @@
                         android:layout_height="54dp"
                         android:layout_marginLeft="20dp"
                         android:layout_marginRight="20dp"
-
                         android:adjustViewBounds="true"
+                        android:contentDescription="@null"
                         android:src="@mipmap/loanreimbursement"/>
 
                     <TextView
@@ -365,8 +368,8 @@
                         android:layout_height="54dp"
                         android:layout_marginLeft="20dp"
                         android:layout_marginRight="20dp"
-
                         android:adjustViewBounds="true"
+                        android:contentDescription="@null"
                         android:src="@mipmap/jobsleave"/>
 
                     <TextView
@@ -393,8 +396,8 @@
                         android:layout_height="54dp"
                         android:layout_marginLeft="20dp"
                         android:layout_marginRight="20dp"
-
                         android:adjustViewBounds="true"
+                        android:contentDescription="@null"
                         android:src="@mipmap/jobsleave"/>
 
                     <TextView
@@ -433,8 +436,8 @@
                         android:layout_height="54dp"
                         android:layout_marginLeft="20dp"
                         android:layout_marginRight="20dp"
-
                         android:adjustViewBounds="true"
+                        android:contentDescription="@null"
                         android:src="@mipmap/takedaysoff"/>
 
                     <TextView
@@ -461,8 +464,8 @@
                         android:layout_height="54dp"
                         android:layout_marginLeft="20dp"
                         android:layout_marginRight="20dp"
-
                         android:adjustViewBounds="true"
+                        android:contentDescription="@null"
                         android:src="@mipmap/loanreimbursement"/>
 
                     <TextView
@@ -491,6 +494,7 @@
                         android:layout_marginLeft="20dp"
                         android:layout_marginRight="20dp"
                         android:adjustViewBounds="true"
+                        android:contentDescription="@null"
                         android:src="@mipmap/jobsleave"/>
 
                     <TextView
@@ -518,9 +522,9 @@
                         android:layout_width="54dp"
                         android:layout_height="54dp"
                         android:layout_marginLeft="20dp"
-
                         android:layout_marginRight="20dp"
                         android:adjustViewBounds="true"
+                        android:contentDescription="@null"
                         android:src="@mipmap/jobsleave"/>
 
                     <TextView
@@ -559,8 +563,8 @@
                         android:layout_height="54dp"
                         android:layout_marginLeft="20dp"
                         android:layout_marginRight="20dp"
-
                         android:adjustViewBounds="true"
+                        android:contentDescription="@null"
                         android:src="@mipmap/jobs"/>
 
                     <TextView
@@ -587,8 +591,8 @@
                         android:layout_height="54dp"
                         android:layout_marginLeft="20dp"
                         android:layout_marginRight="20dp"
-
                         android:adjustViewBounds="true"
+                        android:contentDescription="@null"
                         android:src="@mipmap/borrow"/>
 
                     <TextView
@@ -617,6 +621,7 @@
                         android:layout_marginLeft="20dp"
                         android:layout_marginRight="20dp"
                         android:adjustViewBounds="true"
+                        android:contentDescription="@null"
                         android:src="@mipmap/salaryadjust"/>
 
                     <TextView

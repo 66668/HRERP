@@ -24,7 +24,8 @@
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
             android:layout_marginLeft="28dp"
-            android:background="@mipmap/finance_loan"/>
+            android:background="@mipmap/finance_loan"
+            android:contentDescription="@null"/>
 
         <TextView
             android:id="@+id/tv_typeName_loan"
@@ -76,6 +77,7 @@
             android:layout_centerVertical="true"
             android:layout_marginLeft="28dp"
             android:background="@mipmap/finance_reimburse"
+            android:contentDescription="@null"
             />
 
         <TextView
@@ -157,14 +159,15 @@
             android:textSize="@dimen/common_textSize_default12"/>
 
         <ImageView
+            android:id="@+id/imageView2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="28dp"
-            android:background="@mipmap/finance_pay"
-            android:layout_alignTop="@+id/tv_typeName_pay"
             android:layout_alignParentStart="true"
+            android:layout_alignTop="@+id/tv_typeName_pay"
+            android:layout_marginLeft="28dp"
             android:layout_marginStart="27dp"
-            android:id="@+id/imageView2"/>
+            android:background="@mipmap/finance_pay"
+            android:contentDescription="@null"/>
 
     </RelativeLayout>
 

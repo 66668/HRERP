@@ -5,6 +5,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.huirong.R;
@@ -25,6 +26,14 @@ public class ScheduleListAdapter extends BaseAdapter {
     private Context context;
     private ArrayList<ScheduleModel> list;
 
+    public ScheduleListAdapter(Context context, ArrayList<ScheduleModel> list) {
+        super();
+        this.context = context;
+        this.list = list;
+
+    }
+
+
     @Override
     public int getCount() {
         return list.size();
@@ -44,7 +53,7 @@ public class ScheduleListAdapter extends BaseAdapter {
     public View getView(int position, View convertView, ViewGroup parent) {
         WidgetHolder holder;
         if (convertView == null) {
-            convertView = LayoutInflater.from(MyApplication.getInstance()).inflate(R.layout.item_apps_schedule, null);
+            convertView = LayoutInflater.from(MyApplication.getInstance()).inflate(R.layout.item_apps_schedule, new RelativeLayout(context), false);
             //该布局上的控件
             holder = new WidgetHolder();
             holder.tvTitle = (TextView) convertView.findViewById(R.id.tv_title);
@@ -64,13 +73,6 @@ public class ScheduleListAdapter extends BaseAdapter {
     public class WidgetHolder {
         public TextView tvTitle;//日程类型
         public TextView tvType;//提醒次数
-    }
-
-    public ScheduleListAdapter(Context context, ArrayList<ScheduleModel> list) {
-        super();
-        this.context = context;
-        this.list = list;
-
     }
 
 

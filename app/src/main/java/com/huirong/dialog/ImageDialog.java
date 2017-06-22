@@ -9,12 +9,13 @@ import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 
+import com.huirong.R;
+import com.huirong.common.ImageLoadingConfig;
 import com.nostra13.universalimageloader.core.DisplayImageOptions;
 import com.nostra13.universalimageloader.core.ImageLoader;
 import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
-import com.huirong.R;
-import com.huirong.common.ImageLoadingConfig;
 
 /**
  * 弹窗查看大图（请假和报销使用）
@@ -53,7 +54,7 @@ public class ImageDialog extends Dialog {
     //init
     void init() {
         LayoutInflater inflater = LayoutInflater.from(context);
-        View view = inflater.inflate(R.layout.dialog_imgdetail, null);
+        View view = inflater.inflate(R.layout.dialog_imgdetail,  new RelativeLayout(context), false);
         setContentView(view);
         ImageView imageView = (ImageView) view.findViewById(R.id.dialog_img);
 

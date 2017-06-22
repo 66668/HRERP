@@ -160,6 +160,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:background="@color/white"
+                    android:contentDescription="@null"
                     android:src="@mipmap/et_forword"/>
             </LinearLayout>
 
@@ -252,6 +253,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:background="@color/white"
+                    android:contentDescription="@null"
                     android:src="@mipmap/et_forword"/>
             </LinearLayout>
 
@@ -387,6 +389,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:background="@color/white"
+                    android:contentDescription="@null"
                     android:src="@mipmap/et_forword"/>
             </LinearLayout>
 

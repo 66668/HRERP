@@ -5,6 +5,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.LinearLayout;
 import android.widget.SectionIndexer;
 import android.widget.TextView;
 
@@ -64,7 +65,7 @@ public class ContactsCopyToCoAdapter extends BaseAdapter implements SectionIndex
 		if (convertView == null) {
 			viewHolder = new ViewHolder();
 			//导入布局
-			convertView = LayoutInflater.from(mContext).inflate(R.layout.item_contacts, null);
+			convertView = LayoutInflater.from(mContext).inflate(R.layout.item_contacts, new LinearLayout(mContext), false);
 			viewHolder.tvTitle = (TextView) convertView.findViewById(R.id.tv_name);
 			viewHolder.tvLetter = (TextView) convertView.findViewById(R.id.tv_letter);
 			convertView.setTag(viewHolder);//设置view标签

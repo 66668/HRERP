@@ -31,6 +31,7 @@
                     android:layout_height="50dp"
                     android:layout_marginLeft="10dp"
                     android:layout_marginTop="10dp"
+                    android:contentDescription="@null"
                     android:src="@mipmap/msg_notice"/>
                 <!-- 标题-->
                 <TextView
@@ -97,6 +98,7 @@
                     android:layout_height="50dp"
                     android:layout_marginLeft="10dp"
                     android:layout_marginTop="10dp"
+                    android:contentDescription="@null"
                     android:src="@mipmap/app_notification"/>
                 <!-- 标题-->
                 <TextView
@@ -162,6 +164,7 @@
                     android:layout_height="50dp"
                     android:layout_marginLeft="10dp"
                     android:layout_marginTop="10dp"
+                    android:contentDescription="@null"
                     android:src="@mipmap/msg_conference"/>
                 <!-- 标题-->
                 <TextView
@@ -229,6 +232,7 @@
                     android:layout_marginLeft="10dp"
                     android:layout_marginTop="10dp"
                     android:background="@mipmap/menu_notify_undo"
+                    android:contentDescription="@null"
                     android:textColor="@color/textHintColor"/>
                 <!-- 标题-->
                 <TextView
@@ -294,6 +298,7 @@
                     android:layout_marginLeft="10dp"
                     android:layout_marginTop="10dp"
                     android:background="@mipmap/msg_done"
+                    android:contentDescription="@null"
                     android:textColor="@color/textHintColor"/>
                 <!-- 标题-->
                 <TextView
@@ -359,6 +364,7 @@
                     android:layout_marginLeft="10dp"
                     android:layout_marginTop="10dp"
                     android:background="@mipmap/msg_copy"
+                    android:contentDescription="@null"
                     android:textColor="@color/textHintColor"/>
                 <!-- 标题-->
                 <TextView
@@ -425,6 +431,7 @@
                     android:layout_marginLeft="10dp"
                     android:layout_marginTop="10dp"
                     android:background="@mipmap/app_schedule"
+                    android:contentDescription="@null"
                     android:textColor="@color/textHintColor"/>
                 <!-- 标题-->
                 <TextView

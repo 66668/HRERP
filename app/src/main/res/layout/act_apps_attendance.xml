@@ -90,6 +90,7 @@
         android:gravity="center">
 
         <ImageView
+            android:contentDescription="@null"
             android:id="@+id/img_mapAttend"
             android:layout_width="155dp"
             android:layout_height="155dp"

@@ -13,6 +13,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.huirong.R;
@@ -26,6 +27,7 @@ import com.huirong.utils.LogUtils;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.Locale;
 
 /**
  * 日历gridview中的每一个item显示的textview
@@ -52,7 +54,7 @@ public class ScheduleMainAdapter extends BaseAdapter {
     private String currentMonth = "";
     private String currentDay = "";
 
-    private SimpleDateFormat sdf = new SimpleDateFormat("yyyy-M-d");
+    private SimpleDateFormat sdf = new SimpleDateFormat("yyyy-M-d", Locale.getDefault());
     private int currentFlag = -1;     //用于标记当天
     private int[] schDateTagFlag = null;  //存储当月所有的日程日期
 
@@ -157,7 +159,7 @@ public class ScheduleMainAdapter extends BaseAdapter {
         WidgetHolder holder = null;
 
         if (convertView == null) {
-            convertView = LayoutInflater.from(context).inflate(R.layout.item_schedule_calendar, null);
+            convertView = LayoutInflater.from(context).inflate(R.layout.item_schedule_calendar, new LinearLayout(context),false);
             //该布局上的控件
             holder = new WidgetHolder();
             holder.textView = (TextView) convertView.findViewById(R.id.tvtext);

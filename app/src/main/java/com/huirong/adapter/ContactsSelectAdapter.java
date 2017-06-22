@@ -8,6 +8,7 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.huirong.R;
@@ -72,7 +73,7 @@ public class ContactsSelectAdapter extends BaseAdapter {
 		if (convertView == null) {
 			MyViewHolder = new ContactsSelectAdapter.MyViewHolder();
 			//导入布局
-			convertView = LayoutInflater.from(mContext).inflate(R.layout.item_contacts_select, null);
+			convertView = LayoutInflater.from(mContext).inflate(R.layout.item_contacts_select, new LinearLayout(mContext), false);
 			MyViewHolder.tvTitle = (TextView) convertView.findViewById(R.id.tv_name);
 			MyViewHolder.tvLetter = (TextView) convertView.findViewById(R.id.tv_letter);
 			MyViewHolder.selectCheck = (CheckBox) convertView.findViewById(R.id.checkbox);

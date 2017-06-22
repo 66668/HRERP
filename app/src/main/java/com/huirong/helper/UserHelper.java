@@ -396,7 +396,7 @@ public class UserHelper<T> {
                         .add("iMaxTime", iMaxTime)
                         .add("iMinTime", iMinTime)
                         .add("pageSize", "20")
-                        .add("SeeType", SeeType)
+                        .add("misssionType", SeeType)
                         .add("storeID", mCurrentUser.getStoreID())
                         .add("employeeId", mCurrentUser.getEmployeeID())
         );

@@ -86,7 +86,7 @@ public class DateChooseWheelViewDialog extends Dialog implements View.OnClickLis
         initListener();
     }
     private void initView() {
-        View view = LayoutInflater.from(mContext).inflate(R.layout.dialog_date_choose, null);
+        View view = LayoutInflater.from(mContext).inflate(R.layout.dialog_date_choose, new LinearLayout(mContext), false);
         mDialog.setContentView(view);
         mYearWheelView = (WheelView) view.findViewById(R.id.year_wv);
         mDateWheelView = (WheelView) view.findViewById(R.id.date_wv);

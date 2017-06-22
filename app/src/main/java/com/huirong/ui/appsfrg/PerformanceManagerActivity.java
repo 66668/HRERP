@@ -5,6 +5,7 @@ import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -66,8 +67,8 @@ public class PerformanceManagerActivity extends BaseActivity {
 
         //页面详细布局
         layoutInflater = LayoutInflater.from(this);
-        view1 = layoutInflater.inflate(R.layout.act_apps_performancemanger_frg01, null);
-        view2 = layoutInflater.inflate(R.layout.act_apps_performancemanger_frg02, null);
+        view1 = layoutInflater.inflate(R.layout.act_apps_performancemanger_frg01, new LinearLayout(this), false);
+        view2 = layoutInflater.inflate(R.layout.act_apps_performancemanger_frg02, new LinearLayout(this), false);
 
         //添加页卡视图
         mViewList.add(view1);

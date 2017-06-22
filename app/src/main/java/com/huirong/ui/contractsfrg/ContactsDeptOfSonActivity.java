@@ -226,7 +226,7 @@ public class ContactsDeptOfSonActivity extends BaseActivity {
         LayoutInflater inflator = (LayoutInflater) ContactsDeptOfSonActivity.this.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         for (int j = 0; j < listData.size(); j++) {
             //实例化控件
-            LinearLayout headView = (LinearLayout) inflator.inflate(R.layout.item_contacts, null);
+            LinearLayout headView = (LinearLayout) inflator.inflate(R.layout.item_contacts, new LinearLayout(this), false);
             //消除hederView中 公司
             if (j > 0) {
                 TextView tv_letter = (TextView) headView.findViewById(R.id.tv_letter);

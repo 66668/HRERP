@@ -285,6 +285,7 @@
                     android:gravity="center">
 
                     <ImageView
+                        android:contentDescription="@null"
                         android:id="@+id/img_01"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"/>
@@ -297,6 +298,7 @@
                     android:gravity="center">
 
                     <ImageView
+                        android:contentDescription="@null"
                         android:id="@+id/img_02"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"/>
@@ -309,6 +311,7 @@
                     android:gravity="center">
 
                     <ImageView
+                        android:contentDescription="@null"
                         android:id="@+id/img_03"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"/>

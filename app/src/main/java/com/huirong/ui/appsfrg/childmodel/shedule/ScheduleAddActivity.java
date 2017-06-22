@@ -34,6 +34,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.Locale;
 
 /**
  * 添加日程主界面
@@ -279,7 +280,7 @@ public class ScheduleAddActivity extends BaseActivity {
      */
     public void setScheduleDateTag(int remindID, String year, String month, String day, int scheduleID) {
 
-        SimpleDateFormat format = new SimpleDateFormat("yyyy-M-d");
+        SimpleDateFormat format = new SimpleDateFormat("yyyy-M-d", Locale.getDefault());
         String d = year + "-" + month + "-" + day;
         Calendar cal = Calendar.getInstance();
         try {

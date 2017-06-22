@@ -45,9 +45,6 @@ public class BeawayDetailAplActivity extends BaseActivity {
     TextView tv_right;
 
 
-
-
-
     //交通工具
     @ViewInject(id = R.id.tv_type)
     TextView tv_type;
@@ -157,13 +154,13 @@ public class BeawayDetailAplActivity extends BaseActivity {
                 if (modelList.get(i).getYesOrNo().contains("0")) {
                     vh.tv_yesOrNo.setText("不同意");
                     vh.tv_yesOrNo.setTextColor(getResources().getColor(R.color.red));
-                }else if(TextUtils.isEmpty(modelList.get(i).getYesOrNo())){
+                } else if (TextUtils.isEmpty(modelList.get(i).getYesOrNo())) {
                     vh.tv_yesOrNo.setText("未审批");
                     vh.tv_yesOrNo.setTextColor(getResources().getColor(R.color.red));
                 } else if ((modelList.get(i).getYesOrNo().contains("1"))) {
                     vh.tv_yesOrNo.setText("同意");
                     vh.tv_yesOrNo.setTextColor(getResources().getColor(R.color.green));
-                } else{
+                } else {
                     vh.tv_yesOrNo.setText("yesOrNo为null");
                 }
             }
@@ -222,7 +219,7 @@ public class BeawayDetailAplActivity extends BaseActivity {
     private ViewHolder AddView(Context context, int marks) {
         ls_childView = new ArrayList<View>();
         inflater = LayoutInflater.from(context);
-        childView = inflater.inflate(R.layout.item_examination_status, null);
+        childView = inflater.inflate(R.layout.item_examination_status, new LinearLayout(this), false);
         childView.setId(marks);
         layout_ll.addView(childView, marks);
         return getViewInstance(childView);

@@ -13,6 +13,7 @@
         android:gravity="center">
 
         <ImageView
+            android:contentDescription="@null"
             android:id="@+id/imgBack"
             android:layout_width="25dp"
             android:layout_height="25dp"
