@@ -120,7 +120,8 @@ public class MissionListActivity extends BaseActivity implements RefreshAndLoadL
                     } else {
                         seeType = "2";//我负责的
                     }
-                    showSelectData(spinnerData.get(position).trim(), GET_NEW_DATA);//参数2必填GET_NEW_DATA
+                    getData();
+//                    showSelectData(spinnerData.get(position).trim(), GET_NEW_DATA);//参数2必填GET_NEW_DATA
                 } else {
                     return;
                 }
