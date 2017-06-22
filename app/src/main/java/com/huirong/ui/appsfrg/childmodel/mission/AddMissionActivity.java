@@ -34,6 +34,7 @@ import java.util.List;
  */
 
 public class AddMissionActivity extends BaseActivity {
+
     //back
     @ViewInject(id = R.id.layout_back, click = "forBack")
     RelativeLayout layout_back;
