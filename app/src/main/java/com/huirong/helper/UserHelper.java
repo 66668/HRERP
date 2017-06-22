@@ -11,6 +11,7 @@ import com.huirong.common.HttpResult;
 import com.huirong.common.MyException;
 import com.huirong.common.NetworkManager;
 import com.huirong.db.entityImpl.UserEntity;
+import com.huirong.model.AppFinancialModel;
 import com.huirong.model.ApprovalSModel;
 import com.huirong.model.ConferenceMSGModel;
 import com.huirong.model.ContactsDeptModel;
@@ -24,7 +25,6 @@ import com.huirong.model.NoticeListModel;
 import com.huirong.model.NotificationListModel;
 import com.huirong.model.ProcurementListModel;
 import com.huirong.model.ReceiveListModel;
-import com.huirong.model.applicationdetailmodel.FinancialAllModel;
 import com.huirong.model.mission.MissionListModel;
 import com.huirong.model.workplan.WorkplanListModel;
 import com.huirong.utils.APIUtils;
@@ -423,7 +423,7 @@ public class UserHelper<T> {
      * @throws MyException
      */
 
-    public static String addMission(Context context, JSONObject jsonObject) throws MyException {
+    public static void addMission(Context context, JSONObject jsonObject) throws MyException {
         if (!NetworkManager.isNetworkAvailable(context)) {
             throw new MyException(R.string.network_invalid);
         }
@@ -433,14 +433,13 @@ public class UserHelper<T> {
         } catch (JSONException e) {
             e.printStackTrace();
         }
-        HttpResult hr = APIUtils.postForObject(WebUrl.AppsManager.ADDWORKPLAN,
+        HttpResult hr = APIUtils.postForObject(WebUrl.AppsManager.ADDMISSION,
                 HttpParameter.create()
                         .add("obj", jsonObject.toString()));
 
         if (hr.hasError()) {
             throw hr.getError();
         }
-        return hr.Message;
     }
     /**
      * 02-03
@@ -629,14 +628,14 @@ public class UserHelper<T> {
     }
     //********************************************************应用-财务（费用）***********************************************************************
     /**
-     * 06-01应用-财务记录
+     * 06-01应用-财务
      */
-    public static List<FinancialAllModel> GetAppFinanceList(Context context, String iMaxTime, String iMinTime) throws MyException {
+    public static List<AppFinancialModel> GetAppFinanceList(Context context, String iMaxTime, String iMinTime) throws MyException {
         if (!NetworkManager.isNetworkAvailable(context)) {
             throw new MyException(R.string.network_invalid);
         }
 
-        HttpResult hr = APIUtils.postForObject(WebUrl.AppsManager.FINACELIST,
+        HttpResult hr = APIUtils.postForObject(WebUrl.AppsManager.FINCANCIALLIST,
                 HttpParameter.create()
                         .add("iMaxTime", iMaxTime)
                         .add("iMinTime", iMinTime)
@@ -654,7 +653,7 @@ public class UserHelper<T> {
 
 
         //方式二：
-        return (List<FinancialAllModel>) JSONUtils.fromJson(hr.jsonArray.toString(), new TypeToken<List<FinancialAllModel>>() {
+        return (List<AppFinancialModel>) JSONUtils.fromJson(hr.jsonArray.toString(), new TypeToken<List<AppFinancialModel>>() {
         }.getType());
     }
     //********************************************************应用-审批***********************************************************************

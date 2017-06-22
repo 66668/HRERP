@@ -21,6 +21,7 @@ import com.huirong.helper.UserHelper;
 import com.huirong.inject.ViewInject;
 import com.huirong.model.MyApprovalModel;
 import com.huirong.model.applicationdetailmodel.FinancialAllModel;
+import com.huirong.utils.LogUtils;
 import com.huirong.utils.PageUtil;
 import com.nostra13.universalimageloader.core.DisplayImageOptions;
 import com.nostra13.universalimageloader.core.ImageLoader;
@@ -157,7 +158,7 @@ public class FinancialReimburseDetailApvlActivity extends BaseActivity {
     }
 
     private void setShow(FinancialAllModel model) {
-        Log.d("SJY", "图片size=" + model.getImageLists().size());
+        LogUtils.d("SJY", "图片size=" + model.getImageLists().size());
 
         if (model.getImageLists().size() == 1) {
             imgLoader.displayImage(model.getImageLists().get(0), img_01, imgOptions);

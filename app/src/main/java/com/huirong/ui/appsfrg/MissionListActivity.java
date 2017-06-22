@@ -15,8 +15,8 @@ import com.huirong.dialog.Loading;
 import com.huirong.helper.UserHelper;
 import com.huirong.inject.ViewInject;
 import com.huirong.model.mission.MissionListModel;
+import com.huirong.ui.appsfrg.childmodel.mission.AddMissionActivity;
 import com.huirong.ui.appsfrg.childmodel.mission.MissionSendDetailActivity;
-import com.huirong.ui.appsfrg.childmodel.workplan.AddPlanActivity;
 import com.huirong.ui.appsfrg.childmodel.workplan.WorkplanReceiveDetailActivity;
 import com.huirong.utils.LogUtils;
 import com.huirong.utils.PageUtil;
@@ -90,7 +90,7 @@ public class MissionListActivity extends BaseActivity implements RefreshAndLoadL
 
     //初始化
     private void initMyView() {
-        tv_right.setText("");
+        tv_right.setText("添加任务");
         myListView.setIRefreshListener(this);//下拉刷新监听
         myListView.setILoadMoreListener(this);//加载监听
         vAdapter = new MissionListAdapter(this);// 上拉加载
@@ -109,14 +109,14 @@ public class MissionListActivity extends BaseActivity implements RefreshAndLoadL
         niceSpinner.addOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                LogUtils.d("我的申请", "spinner监听--" + spinnerData.get(position));
+                LogUtils.d("任务", "spinner监听--" + spinnerData.get(position));
 
                 //清空adapter的list长度 isHanging状态改变
 
                 //如果选择状态没变，就不做处理，同时修改 sendType值
                 if (!spinnerData.get(position).equals(myLastSelectState)) {
                     if (spinnerData.get(position).contains("我派发的")) {
-                        seeType = "1";
+                        seeType = "1";//我派发的
                     } else {
                         seeType = "2";//我负责的
                     }
@@ -124,7 +124,6 @@ public class MissionListActivity extends BaseActivity implements RefreshAndLoadL
                 } else {
                     return;
                 }
-
             }
         });
 
@@ -441,7 +440,7 @@ public class MissionListActivity extends BaseActivity implements RefreshAndLoadL
      * @param view
      */
     public void forAddMission(View view) {
-        startActivity(AddPlanActivity.class);
+        startActivity(AddMissionActivity.class);
         this.finish();
 
     }

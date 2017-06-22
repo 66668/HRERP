@@ -102,9 +102,16 @@
     <string name="msn_place">任务地点</string>
     <string name="msn_place_hint">请输入任务地点</string>
     <string name="msn_maintainMan">维修维护人</string>
+    <string name="msn_repairsMan">报修人</string>
+    <string name="msn_repairsMan_hint">请输入报修人</string>
     <string name="msn_repairWay">联系方式</string>
+    <string name="msn_repairWay_hint">报修人联系方式</string>
     <string name="msn_completeTime">完成时间</string>
-
+    <string name="msn_complete">完成任务</string>
+    <array name="msn_maintanType">
+        <item>房屋维修维护</item>
+        <item>设备设施维修维护</item>
+    </array>
 
     <!-- 应用- 地图考勤-->
     <string name="startLocation">开始定位</string>

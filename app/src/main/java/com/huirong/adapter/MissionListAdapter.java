@@ -55,12 +55,12 @@ public class MissionListAdapter extends BaseListAdapter {
     @Override
     protected void initViewData(final int position, View convertView) {
         WidgetHolder holder = (WidgetHolder) convertView.getTag();//获取控件管理实例
+
         //获取一条信息
-        //?java.lang.ClassCastException: java.util.ArrayList cannot be cast to com.yvision.model.VisitorBModel
         MissionListModel model = (MissionListModel) entityList.get(position);
 
         holder.tvTitle.setText(model.getMisssiontheme());
-        holder.tvTime.setText(model.getUpdetTime());
+        holder.tvTime.setText(model.getCreateDate());
 
         //状态
         if (model.getIsYesNo() != null && TextUtils.isEmpty(model.getIsYesNo())) {//排除后台 null和""情况

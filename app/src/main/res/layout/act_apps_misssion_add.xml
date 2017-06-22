@@ -97,7 +97,7 @@
                     android:layout_height="match_parent">
 
                     <EditText
-                        android:id="@+id/et_planContent"
+                        android:id="@+id/et_missionContent"
                         style="@style/BlackText.standard"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
@@ -125,7 +125,7 @@
                 android:background="@color/common_bg_examination_line"/>
 
             <LinearLayout
-                android:id="@+id/layout_startTime"
+                android:id="@+id/layout_type"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/common_topbar_height"
                 android:background="@color/white"
@@ -236,7 +236,7 @@
                     android:textColor="@color/cl_text_common"/>
 
                 <TextView
-                    android:id="@+id/tv_maintanMan"
+                    android:id="@+id/tv_Requester"
                     style="@style/BlackText.standard"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
@@ -282,6 +282,48 @@
                     android:layout_marginLeft="10dp"
                     android:layout_weight="0.28"
                     android:gravity="center_vertical"
+                    android:text="@string/msn_repairsMan"
+                    android:textColor="@color/cl_text_common"/>
+
+                <EditText
+                    android:id="@+id/et_repairman"
+                    style="@style/BlackText.standard"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.72"
+                    android:background="@drawable/et_white_stroke"
+                    android:gravity="center_vertical"
+                    android:hint="@string/msn_repairsMan_hint"
+                    android:textColorHint="@color/cl_hint_common"
+                    />
+            </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dip"
+                android:background="@color/common_bg_examination_line"/>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dip"
+                android:layout_marginTop="10dp"
+                android:background="@color/common_bg_examination_line"/>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/common_topbar_height"
+                android:background="@color/white"
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
+                android:weightSum="1">
+
+                <TextView
+                    style="@style/BlackText.standard"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:layout_weight="0.28"
+                    android:gravity="center_vertical"
                     android:text="@string/msn_repairWay"
                     android:textColor="@color/cl_text_common"/>
 
@@ -293,7 +335,7 @@
                     android:layout_weight="0.72"
                     android:background="@drawable/et_white_stroke"
                     android:gravity="center_vertical"
-                    android:hint="@string/msn_place_hint"
+                    android:hint="@string/msn_repairWay_hint"
                     android:textColorHint="@color/cl_hint_common"
                     />
             </LinearLayout>
@@ -386,6 +428,7 @@
                     android:background="@drawable/et_white_stroke"
                     android:gravity="top|left"
                     android:hint="@string/beaway_remark_hint"
+                    android:maxLength="300"
                     android:paddingTop="10dp"
                     android:textColorHint="@color/cl_hint_common"/>
             </LinearLayout>
@@ -399,67 +442,6 @@
                 android:layout_width="match_parent"
                 android:layout_height="1dip"
                 android:layout_marginTop="10dp"
-                android:background="@color/common_bg_examination_line"/>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="100dp"
-                android:background="@color/white"
-                android:gravity="center_vertical"
-                android:orientation="vertical"
-                android:weightSum="1">
-
-                <TextView
-                    style="@style/BlackText.standard"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="10dp"
-                    android:gravity="center_vertical"
-                    android:text="@string/receiver"
-                    android:textColor="@color/cl_text_common"/>
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:gravity="center_vertical"
-                    android:orientation="horizontal"
-                    android:weightSum="1">
-
-                    <RelativeLayout
-                        android:id="@+id/AddApprover"
-                        android:layout_width="0dp"
-                        android:layout_height="80dp"
-                        android:layout_weight="0.25"
-                        android:gravity="center">
-
-                        <ImageView
-                            android:id="@+id/img_addrequster"
-                            android:layout_width="50dp"
-                            android:layout_height="50dp"
-                            android:src="@mipmap/imgadd"/>
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_below="@+id/img_addrequster"
-                            android:text="@string/addRequster"
-                            />
-                    </RelativeLayout>
-
-                    <TextView
-                        android:id="@+id/tv_Requester"
-                        style="@style/BlackText.standard"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginRight="10dp"
-                        android:layout_toRightOf="@+id/AddApprover"
-                        android:gravity="center_vertical"/>
-                </LinearLayout>
-            </LinearLayout>
-
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="1dip"
                 android:background="@color/common_bg_examination_line"/>
 
         </LinearLayout>

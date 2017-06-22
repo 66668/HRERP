@@ -1,17 +1,30 @@
 package com.huirong.ui.appsfrg.childmodel.finance;
 
 import android.os.Bundle;
+import android.os.Message;
 import android.view.View;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.huirong.R;
 import com.huirong.base.BaseActivity;
+import com.huirong.common.ImageLoadingConfig;
+import com.huirong.common.MyException;
+import com.huirong.dialog.Loading;
+import com.huirong.helper.UserHelper;
 import com.huirong.inject.ViewInject;
+import com.huirong.model.AppFinancialModel;
 import com.huirong.model.applicationdetailmodel.FinancialAllModel;
+import com.huirong.utils.LogUtils;
+import com.huirong.utils.PageUtil;
+import com.nostra13.universalimageloader.core.DisplayImageOptions;
+import com.nostra13.universalimageloader.core.ImageLoader;
+import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
 
 /**
- * 应用-财务-借款详情
+ * 应用-财务-付款 详情
  * Created by sjy on 2017/2/25.
  */
 
@@ -27,6 +40,24 @@ public class FinancialPayDetailActivity extends BaseActivity {
     //
     @ViewInject(id = R.id.tv_right)
     TextView tv_right;
+
+
+    //申请人
+    @ViewInject(id = R.id.tv_ApprovalPerson)
+    TextView tv_ApprovalPerson;
+
+    //部门
+    @ViewInject(id = R.id.tv_approvaldept)
+    TextView tv_approvaldept;
+
+    //公司
+    @ViewInject(id = R.id.tv_approvalCo)
+    TextView tv_approvalCo;
+
+    //申请时间
+    @ViewInject(id = R.id.tv_approvalTime)
+    TextView tv_approvalTime;
+
 
     //付款方式
     @ViewInject(id = R.id.tv_feeType)
@@ -47,66 +78,121 @@ public class FinancialPayDetailActivity extends BaseActivity {
     @ViewInject(id = R.id.tv_fee)
     TextView tv_fee;
 
-
     //备注
     @ViewInject(id = R.id.tv_remark, click = "RemarkExpended")
     TextView tv_remark;
 
-    //申请人
-    @ViewInject(id = R.id.tv_ApprovalPerson)
-    TextView tv_ApprovalPerson;
+    //获取子控件个数的父控件
+    @ViewInject(id = R.id.layout_ll)
+    LinearLayout layout_ll;
 
-    //部门
-    @ViewInject(id = R.id.tv_approvaldept)
-    TextView tv_approvaldept;
+    //图片1
+    @ViewInject(id = R.id.img_01, click = "imgDetail01")
+    ImageView img_01;
 
-    //公司
-    @ViewInject(id = R.id.tv_approvalCo)
-    TextView tv_approvalCo;
+    //图片2
+    @ViewInject(id = R.id.img_02, click = "imgDetail02")
+    ImageView img_02;
 
-    //申请时间
-    @ViewInject(id = R.id.tv_approvalTime)
-    TextView tv_approvalTime;
-
-
+    //图片3
+    @ViewInject(id = R.id.img_03, click = "imgDetail03")
+    ImageView img_03;
+    //常量
+    public static final int POST_SUCCESS = 21;
+    public static final int POST_FAILED = 22;
     //变量
-    private FinancialAllModel model;
+    private AppFinancialModel appFinancialModel;
 
+    private FinancialAllModel model;
+    //imageLoader图片缓存
+    private ImageLoader imgLoader;
+    private DisplayImageOptions imgOptions;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.act_apps_financial_pay_detail);
 
         initMyView();
-        setShow();
+        getDetailData();
     }
 
     private void initMyView() {
         tv_title.setText(getResources().getString(R.string.financial_pay));
         tv_right.setText("");
 
+        imgLoader = ImageLoader.getInstance();
+        imgLoader.init(ImageLoaderConfiguration.createDefault(this));
+        imgOptions = ImageLoadingConfig.generateDisplayImageOptions(R.mipmap.ic_launcher);
         Bundle bundle = this.getIntent().getExtras();
-        model = (FinancialAllModel) bundle.getSerializable("FinancialAllModel");
+        appFinancialModel = (AppFinancialModel) bundle.getSerializable("AppFinancialModel");
     }
 
-    private void setShow() {
+    private void setShow(FinancialAllModel model) {
         //
         tv_ApprovalPerson.setText(model.getEmployeeName());
         tv_approvaldept.setText(model.getDepartmentName());
         tv_approvalCo.setText(model.getStoreName());
-        tv_approvalTime.setText(model.getCreateTime());
+        tv_approvalTime.setText(model.getApplicationCreateTime());
 
         //
-        tv_feeType.setText(model.getWay());
+        tv_feeType.setText(model.getPaymentmethod());
         tv_payOfficial.setText(model.getCollectionunit());
         tv_Account.setText(model.getAccountnumber());
         tv_bank.setText(model.getBankaccount());
         tv_fee.setText(model.getFee());
         tv_remark.setText(model.getRemark());
 
+        if (model.getImageLists().size() == 1) {
+            imgLoader.displayImage(model.getImageLists().get(0), img_01, imgOptions);
+        }
+
+        if (model.getImageLists().size() == 2) {
+            imgLoader.displayImage(model.getImageLists().get(0), img_01, imgOptions);
+            imgLoader.displayImage(model.getImageLists().get(1), img_02, imgOptions);
+        }
+
+        if (model.getImageLists().size() == 3) {
+            imgLoader.displayImage(model.getImageLists().get(0), img_01, imgOptions);
+            imgLoader.displayImage(model.getImageLists().get(1), img_02, imgOptions);
+            imgLoader.displayImage(model.getImageLists().get(2), img_03, imgOptions);
+        }
 
     }
+    private void getDetailData() {
+        Loading.run(this, new Runnable() {
+            @Override
+            public void run() {
+                //泛型
+                try {
+                    FinancialAllModel model1 = new UserHelper<>(FinancialAllModel.class)
+                            .approvalDetailPost(FinancialPayDetailActivity.this,
+                                    appFinancialModel.getApplicationID(),
+                                    appFinancialModel.getApplicationType());
 
+                    sendMessage(POST_SUCCESS, model1);
+                } catch (MyException e) {
+                    LogUtils.d("报销详情异常", e.toString());
+                    sendMessage(POST_FAILED, e.getMessage());
+                }
+            }
+        });
+    }
+
+    @Override
+    protected void handleMessage(Message msg) {
+        super.handleMessage(msg);
+        switch (msg.what) {
+            case POST_SUCCESS:
+                model = (FinancialAllModel) msg.obj;
+                setShow(model);
+                break;
+            case POST_FAILED:
+                PageUtil.DisplayToast((String) msg.obj);
+                break;
+            default:
+                break;
+        }
+    }
     /**
      * back
      *

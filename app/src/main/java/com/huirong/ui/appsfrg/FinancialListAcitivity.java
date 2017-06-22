@@ -2,7 +2,6 @@ package com.huirong.ui.appsfrg;
 
 import android.os.Bundle;
 import android.os.Message;
-import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.RelativeLayout;
@@ -15,10 +14,11 @@ import com.huirong.common.MyException;
 import com.huirong.dialog.Loading;
 import com.huirong.helper.UserHelper;
 import com.huirong.inject.ViewInject;
-import com.huirong.model.applicationdetailmodel.FinancialAllModel;
+import com.huirong.model.AppFinancialModel;
 import com.huirong.ui.appsfrg.childmodel.finance.FinancialLoanDetailActivity;
 import com.huirong.ui.appsfrg.childmodel.finance.FinancialPayDetailActivity;
 import com.huirong.ui.appsfrg.childmodel.finance.FinancialRemburseDetailActivity;
+import com.huirong.utils.LogUtils;
 import com.huirong.utils.PageUtil;
 import com.huirong.widget.NiceSpinner;
 import com.huirong.widget.RefreshAndLoadListView;
@@ -31,7 +31,8 @@ import java.util.List;
 import static com.huirong.R.id.tv_title;
 
 /**
- * 应用-财务列表界面(不同于审批-财务申请)
+ * 应用-财务(不同于审批-财务申请)
+ * <p>
  * spinner+listView上拉下拉
  * Created by JackSong on 2016/10/25.
  */
@@ -68,18 +69,16 @@ public class FinancialListAcitivity extends BaseActivity implements RefreshAndLo
     private List<String> spinnerData;
     private String myLastSelectState;//记录spinner上次选中的值
 
-    private ArrayList<FinancialAllModel> list = null;//获取数据 每次20条
-    private ArrayList<FinancialAllModel> listAll = new ArrayList<>();//记录所有数据
+    private ArrayList<AppFinancialModel> list = null;//获取数据 每次20条
 
-    private ArrayList<FinancialAllModel> listLoanAll = new ArrayList<>();//记录借款的总数据
-    private ArrayList<FinancialAllModel> listRemburseAll = new ArrayList<>();//记录报销的总数据
-    private ArrayList<FinancialAllModel> listFeeAll = new ArrayList<>();//记录费用的总数据
-    private ArrayList<FinancialAllModel> listPayAll = new ArrayList<>();//记录付款的总数据
+    private ArrayList<AppFinancialModel> listAll = new ArrayList<>();//记录借款的总数据
+    private ArrayList<AppFinancialModel> listLoanAll = new ArrayList<>();//记录借款的总数据
+    private ArrayList<AppFinancialModel> listRemburseAll = new ArrayList<>();//记录报销的总数据
+    private ArrayList<AppFinancialModel> listPayAll = new ArrayList<>();//记录付款的总数据
 
-    private ArrayList<FinancialAllModel> listLoan;//每次获取的借款的数据段
-    private ArrayList<FinancialAllModel> listRemburse;//每次获取的报销的数据段
-    private ArrayList<FinancialAllModel> listFee;//每次获取的费用的数据段
-    private ArrayList<FinancialAllModel> listPay;//记录付款的数据段
+    private ArrayList<AppFinancialModel> listLoan;//每次获取的借款的数据段
+    private ArrayList<AppFinancialModel> listRemburse;//每次获取的报销的数据段
+    private ArrayList<AppFinancialModel> listPay;//记录付款的数据段
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -100,8 +99,8 @@ public class FinancialListAcitivity extends BaseActivity implements RefreshAndLo
         myListView.setAdapter(vAdapter);
 
         //spinner数据
-        spinnerData = new LinkedList<>(Arrays.asList("所有", "借款", "报销", "费用申请", "付款"));
-        myLastSelectState = spinnerData.get(0);//默认为 我的申请
+        spinnerData = new LinkedList<>(Arrays.asList("所有", "借款", "报销", "付款"));
+        myLastSelectState = spinnerData.get(0);//默认为 所有
         niceSpinner.attachDataSource(spinnerData);//绑定数据
     }
 
@@ -110,7 +109,7 @@ public class FinancialListAcitivity extends BaseActivity implements RefreshAndLo
         niceSpinner.addOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Log.d("SJY", "spinner监听--" + spinnerData.get(position));
+                LogUtils.d("SJY", "spinner监听--" + spinnerData.get(position));
 
                 //清空adapter的list长度 isHanging状态改变
 
@@ -133,9 +132,9 @@ public class FinancialListAcitivity extends BaseActivity implements RefreshAndLo
                 int newPosition = position - headerViewsCount;//得到新的修正后的position
 
                 //所需参数
-                FinancialAllModel model = (FinancialAllModel) vAdapter.getItem(newPosition);//
-                String type = model.getTypes();
-
+                AppFinancialModel model = (AppFinancialModel) vAdapter.getItem(newPosition);//
+                String type = model.getDetail();
+                LogUtils.d("财务跳转详情", "type=" + type+"--\n"+model.toString());
                 //页面跳转
                 transferTo(type, model);
             }
@@ -148,7 +147,7 @@ public class FinancialListAcitivity extends BaseActivity implements RefreshAndLo
             public void run() {
                 ifLoading = true;//
                 try {
-                    List<FinancialAllModel> visitorModelList = UserHelper.GetAppFinanceList(
+                    List<AppFinancialModel> visitorModelList = UserHelper.GetAppFinanceList(
                             FinancialListAcitivity.this,
                             "",//iMaxTime
                             "");
@@ -159,7 +158,7 @@ public class FinancialListAcitivity extends BaseActivity implements RefreshAndLo
 
                     sendMessage(GET_NEW_DATA, visitorModelList);
                 } catch (MyException e) {
-                    Log.d("SJY", "取值异常=" + e.getMessage());
+                    LogUtils.d("SJY", "取值异常=" + e.getMessage());
                     sendMessage(GET_NONE_NEWDATA, e.getMessage());
                 }
             }
@@ -181,12 +180,12 @@ public class FinancialListAcitivity extends BaseActivity implements RefreshAndLo
                 ifLoading = true;//
                 try {
 
-                    List<FinancialAllModel> visitorModelList = UserHelper.GetAppFinanceList(
+                    List<AppFinancialModel> visitorModelList = UserHelper.GetAppFinanceList(
                             FinancialListAcitivity.this,
                             IMaxtime,//iMaxTime
                             "");
 
-                    Log.d("SJY", "loadMore--min=" + IMaxtime);
+                    LogUtils.d("SJY", "loadMore--min=" + IMaxtime);
                     if (visitorModelList == null || visitorModelList.size() < pageSize) {
                         vAdapter.IsEnd = true;
                     }
@@ -220,12 +219,12 @@ public class FinancialListAcitivity extends BaseActivity implements RefreshAndLo
 
                 ifLoading = true;//
                 try {
-                    List<FinancialAllModel> visitorModelList = UserHelper.GetAppFinanceList(
+                    List<AppFinancialModel> visitorModelList = UserHelper.GetAppFinanceList(
                             FinancialListAcitivity.this,
                             "",//iMaxTime
                             IMinTime);
 
-                    Log.d("SJY", "loadMore--min=" + IMaxtime);
+                    LogUtils.d("SJY", "loadMore--min=" + IMaxtime);
                     if (visitorModelList == null || visitorModelList.size() < pageSize) {
                         vAdapter.IsEnd = true;
                     }
@@ -244,11 +243,11 @@ public class FinancialListAcitivity extends BaseActivity implements RefreshAndLo
         switch (msg.what) {
             case GET_NEW_DATA://进入页面加载最新
                 // 数据显示
-                list = (ArrayList<FinancialAllModel>) msg.obj;
+                list = (ArrayList<AppFinancialModel>) msg.obj;
 
                 //刷新数据前要清空数据
+
                 listAll.clear();
-                listFeeAll.clear();
                 listLoanAll.clear();
                 listPayAll.clear();
                 listRemburseAll.clear();
@@ -261,7 +260,7 @@ public class FinancialListAcitivity extends BaseActivity implements RefreshAndLo
                 ifLoading = false;
                 break;
             case GET_REFRESH_DATA://刷新
-                list = (ArrayList<FinancialAllModel>) msg.obj;
+                list = (ArrayList<AppFinancialModel>) msg.obj;
                 SplitListState(list, GET_REFRESH_DATA);//筛选数据状态
                 showSelectData(myLastSelectState, GET_REFRESH_DATA);//根据spinner值和数据状态 确定显示数据
 
@@ -270,7 +269,7 @@ public class FinancialListAcitivity extends BaseActivity implements RefreshAndLo
                 break;
 
             case GET_MORE_DATA://加载
-                list = (ArrayList<FinancialAllModel>) msg.obj;
+                list = (ArrayList<AppFinancialModel>) msg.obj;
 
                 SplitListState(list, GET_MORE_DATA);//筛选数据状态
                 showSelectData(myLastSelectState, GET_MORE_DATA);//根据spinner值和数据状态 确定显示数据
@@ -293,12 +292,12 @@ public class FinancialListAcitivity extends BaseActivity implements RefreshAndLo
     }
 
 
-    public void setIMaxTime(ArrayList<FinancialAllModel> list) {
+    public void setIMaxTime(ArrayList<AppFinancialModel> list) {
         //        IMaxtime = list.get(0).getPlanbackTime();
         IMaxtime = "";
     }
 
-    public void setIMinTime(ArrayList<FinancialAllModel> list) {
+    public void setIMinTime(ArrayList<AppFinancialModel> list) {
         //        IMinTime = list.get(list.size() - 1).getPlanbackTime();
         IMinTime = "";
     }
@@ -309,24 +308,21 @@ public class FinancialListAcitivity extends BaseActivity implements RefreshAndLo
      * @param list  上拉下拉获取的数据记录 20条
      * @param STATE 具体上拉 下拉 获取 三个状态
      */
-    private void SplitListState(List<FinancialAllModel> list, final int STATE) {
+    private void SplitListState(List<AppFinancialModel> list, final int STATE) {
         if (list.size() <= 0) {
             return;
         }
         //每次来新数据，重新赋值spinner子状态
         listLoan = new ArrayList<>();
         listRemburse = new ArrayList<>();
-        listFee = new ArrayList<>();
         listPay = new ArrayList<>();
 
         for (int i = 0; i < list.size(); i++) {
-            if (list.get(i).getTypes().contains("借款")) {//未审批
+            if (list.get(i).getDetail().contains("借款")) {//未审批
                 listLoan.add(list.get(i));
-            } else if (list.get(i).getTypes().contains("报销")) {//已审批
+            } else if (list.get(i).getDetail().contains("报销")) {//已审批
                 listRemburse.add(list.get(i));
-            } else if (list.get(i).getTypes().contains("费用申请")) {
-                listFee.add(list.get(i));
-            } else if (list.get(i).getTypes().contains("付款")) {
+            } else if (list.get(i).getDetail().contains("付款")) {
                 listPay.add(list.get(i));
             } else {
                 PageUtil.DisplayToast("参数出问题！");
@@ -334,32 +330,27 @@ public class FinancialListAcitivity extends BaseActivity implements RefreshAndLo
         }
         switch (STATE) {
             case GET_NEW_DATA:
-                Log.d("SJY", "GET_NEW_DATA筛选");
+                LogUtils.d("SJY", "GET_NEW_DATA筛选");
 
                 //总数据拼接
                 listAll.addAll(list);// 总记录数据
                 listLoanAll.addAll(listLoan);
                 listRemburseAll.addAll(listRemburse);
-                listFeeAll.addAll(listFee);
                 listPayAll.addAll(listPay);
                 break;
 
             case GET_REFRESH_DATA:
-                Log.d("SJY", "GET_REFRESH_DATA筛选");
+                LogUtils.d("SJY", "GET_REFRESH_DATA筛选");
 
                 //数据插入 (已做拼接处理),使用：当切换spinner时，刷新了n个长度的数据可以直接显示
                 //但是 spinner子状态下如何拼接数据？还有一种方式：每次刷新 清空子状态数据重新赋值？
 
                 listAll.addAll(0, list);
-
                 if (listLoan.size() > 0) {
                     listLoanAll.addAll(0, listLoan);
                 }
                 if (listRemburse.size() > 0) {
                     listRemburseAll.addAll(0, listRemburse);
-                }
-                if (listFee.size() > 0) {
-                    listFeeAll.addAll(0, listFee);
                 }
                 if (listPay.size() > 0) {
                     listPayAll.addAll(0, listPay);
@@ -369,12 +360,10 @@ public class FinancialListAcitivity extends BaseActivity implements RefreshAndLo
 
 
             case GET_MORE_DATA:
-                Log.d("SJY", "GET_MORE_DATA筛选");
-
+                LogUtils.d("SJY", "GET_MORE_DATA筛选");
                 listAll.addAll(list);// 总记录数据
                 listLoanAll.addAll(listLoan);
                 listRemburseAll.addAll(listRemburse);
-                listFeeAll.addAll(listFee);
                 listPayAll.addAll(listPay);
                 break;
 
@@ -398,19 +387,22 @@ public class FinancialListAcitivity extends BaseActivity implements RefreshAndLo
             case "所有":
 
                 if (STATE == GET_NEW_DATA) {
-                    vAdapter.setEntityList(listAll);//代替list，spinner切换时 listAll包含所有数据不会丢失
+                    vAdapter.setEntityList(listAll);
 
                 } else if (STATE == GET_REFRESH_DATA) {
                     vAdapter.insertEntityList(list);
                     myListView.loadAndFreshComplete();
+
                 } else if (STATE == GET_MORE_DATA) {
                     vAdapter.addEntityList(list);
                     myListView.loadAndFreshComplete();
+
                 } else if (STATE == GET_NONE_NEWDATA) {
 
                 }
 
                 break;
+
             case "借款":
 
                 if (STATE == GET_NEW_DATA) {
@@ -440,25 +432,6 @@ public class FinancialListAcitivity extends BaseActivity implements RefreshAndLo
 
                 } else if (STATE == GET_MORE_DATA) {
                     vAdapter.addEntityList(listRemburse);
-                    myListView.loadAndFreshComplete();
-
-                } else if (STATE == GET_NONE_NEWDATA) {
-
-                }
-                break;
-
-            case "费用申请":
-
-
-                if (STATE == GET_NEW_DATA) {
-                    vAdapter.setEntityList(listFeeAll);
-
-                } else if (STATE == GET_REFRESH_DATA) {
-                    vAdapter.insertEntityList(listFee);
-                    myListView.loadAndFreshComplete();
-
-                } else if (STATE == GET_MORE_DATA) {
-                    vAdapter.addEntityList(listFee);
                     myListView.loadAndFreshComplete();
 
                 } else if (STATE == GET_NONE_NEWDATA) {
@@ -498,10 +471,10 @@ public class FinancialListAcitivity extends BaseActivity implements RefreshAndLo
      *
      * @param model
      */
-    private void transferTo(String type, FinancialAllModel model) {
+    private void transferTo(String type, AppFinancialModel model) {
 
         Bundle bundle = new Bundle();
-        bundle.putSerializable("FinancialAllModel", model);
+        bundle.putSerializable("AppFinancialModel", model);
         switch (type) {
             case "借款":
                 startActivity(FinancialLoanDetailActivity.class, bundle);
@@ -516,7 +489,6 @@ public class FinancialListAcitivity extends BaseActivity implements RefreshAndLo
                 break;
         }
     }
-
 
     /**
      * back

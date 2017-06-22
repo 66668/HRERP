@@ -60,16 +60,66 @@ public class WebUrl {
         public static final String ADDWORKPLAN = LOGIN_URL + LOGIN_FLODER_USER + "TaskSchedule/TaskScheduleAdd";
 
         /**
+         * 应用-任务 接口
+         *
+         * #############################################################################################
+         */
+        /**
          * 03-01 任务 记录
          */
         public static final String MISSIONLIST = LOGIN_URL + LOGIN_FLODER_USER + "Maintain/MaintainList";
+
+        /**
+         * 03-01 任务 记录
+         */
+        public static final String ADDMISSION = LOGIN_URL + LOGIN_FLODER_USER + "Maintain/MaintainlAdd";
+
          /**
          * 03-01 任务详情，修改已读
          */
         public static final String MISSIONISREAD = LOGIN_URL + LOGIN_FLODER_USER + "Maintain/MaintainEdit";
 
         /**
-         * 应用-审批接口
+         * 应用-地图签到 接口
+         * #############################################################################################
+         */
+
+        /**
+         * 03地图签到
+         */
+        public static final String ATTENDRECORD = LOGIN_URL + LOGIN_FLODER_USER + "Attence/AttenceRecord";
+
+        /**
+         * 03-02获取地图考勤记录
+         */
+        public static final String GETATTENDRECORD = LOGIN_URL + LOGIN_FLODER_USER + "AttenceRecord/GetAttenceRecord";
+
+        /**
+         * 应用-公告 通知 接口
+         * #############################################################################################
+         */
+
+        /**
+         * 04 应用 公告 获取列表
+         */
+        public static final String GETNOTICELIST = LOGIN_URL + LOGIN_FLODER_USER + "AfficheList/MyAfficheList";
+
+        /**
+         * 04-02 应用 公告 获取列表
+         */
+        public static final String READTHISNOTICE = LOGIN_URL + LOGIN_FLODER_USER + "UpdateIsread/UpdateIsreads";
+
+        /**
+         * 05 应用 通知 列表
+         */
+        public static final String GETNOTIFICATIONLIST = LOGIN_URL + LOGIN_FLODER_USER + "NoticeList/MyNoticeList";
+        /**
+         * 应用-费用（财务） 接口
+         * #############################################################################################
+         */
+        public static final String FINCANCIALLIST = LOGIN_URL + LOGIN_FLODER_USER + "LRApplicationInfo/LRApplicationInfoList";
+        /**
+         * 应用-审批 接口
          *  我的申请 我的审批 抄送 及详情 接口
          * #############################################################################################
          */
@@ -119,10 +169,6 @@ public class WebUrl {
          */
         public static final String GETCOPYDETAIL = LOGIN_URL + LOGIN_FLODER_USER + "AllCopyListInfo/GetAllCopyListInfo";
 
-        /**应用-审批接口
-         *  申请接口
-         * #############################################################################################
-         */
         /**
          * 01-04-01 请假申请
          */
@@ -193,43 +239,9 @@ public class WebUrl {
         public static final String CHANGESALARY = LOGIN_URL + LOGIN_FLODER_USER + "ChangeSalary/ChangeSalaryPost";
 
         /**
-         * 地图签到接口
-         * #############################################################################################
-         */
-
-        /**
-         * 03地图签到
-         */
-        public static final String ATTENDRECORD = LOGIN_URL + LOGIN_FLODER_USER + "Attence/AttenceRecord";
-
-        /**
-         * 03-02获取地图考勤记录
-         */
-        public static final String GETATTENDRECORD = LOGIN_URL + LOGIN_FLODER_USER + "AttenceRecord/GetAttenceRecord";
-        /**
          *
          * #############################################################################################
          */
-
-        /**
-         * 04 应用 公告 获取列表
-         */
-        public static final String GETNOTICELIST = LOGIN_URL + LOGIN_FLODER_USER + "AfficheList/MyAfficheList";
-
-        /**
-         * 04-02 应用 公告 获取列表
-         */
-        public static final String READTHISNOTICE = LOGIN_URL + LOGIN_FLODER_USER + "UpdateIsread/UpdateIsreads";
-
-        /**
-         * 05 应用 通知 列表
-         */
-        public static final String GETNOTIFICATIONLIST = LOGIN_URL + LOGIN_FLODER_USER + "NoticeList/MyNoticeList";
-
-        /**
-         * 05 应用 通知 列表
-         */
-        public static final String FINACELIST = LOGIN_URL + LOGIN_FLODER_USER + "FinanceRecord/GetFinanceRecord";
 
         /**
          * 07-01 应用 会议 列表

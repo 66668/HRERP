@@ -37,35 +37,36 @@ public class MissionSendDetailActivity extends BaseActivity {
 
 
     //标题
-    @ViewInject(id = R.id.tv_workplan_title)
-    TextView tv_workplan_title;
+    @ViewInject(id = R.id.tv_msnTitle)
+    TextView tv_msnTitle;
 
-    //时间
-    @ViewInject(id = R.id.tv_time)
-    TextView tv_time;
+    //内容
+    @ViewInject(id = R.id.tv_msnContent,click = "ContentExpended")
+    TextView tv_msnContent;
 
-    //发件人
-    @ViewInject(id = R.id.tv_to)
-    TextView tv_to;
+    //任务类型
+    @ViewInject(id = R.id.tv_msnType)
+    TextView tv_msnType;
 
-    //收件人
-    @ViewInject(id = R.id.tv_rec)
-    TextView tv_rec;
+    //维修地点
+    @ViewInject(id = R.id.tv_msnPlace)
+    TextView tv_msnPlace;
 
-    //进度
-    @ViewInject(id = R.id.tv_advance)
-    TextView tv_advance;
+    //维修维护人
+    @ViewInject(id = R.id.tv_maintainMan)
+    TextView tv_maintainMan;
+
+    //联系方式
+    @ViewInject(id = R.id.tv_repairWay)
+    TextView tv_repairWay;
 
     //完成时间
     @ViewInject(id = R.id.tv_completeTime)
     TextView tv_completeTime;
 
-    //内容
-    @ViewInject(id = R.id.tv_content)
-    TextView tv_content;
 
     //备注
-    @ViewInject(id = R.id.tv_remark)
+    @ViewInject(id = R.id.tv_remark,click = "RemarkExpended")
     TextView tv_remark;
 
 
@@ -74,7 +75,7 @@ public class MissionSendDetailActivity extends BaseActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.act_apps_workplan_send_detail);
+        setContentView(R.layout.act_apps_mission_send_detail);
         initMyView();
         setShow();
     }
@@ -90,6 +91,7 @@ public class MissionSendDetailActivity extends BaseActivity {
     }
 
     private void setShow() {
+
 //        tv_workplan_title.setText(model.getTitle());
 //        tv_time.setText(model.getCreateTime());
 //        tv_to.setText(model.getUploaderEmployeeID());
@@ -130,7 +132,40 @@ public class MissionSendDetailActivity extends BaseActivity {
         });
     }
 
+    /**
+     * 备注显示扩展
+     */
+    private boolean isRemarkExpend = false;
 
+    public void RemarkExpended(View view) {
+        if (!isRemarkExpend) {
+            tv_remark.setMinLines(0);
+            tv_remark.setMaxLines(Integer.MAX_VALUE);
+            isRemarkExpend = true;
+        } else {
+            tv_remark.setLines(3);
+            isRemarkExpend = false;
+        }
+
+    }
+
+    /**
+     * 内容显示扩展
+     */
+    private boolean isContentExpend = false;
+
+    public void ContentExpended(View view) {
+        if (!isContentExpend) {
+            tv_msnContent.setMinLines(0);
+            tv_msnContent.setMaxLines(Integer.MAX_VALUE);
+            isContentExpend = true;
+        } else {
+//            tv_msnContent.setLines(5);
+            tv_msnContent.setMaxLines(Integer.MAX_VALUE);
+            isContentExpend = false;
+        }
+
+    }
     /**
      * back
      *

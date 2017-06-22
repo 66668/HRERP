@@ -29,6 +29,60 @@ public class MissionListModel implements Serializable {
     private String ISremark;//完成说明
     private String remark;//备注
     private String StoreID;//公司编号
+    private String CreateDate;
+    private String Departmentid;
+    private String EmployeeName;
+    private String maintainMan1;
+    private String showState;
+    private String ActiveFlg;
+
+    public String getCreateDate() {
+        return CreateDate;
+    }
+
+    public void setCreateDate(String createDate) {
+        CreateDate = createDate;
+    }
+
+    public String getDepartmentid() {
+        return Departmentid;
+    }
+
+    public void setDepartmentid(String departmentid) {
+        Departmentid = departmentid;
+    }
+
+    public String getEmployeeName() {
+        return EmployeeName;
+    }
+
+    public void setEmployeeName(String employeeName) {
+        EmployeeName = employeeName;
+    }
+
+    public String getMaintainMan1() {
+        return maintainMan1;
+    }
+
+    public void setMaintainMan1(String maintainMan1) {
+        this.maintainMan1 = maintainMan1;
+    }
+
+    public String getShowState() {
+        return showState;
+    }
+
+    public void setShowState(String showState) {
+        this.showState = showState;
+    }
+
+    public String getActiveFlg() {
+        return ActiveFlg;
+    }
+
+    public void setActiveFlg(String activeFlg) {
+        ActiveFlg = activeFlg;
+    }
 
     public static long getSerialVersionUID() {
         return serialVersionUID;

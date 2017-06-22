@@ -4,17 +4,17 @@ import android.content.Context;
 import android.view.View;
 import android.widget.TextView;
 
-import com.nostra13.universalimageloader.core.DisplayImageOptions;
-import com.nostra13.universalimageloader.core.ImageLoader;
-import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
 import com.huirong.R;
 import com.huirong.base.BaseListAdapter;
 import com.huirong.common.ImageLoadingConfig;
-import com.huirong.model.applicationdetailmodel.FinancialAllModel;
+import com.huirong.model.AppFinancialModel;
+import com.nostra13.universalimageloader.core.DisplayImageOptions;
+import com.nostra13.universalimageloader.core.ImageLoader;
+import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
 
 
 /**
- * 财务记录 自定义上拉下拉listView 的适配
+ * 应用 费用 适配
  *
  * @author
  */
@@ -27,7 +27,6 @@ public class FinanceListAdapter extends BaseListAdapter {
     public class WidgetHolder {
         public TextView tv_finaceTitle;
         public TextView tvTime;
-        public TextView tvType;
     }
 
     public FinanceListAdapter(Context context) {
@@ -45,7 +44,6 @@ public class FinanceListAdapter extends BaseListAdapter {
         WidgetHolder holder = new WidgetHolder();
         holder.tv_finaceTitle = (TextView) view.findViewById(R.id.tv_finace_title);
         holder.tvTime = (TextView) view.findViewById(R.id.tv_time);
-        holder.tvType = (TextView) view.findViewById(R.id.tv_type);
         view.setTag(holder);
         return view;
     }
@@ -54,12 +52,11 @@ public class FinanceListAdapter extends BaseListAdapter {
     protected void initViewData(final int position, View convertView) {
         WidgetHolder holder = (WidgetHolder) convertView.getTag();//获取控件管理实例
 
-        FinancialAllModel model = (FinancialAllModel) entityList.get(position);
+        AppFinancialModel model = (AppFinancialModel) entityList.get(position);
         //获取一条信息
 
+        holder.tv_finaceTitle.setText(model.getDetail());
         holder.tvTime.setText(model.getCreateTime());
-        holder.tvType.setText(model.getTypes());
-        holder.tv_finaceTitle.setText(model.getApplicationTitle());
 
     }
 

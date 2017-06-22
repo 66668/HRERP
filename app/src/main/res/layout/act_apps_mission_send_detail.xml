@@ -1,4 +1,3 @@
-<?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
               android:layout_width="match_parent"
               android:layout_height="match_parent"
@@ -14,17 +13,16 @@
         android:layout_height="match_parent">
 
         <ScrollView
+            android:layout_above="@+id/laytout_complete"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_marginBottom="@dimen/common_topbar_height"
-            android:background="@color/common_bg_examination">
+            android:layout_height="match_parent">
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
+                android:background="@color/notice_detail_bg_common"
                 android:orientation="vertical">
-
-
+                <!-- 标题 -->
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/common_topbar_height40"
@@ -40,10 +38,10 @@
                         android:layout_marginLeft="10dp"
                         android:layout_weight="0.28"
                         android:gravity="center_vertical"
-                        android:text="@string/approval_person"/>
+                        android:text="@string/msn_title"/>
 
                     <TextView
-                        android:id="@+id/tv_ApprovalPerson"
+                        android:id="@+id/tv_msnTitle"
                         style="@style/BlackText.standard"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
@@ -53,158 +51,6 @@
                         />
                 </LinearLayout>
 
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="@dimen/common_topbar_height40"
-                    android:background="@color/white"
-                    android:gravity="center_vertical"
-                    android:orientation="horizontal"
-                    android:weightSum="1">
-
-                    <TextView
-                        style="@style/BlackText.standard"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_marginLeft="10dp"
-                        android:layout_weight="0.28"
-                        android:gravity="center_vertical"
-                        android:text="@string/approval_dept"/>
-
-                    <TextView
-                        android:id="@+id/tv_approvaldept"
-                        style="@style/BlackText.standard"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_marginLeft="10dp"
-                        android:layout_weight="0.72"
-                        android:gravity="center_vertical"
-                        />
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="@dimen/common_topbar_height40"
-                    android:background="@color/white"
-                    android:gravity="center_vertical"
-                    android:orientation="horizontal"
-                    android:weightSum="1">
-
-                    <TextView
-                        style="@style/BlackText.standard"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_marginLeft="10dp"
-                        android:layout_weight="0.28"
-                        android:gravity="center_vertical"
-                        android:text="@string/approval_co"/>
-
-                    <TextView
-                        android:id="@+id/tv_approvalCo"
-                        style="@style/BlackText.standard"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_marginLeft="10dp"
-                        android:layout_weight="0.72"
-                        android:gravity="center_vertical"
-                        />
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="@dimen/common_topbar_height40"
-                    android:background="@color/white"
-                    android:gravity="center_vertical"
-                    android:orientation="horizontal"
-                    android:weightSum="1">
-
-                    <TextView
-                        style="@style/BlackText.standard"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_marginLeft="10dp"
-                        android:layout_weight="0.28"
-                        android:gravity="center_vertical"
-                        android:text="@string/approval_approvalTime"/>
-
-                    <TextView
-                        android:id="@+id/tv_approvalTime"
-                        style="@style/BlackText.standard"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_marginLeft="10dp"
-                        android:layout_weight="0.72"
-                        android:gravity="center_vertical"
-                        />
-                </LinearLayout>
-
-                <View
-                    android:layout_width="match_parent"
-                    android:layout_height="1dip"
-                    android:background="@color/common_bg_examination_line"/>
-
-                <View
-                    android:layout_width="match_parent"
-                    android:layout_height="1dip"
-                    android:layout_marginTop="15dp"
-                    android:background="@color/common_bg_examination_line"/>
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="@dimen/common_topbar_height40"
-                    android:background="@color/white"
-                    android:gravity="center_vertical"
-                    android:orientation="horizontal"
-                    android:weightSum="1">
-
-                    <TextView
-                        style="@style/BlackText.standard"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_marginLeft="10dp"
-                        android:layout_weight="0.28"
-                        android:gravity="center_vertical"
-                        android:text="@string/outgoing_time"
-                        android:textColor="@color/cl_text_common"/>
-
-                    <TextView
-                        android:id="@+id/tv_outgoing_time"
-                        style="@style/BlackText.standard"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_marginLeft="10dp"
-                        android:layout_weight="0.72"
-                        android:gravity="center_vertical"
-                        />
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="@dimen/common_topbar_height40"
-                    android:background="@color/white"
-                    android:gravity="center_vertical"
-                    android:orientation="horizontal"
-                    android:weightSum="1">
-
-                    <TextView
-                        style="@style/BlackText.standard"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_marginLeft="10dp"
-                        android:layout_weight="0.28"
-                        android:gravity="center_vertical"
-                        android:text="@string/outgoing_purpose"
-                        android:textColor="@color/cl_text_common"/>
-
-                    <TextView
-                        android:id="@+id/tv_outgoing_purpose"
-                        style="@style/BlackText.standard"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_marginLeft="10dp"
-                        android:layout_weight="0.72"
-                        android:gravity="center_vertical"
-                        />
-                </LinearLayout>
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -219,14 +65,11 @@
                         android:layout_marginBottom="10dp"
                         android:layout_marginLeft="10dp"
                         android:layout_weight="0.28"
-                        android:text="@string/outgoing_reason"
+                        android:text="@string/msn_content"
                         android:textColor="@color/cl_text_common"/>
 
-
                     <TextView
-                        android:paddingRight="10dp"
-                        android:paddingTop="10dp"
-                        android:id="@+id/tv_reason"
+                        android:id="@+id/tv_msnContent"
                         style="@style/BlackText.standard"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
@@ -235,8 +78,150 @@
                         android:ellipsize="end"
                         android:gravity="top|left"
                         android:lines="3"
+                        android:paddingRight="10dp"
+                        android:paddingTop="10dp"
                         />
 
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/common_topbar_height40"
+                    android:background="@color/white"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal"
+                    android:weightSum="1">
+
+                    <TextView
+                        style="@style/BlackText.standard"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="10dp"
+                        android:layout_weight="0.28"
+                        android:gravity="center_vertical"
+                        android:text="@string/msn_type"/>
+
+                    <TextView
+                        android:id="@+id/tv_msnType"
+                        style="@style/BlackText.standard"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="10dp"
+                        android:layout_weight="0.72"
+                        android:gravity="center_vertical"
+                        />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/common_topbar_height40"
+                    android:background="@color/white"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal"
+                    android:weightSum="1">
+
+                    <TextView
+                        style="@style/BlackText.standard"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="10dp"
+                        android:layout_weight="0.28"
+                        android:gravity="center_vertical"
+                        android:text="@string/msn_place"/>
+
+                    <TextView
+                        android:id="@+id/tv_msnPlace"
+                        style="@style/BlackText.standard"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="10dp"
+                        android:layout_weight="0.72"
+                        android:gravity="center_vertical"
+                        />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/common_topbar_height40"
+                    android:background="@color/white"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal"
+                    android:weightSum="1">
+
+                    <TextView
+                        style="@style/BlackText.standard"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="10dp"
+                        android:layout_weight="0.28"
+                        android:gravity="center_vertical"
+                        android:text="@string/msn_maintainMan"/>
+
+                    <TextView
+                        android:id="@+id/tv_maintainMan"
+                        style="@style/BlackText.standard"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="10dp"
+                        android:layout_weight="0.72"
+                        android:gravity="center_vertical"
+                        />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/common_topbar_height40"
+                    android:background="@color/white"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal"
+                    android:weightSum="1">
+
+                    <TextView
+                        style="@style/BlackText.standard"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="10dp"
+                        android:layout_weight="0.28"
+                        android:gravity="center_vertical"
+                        android:text="@string/msn_repairWay"/>
+
+                    <TextView
+                        android:id="@+id/tv_repairWay"
+                        style="@style/BlackText.standard"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="10dp"
+                        android:layout_weight="0.72"
+                        android:gravity="center_vertical"
+                        />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/common_topbar_height40"
+                    android:background="@color/white"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal"
+                    android:weightSum="1">
+
+                    <TextView
+                        style="@style/BlackText.standard"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="10dp"
+                        android:layout_weight="0.28"
+                        android:gravity="center_vertical"
+                        android:text="@string/msn_completeTime"/>
+
+                    <TextView
+                        android:id="@+id/tv_completeTime"
+                        style="@style/BlackText.standard"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="10dp"
+                        android:layout_weight="0.72"
+                        android:gravity="center_vertical"
+                        />
                 </LinearLayout>
 
                 <LinearLayout
@@ -257,8 +242,6 @@
                         android:textColor="@color/cl_text_common"/>
 
                     <TextView
-                        android:paddingRight="10dp"
-                        android:paddingTop="10dp"
                         android:id="@+id/tv_remark"
                         style="@style/BlackText.standard"
                         android:layout_width="0dp"
@@ -268,50 +251,16 @@
                         android:ellipsize="end"
                         android:gravity="top|left"
                         android:lines="3"
+                        android:paddingRight="10dp"
+                        android:paddingTop="10dp"
                         />
 
                 </LinearLayout>
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="@dimen/common_topbar_height40"
-                    android:background="@color/white"
-                    android:gravity="center_vertical"
-                    android:orientation="horizontal"
-                    android:weightSum="1">
-
-                    <TextView
-                        android:id="@+id/textView5"
-                        style="@style/BlackText.standard"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_marginLeft="10dp"
-                        android:layout_weight="0.28"
-                        android:gravity="center_vertical"
-                        android:text="@string/Requester"
-                        android:textColor="@color/cl_text_common"/>
-
-                    <TextView
-                        android:id="@+id/tv_Requester"
-                        style="@style/BlackText.standard"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_marginLeft="10dp"
-                        android:layout_weight="0.72"
-                        android:gravity="center_vertical"
-                        />
-                </LinearLayout>
-
             </LinearLayout>
         </ScrollView>
 
         <include
-            android:id="@+id/laytout_decide"
-            layout="@layout/bottombar_common_decide"
-            android:visibility="gone"/>
-
-        <include
-            android:id="@+id/laytout_copy"
+            android:id="@+id/laytout_complete"
             layout="@layout/bottombar_common_copyto"/>
     </RelativeLayout>
-
 </LinearLayout>
