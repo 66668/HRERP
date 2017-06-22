@@ -1,4 +1,4 @@
-package com.huirong.ui.appsfrg.childmodel.workplan;
+package com.huirong.ui.appsfrg;
 
 import android.os.Bundle;
 import android.os.Message;
@@ -15,7 +15,9 @@ import com.huirong.dialog.Loading;
 import com.huirong.helper.UserHelper;
 import com.huirong.inject.ViewInject;
 import com.huirong.model.workplan.WorkplanListModel;
-import com.huirong.ui.appsfrg.childmodel.examination.approvaldetail.LeaveDetailApvlActivity;
+import com.huirong.ui.appsfrg.childmodel.workplan.AddPlanActivity;
+import com.huirong.ui.appsfrg.childmodel.workplan.WorkplanReceiveDetailActivity;
+import com.huirong.ui.appsfrg.childmodel.workplan.WorkplanSendDetailActivity;
 import com.huirong.utils.LogUtils;
 import com.huirong.utils.PageUtil;
 import com.huirong.widget.NiceSpinner;
@@ -45,7 +47,7 @@ public class WorkplanListActivity extends BaseActivity implements RefreshAndLoad
     NiceSpinner niceSpinner;
 
     //
-    @ViewInject(id = R.id.tv_right)
+    @ViewInject(id = R.id.tv_right, click = "forAddPlan")
     TextView tv_right;
 
     //list
@@ -54,9 +56,9 @@ public class WorkplanListActivity extends BaseActivity implements RefreshAndLoad
 
     private WorkplanListAdapter vAdapter;//记录适配
     private boolean ifLoading = false;//标记
+    private boolean isAdd = false;//标记 是否进入添加计划界面，是-->返回时刷新接口
 
     private int pageSize = 20;//spinner监听中修改该状态
-    private String sendType = "1";//我收到的=1 我发出的=2
     private String IMaxtime = null;
     private String IMinTime = null;
     //常量
@@ -72,6 +74,7 @@ public class WorkplanListActivity extends BaseActivity implements RefreshAndLoad
     private ArrayList<WorkplanListModel> listREC;//每次获取的收到的数据段
     private ArrayList<WorkplanListModel> listSED;//每次获取的发送的数据段
 
+    private ArrayList<WorkplanListModel> listALL = new ArrayList<>();//记录总数据
     private ArrayList<WorkplanListModel> listRECALL = new ArrayList<>();//记录收到的总数据
     private ArrayList<WorkplanListModel> listSEDALL = new ArrayList<>();//记录发送的总数据
 
@@ -79,7 +82,7 @@ public class WorkplanListActivity extends BaseActivity implements RefreshAndLoad
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.act_apps_workplan_list);
+        setContentView(R.layout.act_apps_mission_list);
         initMyView();
         initListener();
         getData();
@@ -87,15 +90,15 @@ public class WorkplanListActivity extends BaseActivity implements RefreshAndLoad
 
     //初始化
     private void initMyView() {
-        tv_right.setText("");
+        tv_right.setText("添加");
         myListView.setIRefreshListener(this);//下拉刷新监听
         myListView.setILoadMoreListener(this);//加载监听
         vAdapter = new WorkplanListAdapter(this);// 上拉加载
         myListView.setAdapter(vAdapter);
 
         //spinner绑定数据
-        spinnerData = new LinkedList<>(Arrays.asList("我收到的计划", "我发出的计划"));
-        myLastSelectState = spinnerData.get(0);//默认为 我收到的计划
+        spinnerData = new LinkedList<>(Arrays.asList("全部计划", "收到计划", "发出计划"));
+        myLastSelectState = spinnerData.get(0);//默认为 全部计划
         niceSpinner.attachDataSource(spinnerData);//绑定数据
     }
 
@@ -112,11 +115,7 @@ public class WorkplanListActivity extends BaseActivity implements RefreshAndLoad
 
                 //如果选择状态没变，就不做处理，同时修改 sendType值
                 if (!spinnerData.get(position).equals(myLastSelectState)) {
-                    if (spinnerData.get(position).contains("我收到")) {
-                        sendType = "1";
-                    } else {
-                        sendType = "2";
-                    }
+
                     showSelectData(spinnerData.get(position).trim(), GET_NEW_DATA);//参数2必填GET_NEW_DATA
                 } else {
                     return;
@@ -139,7 +138,11 @@ public class WorkplanListActivity extends BaseActivity implements RefreshAndLoad
                 Bundle bundle = new Bundle();
                 bundle.putSerializable("WorkplanListModel", workplanListModel);
 
-                startActivity(LeaveDetailApvlActivity.class, bundle);
+                if (workplanListModel.getSeeType().contains("我发出的")) {
+                    startActivity(WorkplanSendDetailActivity.class, bundle);//跳转发送界面
+                } else if (workplanListModel.getSeeType().contains("我收到的")) {
+                    startActivity(WorkplanReceiveDetailActivity.class, bundle);//跳转接收界面
+                }
             }
         });
     }
@@ -155,8 +158,7 @@ public class WorkplanListActivity extends BaseActivity implements RefreshAndLoad
                     List<WorkplanListModel> visitorModelList = UserHelper.GetWorkPlanList(
                             WorkplanListActivity.this,
                             "",//iMaxTime
-                            "",
-                            sendType);
+                            "");
 
                     if (visitorModelList == null || visitorModelList.size() < pageSize) {
                         vAdapter.IsEnd = true;
@@ -164,7 +166,8 @@ public class WorkplanListActivity extends BaseActivity implements RefreshAndLoad
 
                     sendMessage(GET_NEW_DATA, visitorModelList);
                 } catch (MyException e) {
-                    sendMessage(GET_NONE_NEWDATA, e.getMessage());
+                    LogUtils.e("获取数据出错", e.toString());
+                    sendMessage(GET_NONE_NEWDATA, "获取数据出错");
                 }
             }
         });
@@ -186,8 +189,7 @@ public class WorkplanListActivity extends BaseActivity implements RefreshAndLoad
                     List<WorkplanListModel> visitorModelList = UserHelper.GetWorkPlanList(
                             WorkplanListActivity.this,
                             IMaxtime,//iMaxTime
-                            "",
-                            sendType);
+                            "");
 
                     LogUtils.d("SJY", "onRefresh--IMaxtime=" + IMaxtime);
                     if (visitorModelList == null || visitorModelList.size() < pageSize) {
@@ -221,8 +223,7 @@ public class WorkplanListActivity extends BaseActivity implements RefreshAndLoad
                     List<WorkplanListModel> visitorModelList = UserHelper.GetWorkPlanList(
                             WorkplanListActivity.this,
                             "",//iMaxTime
-                            IMinTime,
-                            sendType);
+                            IMinTime);
 
                     LogUtils.d("SJY", "loadMore--min=" + IMaxtime);
                     if (visitorModelList == null || visitorModelList.size() < pageSize) {
@@ -246,6 +247,7 @@ public class WorkplanListActivity extends BaseActivity implements RefreshAndLoad
                 list = (ArrayList<WorkplanListModel>) msg.obj;//获取数据
 
                 //重新获取数据，需要清空数据
+                listALL.clear();
                 listRECALL.clear();
                 listSEDALL.clear();
 
@@ -320,22 +322,24 @@ public class WorkplanListActivity extends BaseActivity implements RefreshAndLoad
 
         /**
          * 审批的状态
-         * 逻辑：登录人id=填写人id-->我发送的
-         *      登录人id=收件人id -->我收的
+         * 逻辑：
+         *
          */
         for (int i = 0; i < list.size(); i++) {
-            if (list.get(i).getReceiveerEmployeeID().contains(UserHelper.getCurrentUser().getEmployeeID())) {//我收到的
+            if (list.get(i).getSeeType().contains("我收到的")) {//我收到的
                 listREC.add(list.get(i));
             }
-            if (list.get(i).getUploaderEmployeeID().contains(UserHelper.getCurrentUser().getEmployeeID())) {//我发送的
+            if (list.get(i).getSeeType().contains("我发出的")) {//我发送的
                 listSED.add(list.get(i));
             }
         }
+
         switch (STATE) {
             case GET_NEW_DATA:
                 LogUtils.d("SJY", "GET_NEW_DATA筛选");
                 //数据正常拼接
                 //总数据拼接
+                listALL.addAll(list);
                 listRECALL.addAll(listREC);
                 listSEDALL.addAll(listSED);
 
@@ -348,7 +352,7 @@ public class WorkplanListActivity extends BaseActivity implements RefreshAndLoad
                 //数据插入 (已做拼接处理),使用：当切换spinner时，刷新了n个长度的数据可以直接显示
                 //但是 spinner子状态下如何拼接数据？还有一种方式：每次刷新 清空子状态数据重新赋值？
 
-
+                listALL.addAll(0, list);
                 if (listREC.size() > 0) {
                     listRECALL.addAll(0, listREC);
                 }
@@ -363,6 +367,7 @@ public class WorkplanListActivity extends BaseActivity implements RefreshAndLoad
             case GET_MORE_DATA:
                 LogUtils.d("SJY", "GET_MORE_DATA筛选");
                 //总数据拼接
+                listALL.addAll(list);
                 listRECALL.addAll(listREC);
                 listSEDALL.addAll(listSED);
                 break;
@@ -384,8 +389,23 @@ public class WorkplanListActivity extends BaseActivity implements RefreshAndLoad
 
         myLastSelectState = spinnerState;//记录spinner修改状态
         switch (spinnerState) {
+            case "全部计划":
 
-            case "我收到的计划":
+                if (STATE == GET_NEW_DATA) {
+                    vAdapter.setEntityList(listALL);//代替list，spinner切换时 listAll包含所有数据不会丢失
+
+                } else if (STATE == GET_REFRESH_DATA) {
+                    vAdapter.insertEntityList(list);
+                    myListView.loadAndFreshComplete();
+                } else if (STATE == GET_MORE_DATA) {
+                    vAdapter.addEntityList(list);
+                    myListView.loadAndFreshComplete();
+                } else if (STATE == GET_NONE_NEWDATA) {
+
+                }
+
+                break;
+            case "收到计划":
 
                 if (STATE == GET_NEW_DATA) {
                     vAdapter.setEntityList(listRECALL);
@@ -404,7 +424,7 @@ public class WorkplanListActivity extends BaseActivity implements RefreshAndLoad
 
                 break;
 
-            case "我发出的计划":
+            case "发出计划":
 
                 if (STATE == GET_NEW_DATA) {
                     vAdapter.setEntityList(listSEDALL);
@@ -424,9 +444,28 @@ public class WorkplanListActivity extends BaseActivity implements RefreshAndLoad
                 break;
 
             default:
-                PageUtil.DisplayToast("数组出错了！");
+                PageUtil.DisplayToast("Spinne名称出错了！");
                 break;
 
+        }
+    }
+
+    /**
+     * 添加工作计划
+     *
+     * @param view
+     */
+    public void forAddPlan(View view) {
+        startActivity(AddPlanActivity.class);
+        isAdd = true;
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        //添加 后刷新接口
+        if (isAdd) {
+            getData();
         }
     }
 

@@ -18,7 +18,7 @@
     <string name="txt_app">应用</string>
     <string name="open">打开</string>
     <string name="close">关闭</string>
-
+    <!-- ********************************************** 我的 ****************************************************-->
     <!-- 我的-->
     <string name="person_info">个人信息</string>
     <string name="person_changePSD">修改密码</string>
@@ -57,7 +57,7 @@
     <string name="msg_done">已受理</string>
     <string name="msg_copy">抄送给我</string>
 
-
+    <!-- ********************************************** 通讯录 ****************************************************-->
     <!-- 通讯录-->
     <string name="txt_contract">通讯录</string>
     <string name="contacts_dept">部门</string>
@@ -65,7 +65,7 @@
     <string name="epl_email">邮箱</string>
     <string name="epl_dept">部门</string>
     <string name="epl_enterTime">入职</string>
-
+    <!-- ********************************************** 应用 ****************************************************-->
     <!-- 01 应用-->
     <string name="attendance">外出考勤</string>
     <string name="CheckRecordOfAttend">查看考勤记录</string>
@@ -78,8 +78,35 @@
     <string name="app_notice">公告</string>
     <string name="app_notification">通知</string>
 
+    <!-- 应用-工作计划-->
+    <string name="workplan_add">添加计划</string>
+    <string name="workplan_title_send">发出计划详情</string>
+    <string name="workplan_title_rec">收到计划详情</string>
+    <string name="sendPerson">发送人：</string>
+    <string name="ReceivePerson">接收人：</string>
+    <string name="targetAdvance">计划进度：</string>
+    <string name="targetAdvance_hint">请输入计划进度</string>
+    <string name="completeTime">完成时间：</string>
+    <string name="completeTime_hint">请输入完成时间</string>
+    <string name="workplan_title">标题：</string>
+    <string name="workplan_title_hint">请输入标题</string>
+    <string name="receiver">选择接受者</string>
+    <string name="planContent">计划内容</string>
 
-    <!-- 01-03 地图考勤-->
+    <!-- 应用-任务-->
+    <string name="msn_title">任务主题</string>
+    <string name="msn_title_hint">请输入任务主题</string>
+    <string name="msn_content">任务内容</string>
+    <string name="msn_content_hint">请输入任务内容</string>
+    <string name="msn_type">任务类型</string>
+    <string name="msn_place">任务地点</string>
+    <string name="msn_place_hint">请输入任务地点</string>
+    <string name="msn_maintainMan">维修维护人</string>
+    <string name="msn_repairWay">联系方式</string>
+    <string name="msn_completeTime">完成时间</string>
+
+
+    <!-- 应用- 地图考勤-->
     <string name="startLocation">开始定位</string>
     <string name="stopLocation">停止定位</string>
     <string name="mapAttendance">地图签到</string>
@@ -90,11 +117,11 @@
     <string name="forAttend">签到</string>
     <string name="forAttend_detail">美好的一天开始了，快来考勤吧！</string>
 
-    <!-- 01-06 财务-->
+    <!-- 应用- 财务-->
     <string name="financial">财务</string>
 
-
-    <!-- 01-01 申请/审批-->
+    <!-- 应用- 审批-->
+    <!-- 申请/审批-->
     <string name="examination">审批</string>
     <string name="examination_yes">已审批</string>
     <string name="examination_no">未审批</string>
@@ -116,8 +143,6 @@
     <string name="examination_copyto_time">抄送时间</string>
     <string name="examination_copyto_SonOfCO">公司</string>
     <string name="examination_copyto_dept">部门</string>
-
-    <!-- 01-04应用-审批模块-->
 
     <string name="jobs">招聘</string>
     <string name="jobsleave">离职</string>
@@ -152,7 +177,7 @@
     <string name="remark_all_apl">备注</string>
     <string name="hint_remark_all_apl">请输入备注信息</string>
 
-    <!--04-01  请假-->
+    <!--审批-请假01-->
     <string name="leave">请假申请</string>
     <string name="leave_d">请假详情</string>
     <string name="leaveTimeStart">开始时间</string>
@@ -166,7 +191,7 @@
     <string name="picture">图片</string>
     <string name="addPicture">添加图片</string>
 
-    <!-- 04-02出差-->
+    <!-- 审批-出差02-->
     <string name="beaway_title_d">出差详情</string>
     <string name="beaway_title_apl">出差申请</string>
     <string name="beaway_type">交通工具</string>
@@ -186,7 +211,7 @@
         <item>自驾</item>
         <item>其他</item>
     </array>
-    <!-- 04-03  用车-->
+    <!-- 审批-用车03-->
     <string name="carUsed">用车申请</string>
     <string name="carUsed_d">用车详情</string>
     <string name="carUser">驾驶人</string>
@@ -202,7 +227,7 @@
     <string name="carUsed_remark">用车说明</string>
     <string name="carUsed_remark_hint">请输入用车说明</string>
 
-    <!-- 04-04  车辆维护04-->
+    <!--审批-车辆维护04-->
     <string name="vehicleMainennance">车辆维保申请</string>
     <string name="vehicleMainennance_d">车辆维保详情</string>
     <string name="vehicleMainennanceType">维保类型</string>
@@ -233,7 +258,7 @@
     </array>
 
 
-    <!-- 01-01  加班05-->
+    <!-- 审批-加班05-->
 
     <string name="workOverTime">加班申请</string>
     <string name="workOverTime_d">加班详情</string>
@@ -245,7 +270,7 @@
     <string name="tv_OverEmployee">加班人员</string>
     <string name="hint_workOverTimeOverEmployee">请输入加班人员</string>
 
-    <!-- 04-06  财务申请06-->
+    <!-- 审批-费用申请06-->
     <string name="financial_title">财务申请</string>
     <string name="financial_loan">借款申请</string>
     <string name="financial_reimburse">报销申请</string>
@@ -322,7 +347,7 @@
     <string name="financial_fee_totle">合计</string>
     <string name="loanReimburseReason">备注</string>
 
-    <!-- 04-07 - 离职-->
+    <!-- 审批-离职07-->
     <string name="jobsForLeave">离职申请</string>
     <string name="jobsForLeave_d">离职详情</string>
     <string name="jobsleavetype">离职类型</string>
@@ -336,7 +361,7 @@
         <item>其他</item>
     </string-array>
 
-    <!-- 04-08 订票-->
+    <!--审批-订票08-->
     <string name="book_type">交通工具</string>
     <string name="book_title_d">订票详情</string>
     <string name="book_startTime">出发时间</string>
@@ -356,7 +381,8 @@
         <item>自驾</item>
         <item>其他</item>
     </array>
-    <!-- 01-01  调休09-->
+
+    <!-- 审批-调休09-->
     <string name="workRest">调休申请</string>
     <string name="workRest_title">标题</string>
     <string name="workRest_title_hint">请输入调休标题</string>
@@ -370,7 +396,7 @@
     <string name="workRestReason">调休说明</string>
     <string name="hint_workRestReason">请输入调休说明</string>
 
-    <!-- 01 印章10-->
+    <!-- 审批-印章10-->
     <string name="signet_apl">印章申请</string>
     <string name="signet_apl_d">印章详情</string>
     <string name="signetStart">使用时间</string>
@@ -382,7 +408,7 @@
     <string name="signet_use">用途</string>
     <string name="signet_use_hint">请输入用途</string>
 
-    <!-- 01 培训11-->
+    <!-- 审批-培训11-->
     <string name="train_apl">培训申请</string>
     <string name="train_apl_d">培训详情</string>
     <string name="train_type">培训方式</string>
@@ -413,20 +439,8 @@
         <item>其他</item>
     </string-array>
 
-    <!--   薪资调整-->
-    <string name="salaryAdjust">调薪申请</string>
-    <string name="salaryAdjust_d">调薪详情</string>
-    <string name="salaryAdjustEmployee">调薪人</string>
-    <string name="hint_salaryAdjustEmployee">请输入调薪人</string>
-    <string name="salaryAdjustNow">目前薪资</string>
-    <string name="hint_salaryAdjustNow">请输入目前薪资（元）</string>
-    <string name="salaryAdjustAfter">调后薪资</string>
-    <string name="hint_salaryAdjustAfter">请输入调后薪资（元）</string>
-    <string name="salaryAdjustReason">调薪理由</string>
-    <string name="hint_salaryAdjustReason">请输入调薪说明</string>
 
-
-    <!-- 04-13 调动 -->
+    <!-- 审批-调动12 -->
     <string name="positionReplace">调动详情</string>
     <string name="positionReplace_title">标题</string>
     <string name="positionReplace_date">调动日期</string>
@@ -438,7 +452,7 @@
     <string name="positionReplace_reason">调动原因</string>
     <string name="positionReplace_remark">备注</string>
 
-    <!-- 04-14  采购 -->
+    <!-- 审批-采购13 -->
     <string name="procurement">采购详情</string>
     <string name="procurement_ItemName">物品名称</string>
     <string name="procurement_ItemType">物品类型</string>
@@ -451,7 +465,7 @@
     <string name="procurement_aplTime">申请时间</string>
     <string name="procurement_PlanBuyTime">计划购买时间</string>
 
-    <!-- 04-15 招聘-->
+    <!-- 审批-招聘14-->
     <string name="forjobs">招聘申请</string>
     <string name="forjobs_d">招聘详情</string>
     <string name="hint_choose">请选择</string>
@@ -466,6 +480,19 @@
     <string name="addRequster">添加对象</string>
     <string name="commit">提交</string>
 
+
+    <!-- ********************************************** 应用 未使用 ****************************************************-->
+    <!--   薪资调整-->
+    <string name="salaryAdjust">调薪申请</string>
+    <string name="salaryAdjust_d">调薪详情</string>
+    <string name="salaryAdjustEmployee">调薪人</string>
+    <string name="hint_salaryAdjustEmployee">请输入调薪人</string>
+    <string name="salaryAdjustNow">目前薪资</string>
+    <string name="hint_salaryAdjustNow">请输入目前薪资（元）</string>
+    <string name="salaryAdjustAfter">调后薪资</string>
+    <string name="hint_salaryAdjustAfter">请输入调后薪资（元）</string>
+    <string name="salaryAdjustReason">调薪理由</string>
+    <string name="hint_salaryAdjustReason">请输入调薪说明</string>
     <!-- 01-01  通知公告13-->
     <string name="notificaitonAndNotice">通知公告详情</string>
     <string name="notificaitonAndNotice_title">标题</string>
@@ -522,33 +549,6 @@
     <string name="conference_start">会议开始时间</string>
     <string name="conference_end">会议结束时间</string>
     <string name="conference_other">备注</string>
-
-    <!-- 01-09交车-->
-    <string name="vehicleRe">交车</string>
-    <string name="vehicleRe_save">提交</string>
-    <string name="vehicleRe_complete">已交车</string>
-    <string name="vehicleRe_uncomplete">未交车</string>
-
-    <string name="vehicleRe_startTime">实际用车时间</string>
-    <string name="vehicleRe_endTime">实际交车时间</string>
-    <string name="vehicleRe_startTime_m">实际维保时间</string>
-    <string name="vehicleRe_user">驾驶员</string>
-    <string name="vehicleRe_user_hint">请输入驾驶员姓名</string>
-    <string name="vehicleRe_inner">乘车人</string>
-    <string name="vehicleRe_inner_hint">请输入乘车人员</string>
-    <string name="vehicleRe_startMiles">开始里程数</string>
-    <string name="vehicleRe_startMiles_hint">请输入开始里程数</string>
-    <string name="vehicleRe_endMiles">交车里程数</string>
-    <string name="vehicleRe_endMiles_hint">请输入交车里程数</string>
-    <string name="vehicleRe_other">交车备注</string>
-    <string name="vehicleMt_other">申请备注</string>
-    <string name="vehicleRe_other_hint">请输入交车备注</string>
-
-    <string name="vehicleRe_time_null">时间不能为空</string>
-    <string name="vehicleRe_Miles_null">里程不能为空</string>
-    <string name="vehicleRe_driver_null">驾驶人不能为空</string>
-    <string name="vehicleRe_Number_null">车牌号不能为空</string>
-    <string name="vehicleRe_Passenger_null">乘车人不能为空</string>
 
 
 </resources>

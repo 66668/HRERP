@@ -20,11 +20,11 @@ import com.huirong.R;
 import com.huirong.ui.appsfrg.ExaminationAcitivity;
 import com.huirong.ui.appsfrg.FinancialListAcitivity;
 import com.huirong.ui.appsfrg.MapAttendAcitivity;
+import com.huirong.ui.appsfrg.MissionListActivity;
 import com.huirong.ui.appsfrg.NoticeListActivity;
 import com.huirong.ui.appsfrg.NotificationListActivity;
-import com.huirong.ui.appsfrg.PerformanceManagerActivity;
 import com.huirong.ui.appsfrg.ScheduleMainActivity;
-import com.huirong.ui.appsfrg.WorkPlanAcitivity;
+import com.huirong.ui.appsfrg.WorkplanListActivity;
 import com.huirong.utils.LogUtils;
 
 import java.util.ArrayList;
@@ -88,11 +88,11 @@ public class AppsMenuAdapter extends BaseAdapter {
             public void onClick(View v) {
                 switch (position) {
                     case 0://工作计划
-                        Intent intent = new Intent(mContext, WorkPlanAcitivity.class);
+                        Intent intent = new Intent(mContext, WorkplanListActivity.class);
                         mContext.startActivity(intent);
                         break;
                     case 1://任务
-                        Intent intent1 = new Intent(mContext, PerformanceManagerActivity.class);
+                        Intent intent1 = new Intent(mContext, MissionListActivity.class);
                         mContext.startActivity(intent1);
                         break;
                     case 2://考勤

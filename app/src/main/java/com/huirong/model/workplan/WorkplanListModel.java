@@ -10,10 +10,12 @@ import java.io.Serializable;
 public class WorkplanListModel implements Serializable {
     private static final long serialVersionUID = 1L;
 
-    private String UploaderEmployeeID;
     private String Title;
     private String UploaderDepartmentID;//接收部门
-    private String ReceiveerEmployeeID;//接收人
+
+    private String UploaderEmployeeID;//发送人id
+    private String ReceiveerEmployeeID;//接收人id
+
     private String Plancontent;//计划内容
     private String Schedules;//计划进度
     private String Completiontime;//完成时间
@@ -21,6 +23,15 @@ public class WorkplanListModel implements Serializable {
     private String Remark;
     private String StoreID;
     private String CreateTime;
+    private String SeeType;
+
+    public String getSeeType() {
+        return SeeType;
+    }
+
+    public void setSeeType(String seeType) {
+        SeeType = seeType;
+    }
 
     public String getCreateTime() {
         return CreateTime;

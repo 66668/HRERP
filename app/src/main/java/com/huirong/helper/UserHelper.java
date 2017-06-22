@@ -25,6 +25,7 @@ import com.huirong.model.NotificationListModel;
 import com.huirong.model.ProcurementListModel;
 import com.huirong.model.ReceiveListModel;
 import com.huirong.model.applicationdetailmodel.FinancialAllModel;
+import com.huirong.model.mission.MissionListModel;
 import com.huirong.model.workplan.WorkplanListModel;
 import com.huirong.utils.APIUtils;
 import com.huirong.utils.ConfigUtil;
@@ -78,6 +79,7 @@ public class UserHelper<T> {
     public static void setCurrentUser(UserEntity u) {//退出登录调用
         mCurrentUser = u;
     }
+    //*******************************************************************************************************************************
 
     /**
      * -01 密码登录
@@ -135,6 +137,182 @@ public class UserHelper<T> {
     }
 
     /**
+     * 修改密码
+     * <p>
+     * post
+     */
+    public static String changePassword(Context context, String oldpassword, String newpassword) throws MyException {
+
+        if (!NetworkManager.isNetworkAvailable(context)) {
+            throw new MyException(R.string.network_invalid);
+        }
+
+        try {
+            HttpResult httpResult = APIUtils.postForObject(WebUrl.UserManager.CHANGE_PASSWORD,
+                    HttpParameter.create()
+                            .add("oldpassword", oldpassword)
+                            .add("newpassword", newpassword)
+                            .add("UserName", UserHelper.getCurrentUser().getName())
+                            .add("StoreUserId", UserHelper.getCurrentUser().getStoreUserId())
+            );
+
+            if (httpResult.hasError()) {
+                throw httpResult.getError();
+            }
+
+            return httpResult.Message;
+        } catch (MyException e) {
+            throw new MyException(e.getMessage());
+        }
+    }
+
+    //********************************************************通讯录***********************************************************************
+
+    /**
+     * 通讯录01
+     * <p>
+     * 获取 公司-分公司 员工信息
+     */
+    public static List<ContactsSonCOModel> getCompanySonOfCO(Context context) throws MyException {
+        if (!NetworkManager.isNetworkAvailable(context)) {
+            throw new MyException(R.string.network_invalid);
+        }
+        try {
+            LogUtils.d("SJY", UserHelper.getCurrentUser().getEmployeeID());
+            HttpResult httpResult = APIUtils.postForObject(WebUrl.ContactsManager.GETCOMPANYSONOFCO,
+                    HttpParameter.create().
+                            add("sEmployeeID", UserHelper.getCurrentUser().getEmployeeID()));
+
+            if (httpResult.hasError()) {
+                throw httpResult.getError();
+            }
+            LogUtils.d("HTTP", httpResult.jsonArray.toString());
+
+            //1
+            //            return (new Gson()).fromJson(httpResult.jsonArray.toString(), new TypeToken<List<ContactsSonCOModel>>() {
+            //            }.getType());
+
+
+            //方式二：
+            return (List<ContactsSonCOModel>) JSONUtils.fromJson(httpResult.jsonArray.toString(), new TypeToken<List<ContactsSonCOModel>>() {
+            }.getType());
+
+        } catch (MyException e) {
+            throw new MyException(e.getMessage());
+        }
+
+    }
+
+
+    /**
+     * 通讯录02
+     * <p>
+     * 获取 分公司-部门 员工信息
+     */
+    public static List<ContactsDeptModel> getContractsDeptOfSonCO(Context context, String sStoreID) throws MyException {
+        if (!NetworkManager.isNetworkAvailable(context)) {
+            throw new MyException(R.string.network_invalid);
+        }
+        try {
+            HttpResult httpResult = APIUtils.postForObject(WebUrl.ContactsManager.DEPTINFOBYSTOREID,
+                    HttpParameter.create()
+                            .add("sStoreID", sStoreID)
+                            .add("sEmployeeID", UserHelper.getCurrentUser().getEmployeeID()));//分公司ID
+
+            if (httpResult.hasError()) {
+                throw httpResult.getError();
+            }
+            LogUtils.d("HTTP", httpResult.jsonArray.toString());
+
+            //1
+            //            return (new Gson()).fromJson(httpResult.jsonArray.toString(), new TypeToken<List<ContactsDeptModel>>() {
+            //            }.getType());
+
+
+            //方式二：
+            return (List<ContactsDeptModel>) JSONUtils.fromJson(httpResult.jsonArray.toString(), new TypeToken<List<ContactsDeptModel>>() {
+            }.getType());
+
+        } catch (MyException e) {
+            throw new MyException(e.getMessage());
+        }
+
+    }
+
+    /**
+     * 通讯录03
+     * <p>
+     * 获取部门 员工信息接口
+     * <p>
+     * post
+     */
+    public static List<ContactsEmployeeModel> getContractsEmployeeOfDept(Context context, String sDeptID) throws MyException {
+
+        if (!NetworkManager.isNetworkAvailable(context)) {
+            throw new MyException(R.string.network_invalid);
+        }
+        try {
+            HttpResult httpResult = APIUtils.postForObject(WebUrl.ContactsManager.EMPLOYEEINFOBYDEPTID,
+                    HttpParameter.create()
+                            .add("sDeptID", sDeptID)
+                            .add("sEmployeeID", UserHelper.getCurrentUser().getEmployeeID())
+            );
+
+            if (httpResult.hasError()) {
+                throw httpResult.getError();
+            }
+            LogUtils.d("HTTP", httpResult.jsonArray.toString());
+
+            //
+            //            return (new Gson()).fromJson(httpResult.jsonArray.toString(), new TypeToken<List<ContactsEmployeeModel>>() {
+            //            }.getType());
+
+            //方式二：
+            return (List<ContactsEmployeeModel>) JSONUtils.fromJson(httpResult.jsonArray.toString(), new TypeToken<List<ContactsEmployeeModel>>() {
+            }.getType());
+
+        } catch (MyException e) {
+            throw new MyException(e.getMessage());
+        }
+    }
+
+    /**
+     * 通讯录 审批-选择审批人/转交
+     * <p>
+     * 获取级别权限的所有联系人
+     */
+    public static List<ContactsEmployeeModel> getContactsSelectCo(Context context) throws MyException {
+        if (!NetworkManager.isNetworkAvailable(context)) {
+            throw new MyException(R.string.network_invalid);
+        }
+
+        try {
+            HttpResult httpResult = APIUtils.postForObject(WebUrl.ContactsManager.CONTACTSSELECTCO,
+                    HttpParameter.create().
+                            add("sEmployeeID", getCurrentUser().getEmployeeID()));
+
+            if (httpResult.hasError()) {
+                throw httpResult.getError();
+            }
+            LogUtils.d("HTTP", httpResult.jsonArray.toString());
+
+            //1
+            //            return (new Gson()).fromJson(httpResult.jsonArray.toString(), new TypeToken<List<ContactsEmployeeModel>>() {
+            //            }.getType());
+
+
+            //方式二：
+            return (List<ContactsEmployeeModel>) JSONUtils.fromJson(httpResult.jsonArray.toString(), new TypeToken<List<ContactsEmployeeModel>>() {
+            }.getType());
+
+        } catch (MyException e) {
+            throw new MyException(e.getMessage());
+        }
+
+    }
+
+    //********************************************************应用-工作计划***********************************************************************
+    /**
      * 02-01
      * 应用 工作计划 记录
      * <p>
@@ -145,12 +323,75 @@ public class UserHelper<T> {
      * @return
      * @throws MyException
      */
-    public static List<WorkplanListModel> GetWorkPlanList(Context context, String iMaxTime, String iMinTime,String SeeType) throws MyException {
+    public static List<WorkplanListModel> GetWorkPlanList(Context context, String iMaxTime, String iMinTime) throws MyException {
         if (!NetworkManager.isNetworkAvailable(context)) {
             throw new MyException(R.string.network_invalid);
         }
 
         HttpResult hr = APIUtils.postForObject(WebUrl.AppsManager.WORKPLANLIST,
+                HttpParameter.create()
+                        .add("iMaxTime", iMaxTime)
+                        .add("iMinTime", iMinTime)
+                        .add("pageSize", "20")
+                        .add("storeID", mCurrentUser.getStoreID())
+                        .add("employeeId", mCurrentUser.getEmployeeID())
+        );
+
+        if (hr.hasError()) {
+            throw hr.getError();
+        }
+        //方式一：直接调用gson
+        //        return (new Gson()).fromJson(hr.jsonArray.toString(), new TypeToken<List<MyApplicationModel>>() {
+        //        }.getType());
+
+        //方式二:utils工具类
+        return (List<WorkplanListModel>) JSONUtils.fromJson(hr.jsonArray.toString(), new TypeToken<List<WorkplanListModel>>() {
+        }.getType());
+    }
+
+    /**
+     * 02-01
+     * 应用 工作计划 添加
+     * <p>
+     *
+     * @param context
+     *
+     * @return
+     * @throws MyException
+     */
+
+    public static String addWorkplan(Context context, JSONObject jsonObject) throws MyException {
+        if (!NetworkManager.isNetworkAvailable(context)) {
+            throw new MyException(R.string.network_invalid);
+        }
+
+        HttpResult hr = APIUtils.postForObject(WebUrl.AppsManager.ADDWORKPLAN,
+                HttpParameter.create()
+                        .add("obj", jsonObject.toString()));
+
+        if (hr.hasError()) {
+            throw hr.getError();
+        }
+        return hr.Message;
+    }
+    //********************************************************应用-任务***********************************************************************
+    /**
+     * 02-01
+     * 应用-任务 记录
+     * <p>
+     *
+     * @param context
+     * @param iMaxTime
+     * @param iMinTime
+     * @return
+     * @throws MyException
+     */
+    public static List<MissionListModel> GetMissionList(Context context, String iMaxTime, String iMinTime,String SeeType) throws MyException {
+        if (!NetworkManager.isNetworkAvailable(context)) {
+            throw new MyException(R.string.network_invalid);
+        }
+
+        HttpResult hr = APIUtils.postForObject(WebUrl.AppsManager.MISSIONLIST,
                 HttpParameter.create()
                         .add("iMaxTime", iMaxTime)
                         .add("iMinTime", iMinTime)
@@ -168,10 +409,255 @@ public class UserHelper<T> {
         //        }.getType());
 
         //方式二:utils工具类
-        return (List<WorkplanListModel>) JSONUtils.fromJson(hr.jsonArray.toString(), new TypeToken<List<WorkplanListModel>>() {
+        return (List<MissionListModel>) JSONUtils.fromJson(hr.jsonArray.toString(), new TypeToken<List<MissionListModel>>() {
+        }.getType());
+    }
+    /**
+     * 02-02
+     * 应用 任务 添加
+     * <p>
+     *
+     * @param context
+     *
+     * @return
+     * @throws MyException
+     */
+
+    public static String addMission(Context context, JSONObject jsonObject) throws MyException {
+        if (!NetworkManager.isNetworkAvailable(context)) {
+            throw new MyException(R.string.network_invalid);
+        }
+
+        try {
+            jsonObject.put("StoreID", UserHelper.getCurrentUser().getStoreID());
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        HttpResult hr = APIUtils.postForObject(WebUrl.AppsManager.ADDWORKPLAN,
+                HttpParameter.create()
+                        .add("obj", jsonObject.toString()));
+
+        if (hr.hasError()) {
+            throw hr.getError();
+        }
+        return hr.Message;
+    }
+    /**
+     * 02-03
+     *
+     * 进入任务详情，标记已读
+     */
+    public static void postReadThisMission(Context context, JSONObject js) throws MyException {
+        if (!NetworkManager.isNetworkAvailable(context)) {
+            throw new MyException(R.string.network_invalid);
+        }
+        HttpResult hr = APIUtils.postForObject(WebUrl.AppsManager.MISSIONISREAD
+                , HttpParameter.create().add("obj", js.toString()));
+        if (hr.hasError()) {
+            throw hr.getError();
+        }
+    }
+    //********************************************************应用-地图***********************************************************************
+    /**
+     * 03-01添加地图考勤,（obj形式上传)
+     *
+     * @param context
+     * @param attendCapTime
+     * @param address
+     * @throws MyException
+     */
+    public static void forAttend(Context context, String attendCapTime, String address) throws MyException {
+        if (!NetworkManager.isNetworkAvailable(context)) {
+            throw new MyException(R.string.network_invalid);
+        }
+        try {
+            /**
+             * 参数保存成json
+             */
+            JSONObject js = new JSONObject();
+            js.put("EmployeeID", UserHelper.getCurrentUser().getEmployeeID());
+            js.put("attendCapTime", attendCapTime);
+            js.put("address", address);
+
+            HttpResult httpResult = APIUtils.postForObject(WebUrl.AppsManager.ATTENDRECORD,
+                    HttpParameter.create().add("obj", js.toString()));
+
+            if (httpResult.hasError()) {
+                throw httpResult.getError();
+            }
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+    }
+
+
+    /**
+     * 03-02获取地图考勤记录
+     *
+     * @param context
+     * @param iMaxTime
+     * @param iMinTime
+     * @return
+     * @throws MyException
+     */
+    public static List<MapAttendModel> getMapAttendRecord(Context context, String iMaxTime, String iMinTime) throws MyException {
+        if (!NetworkManager.isNetworkAvailable(context)) {
+            throw new MyException(R.string.network_invalid);
+        }
+
+        HttpResult hr = APIUtils.postForObject(WebUrl.AppsManager.GETATTENDRECORD,
+                HttpParameter.create()
+                        .add("iMaxTime", iMaxTime)
+                        .add("iMinTime", iMinTime)
+                        .add("storeID", UserHelper.getCurrentUser().getStoreID())
+                        .add("employeeId", UserHelper.getCurrentUser().getEmployeeID())
+                        .add("pageSize", "20"));
+
+        if (hr.hasError()) {
+            throw hr.getError();
+        }
+        //方式一：直接用gson
+        //        return (new Gson()).fromJson(hr.jsonArray.toString(), new TypeToken<List<MapAttendModel>>() {
+        //        }.getType());
+
+        //方式二：
+        return (List<MapAttendModel>) JSONUtils.fromJson(hr.jsonArray.toString(), new TypeToken<List<MapAttendModel>>() {
+        }.getType());
+
+    }
+    //********************************************************应用-公告***********************************************************************
+    /**
+     * 04 应用 公告
+     * 列表
+     */
+    public static List<NoticeListModel> GetAppNoticeList(Context context, String iMaxTime, String iMinTime) throws MyException {
+        if (!NetworkManager.isNetworkAvailable(context)) {
+            throw new MyException(R.string.network_invalid);
+        }
+
+        HttpResult hr = APIUtils.postForObject(WebUrl.AppsManager.GETNOTICELIST,
+                HttpParameter.create()
+                        .add("iMaxTime", iMaxTime)
+                        .add("iMinTime", iMinTime)
+                        .add("pageSize", "20")
+                        .add("storeID", UserHelper.getCurrentUser().getStoreID())
+                        .add("employeeId", UserHelper.getCurrentUser().getEmployeeID())
+        );
+
+        if (hr.hasError()) {
+            throw hr.getError();
+        }
+
+        //方式一：
+        //        return (new Gson()).fromJson(hr.jsonArray.toString(), new TypeToken<List<NoticeListModel>>() {
+        //        }.getType());
+
+        //方式二：
+        return (List<NoticeListModel>) JSONUtils.fromJson(hr.jsonArray.toString(), new TypeToken<List<NoticeListModel>>() {
+        }.getType());
+
+    }
+
+    /**
+     * 04-02
+     * 进入公告详情，标记已读
+     */
+    public static void postReadThisNotice(Context context, String ApplicationID) throws MyException {
+        if (!NetworkManager.isNetworkAvailable(context)) {
+            throw new MyException(R.string.network_invalid);
+        }
+        LogUtils.d("SJY", "ApplicationID=" + ApplicationID + "--EmployeeID=" + UserHelper.getCurrentUser().getEmployeeID());
+        HttpResult hr = APIUtils.postForObject(WebUrl.AppsManager.READTHISNOTICE,
+                HttpParameter.create()
+                        .add("ApplicationID", ApplicationID)
+                        .add("EmployeeID", UserHelper.getCurrentUser().getEmployeeID())
+        );
+        if (hr.hasError()) {
+            throw hr.getError();
+        }
+    }
+    //********************************************************应用-通知***********************************************************************
+    /**
+     * 05 应用 通知
+     * 通知列表
+     */
+    public static List<NotificationListModel> GetAppNotificationList(Context context, String iMaxTime, String iMinTime) throws MyException {
+        if (!NetworkManager.isNetworkAvailable(context)) {
+            throw new MyException(R.string.network_invalid);
+        }
+
+        HttpResult hr = APIUtils.postForObject(WebUrl.AppsManager.GETNOTIFICATIONLIST,
+                HttpParameter.create()
+                        .add("iMaxTime", iMaxTime)
+                        .add("iMinTime", iMinTime)
+                        .add("pageSize", "20")
+                        .add("storeID", UserHelper.getCurrentUser().getStoreID())
+                        .add("employeeId", UserHelper.getCurrentUser().getEmployeeID())
+        );
+
+        if (hr.hasError()) {
+            throw hr.getError();
+        }
+
+        //方式一：
+        //        return (new Gson()).fromJson(hr.jsonArray.toString(), new TypeToken<List<NotificationListModel>>() {
+        //        }.getType());
+
+        //方式二：
+        return (List<NotificationListModel>) JSONUtils.fromJson(hr.jsonArray.toString(), new TypeToken<List<NotificationListModel>>() {
         }.getType());
     }
 
+    /**
+     * 05-02
+     * 进入公告详情，标记已读
+     */
+    public static void postReadThisNoti(Context context, String ApplicationID) throws MyException {
+        if (!NetworkManager.isNetworkAvailable(context)) {
+            throw new MyException(R.string.network_invalid);
+        }
+        LogUtils.d("SJY", "ApplicationID=" + ApplicationID + "--EmployeeID=" + UserHelper.getCurrentUser().getEmployeeID());
+        HttpResult hr = APIUtils.postForObject(WebUrl.AppsManager.READTHISNOTICE,
+                HttpParameter.create()
+                        .add("ApplicationID", ApplicationID)
+                        .add("EmployeeID", UserHelper.getCurrentUser().getEmployeeID())
+        );
+        if (hr.hasError()) {
+            throw hr.getError();
+        }
+    }
+    //********************************************************应用-财务（费用）***********************************************************************
+    /**
+     * 06-01应用-财务记录
+     */
+    public static List<FinancialAllModel> GetAppFinanceList(Context context, String iMaxTime, String iMinTime) throws MyException {
+        if (!NetworkManager.isNetworkAvailable(context)) {
+            throw new MyException(R.string.network_invalid);
+        }
+
+        HttpResult hr = APIUtils.postForObject(WebUrl.AppsManager.FINACELIST,
+                HttpParameter.create()
+                        .add("iMaxTime", iMaxTime)
+                        .add("iMinTime", iMinTime)
+                        .add("storeID", UserHelper.getCurrentUser().getStoreID())
+                        .add("employeeId", UserHelper.getCurrentUser().getEmployeeID())
+                        .add("pageSize", "20"));
+
+        if (hr.hasError()) {
+            throw hr.getError();
+        }
+
+        //方式一：
+        //        return (new Gson()).fromJson(hr.jsonArray.toString(), new TypeToken<List<FinancialAllModel>>() {
+        //        }.getType());
+
+
+        //方式二：
+        return (List<FinancialAllModel>) JSONUtils.fromJson(hr.jsonArray.toString(), new TypeToken<List<FinancialAllModel>>() {
+        }.getType());
+    }
+    //********************************************************应用-审批***********************************************************************
     /**
      * 02-04-01
      * 获取 我的申请记录
@@ -482,7 +968,7 @@ public class UserHelper<T> {
             throw new MyException(e.getMessage());
         }
     }
-
+    //********************************************************应用-审批-详细申请***********************************************************************
     /**
      * -02-04
      * 01 请假申请 （obj形式上传）
@@ -922,205 +1408,6 @@ public class UserHelper<T> {
     }
 
 
-    /**
-     * 03-01添加地图考勤,（obj形式上传)
-     *
-     * @param context
-     * @param attendCapTime
-     * @param address
-     * @throws MyException
-     */
-    public static void forAttend(Context context, String attendCapTime, String address) throws MyException {
-        if (!NetworkManager.isNetworkAvailable(context)) {
-            throw new MyException(R.string.network_invalid);
-        }
-        try {
-            /**
-             * 参数保存成json
-             */
-            JSONObject js = new JSONObject();
-            js.put("EmployeeID", UserHelper.getCurrentUser().getEmployeeID());
-            js.put("attendCapTime", attendCapTime);
-            js.put("address", address);
-
-            HttpResult httpResult = APIUtils.postForObject(WebUrl.AppsManager.ATTENDRECORD,
-                    HttpParameter.create().add("obj", js.toString()));
-
-            if (httpResult.hasError()) {
-                throw httpResult.getError();
-            }
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
-
-    }
-
-
-    /**
-     * 03-02获取地图考勤记录
-     *
-     * @param context
-     * @param iMaxTime
-     * @param iMinTime
-     * @return
-     * @throws MyException
-     */
-    public static List<MapAttendModel> getMapAttendRecord(Context context, String iMaxTime, String iMinTime) throws MyException {
-        if (!NetworkManager.isNetworkAvailable(context)) {
-            throw new MyException(R.string.network_invalid);
-        }
-
-        HttpResult hr = APIUtils.postForObject(WebUrl.AppsManager.GETATTENDRECORD,
-                HttpParameter.create()
-                        .add("iMaxTime", iMaxTime)
-                        .add("iMinTime", iMinTime)
-                        .add("storeID", UserHelper.getCurrentUser().getStoreID())
-                        .add("employeeId", UserHelper.getCurrentUser().getEmployeeID())
-                        .add("pageSize", "20"));
-
-        if (hr.hasError()) {
-            throw hr.getError();
-        }
-        //方式一：直接用gson
-        //        return (new Gson()).fromJson(hr.jsonArray.toString(), new TypeToken<List<MapAttendModel>>() {
-        //        }.getType());
-
-        //方式二：
-        return (List<MapAttendModel>) JSONUtils.fromJson(hr.jsonArray.toString(), new TypeToken<List<MapAttendModel>>() {
-        }.getType());
-
-    }
-
-    /**
-     * 04 应用 公告
-     * 列表
-     */
-    public static List<NoticeListModel> GetAppNoticeList(Context context, String iMaxTime, String iMinTime) throws MyException {
-        if (!NetworkManager.isNetworkAvailable(context)) {
-            throw new MyException(R.string.network_invalid);
-        }
-
-        HttpResult hr = APIUtils.postForObject(WebUrl.AppsManager.GETNOTICELIST,
-                HttpParameter.create()
-                        .add("iMaxTime", iMaxTime)
-                        .add("iMinTime", iMinTime)
-                        .add("pageSize", "20")
-                        .add("storeID", UserHelper.getCurrentUser().getStoreID())
-                        .add("employeeId", UserHelper.getCurrentUser().getEmployeeID())
-        );
-
-        if (hr.hasError()) {
-            throw hr.getError();
-        }
-
-        //方式一：
-        //        return (new Gson()).fromJson(hr.jsonArray.toString(), new TypeToken<List<NoticeListModel>>() {
-        //        }.getType());
-
-        //方式二：
-        return (List<NoticeListModel>) JSONUtils.fromJson(hr.jsonArray.toString(), new TypeToken<List<NoticeListModel>>() {
-        }.getType());
-
-    }
-
-    /**
-     * 04-02
-     * 进入公告详情，标记已读
-     */
-    public static void postReadThisNotice(Context context, String ApplicationID) throws MyException {
-        if (!NetworkManager.isNetworkAvailable(context)) {
-            throw new MyException(R.string.network_invalid);
-        }
-        LogUtils.d("SJY", "ApplicationID=" + ApplicationID + "--EmployeeID=" + UserHelper.getCurrentUser().getEmployeeID());
-        HttpResult hr = APIUtils.postForObject(WebUrl.AppsManager.READTHISNOTICE,
-                HttpParameter.create()
-                        .add("ApplicationID", ApplicationID)
-                        .add("EmployeeID", UserHelper.getCurrentUser().getEmployeeID())
-        );
-        if (hr.hasError()) {
-            throw hr.getError();
-        }
-    }
-
-    /**
-     * 05 应用 通知
-     * 通知列表
-     */
-    public static List<NotificationListModel> GetAppNotificationList(Context context, String iMaxTime, String iMinTime) throws MyException {
-        if (!NetworkManager.isNetworkAvailable(context)) {
-            throw new MyException(R.string.network_invalid);
-        }
-
-        HttpResult hr = APIUtils.postForObject(WebUrl.AppsManager.GETNOTIFICATIONLIST,
-                HttpParameter.create()
-                        .add("iMaxTime", iMaxTime)
-                        .add("iMinTime", iMinTime)
-                        .add("pageSize", "20")
-                        .add("storeID", UserHelper.getCurrentUser().getStoreID())
-                        .add("employeeId", UserHelper.getCurrentUser().getEmployeeID())
-        );
-
-        if (hr.hasError()) {
-            throw hr.getError();
-        }
-
-        //方式一：
-        //        return (new Gson()).fromJson(hr.jsonArray.toString(), new TypeToken<List<NotificationListModel>>() {
-        //        }.getType());
-
-        //方式二：
-        return (List<NotificationListModel>) JSONUtils.fromJson(hr.jsonArray.toString(), new TypeToken<List<NotificationListModel>>() {
-        }.getType());
-    }
-
-    /**
-     * 05-02
-     * 进入公告详情，标记已读
-     */
-    public static void postReadThisNoti(Context context, String ApplicationID) throws MyException {
-        if (!NetworkManager.isNetworkAvailable(context)) {
-            throw new MyException(R.string.network_invalid);
-        }
-        LogUtils.d("SJY", "ApplicationID=" + ApplicationID + "--EmployeeID=" + UserHelper.getCurrentUser().getEmployeeID());
-        HttpResult hr = APIUtils.postForObject(WebUrl.AppsManager.READTHISNOTICE,
-                HttpParameter.create()
-                        .add("ApplicationID", ApplicationID)
-                        .add("EmployeeID", UserHelper.getCurrentUser().getEmployeeID())
-        );
-        if (hr.hasError()) {
-            throw hr.getError();
-        }
-    }
-
-    /**
-     * 06-01应用-财务记录
-     */
-    public static List<FinancialAllModel> GetAppFinanceList(Context context, String iMaxTime, String iMinTime) throws MyException {
-        if (!NetworkManager.isNetworkAvailable(context)) {
-            throw new MyException(R.string.network_invalid);
-        }
-
-        HttpResult hr = APIUtils.postForObject(WebUrl.AppsManager.FINACELIST,
-                HttpParameter.create()
-                        .add("iMaxTime", iMaxTime)
-                        .add("iMinTime", iMinTime)
-                        .add("storeID", UserHelper.getCurrentUser().getStoreID())
-                        .add("employeeId", UserHelper.getCurrentUser().getEmployeeID())
-                        .add("pageSize", "20"));
-
-        if (hr.hasError()) {
-            throw hr.getError();
-        }
-
-        //方式一：
-        //        return (new Gson()).fromJson(hr.jsonArray.toString(), new TypeToken<List<FinancialAllModel>>() {
-        //        }.getType());
-
-
-        //方式二：
-        return (List<FinancialAllModel>) JSONUtils.fromJson(hr.jsonArray.toString(), new TypeToken<List<FinancialAllModel>>() {
-        }.getType());
-    }
 
     /**
      * 07 会议
@@ -1211,178 +1498,7 @@ public class UserHelper<T> {
     }
 
 
-    /**
-     * 通讯录01
-     * <p>
-     * 获取 公司-分公司 员工信息
-     */
-    public static List<ContactsSonCOModel> getCompanySonOfCO(Context context) throws MyException {
-        if (!NetworkManager.isNetworkAvailable(context)) {
-            throw new MyException(R.string.network_invalid);
-        }
-        try {
-            LogUtils.d("SJY", UserHelper.getCurrentUser().getEmployeeID());
-            HttpResult httpResult = APIUtils.postForObject(WebUrl.ContactsManager.GETCOMPANYSONOFCO,
-                    HttpParameter.create().
-                            add("sEmployeeID", UserHelper.getCurrentUser().getEmployeeID()));
-
-            if (httpResult.hasError()) {
-                throw httpResult.getError();
-            }
-            LogUtils.d("HTTP", httpResult.jsonArray.toString());
-
-            //1
-            //            return (new Gson()).fromJson(httpResult.jsonArray.toString(), new TypeToken<List<ContactsSonCOModel>>() {
-            //            }.getType());
 
 
-            //方式二：
-            return (List<ContactsSonCOModel>) JSONUtils.fromJson(httpResult.jsonArray.toString(), new TypeToken<List<ContactsSonCOModel>>() {
-            }.getType());
-
-        } catch (MyException e) {
-            throw new MyException(e.getMessage());
-        }
-
-    }
-
-
-    /**
-     * 通讯录02
-     * <p>
-     * 获取 分公司-部门 员工信息
-     */
-    public static List<ContactsDeptModel> getContractsDeptOfSonCO(Context context, String sStoreID) throws MyException {
-        if (!NetworkManager.isNetworkAvailable(context)) {
-            throw new MyException(R.string.network_invalid);
-        }
-        try {
-            HttpResult httpResult = APIUtils.postForObject(WebUrl.ContactsManager.DEPTINFOBYSTOREID,
-                    HttpParameter.create()
-                            .add("sStoreID", sStoreID)
-                            .add("sEmployeeID", UserHelper.getCurrentUser().getEmployeeID()));//分公司ID
-
-            if (httpResult.hasError()) {
-                throw httpResult.getError();
-            }
-            LogUtils.d("HTTP", httpResult.jsonArray.toString());
-
-            //1
-            //            return (new Gson()).fromJson(httpResult.jsonArray.toString(), new TypeToken<List<ContactsDeptModel>>() {
-            //            }.getType());
-
-
-            //方式二：
-            return (List<ContactsDeptModel>) JSONUtils.fromJson(httpResult.jsonArray.toString(), new TypeToken<List<ContactsDeptModel>>() {
-            }.getType());
-
-        } catch (MyException e) {
-            throw new MyException(e.getMessage());
-        }
-
-    }
-
-    /**
-     * 通讯录03
-     * <p>
-     * 获取部门 员工信息接口
-     * <p>
-     * post
-     */
-    public static List<ContactsEmployeeModel> getContractsEmployeeOfDept(Context context, String sDeptID) throws MyException {
-
-        if (!NetworkManager.isNetworkAvailable(context)) {
-            throw new MyException(R.string.network_invalid);
-        }
-        try {
-            HttpResult httpResult = APIUtils.postForObject(WebUrl.ContactsManager.EMPLOYEEINFOBYDEPTID,
-                    HttpParameter.create()
-                            .add("sDeptID", sDeptID)
-                            .add("sEmployeeID", UserHelper.getCurrentUser().getEmployeeID())
-            );
-
-            if (httpResult.hasError()) {
-                throw httpResult.getError();
-            }
-            LogUtils.d("HTTP", httpResult.jsonArray.toString());
-
-            //
-            //            return (new Gson()).fromJson(httpResult.jsonArray.toString(), new TypeToken<List<ContactsEmployeeModel>>() {
-            //            }.getType());
-
-            //方式二：
-            return (List<ContactsEmployeeModel>) JSONUtils.fromJson(httpResult.jsonArray.toString(), new TypeToken<List<ContactsEmployeeModel>>() {
-            }.getType());
-
-        } catch (MyException e) {
-            throw new MyException(e.getMessage());
-        }
-    }
-
-    /**
-     * 通讯录 审批-选择审批人/转交
-     * <p>
-     * 获取级别权限的所有联系人
-     */
-    public static List<ContactsEmployeeModel> getContactsSelectCo(Context context) throws MyException {
-        if (!NetworkManager.isNetworkAvailable(context)) {
-            throw new MyException(R.string.network_invalid);
-        }
-
-        try {
-            HttpResult httpResult = APIUtils.postForObject(WebUrl.ContactsManager.CONTACTSSELECTCO,
-                    HttpParameter.create().
-                            add("sEmployeeID", getCurrentUser().getEmployeeID()));
-
-            if (httpResult.hasError()) {
-                throw httpResult.getError();
-            }
-            LogUtils.d("HTTP", httpResult.jsonArray.toString());
-
-            //1
-            //            return (new Gson()).fromJson(httpResult.jsonArray.toString(), new TypeToken<List<ContactsEmployeeModel>>() {
-            //            }.getType());
-
-
-            //方式二：
-            return (List<ContactsEmployeeModel>) JSONUtils.fromJson(httpResult.jsonArray.toString(), new TypeToken<List<ContactsEmployeeModel>>() {
-            }.getType());
-
-        } catch (MyException e) {
-            throw new MyException(e.getMessage());
-        }
-
-    }
-
-
-    /**
-     * 修改密码
-     * <p>
-     * post
-     */
-    public static String changePassword(Context context, String oldpassword, String newpassword) throws MyException {
-
-        if (!NetworkManager.isNetworkAvailable(context)) {
-            throw new MyException(R.string.network_invalid);
-        }
-
-        try {
-            HttpResult httpResult = APIUtils.postForObject(WebUrl.UserManager.CHANGE_PASSWORD,
-                    HttpParameter.create()
-                            .add("oldpassword", oldpassword)
-                            .add("newpassword", newpassword)
-                            .add("UserName", UserHelper.getCurrentUser().getName())
-                            .add("StoreUserId", UserHelper.getCurrentUser().getStoreUserId())
-            );
-
-            if (httpResult.hasError()) {
-                throw httpResult.getError();
-            }
-
-            return httpResult.Message;
-        } catch (MyException e) {
-            throw new MyException(e.getMessage());
-        }
-    }
 
 }

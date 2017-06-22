@@ -30,9 +30,7 @@
     <!-- 相机权限-->
     <uses-permission android:name="android.permission.CAMERA"/>
 
-    <!-- jpush start-->
-    <!-- jpush start-->
-
+    <!-- ****************************************极光推送 权限 开始**********************************************-->
     <permission
         android:name="com.huirong.permission.JPUSH_MESSAGE"
         android:protectionLevel="signature"/>
@@ -51,7 +49,7 @@
     <uses-permission android:name="android.permission.CHANGE_NETWORK_STATE"/>
     <uses-permission android:name="android.permission.GET_TASKS"/>
 
-    <!-- jpush end-->
+    <!-- ****************************************极光推送 权限 结束**********************************************-->
 
     <application
         android:name=".application.MyApplication"
@@ -61,15 +59,25 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
 
+
+        <!-- ATTENTION: This was auto-generated to add Google Play services to your project for
+     App Indexing.  See https://g.co/AppIndexing/AndroidStudio for more information. -->
+        <meta-data
+            android:name="com.google.android.gms.version"
+            android:value="@integer/google_play_services_version"/>
+
+        <!-- ****************************************高德地图配置 开始**********************************************-->
+
         <!-- 高德设置key -->
         <meta-data
             android:name="com.amap.api.v2.apikey"
-            android:value="0c89cf507f40dbf5d6f075cc3556ae71"/>
+            android:value="bda618b5f3af2d1fd5e56ec19b3ab7e1"/>
 
         <!-- 高德定位需要的服务 -->
         <service android:name="com.amap.api.location.APSService"/>
+        <!-- ****************************************高德地图配置 结束**********************************************-->
 
-        <!--jpush start -->
+        <!-- ****************************************极光推送 开始**********************************************-->
 
         <!-- Rich push 核心功能 since 2.0.6-->
         <activity
@@ -91,6 +99,7 @@
                 <category android:name="com.huirong"/>
             </intent-filter>
         </activity>
+
         <!-- Required  SDK核心功能-->
         <service
             android:name="cn.jpush.android.service.DownloadService"
@@ -171,9 +180,9 @@
             android:value="developer-default"/>
         <meta-data
             android:name="JPUSH_APPKEY"
-            android:value="9f3089b2f841fd13680040ec"/> <!--  </>值来自开发者平台取得的AppKey-->
+            android:value=" 272a312f56a5fffaaa593c4b"/> <!--  </>值来自开发者平台取得的AppKey-->
 
-        <!--jpush finish -->
+        <!-- ****************************************极光推送 结束**********************************************-->
 
         <!--主界面 -->
         <activity
@@ -204,7 +213,58 @@
             android:theme="@style/Anim_style2">
         </activity>
 
-        <!-- 01审批-->
+        <!-- ****************************************应用-工作计划**********************************************-->
+        <!-- 工作计划 list-->
+        <activity
+            android:name="com.huirong.ui.appsfrg.WorkplanListActivity"
+            android:label="@string/app_name"
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar">
+        </activity>
+
+        <!-- 发送工作计划 详情-->
+        <activity
+            android:name="com.huirong.ui.appsfrg.childmodel.workplan.WorkplanSendDetailActivity"
+            android:label="@string/app_name"
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar">
+        </activity>
+
+        <!-- 收到工作计划 详情-->
+        <activity
+            android:name="com.huirong.ui.appsfrg.childmodel.workplan.WorkplanReceiveDetailActivity"
+            android:label="@string/app_name"
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar">
+        </activity>
+
+        <!-- 添加 工作计划 -->
+        <activity
+            android:name="com.huirong.ui.appsfrg.childmodel.workplan.AddPlanActivity"
+            android:label="@string/app_name"
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar">
+        </activity>
+        <!-- ****************************************应用-任务**********************************************-->
+
+        <!-- 任务 list-->
+        <activity
+            android:name="com.huirong.ui.appsfrg.MissionListActivity"
+            android:label="@string/app_name"
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar">
+        </activity>
+
+        <!-- 我负责的 详情-->
+        <activity
+            android:name="com.huirong.ui.appsfrg.childmodel.mission.MissionSendDetailActivity"
+            android:label="@string/app_name"
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar">
+        </activity>
+
+        <!-- ****************************************应用-审批**********************************************-->
+        <!-- 02-04-审批-->
         <activity
             android:name="com.huirong.ui.appsfrg.ExaminationAcitivity"
             android:label="@string/app_name"
@@ -688,8 +748,7 @@
             android:theme="@style/Theme.AppCompat.Light.NoActionBar">
         </activity>
 
-        <!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~本app不适用的功能~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
-        <!-- 借阅-->
+        <!-- ****************************************应用-审批**********************************************-->
 
 
         <!-- 调薪-->
@@ -698,7 +757,7 @@
             android:label="@string/app_name"
             android:screenOrientation="portrait"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar">
-        </activity>i
+        </activity>
         <activity
             android:name=".ui.appsfrg.childmodel.examination.applicationdetail.SalaryadjustDetailAplActivity"
             android:label="@string/app_name"
@@ -717,8 +776,6 @@
             android:screenOrientation="portrait"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar">
         </activity>
-        <!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
-
 
         <!-- 05-13  通知公告详情-->
         <activity
@@ -816,9 +873,6 @@
         </activity>
 
 
-        <!-- 05-17  外出详情-->
-
-
         <!-- 05-18  复试详情-->
         <activity
             android:name=".ui.appsfrg.childmodel.examination.applicationdetail.RetestDetailAplActivity"
@@ -860,7 +914,7 @@
             android:theme="@style/Theme.AppCompat.Light.NoActionBar">
         </activity>
 
-
+        <!-- ****************************************我的-**********************************************-->
         <!-- 个人信息-->
         <activity
             android:name="com.huirong.ui.mine.PersonalInfoActivity"
@@ -877,7 +931,6 @@
             android:theme="@style/Theme.AppCompat.Light.NoActionBar">
         </activity>
 
-        <!-- 意见反馈-->
 
         <!--02 业绩管理 -->
         <activity
@@ -886,7 +939,7 @@
             android:screenOrientation="portrait"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar">
         </activity>
-
+        <!-- ****************************************应用-考勤**********************************************-->
         <!-- 03 外出考勤-->
         <activity
             android:name="com.huirong.ui.appsfrg.MapAttendAcitivity"
@@ -911,6 +964,7 @@
             android:theme="@style/Theme.AppCompat.Light.NoActionBar">
         </activity>
 
+        <!-- ****************************************应用-公告**********************************************-->
         <!-- 04 公告列表界面-->
         <activity
             android:name="com.huirong.ui.appsfrg.NoticeListActivity"
@@ -926,6 +980,8 @@
             android:screenOrientation="portrait"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar">
         </activity>
+
+        <!-- ****************************************应用-通知**********************************************-->
 
         <!--05 通知列表界面 -->
         <activity
@@ -944,6 +1000,8 @@
             android:theme="@style/Theme.AppCompat.Light.NoActionBar">
         </activity>
 
+
+        <!-- ****************************************应用-费用申请**********************************************-->
         <!-- 06 财务列表界面-->
         <activity
             android:name="com.huirong.ui.appsfrg.FinancialListAcitivity"
@@ -975,6 +1033,8 @@
             android:screenOrientation="portrait"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar">
         </activity>
+
+        <!-- ****************************************应用-日程 **********************************************-->
 
         <!-- 07 日程界面-->
         <activity
@@ -1008,7 +1068,7 @@
             android:theme="@style/Theme.AppCompat.Light.NoActionBar">
         </activity>
 
-        <!-- 07-04当日但日程详情-->
+        <!-- 07-04当日单日程详情-->
         <activity
             android:name="com.huirong.ui.appsfrg.childmodel.shedule.ScheduleSingleDetailActivity"
             android:label="@string/app_name"
@@ -1016,6 +1076,7 @@
             android:theme="@style/Theme.AppCompat.Light.NoActionBar">
         </activity>
 
+        <!-- ****************************************应用-会议 **********************************************-->
         <!--08 会议列表 -->
         <activity
             android:name="com.huirong.ui.appsfrg.ConferenceListActivity"
@@ -1032,6 +1093,8 @@
             android:theme="@style/Theme.AppCompat.Light.NoActionBar">
         </activity>
 
+        <!-- ****************************************应用-采购领用 **********************************************-->
+
         <!--09 采购领用 -->
         <activity
             android:name="com.huirong.ui.appsfrg.ProcureMainActivity"
@@ -1047,6 +1110,7 @@
             android:screenOrientation="portrait"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar">
         </activity>
+
         <!--09-02 领用详情 -->
         <activity
             android:name=".ui.appsfrg.childmodel.performance.ReceiveDetailActivity"
@@ -1055,56 +1119,7 @@
             android:theme="@style/Theme.AppCompat.Light.NoActionBar">
         </activity>
 
-
-        <!--010 交车 记录界面01 -->
-
-        <!--010 交车 用车-未交车02 -->
-        <activity
-            android:name=".ui.appsfrg.childmodel.vehiclereturn.VehicleReturnUseUncompleteActivity"
-            android:label="@string/app_name"
-            android:screenOrientation="portrait"
-            android:theme="@style/Theme.AppCompat.Light.NoActionBar">
-        </activity>
-
-        <!--010 交车 用车-交车提交03 -->
-        <activity
-            android:name=".ui.appsfrg.childmodel.vehiclereturn.VehicleReturnUseToCompleteActivity"
-            android:label="@string/app_name"
-            android:screenOrientation="portrait"
-            android:theme="@style/Theme.AppCompat.Light.NoActionBar">
-        </activity>
-
-        <!--010 交车 用车-已交车详情04 -->
-        <activity
-            android:name=".ui.appsfrg.childmodel.vehiclereturn.VehicleReturnUseCompleteActivity"
-            android:label="@string/app_name"
-            android:screenOrientation="portrait"
-            android:theme="@style/Theme.AppCompat.Light.NoActionBar">
-        </activity>
-
-        <!--010 交车 未维保-未交车05 -->
-        <activity
-            android:name=".ui.appsfrg.childmodel.vehiclereturn.VehicleReturnMaintenanceUncompleteActivity"
-            android:label="@string/app_name"
-            android:screenOrientation="portrait"
-            android:theme="@style/Theme.AppCompat.Light.NoActionBar">
-        </activity>
-
-        <!--010 交车 维保-交车提交界面05 -->
-        <activity
-            android:name=".ui.appsfrg.childmodel.vehiclereturn.VehicleReturnMaintenanceToCompleteActivity"
-            android:label="@string/app_name"
-            android:screenOrientation="portrait"
-            android:theme="@style/Theme.AppCompat.Light.NoActionBar">
-        </activity>
-
-        <!--010 交车 维保-已交车详情06 -->
-        <activity
-            android:name=".ui.appsfrg.childmodel.vehiclereturn.VehicleReturnMaintenanceCompleteActivity"
-            android:label="@string/app_name"
-            android:screenOrientation="portrait"
-            android:theme="@style/Theme.AppCompat.Light.NoActionBar">
-        </activity>
+        <!-- ****************************************通讯录 **********************************************-->
 
         <!--通讯录-子公司01 -->
         <activity
@@ -1138,18 +1153,7 @@
             android:theme="@style/Theme.AppCompat.Light.NoActionBar">
         </activity>
 
-        <!-- ATTENTION: This was auto-generated to add Google Play services to your project for
-     App Indexing.  See https://g.co/AppIndexing/AndroidStudio for more information. -->
-        <meta-data
-            android:name="com.google.android.gms.version"
-            android:value="@integer/google_play_services_version"/>
-
     </application>
 
-    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"/>
-    <uses-permission android:name="android.permission.CHANGE_WIFI_STATE"/>
-    <uses-permission android:name="android.permission.ACCESS_LOCATION_EXTRA_COMMANDS"/>
-
-    <uses-permission android:name="android.permission.CHANGE_NETWORK_STATE"/>
 
 </manifest>

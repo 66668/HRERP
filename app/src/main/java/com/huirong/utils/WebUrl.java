@@ -59,6 +59,14 @@ public class WebUrl {
          */
         public static final String ADDWORKPLAN = LOGIN_URL + LOGIN_FLODER_USER + "TaskSchedule/TaskScheduleAdd";
 
+        /**
+         * 03-01 任务 记录
+         */
+        public static final String MISSIONLIST = LOGIN_URL + LOGIN_FLODER_USER + "Maintain/MaintainList";
+         /**
+         * 03-01 任务详情，修改已读
+         */
+        public static final String MISSIONISREAD = LOGIN_URL + LOGIN_FLODER_USER + "Maintain/MaintainEdit";
 
         /**
          * 应用-审批接口
