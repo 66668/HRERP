@@ -90,10 +90,8 @@ public class FinancialLoanDetailAplActivity extends BaseActivity {
     ImageView img_03;
 
     //变量
-    private Intent intent = null;
     private FinancialAllModel financialAllModel;
     private MyApplicationModel model;
-    private List<FinancialAllModel.ApprovalInfoLists> modelList;
 
     //imageLoader图片缓存
     private ImageLoader imgLoader;
@@ -101,8 +99,6 @@ public class FinancialLoanDetailAplActivity extends BaseActivity {
 
     //动态添加view 变量
     private List<View> ls_childView;//用于保存动态添加进来的View
-    private View childView;
-    private LayoutInflater inflater;//ViewHolder对象用来保存实例化View的子控件
     private List<ViewHolder> listViewHolder = new ArrayList<>();
 
     //常量
@@ -121,7 +117,7 @@ public class FinancialLoanDetailAplActivity extends BaseActivity {
         getData(model);
     }
 
-    private void initMyView(){
+    private void initMyView() {
         tv_title.setText(getResources().getString(R.string.financial_loan));
         tv_right.setText("");
 
@@ -129,10 +125,11 @@ public class FinancialLoanDetailAplActivity extends BaseActivity {
         imgLoader.init(ImageLoaderConfiguration.createDefault(this));
         imgOptions = ImageLoadingConfig.generateDisplayImageOptions(R.mipmap.ic_launcher);
 
-        intent = getIntent();
+        Intent intent = getIntent();
         model = (MyApplicationModel) intent.getSerializableExtra("MyApplicationModel");
 
     }
+
     private void setShow(FinancialAllModel model) {
 
         if (model.getImageLists().size() == 1) {
@@ -155,7 +152,7 @@ public class FinancialLoanDetailAplActivity extends BaseActivity {
         tv_use.setText(model.getUseage());
         tv_reason.setText(model.getRemark());
 
-        modelList = model.getApprovalInfoLists();
+        List<FinancialAllModel.ApprovalInfoLists>  modelList = model.getApprovalInfoLists();
 
         // 审批人
         StringBuilder nameBuilder = new StringBuilder();
@@ -256,8 +253,8 @@ public class FinancialLoanDetailAplActivity extends BaseActivity {
     //初始化参数
     private ViewHolder AddView(Context context, int marks) {
         ls_childView = new ArrayList<View>();
-        inflater = LayoutInflater.from(context);
-        childView = inflater.inflate(R.layout.item_examination_status,  new LinearLayout(this), false);
+        LayoutInflater inflater = LayoutInflater.from(context);
+        View childView = inflater.inflate(R.layout.item_examination_status, new LinearLayout(this), false);
         childView.setId(marks);
         layout_ll.addView(childView, marks);
         return getViewInstance(childView);

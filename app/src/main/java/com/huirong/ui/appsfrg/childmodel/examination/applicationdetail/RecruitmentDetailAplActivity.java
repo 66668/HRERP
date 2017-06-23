@@ -79,14 +79,10 @@ public class RecruitmentDetailAplActivity extends BaseActivity {
     LinearLayout layout_ll;
 
     //变量
-    private Intent intent = null;
     private RecruitmentModel recruitmentModel;
     private MyApplicationModel model;
-    private List<RecruitmentModel.ApprovalInfoLists> modelList;
     //动态添加view
     private List<View> ls_childView;//用于保存动态添加进来的View
-    private View childView;
-    private LayoutInflater inflater;//ViewHolder对象用来保存实例化View的子控件
     private List<ViewHolder> listViewHolder = new ArrayList<>();
     //常量
     public static final int POST_SUCCESS = 11;
@@ -96,12 +92,16 @@ public class RecruitmentDetailAplActivity extends BaseActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.act_apps_examination_recruitment_d);
+        initMyView();
+        getDetailModel(model);
+    }
+
+    private void initMyView() {
         tv_title.setText(getResources().getString(R.string.forjobs_d));
         tv_right.setText("");
 
-        intent = getIntent();
+        Intent intent = getIntent();
         model = (MyApplicationModel) intent.getSerializableExtra("MyApplicationModel");
-        getDetailModel(model);
     }
 
     private void setShow(RecruitmentModel model) {
@@ -110,9 +110,9 @@ public class RecruitmentDetailAplActivity extends BaseActivity {
         tv_reason.setText(model.getResponsibility());
         tv_remark.setText(model.getRemark());
 
-        modelList = model.getApprovalInfoLists();
 
         // 审批人
+        List<RecruitmentModel.ApprovalInfoLists> modelList = model.getApprovalInfoLists();
         StringBuilder nameBuilder = new StringBuilder();
         for (int i = 0; i < modelList.size(); i++) {
             nameBuilder.append(modelList.get(i).getApprovalEmployeeName() + " ");
@@ -136,20 +136,20 @@ public class RecruitmentDetailAplActivity extends BaseActivity {
         if (recruitmentModel.getApprovalStatus().contains("1") || recruitmentModel.getApprovalStatus().contains("2")) {
             //插入意见
             for (int i = 0, mark = layout_ll.getChildCount(); i < modelList.size(); i++, mark++) {//mark是布局插入位置，放在mark位置的后边（从1开始计数）
-                ViewHolder vh = AddView(this,mark);//添加布局
+                ViewHolder vh = AddView(this, mark);//添加布局
                 vh.tv_name.setText(modelList.get(i).getApprovalEmployeeName());
                 vh.tv_time.setText(modelList.get(i).getApprovalDate());
                 vh.tv_contains.setText(modelList.get(i).getComment());
                 if (modelList.get(i).getYesOrNo().contains("0")) {
                     vh.tv_yesOrNo.setText("不同意");
                     vh.tv_yesOrNo.setTextColor(getResources().getColor(R.color.red));
-                }else if(TextUtils.isEmpty(modelList.get(i).getYesOrNo())){
+                } else if (TextUtils.isEmpty(modelList.get(i).getYesOrNo())) {
                     vh.tv_yesOrNo.setText("未审批");
                     vh.tv_yesOrNo.setTextColor(getResources().getColor(R.color.red));
                 } else if ((modelList.get(i).getYesOrNo().contains("1"))) {
                     vh.tv_yesOrNo.setText("同意");
                     vh.tv_yesOrNo.setTextColor(getResources().getColor(R.color.green));
-                } else{
+                } else {
                     vh.tv_yesOrNo.setText("yesOrNo为null");
                 }
             }
@@ -206,8 +206,8 @@ public class RecruitmentDetailAplActivity extends BaseActivity {
     //初始化参数
     private ViewHolder AddView(Context context, int marks) {
         ls_childView = new ArrayList<View>();
-        inflater = LayoutInflater.from(context);
-        childView = inflater.inflate(R.layout.item_examination_status, new LinearLayout(this), false);
+        LayoutInflater inflater = LayoutInflater.from(context);
+        View childView = inflater.inflate(R.layout.item_examination_status, new LinearLayout(this), false);
         childView.setId(marks);
         layout_ll.addView(childView, marks);
         return getViewInstance(childView);
@@ -232,6 +232,7 @@ public class RecruitmentDetailAplActivity extends BaseActivity {
     public void forBack(View v) {
         this.finish();
     }
+
     private boolean isExpend = false;
 
     public void ReasonExpended(View view) {

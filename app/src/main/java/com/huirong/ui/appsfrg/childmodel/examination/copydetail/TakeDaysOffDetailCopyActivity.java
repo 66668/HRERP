@@ -88,11 +88,8 @@ public class TakeDaysOffDetailCopyActivity extends BaseActivity {
     private Intent intent = null;
     private TakeDaysOffCopyModel takeDaysOffModel;
     private MyCopyModel model;
-    private List<TakeDaysOffCopyModel.ApprovalInfoLists> modelList;
     //动态添加view
     private List<View> ls_childView;//用于保存动态添加进来的View
-    private View childView;
-    private LayoutInflater inflater;//ViewHolder对象用来保存实例化View的子控件
     private List<ViewHolder> listViewHolder = new ArrayList<>();
     //常量
     public static final int POST_SUCCESS = 11;
@@ -102,13 +99,17 @@ public class TakeDaysOffDetailCopyActivity extends BaseActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.act_apps_examination_takedaysoff_d3);
+        initMyView();
+        getDetailModel(model);
+    }
+
+    private void initMyView() {
         tv_title.setText(getResources().getString(R.string.workRest_d));
         tv_right.setText("");
 
 
         Bundle bundle = this.getIntent().getExtras();
         model = (MyCopyModel) bundle.getSerializable("MyCopyModel");
-        getDetailModel(model);
     }
 
     private void setShow(TakeDaysOffCopyModel model) {
@@ -122,7 +123,7 @@ public class TakeDaysOffDetailCopyActivity extends BaseActivity {
         tv_reason.setText(model.getRemark());
 
         // 审批人
-        modelList = model.getApprovalInfoLists();
+        List<TakeDaysOffCopyModel.ApprovalInfoLists> modelList = model.getApprovalInfoLists();
         StringBuilder nameBuilder = new StringBuilder();
         for (int i = 0; i < modelList.size(); i++) {
             nameBuilder.append(modelList.get(i).getApprovalEmployeeName() + " ");
@@ -153,13 +154,13 @@ public class TakeDaysOffDetailCopyActivity extends BaseActivity {
                 if (modelList.get(i).getYesOrNo().contains("0")) {
                     vh.tv_yesOrNo.setText("不同意");
                     vh.tv_yesOrNo.setTextColor(getResources().getColor(R.color.red));
-                }else if(TextUtils.isEmpty(modelList.get(i).getYesOrNo())){
+                } else if (TextUtils.isEmpty(modelList.get(i).getYesOrNo())) {
                     vh.tv_yesOrNo.setText("未审批");
                     vh.tv_yesOrNo.setTextColor(getResources().getColor(R.color.red));
                 } else if ((modelList.get(i).getYesOrNo().contains("1"))) {
                     vh.tv_yesOrNo.setText("同意");
                     vh.tv_yesOrNo.setTextColor(getResources().getColor(R.color.green));
-                } else{
+                } else {
                     vh.tv_yesOrNo.setText("yesOrNo为null");
                 }
             }
@@ -218,8 +219,8 @@ public class TakeDaysOffDetailCopyActivity extends BaseActivity {
     //初始化参数
     private ViewHolder AddView(Context context, int marks) {
         ls_childView = new ArrayList<View>();
-        inflater = LayoutInflater.from(context);
-        childView = inflater.inflate(R.layout.item_examination_status, new LinearLayout(this),false);
+        LayoutInflater inflater = LayoutInflater.from(context);
+        View childView = inflater.inflate(R.layout.item_examination_status, new LinearLayout(this), false);
         childView.setId(marks);
         layout_ll.addView(childView, marks);
         return getViewInstance(childView);
@@ -237,6 +238,7 @@ public class TakeDaysOffDetailCopyActivity extends BaseActivity {
         ls_childView.add(childView);
         return vh;
     }
+
     /**
      * back
      *

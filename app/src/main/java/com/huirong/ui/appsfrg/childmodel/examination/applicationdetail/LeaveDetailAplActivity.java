@@ -91,10 +91,8 @@ public class LeaveDetailAplActivity extends BaseActivity {
     ImageView img_03;
 
     //变量
-    private Intent intent = null;
     private LeaveModel leaveModel;
     private MyApplicationModel model;
-    private List<LeaveModel.ApprovalInfoLists> modelList;
 
     //imageLoader图片缓存
     private ImageLoader imgLoader;
@@ -102,8 +100,6 @@ public class LeaveDetailAplActivity extends BaseActivity {
 
     //动态添加view
     private List<View> ls_childView;//用于保存动态添加进来的View
-    private View childView;
-    private LayoutInflater inflater;//ViewHolder对象用来保存实例化View的子控件
     private List<LeaveDetailAplActivity.ViewHolder> listViewHolder = new ArrayList<LeaveDetailAplActivity.ViewHolder>();
 
     //常量
@@ -127,7 +123,7 @@ public class LeaveDetailAplActivity extends BaseActivity {
         imgOptions = ImageLoadingConfig.generateDisplayImageOptions(R.mipmap.ic_launcher);
 
 
-        intent = getIntent();
+        Intent intent = getIntent();
         model = (MyApplicationModel) intent.getSerializableExtra("MyApplicationModel");
     }
 
@@ -153,7 +149,7 @@ public class LeaveDetailAplActivity extends BaseActivity {
         tv_endTime.setText(model.getEndDate());
         tv_reason.setText(model.getContent());
 
-        modelList = model.getApprovalInfoLists();
+        List<LeaveModel.ApprovalInfoLists> modelList = model.getApprovalInfoLists();
         // 审批人
         StringBuilder nameBuilder = new StringBuilder();
         for (int i = 0; i < modelList.size(); i++) {
@@ -185,13 +181,13 @@ public class LeaveDetailAplActivity extends BaseActivity {
                 if (modelList.get(i).getYesOrNo().contains("0")) {
                     vh.tv_yesOrNo.setText("不同意");
                     vh.tv_yesOrNo.setTextColor(getResources().getColor(R.color.red));
-                }else if(TextUtils.isEmpty(modelList.get(i).getYesOrNo())){
+                } else if (TextUtils.isEmpty(modelList.get(i).getYesOrNo())) {
                     vh.tv_yesOrNo.setText("未审批");
                     vh.tv_yesOrNo.setTextColor(getResources().getColor(R.color.red));
                 } else if ((modelList.get(i).getYesOrNo().contains("1"))) {
                     vh.tv_yesOrNo.setText("同意");
                     vh.tv_yesOrNo.setTextColor(getResources().getColor(R.color.green));
-                } else{
+                } else {
                     vh.tv_yesOrNo.setText("yesOrNo为null");
                 }
             }
@@ -249,26 +245,25 @@ public class LeaveDetailAplActivity extends BaseActivity {
 
 
     public void imgDetail01(View view) {
-        ImageDialog loadingDialog = new ImageDialog(LeaveDetailAplActivity.this,leaveModel.getImageLists().get(0));
+        ImageDialog loadingDialog = new ImageDialog(LeaveDetailAplActivity.this, leaveModel.getImageLists().get(0));
         loadingDialog.setCanceledOnTouchOutside(true);//弹窗之外触摸无效
         loadingDialog.setCancelable(true);//true:可以按返回键back取消
         loadingDialog.show();
     }
 
     public void imgDetail02(View view) {
-        ImageDialog loadingDialog = new ImageDialog(LeaveDetailAplActivity.this,leaveModel.getImageLists().get(1));
+        ImageDialog loadingDialog = new ImageDialog(LeaveDetailAplActivity.this, leaveModel.getImageLists().get(1));
         loadingDialog.setCanceledOnTouchOutside(true);//弹窗之外触摸无效
         loadingDialog.setCancelable(true);//true:可以按返回键back取消
         loadingDialog.show();
     }
 
     public void imgDetail03(View view) {
-        ImageDialog loadingDialog = new ImageDialog(LeaveDetailAplActivity.this,leaveModel.getImageLists().get(2));
+        ImageDialog loadingDialog = new ImageDialog(LeaveDetailAplActivity.this, leaveModel.getImageLists().get(2));
         loadingDialog.setCanceledOnTouchOutside(true);//弹窗之外触摸无效
         loadingDialog.setCancelable(true);//true:可以按返回键back取消
         loadingDialog.show();
     }
-
 
 
     public class ViewHolder {
@@ -282,8 +277,8 @@ public class LeaveDetailAplActivity extends BaseActivity {
     //初始化参数
     private ViewHolder AddView(Context context, int marks) {
         ls_childView = new ArrayList<View>();
-        inflater = LayoutInflater.from(context);
-        childView = inflater.inflate(R.layout.item_examination_status,   new LinearLayout(this), false);
+        LayoutInflater inflater = LayoutInflater.from(context);
+        View childView = inflater.inflate(R.layout.item_examination_status, new LinearLayout(this), false);
         childView.setId(marks);
         layout_ll.addView(childView, marks);
         return getViewInstance(childView);

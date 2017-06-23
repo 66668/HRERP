@@ -7,7 +7,6 @@ package com.huirong.adapter;
 
 import android.content.Context;
 import android.content.Intent;
-import android.content.pm.PackageManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -35,7 +34,6 @@ public class AppsMenuAdapter extends BaseAdapter {
     private List<HashMap<String, Object>> mList;// 定义一个list对象
     private Context mContext;// 上下文
     public static final int APP_PAGE_SIZE = 16;// 每一页装载数据的大小
-    private PackageManager pm;// 定义一个PackageManager对象
 
     /**
      * 构造方法
@@ -48,7 +46,6 @@ public class AppsMenuAdapter extends BaseAdapter {
     public AppsMenuAdapter(Context context, List<HashMap<String, Object>> list, int page) {
         LogUtils.d("SJY", "应用个数=" + list.size());
         mContext = context;
-        pm = context.getPackageManager();
         mList = new ArrayList<HashMap<String, Object>>();
         // 根据当前页计算装载的应用，每页只装载16个
         int i = page * APP_PAGE_SIZE;// 当前页的其实位置

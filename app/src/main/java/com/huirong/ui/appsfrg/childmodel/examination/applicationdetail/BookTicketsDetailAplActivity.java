@@ -83,17 +83,12 @@ public class BookTicketsDetailAplActivity extends BaseActivity {
     @ViewInject(id = R.id.layout_ll)
     LinearLayout layout_ll;
 
-    private Intent intent = null;
     private BookTicketsModel borrowModel;
     private MyApplicationModel model;
-    private List<BookTicketsModel.ApprovalInfoLists> modelList;
 
     //动态添加view
     private List<View> ls_childView;//用于保存动态添加进来的View
-    private View childView;
-    private LayoutInflater inflater;//ViewHolder对象用来保存实例化View的子控件
     private List<ViewHolder> listViewHolder = new ArrayList<>();
-    //    private int mark = 5;//0显示在顶部
 
     //常量
     public static final int POST_SUCCESS = 11;
@@ -111,7 +106,7 @@ public class BookTicketsDetailAplActivity extends BaseActivity {
     private void initMyView() {
         tv_title.setText(getResources().getString(R.string.book_title_d));
         tv_right.setText("");
-        intent = getIntent();
+        Intent intent = getIntent();
         model = (MyApplicationModel) intent.getSerializableExtra("MyApplicationModel");
     }
 
@@ -124,7 +119,7 @@ public class BookTicketsDetailAplActivity extends BaseActivity {
         tv_endTime.setText(model.getEndTime());
         tv_reason.setText(model.getReason());
 
-        modelList = model.getApprovalInfoLists();
+        List<BookTicketsModel.ApprovalInfoLists> modelList = model.getApprovalInfoLists();
         // 审批人
         StringBuilder nameBuilder = new StringBuilder();
         for (int i = 0; i < modelList.size(); i++) {
@@ -220,8 +215,8 @@ public class BookTicketsDetailAplActivity extends BaseActivity {
 
     private ViewHolder AddView(Context context, int marks) {
         ls_childView = new ArrayList<View>();
-        inflater = LayoutInflater.from(context);
-        childView = inflater.inflate(R.layout.item_examination_status,  new LinearLayout(this), false);
+        LayoutInflater  inflater = LayoutInflater.from(context);
+        View  childView = inflater.inflate(R.layout.item_examination_status, new LinearLayout(this), false);
         childView.setId(marks);
         layout_ll.addView(childView, marks);
         return getViewInstance(childView);

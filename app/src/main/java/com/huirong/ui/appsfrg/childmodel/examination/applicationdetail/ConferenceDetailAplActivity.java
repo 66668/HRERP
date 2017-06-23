@@ -88,14 +88,9 @@ public class ConferenceDetailAplActivity extends BaseActivity {
     LinearLayout layout_ll;
 
     //变量
-    private Intent intent = null;
     private ConferenceModel conferenceModel;
-    private MyApplicationModel model;
-    private List<ConferenceModel.ApprovalInfoLists> modelList;
     //动态添加view
     private List<View> ls_childView;//用于保存动态添加进来的View
-    private View childView;
-    private LayoutInflater inflater;//ViewHolder对象用来保存实例化View的子控件
     private List<ViewHolder> listViewHolder = new ArrayList<>();
     //    private int mark = 5;//0显示在顶部
     //常量
@@ -109,8 +104,8 @@ public class ConferenceDetailAplActivity extends BaseActivity {
         tv_title.setText(getResources().getString(R.string.conference));
         tv_right.setText("");
 
-        intent = getIntent();
-        model = (MyApplicationModel) intent.getSerializableExtra("MyApplicationModel");
+        Intent intent = getIntent();
+        MyApplicationModel model = (MyApplicationModel) intent.getSerializableExtra("MyApplicationModel");
         getDetailModel(model);
     }
 
@@ -126,7 +121,7 @@ public class ConferenceDetailAplActivity extends BaseActivity {
         tv_remark.setText(model.getRemark());
 
         // 审批人
-        modelList = model.getApprovalInfoLists();
+        List<ConferenceModel.ApprovalInfoLists> modelList = model.getApprovalInfoLists();
         StringBuilder nameBuilder = new StringBuilder();
         for (int i = 0; i < modelList.size(); i++) {
             nameBuilder.append(modelList.get(i).getApprovalEmployeeName() + " ");
@@ -158,13 +153,13 @@ public class ConferenceDetailAplActivity extends BaseActivity {
                 if (modelList.get(i).getYesOrNo().contains("0")) {
                     vh.tv_yesOrNo.setText("不同意");
                     vh.tv_yesOrNo.setTextColor(getResources().getColor(R.color.red));
-                }else if(TextUtils.isEmpty(modelList.get(i).getYesOrNo())){
+                } else if (TextUtils.isEmpty(modelList.get(i).getYesOrNo())) {
                     vh.tv_yesOrNo.setText("未审批");
                     vh.tv_yesOrNo.setTextColor(getResources().getColor(R.color.red));
                 } else if ((modelList.get(i).getYesOrNo().contains("1"))) {
                     vh.tv_yesOrNo.setText("同意");
                     vh.tv_yesOrNo.setTextColor(getResources().getColor(R.color.green));
-                } else{
+                } else {
                     vh.tv_yesOrNo.setText("yesOrNo为null");
                 }
             }
@@ -222,8 +217,8 @@ public class ConferenceDetailAplActivity extends BaseActivity {
 
     private ViewHolder AddView(Context context, int marks) {
         ls_childView = new ArrayList<View>();
-        inflater = LayoutInflater.from(context);
-        childView = inflater.inflate(R.layout.item_examination_status, new LinearLayout(context), false);
+        LayoutInflater inflater = LayoutInflater.from(context);
+        View childView = inflater.inflate(R.layout.item_examination_status, new LinearLayout(context), false);
         childView.setId(marks);
         layout_ll.addView(childView, marks);
         return getViewInstance(childView);

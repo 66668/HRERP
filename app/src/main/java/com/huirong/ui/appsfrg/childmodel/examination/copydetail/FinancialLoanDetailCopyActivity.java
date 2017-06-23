@@ -1,7 +1,6 @@
 package com.huirong.ui.appsfrg.childmodel.examination.copydetail;
 
 import android.content.Context;
-import android.content.Intent;
 import android.os.Bundle;
 import android.os.Message;
 import android.text.TextUtils;
@@ -99,10 +98,8 @@ public class FinancialLoanDetailCopyActivity extends BaseActivity {
     ImageView img_03;
 
     //变量
-    private Intent intent = null;
     private FinancialAllModel financialAllModel;
     private MyCopyModel model;
-    private List<FinancialAllModel.ApprovalInfoLists> modelList;
 
     //imageLoader图片缓存
     private ImageLoader imgLoader;
@@ -110,8 +107,6 @@ public class FinancialLoanDetailCopyActivity extends BaseActivity {
 
     //动态添加view
     private List<View> ls_childView;//用于保存动态添加进来的View
-    private View childView;
-    private LayoutInflater inflater;//ViewHolder对象用来保存实例化View的子控件
     private List<ViewHolder> listViewHolder = new ArrayList<ViewHolder>();
 
     //常量
@@ -166,7 +161,7 @@ public class FinancialLoanDetailCopyActivity extends BaseActivity {
         tv_use.setText(model.getUseage());
         tv_reason.setText(model.getRemark());
         // 审批人
-        modelList = model.getApprovalInfoLists();
+        List<FinancialAllModel.ApprovalInfoLists> modelList = model.getApprovalInfoLists();
         StringBuilder nameBuilder = new StringBuilder();
         for (int i = 0; i < modelList.size(); i++) {
             nameBuilder.append(modelList.get(i).getApprovalEmployeeName() + " ");
@@ -265,8 +260,8 @@ public class FinancialLoanDetailCopyActivity extends BaseActivity {
     //初始化参数
     private ViewHolder AddView(Context context, int marks) {
         ls_childView = new ArrayList<View>();
-        inflater = LayoutInflater.from(context);
-        childView = inflater.inflate(R.layout.item_examination_status,  new LinearLayout(this), false);
+        LayoutInflater inflater = LayoutInflater.from(context);
+        View childView = inflater.inflate(R.layout.item_examination_status, new LinearLayout(this), false);
         childView.setId(marks);
         layout_ll.addView(childView, marks);
         return getViewInstance(childView);

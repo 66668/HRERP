@@ -57,7 +57,6 @@ public class SignetDetailApvlActivity extends BaseActivity {
     TextView tv_approvalTime;
 
 
-
     //未审批bottom
     @ViewInject(id = R.id.laytout_decide)
     LinearLayout laytout_decide;
@@ -81,7 +80,6 @@ public class SignetDetailApvlActivity extends BaseActivity {
     //抄送
     @ViewInject(id = R.id.btn_copytp, click = "forCopyto")
     Button btn_copytp;
-
 
 
     //公司名称
@@ -138,22 +136,22 @@ public class SignetDetailApvlActivity extends BaseActivity {
         bottomType();
     }
 
-    private void setShow(SignetApvlModel model) {
-        tv_ApprovalPerson.setText(model.getEmployeeName());
-        tv_approvaldept.setText(model.getDepartmentName());
-        tv_approvalCo.setText(model.getStoreName());
-        tv_approvalTime.setText(model.getApplicationCreateTime());
+    private void setShow() {
+        tv_ApprovalPerson.setText(borrowModel.getEmployeeName());
+        tv_approvaldept.setText(borrowModel.getDepartmentName());
+        tv_approvalCo.setText(borrowModel.getStoreName());
+        tv_approvalTime.setText(borrowModel.getApplicationCreateTime());
 
 
-
-        tv_company.setText(model.getSignatureName());
-        tv_startTime.setText(model.getStartTime());
-        tv_endTime.setText(model.getEndTime());
-        tv_copies.setText(model.getCopies());
-        tv_reason.setText(model.getPurpose());
-        tv_remark.setText(model.getRemark());
+        tv_company.setText(borrowModel.getSignatureName());
+        tv_startTime.setText(borrowModel.getStartTime());
+        tv_endTime.setText(borrowModel.getEndTime());
+        tv_copies.setText(borrowModel.getCopies());
+        tv_reason.setText(borrowModel.getPurpose());
+        tv_remark.setText(borrowModel.getRemark());
 
     }
+
     private void bottomType() {
         //
         if (myApprovalModel.getApprovalStatus().contains("1")) {
@@ -166,6 +164,7 @@ public class SignetDetailApvlActivity extends BaseActivity {
             laytout_copy.setVisibility(View.GONE);
         }
     }
+
     /**
      * 获取详情数据
      */
@@ -195,7 +194,7 @@ public class SignetDetailApvlActivity extends BaseActivity {
         switch (msg.what) {
             case POST_SUCCESS:
                 borrowModel = (SignetApvlModel) msg.obj;
-                setShow(borrowModel);
+                setShow();
                 break;
             case POST_FAILED:
                 PageUtil.DisplayToast((String) msg.obj);
@@ -209,28 +208,28 @@ public class SignetDetailApvlActivity extends BaseActivity {
     public void forRefulse(View view) {
         Bundle bundle = new Bundle();
         bundle.putSerializable("MyApprovalModel", myApprovalModel);
-        startActivity(CommonDisagreeActivity.class,bundle);
+        startActivity(CommonDisagreeActivity.class, bundle);
     }
 
     //同意
     public void toForCommit(View view) {
         Bundle bundle = new Bundle();
         bundle.putSerializable("MyApprovalModel", myApprovalModel);
-        startActivity(CommonAgreeActivity.class,bundle);
+        startActivity(CommonAgreeActivity.class, bundle);
     }
 
     //转交
     public void forTransfer(View view) {
         Bundle bundle = new Bundle();
         bundle.putSerializable("MyApprovalModel", myApprovalModel);
-        startActivity(CommonTransfertoActivity.class,bundle);
+        startActivity(CommonTransfertoActivity.class, bundle);
     }
 
     // 抄送
     public void forCopyto(View view) {
         Bundle bundle = new Bundle();
         bundle.putSerializable("MyApprovalModel", myApprovalModel);
-        startActivity(CommonCopytoCoActivity.class,bundle);
+        startActivity(CommonCopytoCoActivity.class, bundle);
     }
 
     /**

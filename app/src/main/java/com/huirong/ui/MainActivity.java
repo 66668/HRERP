@@ -45,7 +45,6 @@ import cn.jpush.android.api.TagAliasCallback;
 
 /**
  * 主界面
- *
  */
 public class MainActivity extends BaseActivity {
 
@@ -58,10 +57,6 @@ public class MainActivity extends BaseActivity {
     private RadioButton mAppsRb;
     private RadioButton mContractsRb;
 
-    private MessageFragment messageFragment;//消息
-    private AppsFragment appsFragment;//应用
-    private ContactsFragment contactsFragment;//联系人
-
     private List<BaseFragment> listFragment;
     private int currentFragment;
     public static boolean isForeground = false;//推送 判断
@@ -70,8 +65,8 @@ public class MainActivity extends BaseActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.act_main);
-//        int maxMemory = (int) (Runtime.getRuntime().maxMemory() / 1024/1024);
-//        Log.d("SJY", "Max memory is " + maxMemory + "MB");
+        //        int maxMemory = (int) (Runtime.getRuntime().maxMemory() / 1024/1024);
+        //        Log.d("SJY", "Max memory is " + maxMemory + "MB");
         initJpush();
 
         initMyView();
@@ -142,9 +137,9 @@ public class MainActivity extends BaseActivity {
 
     private void initViewPaperAndFragment() {
 
-        messageFragment = MessageFragment.newInstance();
-        appsFragment = AppsFragment.newInstance();
-        contactsFragment = ContactsFragment.newInstance();
+        MessageFragment messageFragment = MessageFragment.newInstance();
+        AppsFragment appsFragment = AppsFragment.newInstance();
+        ContactsFragment contactsFragment = ContactsFragment.newInstance();
         listFragment = new ArrayList<>();
         listFragment.add(messageFragment);
         listFragment.add(appsFragment);

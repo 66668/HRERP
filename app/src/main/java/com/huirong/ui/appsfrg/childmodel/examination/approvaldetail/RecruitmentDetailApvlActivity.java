@@ -119,7 +119,7 @@ public class RecruitmentDetailApvlActivity extends BaseActivity {
         MyApplication.getInstance().addACT(this);
     }
 
-    private void setShow(RecruitmentApvlModel model) {
+    private void setShow() {
         tv_ApprovalPerson.setText(model.getEmployeeName());
         tv_approvaldept.setText(model.getDepartmentName());
         tv_approvalCo.setText(model.getStoreName());
@@ -171,7 +171,7 @@ public class RecruitmentDetailApvlActivity extends BaseActivity {
         switch (msg.what) {
             case POST_SUCCESS:
                 model = (RecruitmentApvlModel) msg.obj;
-                setShow(model);
+                setShow();
                 break;
             case POST_FAILED:
                 PageUtil.DisplayToast((String) msg.obj);
@@ -208,7 +208,7 @@ public class RecruitmentDetailApvlActivity extends BaseActivity {
         Bundle bundle = new Bundle();
         bundle.putSerializable("MyApprovalModel", myApprovalModel);
 
-        Log.d("SJY", "招聘obj="+myApprovalModel.getApprovalID() + "\n" + myApprovalModel.getComment() + "\n" +
+        Log.d("SJY", "招聘obj=" + myApprovalModel.getApprovalID() + "\n" + myApprovalModel.getComment() + "\n" +
                 myApprovalModel.getApplicationID() + "\n" + myApprovalModel.getApplicationType() + "\n" +
                 myApprovalModel.getEmployeeID() + "\n" + myApprovalModel.getStoreID() + "\n" +
                 myApprovalModel.getApplicationTitle());

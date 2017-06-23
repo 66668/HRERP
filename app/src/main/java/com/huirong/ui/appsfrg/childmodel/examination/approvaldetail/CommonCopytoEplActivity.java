@@ -63,7 +63,6 @@ public class CommonCopytoEplActivity extends BaseActivity {
     private String sDeptID;//
     private MyApprovalModel myApprovalModel;//跳转对象
     private ApprovalSModel approvalSModel;//提交对象
-    private String sApprovalemployeeinfos;//转发人ApprovalEmployeeID
 
     private SideBar sideBar;
     private CharacterParser characterParser;// 汉字转换成拼音的类
@@ -280,7 +279,7 @@ public class CommonCopytoEplActivity extends BaseActivity {
     public void forCopyto(View view) {
 
         selectlist = getSelectList(listData);//获取 抄送人
-        sApprovalemployeeinfos = getList2String(selectlist);//获取
+        String sApprovalemployeeinfos = getList2String(selectlist);//获取//转发人ApprovalEmployeeID
         Log.d("SJY", "转发-确定sApprovalemployeeinfos=" + sApprovalemployeeinfos);
 
         if (TextUtils.isEmpty(sApprovalemployeeinfos)) {

@@ -144,7 +144,7 @@ public class ProcurementDetailApvlActivity extends BaseActivity {
         MyApplication.getInstance().addACT(this);
     }
 
-    private void setShow(ProcurementApvlModel model) {
+    private void setShow() {
         //
         tv_ApprovalPerson.setText(model.getEmployeeName());
         tv_approvaldept.setText(model.getDepartmentName());
@@ -203,7 +203,7 @@ public class ProcurementDetailApvlActivity extends BaseActivity {
         switch (msg.what) {
             case POST_SUCCESS:
                 model = (ProcurementApvlModel) msg.obj;
-                setShow(model);
+                setShow();
                 break;
             case POST_FAILED:
                 PageUtil.DisplayToast((String) msg.obj);

@@ -55,7 +55,6 @@ public class ScheduleSingleDetailActivity extends BaseActivity {
     //    private ScheduleDAO dao = null;
     private SQLiteScheduledb dao = null;
     private String[] scheduleIDs;
-    private ScheduleModel scheduleModel = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -77,7 +76,7 @@ public class ScheduleSingleDetailActivity extends BaseActivity {
         Intent intent = getIntent();
         scheduleIDs = intent.getStringArrayExtra("scheduleID");
         if (scheduleIDs.length > 0) {
-            scheduleModel = dao.getScheduleByID(Integer.parseInt(scheduleIDs[0]));
+            ScheduleModel scheduleModel = dao.getScheduleByID(Integer.parseInt(scheduleIDs[0]));
             setShow(scheduleModel);
         }
 

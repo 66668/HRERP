@@ -43,11 +43,11 @@ public class NotificationAndNoticeDetailAplActivity2 extends BaseActivity {
 
         Bundle bundle = this.getIntent().getExtras();
         notificationAndNoticeModel = (NotificationAndNoticeModel) bundle.getSerializable("notificationAndNoticeModel");
-        setShow(notificationAndNoticeModel);
+        setShow();
     }
 
-    private void setShow(NotificationAndNoticeModel model) {
-        tv_content.setText(model.getAbstract());
+    private void setShow() {
+        tv_content.setText(notificationAndNoticeModel.getAbstract());
     }
 
     /**

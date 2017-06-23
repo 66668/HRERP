@@ -55,7 +55,6 @@ public class CommonCopytoCoActivity extends BaseActivity {
 
     private static List<ContactsSonCOModel> listSonCoData;//子公司集合
 
-    private ContactsCopyToCoAdapter adapter;//通讯录 适配
     private SQLiteCopytoContactdb dao; //sql数据库雷
 
     //常量
@@ -151,6 +150,7 @@ public class CommonCopytoCoActivity extends BaseActivity {
     @Override
     protected void handleMessage(Message msg) {
         super.handleMessage(msg);
+        ContactsCopyToCoAdapter adapter;
         switch (msg.what) {
             case POST_SUCCESS://
                 //数据处理
@@ -159,7 +159,7 @@ public class CommonCopytoCoActivity extends BaseActivity {
                 dao.addSonCoList(listSonCoData);
                 //设置首字母 adapter使用
                 setFirstLetter(listSonCoData);
-                adapter = new ContactsCopyToCoAdapter(this, listSonCoData);
+                adapter  = new ContactsCopyToCoAdapter(this, listSonCoData);
                 //数据展示
                 contactsListView.setAdapter(adapter);
 

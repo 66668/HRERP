@@ -1,7 +1,6 @@
 package com.huirong.ui.appsfrg.childmodel.examination.copydetail;
 
 import android.content.Context;
-import android.content.Intent;
 import android.os.Bundle;
 import android.os.Message;
 import android.text.TextUtils;
@@ -34,7 +33,7 @@ import java.util.List;
 
 /**
  * 抄送
- *
+ * <p>
  * 请假详细
  * Created by sjy on 2016/12/2.
  */
@@ -101,7 +100,6 @@ public class LeaveDetailCopyActivity extends BaseActivity {
     ImageView img_03;
 
     //变量
-    private Intent intent = null;
     private LeaveCopyModel leaveModel;
     private MyCopyModel model;
     private List<LeaveCopyModel.ApprovalInfoLists> modelList;
@@ -112,8 +110,6 @@ public class LeaveDetailCopyActivity extends BaseActivity {
 
     //动态添加view
     private List<View> ls_childView;//用于保存动态添加进来的View
-    private View childView;
-    private LayoutInflater inflater;//ViewHolder对象用来保存实例化View的子控件
     private List<ViewHolder> listViewHolder = new ArrayList<ViewHolder>();
     //常量
     public static final int POST_SUCCESS = 11;
@@ -123,6 +119,11 @@ public class LeaveDetailCopyActivity extends BaseActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.act_apps_examination_forleave_d3);
+        initMyView();
+        getDetailModel(model);
+    }
+
+    private void initMyView() {
         tv_title.setText(getResources().getString(R.string.leave_d));
         tv_right.setText("");
 
@@ -132,8 +133,6 @@ public class LeaveDetailCopyActivity extends BaseActivity {
 
         Bundle bundle = this.getIntent().getExtras();
         model = (MyCopyModel) bundle.getSerializable("MyCopyModel");
-
-        getDetailModel(model);
     }
 
     private void setShow(LeaveCopyModel model) {
@@ -279,8 +278,8 @@ public class LeaveDetailCopyActivity extends BaseActivity {
     //初始化参数
     private ViewHolder AddView(Context context, int marks) {
         ls_childView = new ArrayList<View>();
-        inflater = LayoutInflater.from(context);
-        childView = inflater.inflate(R.layout.item_examination_status,   new LinearLayout(this), false);
+        LayoutInflater inflater = LayoutInflater.from(context);
+        View childView = inflater.inflate(R.layout.item_examination_status, new LinearLayout(this), false);
         childView.setId(marks);
         layout_ll.addView(childView, marks);
         return getViewInstance(childView);

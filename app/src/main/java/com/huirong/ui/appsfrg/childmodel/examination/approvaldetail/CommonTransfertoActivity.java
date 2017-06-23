@@ -58,7 +58,6 @@ public class CommonTransfertoActivity extends BaseActivity {
     //变量
     private MyApprovalModel myApprovalModel;//跳转对象
     private ApprovalSModel approvalSModel;//传送对象
-    private String sApprovalemployeeinfos;//转发人ApprovalEmployeeID
 
     private SideBar sideBar;
     private CharacterParser characterParser;// 汉字转换成拼音的类
@@ -273,7 +272,7 @@ public class CommonTransfertoActivity extends BaseActivity {
      */
     public void forCopyto(View view) {
         selectlist = getSelectList(listContactApprover);//获取转交人
-        sApprovalemployeeinfos = getList2String(selectlist);//获取
+        String sApprovalemployeeinfos = getList2String(selectlist);//获取
         Log.d("SJY", "转发-确定sApprovalemployeeinfos=" + sApprovalemployeeinfos);
 
         if (TextUtils.isEmpty(sApprovalemployeeinfos)) {

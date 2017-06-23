@@ -98,8 +98,6 @@ public class FinancialRemburseDetailActivity extends BaseActivity {
     //变量
     private AppFinancialModel appFinancialModel;
 
-    private FinancialAllModel model;
-
     //imageLoader图片缓存
     private ImageLoader imgLoader;
     private DisplayImageOptions imgOptions;
@@ -189,7 +187,7 @@ public class FinancialRemburseDetailActivity extends BaseActivity {
         super.handleMessage(msg);
         switch (msg.what) {
             case POST_SUCCESS:
-                model = (FinancialAllModel) msg.obj;
+                FinancialAllModel model = (FinancialAllModel) msg.obj;
                 setShow(model);
                 break;
             case POST_FAILED:

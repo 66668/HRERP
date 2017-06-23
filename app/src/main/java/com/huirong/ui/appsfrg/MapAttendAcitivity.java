@@ -47,7 +47,6 @@ public class MapAttendAcitivity extends BaseActivity {
     TextView tv_Date;
 
     private final int LOGIN_SUCESS = 2001; // 登陆成功
-    private ImageView forMapAttend;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -56,7 +55,7 @@ public class MapAttendAcitivity extends BaseActivity {
         tvTitle.setText(getResources().getString(R.string.mapAttendance));
         tvRight.setText("");
 
-        forMapAttend = (ImageView) findViewById(R.id.img_mapAttend);
+        ImageView  forMapAttend = (ImageView) findViewById(R.id.img_mapAttend);
         forMapAttend.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

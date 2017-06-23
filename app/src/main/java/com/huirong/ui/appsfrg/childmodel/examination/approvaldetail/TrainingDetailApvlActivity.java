@@ -140,7 +140,7 @@ public class TrainingDetailApvlActivity extends BaseActivity {
         MyApplication.getInstance().addACT(this);
     }
 
-    private void setShow(TrainingApvlModel model) {
+    private void setShow() {
         tv_ApprovalPerson.setText(model.getEmployeeName());
         tv_approvaldept.setText(model.getDepartmentName());
         tv_approvalCo.setText(model.getStoreName());
@@ -196,7 +196,7 @@ public class TrainingDetailApvlActivity extends BaseActivity {
         switch (msg.what) {
             case POST_SUCCESS:
                 model = (TrainingApvlModel) msg.obj;
-                setShow(model);
+                setShow();
                 break;
             case POST_FAILED:
                 PageUtil.DisplayToast((String) msg.obj);

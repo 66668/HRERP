@@ -127,7 +127,7 @@ public class BeawayDetailApvlActivity extends BaseActivity {
         MyApplication.getInstance().addACT(this);
     }
 
-    private void setShow(BeawayApvlModel model) {
+    private void setShow() {
 
         tv_ApprovalPerson.setText(model.getEmployeeName());
         tv_approvaldept.setText(model.getDepartmentName());
@@ -181,7 +181,7 @@ public class BeawayDetailApvlActivity extends BaseActivity {
         switch (msg.what) {
             case POST_SUCCESS:
                 model = (BeawayApvlModel) msg.obj;
-                setShow(model);
+                setShow();
                 break;
             case POST_FAILED:
                 PageUtil.DisplayToast((String) msg.obj);

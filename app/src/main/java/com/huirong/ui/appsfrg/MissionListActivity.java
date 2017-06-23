@@ -47,7 +47,7 @@ public class MissionListActivity extends BaseActivity implements RefreshAndLoadL
     NiceSpinner niceSpinner;
 
     //
-    @ViewInject(id = R.id.tv_right,click = "forAddMission")
+    @ViewInject(id = R.id.tv_right, click = "forAddMission")
     TextView tv_right;
 
     //list
@@ -71,7 +71,6 @@ public class MissionListActivity extends BaseActivity implements RefreshAndLoadL
     //spinner
     private List<String> spinnerData;
     private String myLastSelectState;//记录spinner上次选中的值
-    private ArrayList<MissionListModel> list = null;//获取数据 每次20条,通过拆分成listREC listSED
     private ArrayList<MissionListModel> listREC;//每次获取的收到的数据段
     private ArrayList<MissionListModel> listSED;//每次获取的发送的数据段
 
@@ -121,7 +120,7 @@ public class MissionListActivity extends BaseActivity implements RefreshAndLoadL
                         seeType = "2";//我负责的
                     }
                     getData();
-//                    showSelectData(spinnerData.get(position).trim(), GET_NEW_DATA);//参数2必填GET_NEW_DATA
+                    //                    showSelectData(spinnerData.get(position).trim(), GET_NEW_DATA);//参数2必填GET_NEW_DATA
                 } else {
                     return;
                 }
@@ -249,6 +248,7 @@ public class MissionListActivity extends BaseActivity implements RefreshAndLoadL
 
     @Override
     protected void handleMessage(Message msg) {
+        ArrayList<MissionListModel> list;
         switch (msg.what) {
             case GET_NEW_DATA:
                 list = (ArrayList<MissionListModel>) msg.obj;//获取数据

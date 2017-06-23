@@ -64,7 +64,7 @@ public class ZOCopyListActivity extends BaseActivity implements RefreshListView.
     private ZOCopyLoadMoreListAdapter vAdapter;//记录适配
     private boolean ifLoading = false;//标记
     private int pageSize = 20;
-    private ArrayList<MyCopyModel> list = null;
+
     private String IMaxtime = null;
     private String IMinTime = null;
 
@@ -208,6 +208,7 @@ public class ZOCopyListActivity extends BaseActivity implements RefreshListView.
 
     @Override
     protected void handleMessage(Message msg) {
+        ArrayList<MyCopyModel> list;
         switch (msg.what) {
             case GET_NEW_DATA://进入页面加载最新
                 // 数据显示
@@ -335,30 +336,30 @@ public class ZOCopyListActivity extends BaseActivity implements RefreshListView.
                 break;
 
 
-//            case "借阅申请"://06
-//                startActivity(BorrowDetailCopyActivity.class, bundle);
-//                break;
-//            case "调薪申请"://07
-//                startActivity(SalaryadjustDetailCopyActivity.class, bundle);
-//                break;
-//            case "通知公告申请"://13
-//                startActivity(NotificationAndNoticeDetailCopyActivity.class, bundle);
-//                break;
-//            case "办公室申请"://14
-//                startActivity(OfficeDetailCopyActivity.class, bundle);
-//                break;
-//            case "领用申请"://15
-//                startActivity(ReceiveDetailCopyActivity.class, bundle);
-//                break;
-//            case "合同文件申请"://16
-//                startActivity(ContractFileDetailCopyActivity.class, bundle);
-//                break;
-//            case "复试申请"://18
-//                startActivity(RetestDetailCopyActivity.class, bundle);
-//                break;
-//            case "会议申请"://19
-//                startActivity(ConferenceDetailCopyActivity.class, bundle);
-//                break;
+            //            case "借阅申请"://06
+            //                startActivity(BorrowDetailCopyActivity.class, bundle);
+            //                break;
+            //            case "调薪申请"://07
+            //                startActivity(SalaryadjustDetailCopyActivity.class, bundle);
+            //                break;
+            //            case "通知公告申请"://13
+            //                startActivity(NotificationAndNoticeDetailCopyActivity.class, bundle);
+            //                break;
+            //            case "办公室申请"://14
+            //                startActivity(OfficeDetailCopyActivity.class, bundle);
+            //                break;
+            //            case "领用申请"://15
+            //                startActivity(ReceiveDetailCopyActivity.class, bundle);
+            //                break;
+            //            case "合同文件申请"://16
+            //                startActivity(ContractFileDetailCopyActivity.class, bundle);
+            //                break;
+            //            case "复试申请"://18
+            //                startActivity(RetestDetailCopyActivity.class, bundle);
+            //                break;
+            //            case "会议申请"://19
+            //                startActivity(ConferenceDetailCopyActivity.class, bundle);
+            //                break;
         }
     }
 

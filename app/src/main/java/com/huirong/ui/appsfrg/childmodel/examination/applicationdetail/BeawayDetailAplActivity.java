@@ -82,15 +82,11 @@ public class BeawayDetailAplActivity extends BaseActivity {
     @ViewInject(id = R.id.layout_ll)
     LinearLayout layout_ll;
 
-    private Intent intent = null;
     private BeawayModel BeawayModel;
     private MyApplicationModel model;
-    private List<BeawayModel.ApprovalInfoLists> modelList;
 
     //动态添加view
     private List<View> ls_childView;//用于保存动态添加进来的View
-    private View childView;
-    private LayoutInflater inflater;//ViewHolder对象用来保存实例化View的子控件
     private List<ViewHolder> listViewHolder = new ArrayList<>();
     //    private int mark = 5;//0显示在顶部
 
@@ -110,7 +106,7 @@ public class BeawayDetailAplActivity extends BaseActivity {
     private void initMyView() {
         tv_title.setText(getResources().getString(R.string.beaway_title_d));
         tv_right.setText("");
-        intent = getIntent();
+        Intent intent = getIntent();
         model = (MyApplicationModel) intent.getSerializableExtra("MyApplicationModel");
     }
 
@@ -122,7 +118,7 @@ public class BeawayDetailAplActivity extends BaseActivity {
         tv_reason.setText(model.getReason());
         tv_remark.setText(model.getRemark());
 
-        modelList = model.getApprovalInfoLists();
+        List<BeawayModel.ApprovalInfoLists> modelList = model.getApprovalInfoLists();
         // 审批人
         StringBuilder nameBuilder = new StringBuilder();
         for (int i = 0; i < modelList.size(); i++) {
@@ -218,8 +214,8 @@ public class BeawayDetailAplActivity extends BaseActivity {
 
     private ViewHolder AddView(Context context, int marks) {
         ls_childView = new ArrayList<View>();
-        inflater = LayoutInflater.from(context);
-        childView = inflater.inflate(R.layout.item_examination_status, new LinearLayout(this), false);
+        LayoutInflater inflater = LayoutInflater.from(context);//ViewHolder对象用来保存实例化View的子控件
+        View childView = inflater.inflate(R.layout.item_examination_status, new LinearLayout(this), false);
         childView.setId(marks);
         layout_ll.addView(childView, marks);
         return getViewInstance(childView);

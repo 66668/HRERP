@@ -111,16 +111,12 @@ public class FinancialReimburseDetailCopyActivity extends BaseActivity {
     //变量
     private Intent intent = null;
     private FinancialAllModel financialAllModel;
-    private MyCopyModel model;
-    private List<FinancialAllModel.ApprovalInfoLists> modelList;
     //imageLoader图片缓存
     private ImageLoader imgLoader;
     private DisplayImageOptions imgOptions;
 
     //动态添加view 变量
     private List<View> ls_childView;//用于保存动态添加进来的View
-    private View childView;
-    private LayoutInflater inflater;//ViewHolder对象用来保存实例化View的子控件
     private List<ViewHolder> listViewHolder = new ArrayList<>();
 
     //常量
@@ -139,7 +135,7 @@ public class FinancialReimburseDetailCopyActivity extends BaseActivity {
         imgOptions = ImageLoadingConfig.generateDisplayImageOptions(R.mipmap.ic_launcher);
 
         Bundle bundle = this.getIntent().getExtras();
-        model = (MyCopyModel) bundle.getSerializable("MyCopyModel");
+        MyCopyModel model = (MyCopyModel) bundle.getSerializable("MyCopyModel");
         getDetailModel(model);
     }
 
@@ -176,7 +172,7 @@ public class FinancialReimburseDetailCopyActivity extends BaseActivity {
         tv_remark.setText(model.getRemark());//?
 
         // 审批人
-        modelList = model.getApprovalInfoLists();
+        List<FinancialAllModel.ApprovalInfoLists> modelList = model.getApprovalInfoLists();
         StringBuilder nameBuilder = new StringBuilder();
         for (int i = 0; i < modelList.size(); i++) {
             nameBuilder.append(modelList.get(i).getApprovalEmployeeName() + " ");
@@ -294,8 +290,8 @@ public class FinancialReimburseDetailCopyActivity extends BaseActivity {
     //初始化参数
     private ViewHolder AddView(Context context, int marks) {
         ls_childView = new ArrayList<View>();
-        inflater = LayoutInflater.from(context);
-        childView = inflater.inflate(R.layout.item_examination_status,  new LinearLayout(this), false);
+        LayoutInflater inflater = LayoutInflater.from(context);
+        View childView = inflater.inflate(R.layout.item_examination_status, new LinearLayout(this), false);
         childView.setId(marks);
         layout_ll.addView(childView, marks);
         return getViewInstance(childView);

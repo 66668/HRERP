@@ -49,7 +49,6 @@ public class ConferenceListActivity extends BaseActivity implements RefreshListV
     private ConferenceLoadMoreListAdapter vAdapter;//记录适配
     private boolean ifLoading = false;//标记
     private int pageSize = 20;
-    private ArrayList<ConferenceMSGModel> list = null;
     private String IMaxtime = null;
     private String IMinTime = null;
 
@@ -192,6 +191,7 @@ public class ConferenceListActivity extends BaseActivity implements RefreshListV
 
     @Override
     protected void handleMessage(Message msg) {
+        ArrayList<ConferenceMSGModel> list;
         switch (msg.what) {
             case GET_NEW_DATA://进入页面加载最新
                 // 数据显示

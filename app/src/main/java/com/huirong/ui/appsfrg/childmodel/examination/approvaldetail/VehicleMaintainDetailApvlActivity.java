@@ -22,7 +22,7 @@ import com.huirong.utils.PageUtil;
 
 /**
  * 维保 审批详情
- *
+ * <p>
  * Created by sjy on 2016/12/2.
  */
 
@@ -117,7 +117,6 @@ public class VehicleMaintainDetailApvlActivity extends BaseActivity {
     TextView tv_remark;
 
 
-
     //变量
     private MyApprovalModel myApprovalModel;
     private VehicleMaintainApvlModel model;
@@ -143,7 +142,7 @@ public class VehicleMaintainDetailApvlActivity extends BaseActivity {
         MyApplication.getInstance().addACT(this);
     }
 
-    private void setShow(VehicleMaintainApvlModel model) {
+    private void setShow() {
 
         tv_ApprovalPerson.setText(model.getEmployeeName());
         tv_approvaldept.setText(model.getDepartmentName());
@@ -201,7 +200,7 @@ public class VehicleMaintainDetailApvlActivity extends BaseActivity {
         switch (msg.what) {
             case POST_SUCCESS:
                 model = (VehicleMaintainApvlModel) msg.obj;
-                setShow(model);
+                setShow();
                 break;
             case POST_FAILED:
                 PageUtil.DisplayToast((String) msg.obj);
@@ -247,6 +246,7 @@ public class VehicleMaintainDetailApvlActivity extends BaseActivity {
     public void forBack(View view) {
         this.finish();
     }
+
     private boolean isRemarkExpend = false;
 
     public void RemarkExpended(View view) {

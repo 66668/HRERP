@@ -145,7 +145,7 @@ public class FinancialLoanDetailApvlActivity extends BaseActivity {
         Log.d("SJY", "详情MyApprovalModel");
     }
 
-    private void setShow(FinancialAllModel model) {
+    private void setShow() {
         //
         tv_ApprovalPerson.setText(model.getEmployeeName());
         tv_approvaldept.setText(model.getDepartmentName());
@@ -213,7 +213,7 @@ public class FinancialLoanDetailApvlActivity extends BaseActivity {
         switch (msg.what) {
             case POST_SUCCESS:
                 model = (FinancialAllModel) msg.obj;
-                setShow(model);
+                setShow();
                 break;
             case POST_FAILED:
                 PageUtil.DisplayToast((String) msg.obj);

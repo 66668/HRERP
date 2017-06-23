@@ -110,15 +110,12 @@ public class FinancialPayDetailCopyActivity extends BaseActivity {
     private Intent intent = null;
     private FinancialAllModel financialAllModel;
     private MyCopyModel model;
-    private List<FinancialAllModel.ApprovalInfoLists> modelList;
     //imageLoader图片缓存
     private ImageLoader imgLoader;
     private DisplayImageOptions imgOptions;
 
     //动态添加view
     private List<View> ls_childView;//用于保存动态添加进来的View
-    private View childView;
-    private LayoutInflater inflater;//ViewHolder对象用来保存实例化View的子控件
     private List<ViewHolder> listViewHolder = new ArrayList<ViewHolder>();
 
     //常量
@@ -137,6 +134,7 @@ public class FinancialPayDetailCopyActivity extends BaseActivity {
     private void initMyView() {
         tv_title.setText(getResources().getString(R.string.financial_pay));
         tv_right.setText("");
+
         imgLoader = ImageLoader.getInstance();
         imgLoader.init(ImageLoaderConfiguration.createDefault(this));
         imgOptions = ImageLoadingConfig.generateDisplayImageOptions(R.mipmap.ic_launcher);
@@ -158,9 +156,23 @@ public class FinancialPayDetailCopyActivity extends BaseActivity {
         tv_fee.setText(model.getFee());
         tv_remark.setText(model.getRemark());
 
+        if (model.getImageLists().size() == 1) {
+            imgLoader.displayImage(model.getImageLists().get(0), img_01, imgOptions);
+        }
+
+        if (model.getImageLists().size() == 2) {
+            imgLoader.displayImage(model.getImageLists().get(0), img_01, imgOptions);
+            imgLoader.displayImage(model.getImageLists().get(1), img_02, imgOptions);
+        }
+
+        if (model.getImageLists().size() == 3) {
+            imgLoader.displayImage(model.getImageLists().get(0), img_01, imgOptions);
+            imgLoader.displayImage(model.getImageLists().get(1), img_02, imgOptions);
+            imgLoader.displayImage(model.getImageLists().get(2), img_03, imgOptions);
+        }
 
         // 审批人
-        modelList = model.getApprovalInfoLists();
+        List<FinancialAllModel.ApprovalInfoLists> modelList = model.getApprovalInfoLists();
         StringBuilder nameBuilder = new StringBuilder();
         for (int i = 0; i < modelList.size(); i++) {
             nameBuilder.append(modelList.get(i).getApprovalEmployeeName() + " ");
@@ -259,8 +271,8 @@ public class FinancialPayDetailCopyActivity extends BaseActivity {
     //初始化参数
     private ViewHolder AddView(Context context, int marks) {
         ls_childView = new ArrayList<View>();
-        inflater = LayoutInflater.from(context);
-        childView = inflater.inflate(R.layout.item_examination_status,  new LinearLayout(this), false);
+        LayoutInflater inflater = LayoutInflater.from(context);
+        View childView = inflater.inflate(R.layout.item_examination_status, new LinearLayout(this), false);
         childView.setId(marks);
         layout_ll.addView(childView, marks);
         return getViewInstance(childView);

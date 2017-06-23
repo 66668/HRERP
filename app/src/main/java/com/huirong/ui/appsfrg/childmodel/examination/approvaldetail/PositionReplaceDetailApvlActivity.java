@@ -134,7 +134,7 @@ public class PositionReplaceDetailApvlActivity extends BaseActivity {
         MyApplication.getInstance().addACT(this);
     }
 
-    private void setShow(PositionReplaceApvlModel model) {
+    private void setShow() {
         //
         tv_ApprovalPerson.setText(model.getEmployeeName());
         tv_approvaldept.setText(model.getDepartmentName());
@@ -193,7 +193,7 @@ public class PositionReplaceDetailApvlActivity extends BaseActivity {
         switch (msg.what) {
             case POST_SUCCESS:
                 model = (PositionReplaceApvlModel) msg.obj;
-                setShow(model);
+                setShow();
                 break;
             case POST_FAILED:
                 PageUtil.DisplayToast((String) msg.obj);
@@ -239,6 +239,7 @@ public class PositionReplaceDetailApvlActivity extends BaseActivity {
     public void forBack(View view) {
         this.finish();
     }
+
     private boolean isExpend = false;
 
     public void ReasonExpended(View view) {

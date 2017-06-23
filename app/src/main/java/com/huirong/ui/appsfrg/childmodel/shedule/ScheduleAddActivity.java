@@ -91,8 +91,6 @@ public class ScheduleAddActivity extends BaseActivity {
     ScheduleModel scheduleModel = null;
     private ArrayList<ScheduleDateTag> dateTagList = new ArrayList<ScheduleDateTag>();
     private String scheduleYear = "";
-    private String scheduleMonth = "";
-    private String scheduleDay = "";
     private String week = "";
 
     //临时日期时间变量，
@@ -406,12 +404,12 @@ public class ScheduleAddActivity extends BaseActivity {
         // 得到年月日和星期
         scheduleYear = scheduleDate.get(0);
         Log.d("ss", "添加日程--年=" + scheduleYear);
-        scheduleMonth = scheduleDate.get(1);
+        String  scheduleMonth = scheduleDate.get(1);
         tempMonth = scheduleMonth;
         if (Integer.parseInt(scheduleMonth) < 10) {
             scheduleMonth = "0" + scheduleMonth;
         }
-        scheduleDay = scheduleDate.get(2);
+        String scheduleDay = scheduleDate.get(2);
         tempDay = scheduleDay;
         if (Integer.parseInt(scheduleDay) < 10) {
             scheduleDay = "0" + scheduleDay;

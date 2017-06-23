@@ -119,7 +119,6 @@ public class FinancialLoanActivity extends BaseActivity implements CameraGallery
     private String fee = "";
 
     private CameraGalleryUtils cameraGalleryUtils;// 头像上传工具
-    private String picPath;
     private File filePicPath;
     private List<Bitmap> listPic;
 
@@ -370,9 +369,8 @@ public class FinancialLoanActivity extends BaseActivity implements CameraGallery
 
     @Override
     public void updateAvatarSuccess(int updateType, String picpath, String avatarBase64) {
-        picPath = picpath;
 
-        Bitmap bitmap = BitmapFactory.decodeFile(picPath);
+        Bitmap bitmap = BitmapFactory.decodeFile(picpath);
         Uri uri = ImageUtils.savePicture(this, bitmap);
         filePicPath = new File(ImageUtils.getImageAbsolutePath(this, uri));
 

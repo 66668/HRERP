@@ -24,8 +24,6 @@ import java.util.List;
 
 public class AppsFragment extends BaseFragment {
     private static final String TAG = "AppsFragment";
-    private ViewPager viewPager;
-    private ArrayList<GridView> array;//分页使用
     //    private LinePageIndicator mIndicator;//横条
 
     //单例模式
@@ -59,7 +57,7 @@ public class AppsFragment extends BaseFragment {
 
     //界面详细
     public void initView(View view) {
-        viewPager = (ViewPager) view.findViewById(R.id.myviewpager);
+        ViewPager  viewPager = (ViewPager) view.findViewById(R.id.myviewpager);
 
         //为按钮添加数据
         final List<HashMap<String, Object>> list = new ArrayList<HashMap<String, Object>>();
@@ -128,7 +126,7 @@ public class AppsFragment extends BaseFragment {
 //        list.add(map12);
 
         final int PageCount = 1;//分页
-        array = new ArrayList<GridView>();
+        ArrayList<GridView> array = new ArrayList<GridView>();
         for (int i = 0; i < PageCount; i++) {
             GridView appPage = new GridView(getActivity());
             //详细界面分析
@@ -137,6 +135,7 @@ public class AppsFragment extends BaseFragment {
             appPage.setVerticalSpacing(80);
             array.add(appPage);
             viewPager.setAdapter(new AppsViewPagerAdapter(getActivity(), array));
+
             // 横条使用
             // mIndicator = (LinePageIndicator)view.findViewById(R.id.indicator);
             // mIndicator.setViewPager(viewPager);

@@ -80,7 +80,6 @@ public class TrainingDetailCopyActivity extends BaseActivity {
     TextView tv_remark;
 
 
-
     //审批人
     @ViewInject(id = R.id.tv_Requester)
     TextView tv_Requester;
@@ -106,12 +105,9 @@ public class TrainingDetailCopyActivity extends BaseActivity {
     private Intent intent = null;
     private TrainingCopyModel borrowModel;
     private MyCopyModel model;
-    private List<TrainingCopyModel.ApprovalInfoLists> modelList;
 
     //动态添加view
     private List<View> ls_childView;//用于保存动态添加进来的ViewA
-    private View childView;
-    private LayoutInflater inflater;//ViewHolder对象用来保存实例化View的子控件
     private List<ViewHolder> listViewHolder = new ArrayList<>();
     private LinearLayout ll_main;
     //    private int mark = 5;//0显示在顶部
@@ -124,12 +120,16 @@ public class TrainingDetailCopyActivity extends BaseActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.act_apps_examination_training_d3);
+        initMyView();
+        getDetailModel(model);
+    }
+
+    private void initMyView() {
         tv_title.setText(getResources().getString(R.string.train_apl_d));
         tv_right.setText("");
 
         Bundle bundle = this.getIntent().getExtras();
         model = (MyCopyModel) bundle.getSerializable("MyCopyModel");
-        getDetailModel(model);
     }
 
     private void setShow(TrainingCopyModel model) {
@@ -148,7 +148,7 @@ public class TrainingDetailCopyActivity extends BaseActivity {
 
 
         // 审批人
-        modelList = model.getApprovalInfoLists();
+        List<TrainingCopyModel.ApprovalInfoLists> modelList = model.getApprovalInfoLists();
         StringBuilder nameBuilder = new StringBuilder();
         for (int i = 0; i < modelList.size(); i++) {
             nameBuilder.append(modelList.get(i).getApprovalEmployeeName() + " ");
@@ -241,8 +241,8 @@ public class TrainingDetailCopyActivity extends BaseActivity {
     //初始化参数
     private ViewHolder AddView(Context context, int marks) {
         ls_childView = new ArrayList<View>();
-        inflater = LayoutInflater.from(context);
-        childView = inflater.inflate(R.layout.item_examination_status, new LinearLayout(this),false);
+        LayoutInflater inflater = LayoutInflater.from(context);
+        View childView = inflater.inflate(R.layout.item_examination_status, new LinearLayout(this), false);
         childView.setId(marks);
         layout_ll.addView(childView, marks);
         return getViewInstance(childView);

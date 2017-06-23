@@ -54,7 +54,6 @@ public class CommonCopytoDeptActivity extends BaseActivity {
 
     private static List<ContactsDeptModel> listDeptData;//部门集合
 
-    private ContactsCopyToDeptAdapter adapter;//通讯录排序适配
     private String sStoreID;
     private SQLiteCopytoContactdb dao; //sql数据库雷
 
@@ -160,6 +159,7 @@ public class CommonCopytoDeptActivity extends BaseActivity {
     @Override
     protected void handleMessage(Message msg) {
         super.handleMessage(msg);
+        ContactsCopyToDeptAdapter adapter;
         switch (msg.what) {
             case POST_SUCCESEE:// 服务端数据处理
 

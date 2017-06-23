@@ -883,7 +883,7 @@ public class Utils {
      * 类型安全转换(八大类型)
      */
     //(1)int型
-    public final static int convertToInt(Object value, int defaultValue) {
+    public static int convertToInt(Object value, int defaultValue) {
         if (value == null || "".equals(value.toString().trim())) {
             return defaultValue;
         }

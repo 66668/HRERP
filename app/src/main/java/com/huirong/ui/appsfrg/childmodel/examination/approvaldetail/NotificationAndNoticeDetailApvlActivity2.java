@@ -32,7 +32,6 @@ public class NotificationAndNoticeDetailApvlActivity2 extends BaseActivity {
     TextView tv_content;
 
     //变量
-    private String content;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,7 +41,7 @@ public class NotificationAndNoticeDetailApvlActivity2 extends BaseActivity {
         tv_right.setText("");
 
         Bundle bundle = this.getIntent().getExtras();
-        content = bundle.getString("Abstract");
+        String content = bundle.getString("Abstract");
         setShow(content);
 
     }

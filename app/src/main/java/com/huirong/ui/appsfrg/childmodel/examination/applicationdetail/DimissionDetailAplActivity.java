@@ -80,15 +80,10 @@ public class DimissionDetailAplActivity extends BaseActivity {
 
 
     //变量
-    private Intent intent = null;
     private DismissionModel dismissionModel;
-    private MyApplicationModel model;
-    private List<DismissionModel.ApprovalInfoLists> modelList;
 
     //动态添加view
     private List<View> ls_childView;//用于保存动态添加进来的View
-    private View childView;
-    private LayoutInflater inflater;//ViewHolder对象用来保存实例化View的子控件
     private List<ViewHolder> listViewHolder = new ArrayList<ViewHolder>();
 
     //常量
@@ -101,8 +96,8 @@ public class DimissionDetailAplActivity extends BaseActivity {
         setContentView(R.layout.act_apps_examination_dismission_d);
         tv_title.setText(getResources().getString(R.string.jobsForLeave_d));
         tv_right.setText("");
-        intent = getIntent();
-        model = (MyApplicationModel) intent.getSerializableExtra("MyApplicationModel");
+        Intent intent = getIntent();
+        MyApplicationModel model = (MyApplicationModel) intent.getSerializableExtra("MyApplicationModel");
         getDetailModel(model);
     }
 
@@ -112,7 +107,7 @@ public class DimissionDetailAplActivity extends BaseActivity {
         tv_endTime.setText(model.getDimissionDate());
         tv_reason.setText(model.getContent());
 
-        modelList = model.getApprovalInfoLists();
+        List<DismissionModel.ApprovalInfoLists> modelList = model.getApprovalInfoLists();
         // 审批人
         StringBuilder nameBuilder = new StringBuilder();
         for (int i = 0; i < modelList.size(); i++) {
@@ -209,8 +204,8 @@ public class DimissionDetailAplActivity extends BaseActivity {
     //初始化参数
     private ViewHolder AddView(Context context, int marks) {
         ls_childView = new ArrayList<View>();
-        inflater = LayoutInflater.from(context);
-        childView = inflater.inflate(R.layout.item_examination_status, new LinearLayout(this), false);
+        LayoutInflater inflater = LayoutInflater.from(context);
+        View childView = inflater.inflate(R.layout.item_examination_status, new LinearLayout(this), false);
         childView.setId(marks);
         layout_ll.addView(childView, marks);
         return getViewInstance(childView);

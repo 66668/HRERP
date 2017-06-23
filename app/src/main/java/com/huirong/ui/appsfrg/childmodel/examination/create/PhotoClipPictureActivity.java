@@ -98,7 +98,7 @@ public class PhotoClipPictureActivity extends BaseActivity implements OnTouchLis
 			Object object = clazz.newInstance();
 			Field field = clazz.getField("status_bar_height");
 			int height = Integer.parseInt(field.get(object).toString());
-			MOBILE_STATUS_BAR_HEIGHT = getResources().getDimensionPixelSize(height); 
+			MOBILE_STATUS_BAR_HEIGHT = getResources().getDimensionPixelSize(height);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -108,7 +108,7 @@ public class PhotoClipPictureActivity extends BaseActivity implements OnTouchLis
 		orgImageView = (ImageView) this.findViewById(R.id.src_pic);
 		// 06设置图片裁剪监听
 		orgImageView.setOnTouchListener(this);
-		
+
 		// 获取图片路径(相册调用)
 		Intent intent = getIntent();
 		if (intent != null) {
@@ -125,7 +125,7 @@ public class PhotoClipPictureActivity extends BaseActivity implements OnTouchLis
 			Toast.makeText(getApplicationContext(), "请选择系统相册图片", Toast.LENGTH_SHORT).show();
 			finish();
 			return;
-		}     
+		}
 		// 刚进入此页面时，加载提示
 		userPhotoLoadingBg = (LinearLayout) findViewById(R.id.user_photo_loading_bg);
 		// 05保存缓存到本地
@@ -197,14 +197,14 @@ public class PhotoClipPictureActivity extends BaseActivity implements OnTouchLis
 		ImageView back = (ImageView) findViewById(R.id.back_btn);// back图片按钮
 		ImageButton next = (ImageButton) findViewById(R.id.top_right_btn);// 对号按钮，裁剪完成点击
 		next.setVisibility(View.VISIBLE);// 设置可见
-		
+
 		back.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
 				finish();
 			}
 		});
-		
+
 		next.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {

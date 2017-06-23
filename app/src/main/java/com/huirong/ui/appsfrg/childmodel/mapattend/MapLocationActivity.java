@@ -59,8 +59,6 @@ public class MapLocationActivity extends BaseActivity implements LocationSource 
     private OnLocationChangedListener mListener = null;
     //标识，用于判断是否只显示一次定位信息和用户重新定位
     private boolean isFirstLoc = true;
-    private ImageView imgBack = null;
-    private StringBuffer buffer = null;
     private double lat ;
     private double lon ;
     private String currentTime = null;
@@ -78,7 +76,7 @@ public class MapLocationActivity extends BaseActivity implements LocationSource 
         tv_right.setText(getResources().getString(R.string.forAttend));
 
         mapView = (MapView) findViewById(R.id.map_view);
-        imgBack = (ImageView) findViewById(R.id.imgBack);
+        ImageView  imgBack = (ImageView) findViewById(R.id.imgBack);
         imgBack.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -188,7 +186,7 @@ public class MapLocationActivity extends BaseActivity implements LocationSource 
                         //添加图钉
                         //  aMap.addMarker(getMarkerOptions(amapLocation));
                         //获取定位信息
-                        buffer = new StringBuffer();
+                        StringBuffer   buffer = new StringBuffer();
                         buffer.append(aMapLocation.getCountry() + ""
                                 + aMapLocation.getProvince() + ""
                                 + aMapLocation.getCity() + ""

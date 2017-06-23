@@ -73,14 +73,9 @@ public class ContractFileDetailAplActivity extends BaseActivity {
     LinearLayout layout_ll;
 
     //变量
-    private Intent intent = null;
     private ContractFileModel contractFileModel;
-    private MyApplicationModel model;
-    private List<ContractFileModel.ApprovalInfoLists> modelList;
     //动态添加view
     private List<View> ls_childView;//用于保存动态添加进来的View
-    private View childView;
-    private LayoutInflater inflater;//ViewHolder对象用来保存实例化View的子控件
     private List<ViewHolder> listViewHolder = new ArrayList<>();
     //    private int mark = 5;//0显示在顶部
     //常量
@@ -94,8 +89,8 @@ public class ContractFileDetailAplActivity extends BaseActivity {
         tv_title.setText(getResources().getString(R.string.contractfile));
         tv_right.setText("");
 
-        intent = getIntent();
-        model = (MyApplicationModel) intent.getSerializableExtra("MyApplicationModel");
+        Intent intent = getIntent();
+        MyApplicationModel  model = (MyApplicationModel) intent.getSerializableExtra("MyApplicationModel");
         getDetailModel(model);
     }
 
@@ -105,7 +100,7 @@ public class ContractFileDetailAplActivity extends BaseActivity {
         tv_remark.setText(model.getRemark());
 
         // 审批人
-        modelList = model.getApprovalInfoLists();
+        List<ContractFileModel.ApprovalInfoLists> modelList = model.getApprovalInfoLists();
         StringBuilder nameBuilder = new StringBuilder();
         for (int i = 0; i < modelList.size(); i++) {
             nameBuilder.append(modelList.get(i).getApprovalEmployeeName() + " ");
@@ -201,8 +196,8 @@ public class ContractFileDetailAplActivity extends BaseActivity {
     //初始化参数
     private ViewHolder AddView(Context context, int marks) {
         ls_childView = new ArrayList<View>();
-        inflater = LayoutInflater.from(context);
-        childView = inflater.inflate(R.layout.item_examination_status, new LinearLayout(this), false);
+        LayoutInflater inflater = LayoutInflater.from(context);
+        View  childView = inflater.inflate(R.layout.item_examination_status, new LinearLayout(this), false);
         childView.setId(marks);
         layout_ll.addView(childView, marks);
         return getViewInstance(childView);

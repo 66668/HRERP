@@ -13,6 +13,7 @@ import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.huirong.utils.LogUtils;
 import com.nostra13.universalimageloader.core.DisplayImageOptions;
 import com.nostra13.universalimageloader.core.ImageLoader;
 import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
@@ -106,8 +107,6 @@ public class FinancialReimburseDetailAplActivity extends BaseActivity {
     //变量
     private Intent intent = null;
     private FinancialAllModel financialAllModel;
-    private MyApplicationModel model;
-    private List<FinancialAllModel.ApprovalInfoLists> modelList;
 
     //imageLoader图片缓存
     private ImageLoader imgLoader;
@@ -115,8 +114,6 @@ public class FinancialReimburseDetailAplActivity extends BaseActivity {
 
     //动态添加view 变量
     private List<View> ls_childView;//用于保存动态添加进来的View
-    private View childView;
-    private LayoutInflater inflater;//ViewHolder对象用来保存实例化View的子控件
     private List<ViewHolder> listViewHolder = new ArrayList<>();
 
     //常量
@@ -135,13 +132,12 @@ public class FinancialReimburseDetailAplActivity extends BaseActivity {
         imgOptions = ImageLoadingConfig.generateDisplayImageOptions(R.mipmap.ic_launcher);
 
         Bundle bundle = this.getIntent().getExtras();
-        model = (MyApplicationModel) bundle.getSerializable("MyApplicationModel");
-        Log.d("SJY", "model==null?" + (model == null));
+        MyApplicationModel model = (MyApplicationModel) bundle.getSerializable("MyApplicationModel");
         getDetailModel(model);
     }
 
     private void setShow(FinancialAllModel model) {
-        Log.d("SJY", "图片size=" + model.getImageLists().size());
+        LogUtils.d("SJY", "图片size=" + model.getImageLists().size());
 
         if (model.getImageLists().size() == 1) {
             imgLoader.displayImage(model.getImageLists().get(0), img_01, imgOptions);
@@ -170,7 +166,7 @@ public class FinancialReimburseDetailAplActivity extends BaseActivity {
         tv_remark.setText(model.getRemark());//?
 
         // 审批人
-        modelList = model.getApprovalInfoLists();
+        List<FinancialAllModel.ApprovalInfoLists> modelList = model.getApprovalInfoLists();
         StringBuilder nameBuilder = new StringBuilder();
         for (int i = 0; i < modelList.size(); i++) {
             nameBuilder.append(modelList.get(i).getApprovalEmployeeName() + " ");
@@ -291,8 +287,8 @@ public class FinancialReimburseDetailAplActivity extends BaseActivity {
     //初始化参数
     private ViewHolder AddView(Context context, int marks) {
         ls_childView = new ArrayList<View>();
-        inflater = LayoutInflater.from(context);
-        childView = inflater.inflate(R.layout.item_examination_status,  new LinearLayout(this), false);
+        LayoutInflater inflater = LayoutInflater.from(context);
+        View childView = inflater.inflate(R.layout.item_examination_status, new LinearLayout(this), false);
         childView.setId(marks);
         layout_ll.addView(childView, marks);
         return getViewInstance(childView);

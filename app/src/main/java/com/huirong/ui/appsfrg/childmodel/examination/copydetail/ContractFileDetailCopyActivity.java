@@ -69,23 +69,19 @@ public class ContractFileDetailCopyActivity extends BaseActivity {
     TextView tv_contractfile_name;
 
     //备注
-    @ViewInject(id = R.id.tv_remark,click = "RemarkExpended")
+    @ViewInject(id = R.id.tv_remark, click = "RemarkExpended")
     TextView tv_remark;
 
     //附件
     @ViewInject(id = R.id.contractfile_files)
     TextView contractfile_files;
-    
+
 
     //变量
     private Intent intent = null;
     private ContractFileCopyModel contractFileModel;
-    private MyCopyModel model;
-    private List<ContractFileCopyModel.ApprovalInfoLists> modelList;
     //动态添加view
     private List<View> ls_childView;//用于保存动态添加进来的View
-    private View childView;
-    private LayoutInflater inflater;//ViewHolder对象用来保存实例化View的子控件
     private List<ViewHolder> listViewHolder = new ArrayList<ViewHolder>();
 
     //常量
@@ -100,7 +96,7 @@ public class ContractFileDetailCopyActivity extends BaseActivity {
         tv_right.setText("");
 
         Bundle bundle = this.getIntent().getExtras();
-        model = (MyCopyModel) bundle.getSerializable("MyCopyModel");
+        MyCopyModel model = (MyCopyModel) bundle.getSerializable("MyCopyModel");
         getDetailModel(model);
     }
 
@@ -113,7 +109,7 @@ public class ContractFileDetailCopyActivity extends BaseActivity {
 
 
         // 审批人
-        modelList = model.getApprovalInfoLists();
+        List<ContractFileCopyModel.ApprovalInfoLists> modelList = model.getApprovalInfoLists();
         StringBuilder nameBuilder = new StringBuilder();
         for (int i = 0; i < modelList.size(); i++) {
             nameBuilder.append(modelList.get(i).getApprovalEmployeeName() + " ");
@@ -144,13 +140,13 @@ public class ContractFileDetailCopyActivity extends BaseActivity {
                 if (modelList.get(i).getYesOrNo().contains("0")) {
                     vh.tv_yesOrNo.setText("不同意");
                     vh.tv_yesOrNo.setTextColor(getResources().getColor(R.color.red));
-                }else if(TextUtils.isEmpty(modelList.get(i).getYesOrNo())){
+                } else if (TextUtils.isEmpty(modelList.get(i).getYesOrNo())) {
                     vh.tv_yesOrNo.setText("未审批");
                     vh.tv_yesOrNo.setTextColor(getResources().getColor(R.color.red));
                 } else if ((modelList.get(i).getYesOrNo().contains("1"))) {
                     vh.tv_yesOrNo.setText("同意");
                     vh.tv_yesOrNo.setTextColor(getResources().getColor(R.color.green));
-                } else{
+                } else {
                     vh.tv_yesOrNo.setText("yesOrNo为null");
                 }
             }
@@ -207,8 +203,8 @@ public class ContractFileDetailCopyActivity extends BaseActivity {
     //初始化参数
     private ViewHolder AddView(Context context, int marks) {
         ls_childView = new ArrayList<View>();
-        inflater = LayoutInflater.from(context);
-        childView = inflater.inflate(R.layout.item_examination_status, new LinearLayout(this), false);
+        LayoutInflater inflater = LayoutInflater.from(context);
+        View childView = inflater.inflate(R.layout.item_examination_status, new LinearLayout(this), false);
         childView.setId(marks);
         layout_ll.addView(childView, marks);
         return getViewInstance(childView);
@@ -226,6 +222,7 @@ public class ContractFileDetailCopyActivity extends BaseActivity {
         ls_childView.add(childView);
         return vh;
     }
+
     /**
      * back
      *
@@ -234,6 +231,7 @@ public class ContractFileDetailCopyActivity extends BaseActivity {
     public void forBack(View view) {
         this.finish();
     }
+
     private boolean isRemarkExpend = false;
 
     public void RemarkExpended(View view) {

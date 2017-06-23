@@ -45,8 +45,6 @@ public class SignetDetailAplActivity extends BaseActivity {
     TextView tv_right;
 
 
-
-
     //公司名称
     @ViewInject(id = R.id.tv_company)
     TextView tv_company;
@@ -85,15 +83,11 @@ public class SignetDetailAplActivity extends BaseActivity {
     @ViewInject(id = R.id.layout_ll)
     LinearLayout layout_ll;
 
-    private Intent intent = null;
     private SignetModel signetModel;
     private MyApplicationModel model;
-    private List<SignetModel.ApprovalInfoLists> modelList;
 
     //动态添加view
     private List<View> ls_childView;//用于保存动态添加进来的View
-    private View childView;
-    private LayoutInflater inflater;//ViewHolder对象用来保存实例化View的子控件
     private List<ViewHolder> listViewHolder = new ArrayList<>();
     //    private int mark = 5;//0显示在顶部
 
@@ -113,7 +107,7 @@ public class SignetDetailAplActivity extends BaseActivity {
     private void initMyView() {
         tv_title.setText(getResources().getString(R.string.signet_apl_d));
         tv_right.setText("");
-        intent = getIntent();
+        Intent intent = getIntent();
         model = (MyApplicationModel) intent.getSerializableExtra("MyApplicationModel");
     }
 
@@ -126,8 +120,8 @@ public class SignetDetailAplActivity extends BaseActivity {
         tv_reason.setText(model.getPurpose());
         tv_remark.setText(model.getRemark());
 
-        modelList = model.getApprovalInfoLists();
         // 审批人
+        List<SignetModel.ApprovalInfoLists> modelList = model.getApprovalInfoLists();
         StringBuilder nameBuilder = new StringBuilder();
         for (int i = 0; i < modelList.size(); i++) {
             nameBuilder.append(modelList.get(i).getApprovalEmployeeName() + " ");
@@ -222,8 +216,8 @@ public class SignetDetailAplActivity extends BaseActivity {
 
     private ViewHolder AddView(Context context, int marks) {
         ls_childView = new ArrayList<View>();
-        inflater = LayoutInflater.from(context);
-        childView = inflater.inflate(R.layout.item_examination_status,  new LinearLayout(context),false);
+        LayoutInflater  inflater = LayoutInflater.from(context);
+        View childView = inflater.inflate(R.layout.item_examination_status, new LinearLayout(context), false);
         childView.setId(marks);
         layout_ll.addView(childView, marks);
         return getViewInstance(childView);

@@ -31,17 +31,13 @@ import com.huirong.model.ScheduleModel;
 public class ScheduleMultDetailActivity extends Activity {
 
     private LinearLayout layout = null;
-    private TextView textTop = null;
     private TextView info = null;
     private TextView date = null;
     private TextView type = null;
-    private TextView editInfo = null;
 
     //    private ScheduleDAO dao = null;
     private SQLiteScheduledb dao = null;
 
-
-    private ScheduleModel scheduleModel = null;
 
     private String scheduleInfo = "";    //日程信息被修改前的内容
     private String scheduleChangeInfo = "";  //日程信息被修改之后的内容
@@ -60,7 +56,7 @@ public class ScheduleMultDetailActivity extends Activity {
         layout.setBackgroundColor(getResources().getColor(R.color.common_bg_examination));
         layout.setLayoutParams(params);
 
-        textTop = new TextView(this, null);
+        TextView textTop = new TextView(this, null);
         textTop.setTextColor(Color.BLACK);
         textTop.setBackgroundColor(getResources().getColor(R.color.common_topbar_bgcolor));
         textTop.setText("日程详情");
@@ -68,7 +64,7 @@ public class ScheduleMultDetailActivity extends Activity {
         textTop.setGravity(Gravity.CENTER);
 
 
-        editInfo = new TextView(ScheduleMultDetailActivity.this, null);
+        TextView editInfo = new TextView(ScheduleMultDetailActivity.this, null);
         editInfo.setTextColor(Color.BLACK);
         editInfo.setBackgroundColor(Color.WHITE);
         editInfo.setHeight(200);
@@ -154,7 +150,7 @@ public class ScheduleMultDetailActivity extends Activity {
         layout.addView(info);
         /*Intent intent = getIntent();
         int scheduleID = Integer.parseInt(intent.getStringExtra("scheduleID"));*/
-        scheduleModel = dao.getScheduleByID(scheduleID);
+        ScheduleModel scheduleModel = dao.getScheduleByID(scheduleID);
         date.setText(scheduleModel.getScheduleDate());
         type.setText(CalendarTpyeArray.sch_type[scheduleModel.getScheduleTypeID()]);
         info.setText(scheduleModel.getScheduleContent());

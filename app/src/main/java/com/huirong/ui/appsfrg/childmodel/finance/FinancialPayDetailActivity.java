@@ -127,7 +127,7 @@ public class FinancialPayDetailActivity extends BaseActivity {
         appFinancialModel = (AppFinancialModel) bundle.getSerializable("AppFinancialModel");
     }
 
-    private void setShow(FinancialAllModel model) {
+    private void setShow() {
         //
         tv_ApprovalPerson.setText(model.getEmployeeName());
         tv_approvaldept.setText(model.getDepartmentName());
@@ -184,7 +184,7 @@ public class FinancialPayDetailActivity extends BaseActivity {
         switch (msg.what) {
             case POST_SUCCESS:
                 model = (FinancialAllModel) msg.obj;
-                setShow(model);
+                setShow();
                 break;
             case POST_FAILED:
                 PageUtil.DisplayToast((String) msg.obj);

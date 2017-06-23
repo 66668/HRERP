@@ -96,15 +96,11 @@ public class BookTicketsDetailCopyActivity extends BaseActivity {
     private Intent intent = null;
     private BookTicketsCopyModel borrowModel;
     private MyCopyModel model;
-    private List<BookTicketsCopyModel.ApprovalInfoLists> modelList;
 
     //动态添加view
     private List<View> ls_childView;//用于保存动态添加进来的ViewA
-    private View childView;
-    private LayoutInflater inflater;//ViewHolder对象用来保存实例化View的子控件
     private List<ViewHolder> listViewHolder = new ArrayList<>();
     private LinearLayout ll_main;
-    //    private int mark = 5;//0显示在顶部
 
     //常量
     public static final int POST_SUCCESS = 11;
@@ -122,19 +118,19 @@ public class BookTicketsDetailCopyActivity extends BaseActivity {
         getDetailModel(model);
     }
 
-    private void setShow(BookTicketsCopyModel model) {
-        tv_copyer.setText(model.getEmployeeName());
-        tv_copyTime.setText(model.getApplicationCreateTime());
+    private void setShow() {
+        tv_copyer.setText(borrowModel.getEmployeeName());
+        tv_copyTime.setText(borrowModel.getApplicationCreateTime());
 
-        tv_type.setText(model.getTraffic());
-        tv_startPlace.setText(model.getStartAddress());
-        tv_endPlace.setText(model.getEndAddress());
-        tv_startTime.setText(model.getStartTime());
-        tv_endTime.setText(model.getEndTime());
-        tv_reason.setText(model.getReason());
+        tv_type.setText(borrowModel.getTraffic());
+        tv_startPlace.setText(borrowModel.getStartAddress());
+        tv_endPlace.setText(borrowModel.getEndAddress());
+        tv_startTime.setText(borrowModel.getStartTime());
+        tv_endTime.setText(borrowModel.getEndTime());
+        tv_reason.setText(borrowModel.getReason());
 
         // 审批人
-        modelList = model.getApprovalInfoLists();
+        List<BookTicketsCopyModel.ApprovalInfoLists> modelList = borrowModel.getApprovalInfoLists();
         StringBuilder nameBuilder = new StringBuilder();
         for (int i = 0; i < modelList.size(); i++) {
             nameBuilder.append(modelList.get(i).getApprovalEmployeeName() + " ");
@@ -205,7 +201,7 @@ public class BookTicketsDetailCopyActivity extends BaseActivity {
         switch (msg.what) {
             case POST_SUCCESS: // 1001
                 borrowModel = (BookTicketsCopyModel) msg.obj;
-                setShow(borrowModel);
+                setShow();
                 break;
             case POST_FAILED: // 1001
                 PageUtil.DisplayToast((String) msg.obj);
@@ -226,8 +222,8 @@ public class BookTicketsDetailCopyActivity extends BaseActivity {
     //初始化参数
     private ViewHolder AddView(Context context, int marks) {
         ls_childView = new ArrayList<View>();
-        inflater = LayoutInflater.from(context);
-        childView = inflater.inflate(R.layout.item_examination_status, new LinearLayout(this), false);
+        LayoutInflater  inflater = LayoutInflater.from(context);
+        View  childView = inflater.inflate(R.layout.item_examination_status, new LinearLayout(this), false);
         childView.setId(marks);
         layout_ll.addView(childView, marks);
         return getViewInstance(childView);
