@@ -36,8 +36,7 @@
                 android:layout_alignStart="@+id/img_person"
                 android:layout_below="@+id/img_person"
                 android:layout_marginTop="5dp"
-                android:gravity="center"
-                android:text="姓名"/>
+                android:gravity="center"/>
 
             <ImageView
                 android:contentDescription="@null"
@@ -109,7 +108,7 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:orientation="vertical">
             <!-- 手机-->
             <LinearLayout
@@ -135,7 +134,8 @@
                     android:layout_height="@dimen/common_topbar_height"
                     android:layout_weight="0.55"
                     android:gravity="center_vertical|right"
-                    android:paddingLeft="20dp"
+                    android:paddingEnd="0dp"
+                    android:paddingStart="20dp"
                     android:textColor="@color/cl_hint_common"
                     android:textSize="@dimen/common_textSize_default12"/>
 
@@ -166,7 +166,8 @@
                     android:layout_height="@dimen/common_topbar_height"
                     android:layout_weight="0.55"
                     android:gravity="center_vertical|right"
-                    android:paddingLeft="20dp"
+                    android:paddingEnd="0dp"
+                    android:paddingStart="20dp"
                     android:textColor="@color/cl_hint_common"
                     android:textSize="@dimen/common_textSize_default12"/>
 
@@ -197,7 +198,8 @@
                     android:layout_height="@dimen/common_topbar_height"
                     android:layout_weight="0.55"
                     android:gravity="center_vertical|right"
-                    android:paddingLeft="20dp"
+                    android:paddingEnd="0dp"
+                    android:paddingStart="20dp"
                     android:textColor="@color/cl_hint_common"
                     android:textSize="@dimen/common_textSize_default12"/>
 
@@ -228,7 +230,8 @@
                     android:layout_height="@dimen/common_topbar_height"
                     android:layout_weight="0.55"
                     android:gravity="center_vertical|right"
-                    android:paddingLeft="20dp"
+                    android:paddingEnd="0dp"
+                    android:paddingStart="20dp"
                     android:textColor="@color/cl_hint_common"
                     android:textSize="@dimen/common_textSize_default12"/>
 

@@ -16,7 +16,7 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:focusable="true"
             android:focusableInTouchMode="true"
             android:orientation="vertical">
@@ -59,7 +59,8 @@
                     android:layout_weight="0.66"
                     android:gravity="center_vertical|right"
                     android:hint="@string/hint_choose"
-                    android:paddingRight="10dp"
+                    android:paddingEnd="10dp"
+                    android:paddingStart="0dp"
                     android:textColor="@color/cl_text_common"
                     android:textColorHint="@color/cl_hint_common"
                     />
@@ -110,7 +111,8 @@
                     android:layout_weight="0.66"
                     android:gravity="center_vertical|right"
                     android:hint="@string/hint_choose"
-                    android:paddingRight="10dp"
+                    android:paddingEnd="10dp"
+                    android:paddingStart="0dp"
                     android:textColor="@color/cl_text_common"
                     android:textColorHint="@color/cl_hint_common"
                     />
@@ -161,7 +163,8 @@
                     android:layout_weight="0.66"
                     android:gravity="center_vertical|right"
                     android:hint="@string/hint_choose"
-                    android:paddingRight="10dp"
+                    android:paddingEnd="10dp"
+                    android:paddingStart="0dp"
                     android:textColor="@color/cl_text_common"
                     android:textColorHint="@color/cl_hint_common"
                     />
@@ -212,7 +215,8 @@
                     android:layout_weight="0.66"
                     android:gravity="center_vertical|right"
                     android:hint="@string/hint_choose"
-                    android:paddingRight="10dp"
+                    android:paddingEnd="10dp"
+                    android:paddingStart="0dp"
                     android:textColor="@color/cl_text_common"
                     android:textColorHint="@color/cl_hint_common"
                     />
@@ -506,7 +510,6 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginRight="10dp"
-                        android:layout_toRightOf="@+id/AddApprover"
                         android:gravity="center_vertical"/>
                 </LinearLayout>
             </LinearLayout>

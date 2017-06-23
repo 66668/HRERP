@@ -14,7 +14,7 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:focusable="true"
             android:focusableInTouchMode="true"
             android:orientation="vertical">
@@ -36,7 +36,7 @@
                     android:layout_marginLeft="10dp"
                     android:layout_weight="0.28"
                     android:gravity="center_vertical"
-                    android:text="日程类型"/>
+                    android:text="@string/schedule_type"/>
 
                 <TextView
                     android:id="@+id/scheduleType"
@@ -47,8 +47,9 @@
                     android:layout_weight="0.72"
                     android:drawableRight="@mipmap/forword"
                     android:gravity="center_vertical|center_horizontal"
-                    android:hint="请选择日程类型"
-                    android:paddingRight="20dp"
+                    android:hint="@string/schedule_type_hint"
+                    android:paddingEnd="10dp"
+                    android:paddingStart="0dp"
                     />
             </LinearLayout>
 
@@ -69,7 +70,7 @@
                     android:layout_marginLeft="10dp"
                     android:layout_weight="0.28"
                     android:gravity="center_vertical"
-                    android:text="提醒次数"/>
+                    android:text="@string/schedule_times"/>
 
                 <TextView
                     android:id="@+id/scheduleRemind"
@@ -80,8 +81,9 @@
                     android:layout_weight="0.72"
                     android:drawableRight="@mipmap/forword"
                     android:gravity="center_vertical|center_horizontal"
-                    android:hint="请选择提醒次数"
-                    android:paddingRight="20dp"
+                    android:hint="@string/schedule_times_hint"
+                    android:paddingEnd="10dp"
+                    android:paddingStart="0dp"
                     />
             </LinearLayout>
 
@@ -102,7 +104,7 @@
                     android:layout_marginLeft="10dp"
                     android:layout_weight="0.28"
                     android:gravity="center_vertical"
-                    android:text="提醒时间"/>
+                    android:text="@string/schedule_time"/>
 
                 <TextView
                     android:id="@+id/tvProTime"
@@ -113,8 +115,9 @@
                     android:layout_weight="0.72"
                     android:drawableRight="@mipmap/forword"
                     android:gravity="center_vertical|center_horizontal"
-                    android:hint="请选择提醒时间"
-                    android:paddingRight="20dp"
+                    android:hint="@string/schedule_time_hint"
+                    android:paddingEnd="10dp"
+                    android:paddingStart="0dp"
                     />
             </LinearLayout>
 
@@ -125,7 +128,7 @@
                 android:layout_marginTop="5dp"
                 android:background="@null"
                 android:gravity="top"
-                android:hint="请输入你的日程..."
+                android:hint="@string/schedule_content_hint"
                 android:padding="10dp"
                 android:textColor="@color/black"
                 android:textSize="@dimen/common_textSize_default14"
@@ -149,7 +152,7 @@
                     android:layout_height="@dimen/common_topbar_height40"
                     android:layout_weight="0.72"
                     android:background="@drawable/btn_style"
-                    android:text="保存"
+                    android:text="@string/schedule_save"
                     android:textColor="@android:color/white"
                     android:textSize="@dimen/common_textSize_default18"
                     />

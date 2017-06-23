@@ -41,6 +41,7 @@
     <string name="person_psd_oldpsd_error">输入原密码错误</string>
     <string name="person_psd_oldpsd_in">请输入旧密码！</string>
     <string name="person_psd_newpsd">新密码</string>
+    <string name="person_psd_commint">确认修改</string>
     <string name="person_psd_newpsd_d">确认密码</string>
     <string name="person_psd_newpsd_in">请输入新密码！</string>
     <string name="person_psd_newpsd_errorin">两次输入的新密码不一样！</string>
@@ -60,6 +61,7 @@
     <!-- ********************************************** 通讯录 ****************************************************-->
     <!-- 通讯录-->
     <string name="txt_contract">通讯录</string>
+    <string name="context_contract_hint">请输入关键字</string>
     <string name="contacts_dept">部门</string>
     <string name="epl_phone">手机号</string>
     <string name="epl_email">邮箱</string>
@@ -126,6 +128,15 @@
 
     <!-- 应用- 财务-->
     <string name="financial">财务</string>
+    <!-- 应用 日程-->
+    <string name="schedule_type">日程类型</string>
+    <string name="schedule_type_hint">请选择日程类型</string>
+    <string name="schedule_times">提醒次数</string>
+    <string name="schedule_times_hint">请选择提醒次数</string>
+    <string name="schedule_time">提醒时间</string>
+    <string name="schedule_time_hint">请选择提醒时间</string>
+    <string name="schedule_content_hint">请输入你的日程</string>
+    <string name="schedule_save">保存</string>
 
     <!-- 应用- 审批-->
     <!-- 申请/审批-->
@@ -139,6 +150,8 @@
     <string name="hint_examination_refulse">请输入意见</string>
 
     <string name="examination_commit">批准</string>
+    <string name="examination_name">姓名:</string>
+    <string name="examination_content">审批意见:</string>
     <string name="approve_sure_all">终审</string>
     <string name="approve_sure">同意</string>
 

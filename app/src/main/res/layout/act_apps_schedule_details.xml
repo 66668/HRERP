@@ -13,7 +13,7 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:focusable="true"
             android:focusableInTouchMode="true"
             android:orientation="vertical">
@@ -35,7 +35,7 @@
                     android:layout_marginLeft="10dp"
                     android:layout_weight="0.28"
                     android:gravity="center_vertical"
-                    android:text="日程类型"/>
+                    android:text="@string/schedule_type"/>
 
                 <TextView
                     android:id="@+id/scheduleType"
@@ -45,7 +45,8 @@
                     android:layout_marginLeft="10dp"
                     android:layout_weight="0.72"
                     android:gravity="center_vertical|center_horizontal"
-                    android:paddingRight="20dp"
+                    android:paddingEnd="10dp"
+                    android:paddingStart="0dp"
                     />
             </LinearLayout>
 
@@ -66,7 +67,7 @@
                     android:layout_marginLeft="10dp"
                     android:layout_weight="0.28"
                     android:gravity="center_vertical"
-                    android:text="提醒次数"/>
+                    android:text="@string/schedule_times"/>
 
                 <TextView
                     android:id="@+id/scheduleRemind"
@@ -76,7 +77,8 @@
                     android:layout_marginLeft="10dp"
                     android:layout_weight="0.72"
                     android:gravity="center_vertical|center_horizontal"
-                    android:paddingRight="20dp"
+                    android:paddingEnd="10dp"
+                    android:paddingStart="0dp"
                     />
             </LinearLayout>
 
@@ -97,7 +99,7 @@
                     android:layout_marginLeft="10dp"
                     android:layout_weight="0.28"
                     android:gravity="center_vertical"
-                    android:text="提醒时间"/>
+                    android:text="@string/schedule_time"/>
 
                 <TextView
                     android:id="@+id/tvProTime"
@@ -107,7 +109,8 @@
                     android:layout_marginLeft="10dp"
                     android:layout_weight="0.72"
                     android:gravity="center_vertical|center_horizontal"
-                    android:paddingRight="20dp"
+                    android:paddingEnd="10dp"
+                    android:paddingStart="0dp"
                     />
             </LinearLayout>
 

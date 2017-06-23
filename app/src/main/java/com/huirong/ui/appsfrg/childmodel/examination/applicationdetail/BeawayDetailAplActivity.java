@@ -157,7 +157,7 @@ public class BeawayDetailAplActivity extends BaseActivity {
                     vh.tv_yesOrNo.setText("同意");
                     vh.tv_yesOrNo.setTextColor(getResources().getColor(R.color.green));
                 } else {
-                    vh.tv_yesOrNo.setText("yesOrNo为null");
+                    vh.tv_yesOrNo.setText("");
                 }
             }
         }

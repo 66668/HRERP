@@ -28,6 +28,8 @@ public class ClipViews extends View{
 		super(context, attrs, defStyle);
 	}
 
+	Paint paint = new Paint();
+	Paint linePaint = new Paint();
 	@Override
 	protected void onDraw(Canvas canvas){
 		super.onDraw(canvas);
@@ -35,12 +37,12 @@ public class ClipViews extends View{
 		int width = this.getWidth();
 		int height = this.getHeight();
 		
-		Paint paint = new Paint();
+
 		paint.setColor(Color.BLACK); //0xaa000000
 		paint.setAlpha(99);
 		paint.setAntiAlias(true);
 		 
-		Paint linePaint = new Paint();
+
 		linePaint.setColor(Color.WHITE);
 		linePaint.setAntiAlias(true); 
 		

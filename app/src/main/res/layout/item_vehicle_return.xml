@@ -17,7 +17,8 @@
             android:layout_width="80dp"
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
-            android:paddingLeft="10dp"
+            android:paddingEnd="0dp"
+            android:paddingStart="10dp"
             android:text="类型"
             android:textColor="@color/textHintColor"
             android:textSize="@dimen/common_textSize_default14"/>

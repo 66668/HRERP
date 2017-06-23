@@ -16,7 +16,7 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:focusable="true"
             android:focusableInTouchMode="true"
             android:orientation="vertical">
@@ -92,23 +92,17 @@
                     android:text="@string/msn_content"
                     android:textColor="@color/cl_text_common"/>
 
-                <ScrollView
+                <EditText
+                    android:id="@+id/et_missionContent"
+                    style="@style/BlackText.standard"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent">
-
-                    <EditText
-                        android:id="@+id/et_missionContent"
-                        style="@style/BlackText.standard"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:background="@drawable/et_white_stroke"
-                        android:gravity="top|left"
-                        android:hint="@string/msn_content_hint"
-                        android:maxLength="1000"
-                        android:padding="10dp"
-                        android:textColorHint="@color/cl_hint_common"
-                        />
-                </ScrollView>
+                    android:layout_height="match_parent"
+                    android:background="@drawable/et_white_stroke"
+                    android:gravity="top|left"
+                    android:hint="@string/msn_content_hint"
+                    android:maxLength="1000"
+                    android:padding="10dp"
+                    android:textColorHint="@color/cl_hint_common"/>
 
             </LinearLayout>
 
@@ -151,7 +145,8 @@
                     android:layout_weight="0.66"
                     android:gravity="center_vertical|right"
                     android:hint="@string/hint_choose"
-                    android:paddingRight="10dp"
+                    android:paddingEnd="10dp"
+                    android:paddingStart="0dp"
                     android:textColor="@color/cl_text_common"
                     android:textColorHint="@color/cl_hint_common"
                     />
@@ -244,7 +239,8 @@
                     android:layout_weight="0.66"
                     android:gravity="center_vertical|right"
                     android:hint="@string/hint_choose"
-                    android:paddingRight="10dp"
+                    android:paddingEnd="10dp"
+                    android:paddingStart="0dp"
                     android:textColor="@color/cl_text_common"
                     android:textColorHint="@color/cl_hint_common"
                     />
@@ -380,7 +376,8 @@
                     android:layout_weight="0.66"
                     android:gravity="center_vertical|right"
                     android:hint="@string/hint_choose"
-                    android:paddingRight="10dp"
+                    android:paddingEnd="10dp"
+                    android:paddingStart="0dp"
                     android:textColor="@color/cl_text_common"
                     android:textColorHint="@color/cl_hint_common"
                     />

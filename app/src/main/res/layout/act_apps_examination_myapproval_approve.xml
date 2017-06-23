@@ -22,7 +22,8 @@
             android:background="@drawable/et_white_stroke"
             android:gravity="top|left"
             android:hint="@string/hint_examination_refulse"
-            android:paddingLeft="10dp"
+            android:paddingEnd="0dp"
+            android:paddingStart="10dp"
             android:paddingTop="10dp"
             android:textSize="@dimen/common_textSize_default12"
             />
@@ -36,10 +37,9 @@
 
             <Button
                 android:id="@+id/btn_commit_all"
+                style="?android:attr/buttonBarButtonStyle"
                 android:layout_width="0dp"
                 android:layout_height="@dimen/common_topbar_height"
-                android:layout_alignParentBottom="true"
-                android:layout_alignParentStart="true"
                 android:layout_weight="1"
                 android:background="@color/white"
                 android:gravity="center"
@@ -49,9 +49,9 @@
 
             <Button
                 android:id="@+id/btn_commit"
+                style="?android:attr/buttonBarButtonStyle"
                 android:layout_width="0dp"
                 android:layout_height="@dimen/common_topbar_height"
-                android:layout_alignParentBottom="true"
                 android:layout_alignParentStart="true"
                 android:layout_weight="1"
                 android:background="@color/exa_agree"

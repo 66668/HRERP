@@ -7,16 +7,17 @@
               tools:context="com.huirong.ui.MainActivity">
 
     <ImageView
-        android:id="@+id/menu_icon"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:contentDescription="@null"
-        android:src="@mipmap/menu1"/>
+    android:id="@+id/menu_icon"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:contentDescription="@null"
+    android:src="@mipmap/menu1"/>
 
     <TextView
         android:id="@+id/menu_name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:padding="5dp"
         android:text="我"
         android:textSize="14sp"/>
 

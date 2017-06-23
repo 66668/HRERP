@@ -17,7 +17,7 @@
         <LinearLayout
             android:id="@+id/layout_ll"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:orientation="vertical">
 
             <LinearLayout
@@ -253,7 +253,8 @@
                     android:ellipsize="end"
                     android:gravity="top|left"
                     android:lines="3"
-                    android:paddingRight="10dp"
+                    android:paddingEnd="10dp"
+                    android:paddingStart="0dp"
                     android:paddingTop="10dp"
                     />
 
@@ -286,7 +287,8 @@
                     android:ellipsize="end"
                     android:gravity="top|left"
                     android:lines="3"
-                    android:paddingRight="10dp"
+                    android:paddingEnd="10dp"
+                    android:paddingStart="0dp"
                     android:paddingTop="10dp"
                     />
 
@@ -350,7 +352,8 @@
                     android:layout_marginLeft="10dp"
                     android:layout_weight="0.72"
                     android:gravity="center_vertical"
-                    android:paddingRight="10dp"
+                    android:paddingEnd="10dp"
+                    android:paddingStart="0dp"
                     android:textColor="@color/red"
                     />
             </LinearLayout>

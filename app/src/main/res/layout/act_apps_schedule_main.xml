@@ -31,7 +31,6 @@
             android:gravity="center"
             android:paddingLeft="30dp"
             android:paddingRight="30dp"
-            android:text="2017-03"
             android:textColor="@color/common_topbar_bgcolor"
             android:textSize="@dimen/common_textSize_default18"
             android:typeface="sans"/>

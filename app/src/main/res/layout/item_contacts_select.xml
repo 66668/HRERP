@@ -8,11 +8,11 @@
     <TextView
         android:id="@+id/tv_letter"
         android:layout_width="fill_parent"
-        android:layout_height="20dp"
+        android:layout_height="0dp"
         android:layout_weight="1.0"
         android:background="@color/item_contacts_bg_color"
         android:gravity="center_vertical"
-        android:paddingLeft="10dp"
+        android:paddingEnd="0dp"
         android:paddingStart="10dp"
         android:text="A"
         android:textColor="@color/cl_text_common"
@@ -33,22 +33,22 @@
             android:id="@+id/checkbox"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
             android:layout_marginLeft="10dp"
             android:background="@drawable/checkbox_selector"
             android:button="@null"
-            android:focusable="false"
-            android:layout_centerVertical="true"/>
+            android:focusable="false"/>
 
         <TextView
-            android:layout_centerVertical="true"
-            android:layout_marginLeft="10dp"
             android:id="@+id/tv_name"
             android:layout_width="100dp"
             android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="10dp"
             android:layout_toRightOf="@+id/checkbox"
             android:gravity="center_vertical"
-            android:textColor="@color/cl_text_common"
             android:text="名字"
+            android:textColor="@color/cl_text_common"
             android:textSize="@dimen/common_textSize_default16"/>
     </RelativeLayout>
 

@@ -30,6 +30,7 @@ import com.huirong.utils.PageUtil;
 import com.huirong.widget.SearchEditText;
 import com.huirong.widget.SideBar;
 
+import java.lang.ref.WeakReference;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -216,38 +217,53 @@ public class ContactsFragment extends BaseFragment {
         });
     }
 
-    public Handler handler = new Handler() {
+    /**
+     * 静态+弱引用 避免内存泄漏
+     */
+    private final MyHandler handler = new MyHandler(this);
+
+    private static class MyHandler extends Handler {
+        private final WeakReference<ContactsFragment> weakReference;
+
+        public MyHandler(ContactsFragment fragment) {
+            weakReference = new WeakReference<ContactsFragment>(fragment);
+        }
+
         @Override
         public void handleMessage(Message msg) {
-            switch (msg.what) {
-                case POST_SONCO_SUCCESS:// 1001
-                    //数据处理
+            ContactsFragment fragment = weakReference.get();
+            if (fragment != null) {
+                switch (msg.what) {
+                    case POST_SONCO_SUCCESS:// 1001
+                        //数据处理
 
-                    listSonCoData = (List<ContactsSonCOModel>) msg.obj;
+                        listSonCoData = (List<ContactsSonCOModel>) msg.obj;
 
-                    List<ContactsEmployeeModel> listEmpl = new ArrayList<ContactsEmployeeModel>();
-                    for (int i = 0; i < listSonCoData.size(); i++) {
-                        listEmpl.addAll(listSonCoData.get(i).getObj());
-                    }
+                        List<ContactsEmployeeModel> listEmpl = new ArrayList<ContactsEmployeeModel>();
+                        for (int i = 0; i < listSonCoData.size(); i++) {
+                            listEmpl.addAll(listSonCoData.get(i).getObj());
+                        }
 
-                    //为数据添加首字母
-                    ListEmployeeData = filledData(listEmpl);
-                    // 根据a-z进行排序源数据
-                    Collections.sort(ListEmployeeData, pinyinComparator);
-                    adapter = new ContactsSortAdapter(getActivity(), ListEmployeeData);
+                        //为数据添加首字母
+                        ListEmployeeData = fragment.filledData(listEmpl);
+                        // 根据a-z进行排序源数据
+                        Collections.sort(ListEmployeeData, fragment.pinyinComparator);
+                        fragment.adapter = new ContactsSortAdapter(fragment.getContext(), ListEmployeeData);
 
-                    //为listView添加动态headerView
-                    addHeadView(listSonCoData);
+                        //为listView添加动态headerView
+                        fragment.addHeadView(listSonCoData);
 
-                    contactsListView.setAdapter(adapter);
+                        fragment.contactsListView.setAdapter(fragment.adapter);
 
-                    break;
-                case POST_FAILED:// 1001
-                    PageUtil.DisplayToast((String) msg.obj);
-                    break;
+                        break;
+                    case POST_FAILED:// 1001
+                        PageUtil.DisplayToast((String) msg.obj);
+                        break;
+                }
             }
+
         }
-    };
+    }
 
     //
     private void addHeadView(List<ContactsSonCOModel> listData) {

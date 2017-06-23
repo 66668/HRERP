@@ -17,7 +17,7 @@
         <LinearLayout
             android:id="@+id/layout_ll"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:orientation="vertical">
 
 
@@ -185,7 +185,8 @@
 
 
                 <TextView
-                    android:paddingRight="10dp"
+                    android:paddingEnd="10dp"
+                    android:paddingStart="0dp"
                     android:paddingTop="10dp"
                     android:id="@+id/tv_reason"
                     style="@style/BlackText.standard"
@@ -218,7 +219,8 @@
                     android:textColor="@color/cl_text_common"/>
 
                 <TextView
-                    android:paddingRight="10dp"
+                    android:paddingEnd="10dp"
+                    android:paddingStart="0dp"
                     android:paddingTop="10dp"
                     android:id="@+id/tv_remark"
                     style="@style/BlackText.standard"

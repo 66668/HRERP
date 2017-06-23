@@ -15,7 +15,6 @@
             android:id="@+id/view_top"
             android:layout_width="match_parent"
             android:layout_height="1dip"
-            android:layout_alignParentTop="true"
             android:layout_marginTop="5dp"
             android:background="@color/textHintColor"/>
 
@@ -24,7 +23,6 @@
             android:id="@+id/layout_title"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/view_top"
             android:background="@color/snow"
             android:orientation="horizontal"
             android:weightSum="1">
@@ -38,9 +36,10 @@
                 android:background="@color/snow"
                 android:gravity="right"
                 android:paddingBottom="10dp"
-                android:paddingRight="10dp"
+                android:paddingEnd="10dp"
+                android:paddingStart="0dp"
                 android:paddingTop="10dp"
-                android:text="姓名:"/>
+                android:text="@string/examination_name"/>
 
             <TextView
                 android:id="@+id/tv_yesOrNo"
@@ -63,7 +62,8 @@
                 android:background="@color/snow"
                 android:gravity="right"
                 android:paddingBottom="10dp"
-                android:paddingRight="10dp"
+                android:paddingEnd="10dp"
+                android:paddingStart="0dp"
                 android:paddingTop="10dp"
                 android:text="2000-01-01"/>
         </LinearLayout>
@@ -72,7 +72,6 @@
             android:id="@+id/layout_content"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/layout_title"
             android:background="@color/snow"
             android:orientation="horizontal"
             android:weightSum="1">
@@ -86,7 +85,7 @@
                 android:gravity="center"
                 android:paddingBottom="10dp"
                 android:paddingTop="10dp"
-                android:text="审批意见:"/>
+                android:text="@string/examination_content"/>
 
             <TextView
                 android:id="@+id/tv_contains"
@@ -102,8 +101,6 @@
         <View
             android:layout_width="match_parent"
             android:layout_height="1dip"
-            android:layout_alignParentBottom="true"
-            android:layout_below="@+id/layout_content"
             android:background="@color/textHintColor"
             />
     </LinearLayout>

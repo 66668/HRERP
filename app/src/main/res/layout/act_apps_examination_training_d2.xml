@@ -21,7 +21,7 @@
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_height="wrap_content"
                 android:orientation="vertical">
 
 
@@ -318,7 +318,8 @@
                         android:ellipsize="end"
                         android:gravity="top|left"
                         android:lines="3"
-                        android:paddingRight="10dp"
+                        android:paddingEnd="10dp"
+                        android:paddingStart="0dp"
                         android:paddingTop="10dp"
                         />
 
@@ -408,7 +409,8 @@
                         android:ellipsize="end"
                         android:gravity="top|left"
                         android:lines="3"
-                        android:paddingRight="10dp"
+                        android:paddingEnd="10dp"
+                        android:paddingStart="0dp"
                         android:paddingTop="10dp"
                         />
 

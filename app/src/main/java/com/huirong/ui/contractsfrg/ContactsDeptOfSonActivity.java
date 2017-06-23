@@ -32,6 +32,7 @@ import com.huirong.utils.PageUtil;
 import com.huirong.widget.SearchEditText;
 import com.huirong.widget.SideBar;
 
+import java.lang.ref.WeakReference;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -71,7 +72,7 @@ public class ContactsDeptOfSonActivity extends BaseActivity {
     /**
      * 根据拼音来排列ListView里面的数据类
      */
-    private PinyinComparator pinyinComparator;
+    private static PinyinComparator pinyinComparator;
 
     //常量
     public static final int POST_SONCO_SUCCESS = 15;
@@ -189,53 +190,67 @@ public class ContactsDeptOfSonActivity extends BaseActivity {
         });
     }
 
-    public Handler handler = new Handler() {
+    /**
+     * 静态+弱引用 避免内存泄漏
+     */
+    private final MyHandler handler = new MyHandler(this);
+
+    private static class MyHandler extends Handler {
+        private final WeakReference<ContactsDeptOfSonActivity> mActivity;
+
+        public MyHandler(ContactsDeptOfSonActivity activity) {
+            mActivity = new WeakReference<ContactsDeptOfSonActivity>(activity);
+        }
+
         @Override
         public void handleMessage(Message msg) {
-            switch (msg.what) {
-                case POST_SONCO_SUCCESS://服务端数据处理
+            ContactsDeptOfSonActivity activity = mActivity.get();
+            if (activity != null) {
+                switch (msg.what) {
+                    case POST_SONCO_SUCCESS://服务端数据处理
 
-                    listDeptData = (List<ContactsDeptModel>) msg.obj;
+                        listDeptData = (List<ContactsDeptModel>) msg.obj;
 
-                    List<ContactsEmployeeModel> listEmpl = new ArrayList<ContactsEmployeeModel>();
-                    for (int i = 0; i < listDeptData.size(); i++) {
-                        listEmpl.addAll(listDeptData.get(i).getObj());
-                    }
+                        List<ContactsEmployeeModel> listEmpl = new ArrayList<ContactsEmployeeModel>();
+                        for (int i = 0; i < listDeptData.size(); i++) {
+                            listEmpl.addAll(listDeptData.get(i).getObj());
+                        }
 
-                    //为数据添加首字母
-                    ListEmployeeData = filledData(listEmpl);
-                    // 根据a-z进行排序源数据
-                    Collections.sort(ListEmployeeData, pinyinComparator);
-                    adapter = new ContactsSortAdapter(ContactsDeptOfSonActivity.this, ListEmployeeData);
+                        //为数据添加首字母
+                        ListEmployeeData = activity.filledData(listEmpl);
+                        // 根据a-z进行排序源数据
+                        Collections.sort(ListEmployeeData, pinyinComparator);
+                        activity.adapter = new ContactsSortAdapter(activity, ListEmployeeData);
 
-                    //为listView添加动态headerView
-                    addHeadView(listDeptData);
+                        //为listView添加动态headerView
+                        activity.addHeadView(listDeptData);
 
-                    contactsListView.setAdapter(adapter);
+                        activity.contactsListView.setAdapter(activity.adapter);
 
-                    break;
-                case POST_FAILED:// 1001
-                    PageUtil.DisplayToast((String) msg.obj);
-                    break;
+                        break;
+                    case POST_FAILED:// 1001
+                        PageUtil.DisplayToast((String) msg.obj);
+                        break;
+                }
             }
+
         }
-    };
+    }
 
     private void addHeadView(List<ContactsDeptModel> listData) {
 
         LayoutInflater inflator = (LayoutInflater) ContactsDeptOfSonActivity.this.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+
         for (int j = 0; j < listData.size(); j++) {
             //实例化控件
             LinearLayout headView = (LinearLayout) inflator.inflate(R.layout.item_contacts, null);
+            TextView tv_letter = (TextView) headView.findViewById(R.id.tv_letter);
             //消除hederView中 公司
             if (j > 0) {
-                TextView tv_letter = (TextView) headView.findViewById(R.id.tv_letter);
                 tv_letter.setVisibility(View.GONE);
             }
             //展示界面
-            TextView tv_Letter = (TextView) headView.findViewById(R.id.tv_letter);
-            tv_Letter.setText(getResources().getString(R.string.examination_copyto_dept));
-
+            tv_letter.setText(getResources().getString(R.string.examination_copyto_dept));
             TextView tv_SonOfCo = (TextView) headView.findViewById(R.id.tv_name);
             tv_SonOfCo.setText(listData.get(j).getsDeptName());
 

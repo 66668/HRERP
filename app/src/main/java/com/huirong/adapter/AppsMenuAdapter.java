@@ -74,9 +74,10 @@ public class AppsMenuAdapter extends BaseAdapter {
                     R.layout.item_home_menu, parent, false);
         }
         final HashMap<String, Object> appInfo = mList.get(position);
-        ImageView appicon = (ImageView) convertView.findViewById(R.id.menu_icon);
+        ImageView img = (ImageView) convertView.findViewById(R.id.menu_icon);
         final TextView appname = (TextView) convertView.findViewById(R.id.menu_name);
-        appicon.setImageResource((Integer) appInfo.get("icon"));//图片展示
+
+        img.setImageResource((Integer) appInfo.get("icon"));//图片展示
         appname.setText(appInfo.get("name").toString());//功能名称
 
         final View finalConvertView = convertView;

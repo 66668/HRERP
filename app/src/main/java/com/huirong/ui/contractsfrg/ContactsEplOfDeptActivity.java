@@ -27,6 +27,7 @@ import com.huirong.utils.PageUtil;
 import com.huirong.widget.SearchEditText;
 import com.huirong.widget.SideBar;
 
+import java.lang.ref.WeakReference;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -171,27 +172,44 @@ public class ContactsEplOfDeptActivity extends BaseActivity {
         });
     }
 
-    public Handler handler = new Handler() {
+
+    /**
+     * 静态+弱引用 避免内存泄漏
+     */
+    private final MyHandler handler = new MyHandler(ContactsEplOfDeptActivity.this);
+
+    private static class MyHandler extends Handler {
+        private final WeakReference<ContactsEplOfDeptActivity> mActivity;
+
+        public MyHandler(ContactsEplOfDeptActivity activity) {
+            mActivity = new WeakReference<ContactsEplOfDeptActivity>(activity);
+        }
+
         @Override
         public void handleMessage(Message msg) {
-            switch (msg.what) {
-                case POST_SONCO_SUCCESS:// 1001
-                    //数据处理
-                    ListEmployeeData = (List<ContactsEmployeeModel>) msg.obj;
-                    //为数据添加首字母
-                    filledData(ListEmployeeData);
-                    // 根据a-z进行排序源数据
-                    Collections.sort(ListEmployeeData, pinyinComparator);
-                    adapter = new ContactsSortAdapter(ContactsEplOfDeptActivity.this, ListEmployeeData);
-                    contactsListView.setAdapter(adapter);
+            ContactsEplOfDeptActivity activity = mActivity.get();
+            if (activity != null) {
+                switch (msg.what) {
+                    case POST_SONCO_SUCCESS:// 1001
+                        //数据处理
+                        ListEmployeeData = (List<ContactsEmployeeModel>) msg.obj;
+                        //为数据添加首字母
+                        activity.filledData(ListEmployeeData);
+                        // 根据a-z进行排序源数据
+                        Collections.sort(ListEmployeeData, activity.pinyinComparator);
+                        activity.adapter = new ContactsSortAdapter(activity, ListEmployeeData);
+                        activity.contactsListView.setAdapter(activity.adapter);
 
-                    break;
-                case POST_FAILED:// 1001
-                    PageUtil.DisplayToast((String) msg.obj);
-                    break;
+                        break;
+                    case POST_FAILED:// 1001
+                        PageUtil.DisplayToast((String) msg.obj);
+                        break;
+                }
             }
+
         }
-    };
+    }
+
 
     /**
      * 重新修改model,为ListView填充首字母数据

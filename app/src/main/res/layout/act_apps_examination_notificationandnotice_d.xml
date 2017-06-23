@@ -17,7 +17,7 @@
         <LinearLayout
             android:id="@+id/layout_ll"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:orientation="vertical">
 
 
@@ -105,7 +105,8 @@
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="10dp"
                     android:drawableRight="@mipmap/forword"
-                    android:paddingRight="10dp"
+                    android:paddingEnd="10dp"
+                    android:paddingStart="0dp"
                     android:layout_weight="0.72"
                     android:gravity="center_vertical"
                     />
@@ -129,7 +130,8 @@
                     android:textColor="@color/cl_text_common"/>
 
                 <TextView
-                    android:paddingRight="10dp"
+                    android:paddingEnd="10dp"
+                    android:paddingStart="0dp"
                     android:paddingTop="10dp"
                     android:id="@+id/tv_remark"
                     style="@style/BlackText.standard"
@@ -202,7 +204,8 @@
                     android:layout_weight="0.72"
                     android:drawableRight="@mipmap/forword"
                     android:gravity="center_vertical"
-                    android:paddingRight="10dp"
+                    android:paddingEnd="10dp"
+                    android:paddingStart="0dp"
                     android:textColor="@color/red"
                     />
             </LinearLayout>

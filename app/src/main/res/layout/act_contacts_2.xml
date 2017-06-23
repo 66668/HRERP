@@ -21,7 +21,7 @@
             android:layout_marginRight="10dp"
             android:background="@drawable/et_search_style"
             android:drawableLeft="@mipmap/search_bar_icon_normal"
-            android:hint="请输入关键字"
+            android:hint="@string/context_contract_hint"
             android:maxLines="1"
             android:textColorHint="@color/cl_hint_common_search"
             android:textSize="@dimen/common_textSize_default13"/>
