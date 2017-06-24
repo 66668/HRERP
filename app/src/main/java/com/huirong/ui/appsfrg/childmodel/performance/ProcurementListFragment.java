@@ -288,11 +288,6 @@ public class ProcurementListFragment extends BaseFragment implements RefreshAndL
     }
 
     @Override
-    public boolean hasMultiFragment() {
-        return false;
-    }
-
-    @Override
     protected String setFragmentName() {
         return null;
     }

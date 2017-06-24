@@ -324,7 +324,7 @@ public class PhotoClipPictureActivity extends BaseActivity implements OnTouchLis
 							float nowImgHeight = ((float) orgImageView.getWidth() / bitmapModel.getWidth())
 									* bitmapModel.getHeight();
 							// 比例
-							float sx = (float) (orgImageView.getWidth() / nowImgHeight);
+							float sx =  (orgImageView.getWidth() / nowImgHeight);
 							matrix.postScale(sx, sx, orgImageView.getWidth() / 2, orgImageView.getHeight() / 2);
 						}
 

@@ -216,7 +216,7 @@ public class ContactsEplOfDeptActivity extends BaseActivity {
      *
      * @return
      */
-    private List<ContactsEmployeeModel> filledData(List<ContactsEmployeeModel> listdata) {
+    private void filledData(List<ContactsEmployeeModel> listdata) {
         List<ContactsEmployeeModel> mSortList = new ArrayList<ContactsEmployeeModel>();
 
         for (int i = 0; i < listdata.size(); i++) {
@@ -234,8 +234,6 @@ public class ContactsEplOfDeptActivity extends BaseActivity {
 
             mSortList.add(listdata.get(i));
         }
-        return mSortList;
-
     }
 
     /**

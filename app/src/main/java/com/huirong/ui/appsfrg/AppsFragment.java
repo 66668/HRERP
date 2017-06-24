@@ -148,15 +148,6 @@ public class AppsFragment extends BaseFragment {
 
     }
 
-    @Override
-    public boolean hasMultiFragment() {
-        return false;
-    }
-
-    @Override
-    protected String setFragmentName() {
-        return null;
-    }
 
     //重写setMenuVisibility方法，不然会出现叠层的现象
     @Override

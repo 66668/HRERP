@@ -32,7 +32,7 @@
                     style="@style/BlackText.standard"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="10dp"
+                    android:layout_marginStart="10dp"
                     android:layout_weight="0.28"
                     android:gravity="center_vertical"
                     android:text="@string/schedule_type"/>
@@ -42,7 +42,7 @@
                     style="@style/BlackText.standard"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
-                    android:layout_marginLeft="10dp"
+                    android:layout_marginStart="10dp"
                     android:layout_weight="0.72"
                     android:gravity="center_vertical|center_horizontal"
                     android:paddingEnd="10dp"
@@ -64,7 +64,7 @@
                     style="@style/BlackText.standard"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="10dp"
+                    android:layout_marginStart="10dp"
                     android:layout_weight="0.28"
                     android:gravity="center_vertical"
                     android:text="@string/schedule_times"/>
@@ -74,7 +74,7 @@
                     style="@style/BlackText.standard"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
-                    android:layout_marginLeft="10dp"
+                    android:layout_marginStart="10dp"
                     android:layout_weight="0.72"
                     android:gravity="center_vertical|center_horizontal"
                     android:paddingEnd="10dp"
@@ -96,7 +96,7 @@
                     style="@style/BlackText.standard"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="10dp"
+                    android:layout_marginStart="10dp"
                     android:layout_weight="0.28"
                     android:gravity="center_vertical"
                     android:text="@string/schedule_time"/>
@@ -106,7 +106,7 @@
                     style="@style/BlackText.standard"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
-                    android:layout_marginLeft="10dp"
+                    android:layout_marginStart="10dp"
                     android:layout_weight="0.72"
                     android:gravity="center_vertical|center_horizontal"
                     android:paddingEnd="10dp"
@@ -121,7 +121,7 @@
                 android:layout_height="240dp"
                 android:layout_marginTop="10dp"
                 android:background="@color/white"
-                android:gravity="top|left"
+                android:gravity="top|start"
                 android:padding="10dp"
                 />
 

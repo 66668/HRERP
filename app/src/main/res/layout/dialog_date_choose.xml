@@ -31,7 +31,7 @@
         <FrameLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignParentRight="true">
+            android:layout_alignParentEnd="true">
 
             <Button
                 android:id="@+id/date_choose_close_btn"
@@ -59,7 +59,7 @@
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:layout_gravity="center"
-            android:layout_marginLeft="15dp"
+            android:layout_marginStart="15dp"
             android:layout_weight="1.5"
             />
 
@@ -84,7 +84,7 @@
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:layout_gravity="center"
-            android:layout_marginRight="15dp"
+            android:layout_marginStart="15dp"
             android:layout_weight="1"
             />
     </LinearLayout>

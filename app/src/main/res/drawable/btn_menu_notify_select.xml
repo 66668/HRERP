@@ -4,6 +4,6 @@
     <item android:state_focused="true" android:drawable="@mipmap/menu_notify_selector" />
     <item android:state_checked="true" android:drawable="@mipmap/menu_notify_selector" />
     <item android:state_selected="true" android:drawable="@mipmap/menu_notify_selector"/>
-    <item android:drawable="@mipmap/menu_notify_narmal"></item>
+    <item android:drawable="@mipmap/menu_notify_narmal"/>
 
 </selector>

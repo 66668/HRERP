@@ -23,7 +23,7 @@
         android:layout_width="match_parent"
         android:layout_height="44dp"
         android:background="@color/common_bg_examination"
-        android:drawableRight="@mipmap/forword"
+        android:drawableEnd="@mipmap/forword"
         android:gravity="center_vertical"
         android:paddingLeft="10dp"
         android:paddingRight="10dp"

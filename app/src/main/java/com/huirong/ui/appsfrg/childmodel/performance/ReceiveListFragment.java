@@ -291,10 +291,6 @@ public class ReceiveListFragment extends BaseFragment implements RefreshAndLoadL
 
     }
 
-    @Override
-    public boolean hasMultiFragment() {
-        return false;
-    }
 
     @Override
     protected String setFragmentName() {

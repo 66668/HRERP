@@ -12,8 +12,8 @@
         android:id="@+id/btn_loan"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginLeft="10dp"
-        android:layout_marginRight="10dp"
+        android:layout_marginStart="10dp"
+        android:layout_marginEnd="10dp"
         android:layout_marginTop="10dp"
         android:layout_weight="1"
         android:background="@mipmap/bg_finance"
@@ -23,7 +23,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
-            android:layout_marginLeft="28dp"
+            android:layout_marginStart="28dp"
             android:background="@mipmap/finance_loan"
             android:contentDescription="@null"/>
 
@@ -32,8 +32,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_above="@+id/view_position"
-            android:layout_alignParentRight="true"
-            android:layout_marginRight="28dp"
+            android:layout_alignParentEnd="true"
+            android:layout_marginEnd="28dp"
             android:text="@string/financial_loan"
             android:textColor="@color/white"
             android:textSize="@dimen/common_textSize_default18"/>
@@ -42,7 +42,7 @@
             android:id="@+id/view_position"
             android:layout_width="10dp"
             android:layout_height="1dip"
-            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true"
             android:layout_centerVertical="true"/>
 
         <TextView
@@ -51,9 +51,9 @@
             android:layout_height="wrap_content"
             android:layout_alignStart="@+id/tv_typeName_loan"
             android:layout_below="@+id/tv_typeName_loan"
-            android:layout_marginRight="28dp"
+            android:layout_marginEnd="28dp"
             android:drawablePadding="5dp"
-            android:drawableRight="@mipmap/finance_forword"
+            android:drawableEnd="@mipmap/finance_forword"
             android:gravity="center_vertical"
             android:text="@string/financial_start"
             android:textColor="@color/white"
@@ -64,8 +64,8 @@
         android:id="@+id/btn_reimburse"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginLeft="10dp"
-        android:layout_marginRight="10dp"
+        android:layout_marginStart="10dp"
+        android:layout_marginEnd="10dp"
         android:layout_marginTop="10dp"
         android:layout_weight="1"
         android:background="@mipmap/bg_finance"
@@ -75,7 +75,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
-            android:layout_marginLeft="28dp"
+            android:layout_marginStart="28dp"
             android:background="@mipmap/finance_reimburse"
             android:contentDescription="@null"
             />
@@ -85,8 +85,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_above="@+id/view_position2"
-            android:layout_alignParentRight="true"
-            android:layout_marginRight="28dp"
+            android:layout_alignParentEnd="true"
+            android:layout_marginEnd="28dp"
             android:text="@string/financial_reimburse"
             android:textColor="@color/white"
             android:textSize="@dimen/common_textSize_default18"/>
@@ -95,7 +95,7 @@
             android:id="@+id/view_position2"
             android:layout_width="10dp"
             android:layout_height="1dip"
-            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true"
             android:layout_centerVertical="true"/>
 
         <TextView
@@ -104,9 +104,9 @@
             android:layout_height="wrap_content"
             android:layout_alignStart="@+id/tv_typeName_remburse"
             android:layout_below="@+id/tv_typeName_remburse"
-            android:layout_marginRight="28dp"
+            android:layout_marginEnd="28dp"
             android:drawablePadding="5dp"
-            android:drawableRight="@mipmap/finance_forword"
+            android:drawableEnd="@mipmap/finance_forword"
             android:gravity="center_vertical"
             android:text="@string/financial_start"
             android:textColor="@color/white"
@@ -120,8 +120,8 @@
         android:id="@+id/btn_pay"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginLeft="10dp"
-        android:layout_marginRight="10dp"
+        android:layout_marginStart="10dp"
+        android:layout_marginEnd="10dp"
         android:layout_marginTop="10dp"
         android:layout_weight="1"
         android:background="@mipmap/bg_finance">
@@ -131,8 +131,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_above="@+id/view_position4"
-            android:layout_alignParentRight="true"
-            android:layout_marginRight="28dp"
+            android:layout_alignParentEnd="true"
+            android:layout_marginEnd="28dp"
             android:text="@string/financial_pay"
             android:textColor="@color/white"
             android:textSize="@dimen/common_textSize_default18"/>
@@ -141,7 +141,7 @@
             android:id="@+id/view_position4"
             android:layout_width="10dp"
             android:layout_height="1dip"
-            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true"
             android:layout_centerVertical="true"/>
 
         <TextView
@@ -150,9 +150,9 @@
             android:layout_height="wrap_content"
             android:layout_alignStart="@+id/tv_typeName_pay"
             android:layout_below="@+id/tv_typeName_pay"
-            android:layout_marginRight="28dp"
+            android:layout_marginEnd="28dp"
             android:drawablePadding="5dp"
-            android:drawableRight="@mipmap/finance_forword"
+            android:drawableEnd="@mipmap/finance_forword"
             android:gravity="center_vertical"
             android:text="@string/financial_start"
             android:textColor="@color/white"
@@ -164,8 +164,7 @@
             android:layout_height="wrap_content"
             android:layout_alignParentStart="true"
             android:layout_alignTop="@+id/tv_typeName_pay"
-            android:layout_marginLeft="28dp"
-            android:layout_marginStart="27dp"
+            android:layout_marginStart="28dp"
             android:background="@mipmap/finance_pay"
             android:contentDescription="@null"/>
 

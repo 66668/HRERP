@@ -27,13 +27,13 @@
         android:layout_height="0dp"
         android:layout_weight="0.4"
         android:orientation="vertical"
-        android:weightSum="3">
+        android:weightSum="1">
 
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
+            android:layout_height="0dp"
+            android:layout_weight="0.33"
             android:weightSum="1"
             android:orientation="horizontal"
             >
@@ -49,7 +49,7 @@
                 android:layout_height="@dimen/common_topbar_height40"
                 android:layout_weight="0.72"
                 android:background="@drawable/et_login_style"
-                android:drawableLeft="@mipmap/login_co"
+                android:drawableStart="@mipmap/login_co"
                 android:drawablePadding="10dp"
                 android:hint="@string/please_input_account"
                 android:lines="1"
@@ -67,8 +67,8 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
+            android:layout_height="0dp"
+            android:layout_weight="0.33"
             android:orientation="horizontal"
             >
 
@@ -83,7 +83,7 @@
                 android:layout_height="@dimen/common_topbar_height40"
                 android:layout_weight="0.72"
                 android:background="@drawable/et_login_style"
-                android:drawableLeft="@mipmap/login_user"
+                android:drawableStart="@mipmap/login_user"
                 android:drawablePadding="10dp"
                 android:hint="@string/please_input_uername"
                 android:lines="1"
@@ -101,8 +101,8 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
+            android:layout_height="0dp"
+            android:layout_weight="0.33"
             android:orientation="horizontal"
             >
 
@@ -117,7 +117,7 @@
                 android:layout_height="@dimen/common_topbar_height40"
                 android:layout_weight="0.72"
                 android:background="@drawable/et_login_style"
-                android:drawableLeft="@mipmap/login_psd"
+                android:drawableStart="@mipmap/login_psd"
                 android:drawablePadding="10dp"
                 android:hint="@string/please_input_ps"
                 android:inputType="textPassword"

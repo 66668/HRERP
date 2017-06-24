@@ -86,7 +86,7 @@
                     style="@style/BlackText.standard"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="10dp"
+                    android:layout_marginStart="10dp"
                     android:layout_weight="0.28"
                     android:gravity="center_vertical"
                     android:text="@string/salaryAdjustNow"
@@ -97,7 +97,7 @@
                     style="@style/BlackText.standard"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_marginRight="10dp"
+                    android:layout_marginEnd="10dp"
                     android:layout_weight="0.72"
                     android:background="@drawable/et_white_stroke"
                     android:gravity="center_vertical"
@@ -130,7 +130,7 @@
                     style="@style/BlackText.standard"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="10dp"
+                    android:layout_marginStart="10dp"
                     android:layout_weight="0.28"
                     android:gravity="center_vertical"
                     android:text="@string/salaryAdjustAfter"
@@ -141,7 +141,7 @@
                     style="@style/BlackText.standard"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_marginRight="10dp"
+                    android:layout_marginEnd="10dp"
                     android:layout_weight="0.72"
                     android:background="@drawable/et_white_stroke"
                     android:gravity="center_vertical"
@@ -174,7 +174,7 @@
                     style="@style/BlackText.standard"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="10dp"
+                    android:layout_marginStart="10dp"
                     android:layout_weight="0.28"
                     android:text="@string/salaryAdjustReason"
                     android:textColor="@color/cl_text_common"/>
@@ -186,7 +186,7 @@
                     android:layout_height="match_parent"
                     android:layout_weight="0.72"
                     android:background="@drawable/et_white_stroke"
-                    android:gravity="top|left"
+                    android:gravity="top|start"
                     android:hint="@string/hint_salaryAdjustReason"
                     android:padding="10dp"
                     android:textColorHint="@color/cl_hint_common"/>
@@ -214,7 +214,7 @@
                     style="@style/BlackText.standard"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="10dp"
+                    android:layout_marginStart="10dp"
                     android:layout_weight="0.28"
                     android:text="@string/remark_all_apl"
                     android:textColor="@color/cl_text_common"/>
@@ -224,10 +224,10 @@
                     style="@style/BlackText.standard"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
-                    android:layout_marginRight="10dp"
+                    android:layout_marginEnd="10dp"
                     android:layout_weight="0.71"
                     android:background="@drawable/et_white_stroke"
-                    android:gravity="top|left"
+                    android:gravity="top|start"
                     android:hint="@string/hint_remark_all_apl"
                     android:paddingTop="10dp"
                     android:textColorHint="@color/cl_hint_common"/>
@@ -256,7 +256,7 @@
                     style="@style/BlackText.standard"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="10dp"
+                    android:layout_marginStart="10dp"
                     android:gravity="center_vertical"
                     android:text="@string/Requester"
                     android:textColor="@color/cl_text_common"/>
@@ -291,10 +291,10 @@
                         style="@style/BlackText.standard"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_alignParentRight="true"
+                        android:layout_alignParentEnd="true"
                         android:layout_centerVertical="true"
-                        android:layout_marginRight="10dp"
-                        android:layout_toRightOf="@+id/AddApprover"/>
+                        android:layout_marginEnd="10dp"
+                        android:layout_toEndOf="@+id/AddApprover"/>
                 </RelativeLayout>
             </LinearLayout>
 

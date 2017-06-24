@@ -24,8 +24,8 @@
             android:layout_width="20dp"
             android:layout_height="20dp"
             android:layout_centerVertical="true"
-            android:layout_marginRight="5dp"
-            android:layout_toLeftOf="@+id/tv_loadmore"
+            android:layout_marginEnd="5dp"
+            android:layout_toStartOf="@+id/tv_loadmore"
             android:contentDescription="@null"
             android:src="@mipmap/uparrow"/>
 
@@ -35,8 +35,8 @@
             android:layout_width="20dp"
             android:layout_height="20dp"
             android:layout_centerVertical="true"
-            android:layout_marginRight="5dp"
-            android:layout_toLeftOf="@+id/tv_loadmore"
+            android:layout_marginEnd="5dp"
+            android:layout_toStartOf="@+id/tv_loadmore"
             />
     </RelativeLayout>
 

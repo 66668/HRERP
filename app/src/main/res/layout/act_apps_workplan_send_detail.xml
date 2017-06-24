@@ -24,8 +24,8 @@
                 style="@style/BlackText.Large20"
                 android:layout_width="match_parent"
                 android:layout_height="30dp"
-                android:layout_marginLeft="10dp"
-                android:layout_marginRight="10dp"
+                android:layout_marginStart="10dp"
+                android:layout_marginEnd="10dp"
                 android:layout_marginTop="10dp"
                 android:gravity="center_vertical"
                 android:lines="1"
@@ -35,7 +35,7 @@
                 android:id="@+id/tv_time"
                 android:layout_width="match_parent"
                 android:layout_height="20dp"
-                android:layout_marginLeft="10dp"
+                android:layout_marginStart="10dp"
                 android:gravity="center_vertical"
                 android:text="2016-01-01 12:59:59"
                 android:textColor="@color/textHintColor"
@@ -50,7 +50,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="20dp"
-                    android:layout_marginLeft="10dp"
+                    android:layout_marginStart="10dp"
                     android:gravity="center_vertical"
                     android:text="@string/sendPerson"
                     android:textColor="@color/textHintColor"
@@ -60,7 +60,7 @@
                     android:id="@+id/tv_to"
                     android:layout_width="wrap_content"
                     android:layout_height="20dp"
-                    android:layout_marginLeft="10dp"
+                    android:layout_marginStart="10dp"
                     android:gravity="center_vertical"
                     android:text="我是发送人"
                     android:textColor="@color/textHintColor"
@@ -77,7 +77,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="20dp"
-                    android:layout_marginLeft="10dp"
+                    android:layout_marginStart="10dp"
                     android:gravity="center_vertical"
                     android:text="@string/ReceivePerson"
                     android:textColor="@color/textHintColor"
@@ -87,7 +87,7 @@
                     android:id="@+id/tv_rec"
                     android:layout_width="wrap_content"
                     android:layout_height="20dp"
-                    android:layout_marginLeft="10dp"
+                    android:layout_marginStart="10dp"
                     android:gravity="center_vertical"
                     android:text="我是接收人"
                     android:textColor="@color/textHintColor"
@@ -104,7 +104,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="30dp"
-                    android:layout_marginLeft="10dp"
+                    android:layout_marginStart="10dp"
                     android:gravity="center_vertical"
                     android:text="@string/targetAdvance"
                     android:textColor="@color/textHintColor"
@@ -114,8 +114,8 @@
                     android:id="@+id/tv_advance"
                     android:layout_width="wrap_content"
                     android:layout_height="20dp"
-                    android:layout_marginLeft="10dp"
-                    android:gravity="left|top"
+                    android:layout_marginStart="10dp"
+                    android:gravity="start|top"
                     android:textColor="@color/textHintColor"
                     android:textSize="@dimen/common_textSize_default12"/>
             </LinearLayout>
@@ -129,7 +129,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="30dp"
-                    android:layout_marginLeft="10dp"
+                    android:layout_marginStart="10dp"
                     android:gravity="center_vertical"
                     android:text="@string/completeTime"
                     android:textColor="@color/textHintColor"
@@ -139,8 +139,8 @@
                     android:id="@+id/tv_completeTime"
                     android:layout_width="wrap_content"
                     android:layout_height="20dp"
-                    android:layout_marginLeft="10dp"
-                    android:gravity="left|top"
+                    android:layout_marginStart="10dp"
+                    android:gravity="start|top"
                     android:textColor="@color/textHintColor"
                     android:textSize="@dimen/common_textSize_default12"/>
             </LinearLayout>
@@ -167,7 +167,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="30dp"
-                    android:layout_marginLeft="10dp"
+                    android:layout_marginStart="10dp"
                     android:gravity="center_vertical"
                     android:text="@string/remark_all_apl"
                     android:textColor="@color/textHintColor"
@@ -177,8 +177,8 @@
                     android:id="@+id/tv_remark"
                     android:layout_width="wrap_content"
                     android:layout_height="20dp"
-                    android:layout_marginLeft="10dp"
-                    android:gravity="left|top"
+                    android:layout_marginStart="10dp"
+                    android:gravity="start|top"
                     android:textColor="@color/textHintColor"
                     android:textSize="@dimen/common_textSize_default12"/>
             </LinearLayout>

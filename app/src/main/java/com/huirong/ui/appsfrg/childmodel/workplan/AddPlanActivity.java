@@ -177,10 +177,6 @@ public class AddPlanActivity extends BaseActivity {
         }
     }
 
-    private void clear() {
-
-    }
-
 
     /**
      * 添加审批人
@@ -198,7 +194,7 @@ public class AddPlanActivity extends BaseActivity {
         if (requestCode == 0 && resultCode == 0) {
             //判断返回值是否为空
             List<ContactsEmployeeModel> list = new ArrayList<>();
-            if (data != null && (List<ContactsEmployeeModel>) data.getSerializableExtra("data") != null) {
+            if (data != null &&  data.getSerializableExtra("data") != null) {
                 list = (List<ContactsEmployeeModel>) data.getSerializableExtra("data");
             } else {
 

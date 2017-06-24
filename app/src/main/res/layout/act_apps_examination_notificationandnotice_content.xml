@@ -25,7 +25,7 @@
                 style="@style/BlackText.standard"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:gravity="left|top"
+                android:gravity="start|top"
                 android:padding="10dp"/>
         </LinearLayout>
     </ScrollView>

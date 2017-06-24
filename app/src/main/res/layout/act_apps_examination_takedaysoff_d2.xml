@@ -35,7 +35,7 @@
                         style="@style/BlackText.standard"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:layout_marginLeft="10dp"
+                        android:layout_marginStart="10dp"
                         android:layout_weight="0.28"
                         android:gravity="center_vertical"
                         android:text="@string/approval_person"/>
@@ -45,7 +45,7 @@
                         style="@style/BlackText.standard"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:layout_marginLeft="10dp"
+                        android:layout_marginStart="10dp"
                         android:layout_weight="0.72"
                         android:gravity="center_vertical"
                         />
@@ -62,7 +62,7 @@
                         style="@style/BlackText.standard"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:layout_marginLeft="10dp"
+                        android:layout_marginStart="10dp"
                         android:layout_weight="0.28"
                         android:gravity="center_vertical"
                         android:text="@string/approval_dept"/>
@@ -72,7 +72,7 @@
                         style="@style/BlackText.standard"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:layout_marginLeft="10dp"
+                        android:layout_marginStart="10dp"
                         android:layout_weight="0.72"
                         android:gravity="center_vertical"
                         />
@@ -89,7 +89,7 @@
                         style="@style/BlackText.standard"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:layout_marginLeft="10dp"
+                        android:layout_marginStart="10dp"
                         android:layout_weight="0.28"
                         android:gravity="center_vertical"
                         android:text="@string/approval_co"/>
@@ -99,7 +99,7 @@
                         style="@style/BlackText.standard"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:layout_marginLeft="10dp"
+                        android:layout_marginStart="10dp"
                         android:layout_weight="0.72"
                         android:gravity="center_vertical"
                         />
@@ -116,7 +116,7 @@
                         style="@style/BlackText.standard"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:layout_marginLeft="10dp"
+                        android:layout_marginStart="10dp"
                         android:layout_weight="0.28"
                         android:gravity="center_vertical"
                         android:text="@string/approval_approvalTime"/>
@@ -126,7 +126,7 @@
                         style="@style/BlackText.standard"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:layout_marginLeft="10dp"
+                        android:layout_marginStart="10dp"
                         android:layout_weight="0.72"
                         android:gravity="center_vertical"
                         />
@@ -155,7 +155,7 @@
                         style="@style/BlackText.standard"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:layout_marginLeft="10dp"
+                        android:layout_marginStart="10dp"
                         android:layout_weight="0.28"
                         android:gravity="center_vertical"
                         android:text="@string/workRestStart"/>
@@ -165,7 +165,7 @@
                         style="@style/BlackText.standard"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:layout_marginLeft="10dp"
+                        android:layout_marginStart="10dp"
                         android:layout_weight="0.72"
                         android:gravity="center_vertical"
                         />
@@ -183,7 +183,7 @@
                         style="@style/BlackText.standard"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:layout_marginLeft="10dp"
+                        android:layout_marginStart="10dp"
                         android:layout_weight="0.28"
                         android:gravity="center_vertical"
                         android:text="@string/workRestEnd"/>
@@ -193,7 +193,7 @@
                         style="@style/BlackText.standard"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:layout_marginLeft="10dp"
+                        android:layout_marginStart="10dp"
                         android:layout_weight="0.72"
                         android:gravity="center_vertical"
                         />
@@ -211,7 +211,7 @@
                         style="@style/BlackText.standard"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:layout_marginLeft="10dp"
+                        android:layout_marginStart="10dp"
                         android:layout_weight="0.28"
                         android:gravity="center_vertical"
                         android:text="@string/workRestStartbefore"/>
@@ -221,7 +221,7 @@
                         style="@style/BlackText.standard"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:layout_marginLeft="10dp"
+                        android:layout_marginStart="10dp"
                         android:layout_weight="0.72"
                         android:gravity="center_vertical"
                         />
@@ -239,7 +239,7 @@
                         style="@style/BlackText.standard"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:layout_marginLeft="10dp"
+                        android:layout_marginStart="10dp"
                         android:layout_weight="0.28"
                         android:gravity="center_vertical"
                         android:text="@string/workRestEndBefore"/>
@@ -249,7 +249,7 @@
                         style="@style/BlackText.standard"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:layout_marginLeft="10dp"
+                        android:layout_marginStart="10dp"
                         android:layout_weight="0.72"
                         android:gravity="center_vertical"
                         />
@@ -267,7 +267,7 @@
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_marginBottom="10dp"
-                        android:layout_marginLeft="10dp"
+                        android:layout_marginStart="10dp"
                         android:layout_weight="0.28"
                         android:text="@string/workRestReason"
                         android:textColor="@color/cl_text_common"/>
@@ -281,10 +281,10 @@
                         style="@style/BlackText.standard"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:layout_marginLeft="10dp"
+                        android:layout_marginStart="10dp"
                         android:layout_weight="0.72"
                         android:ellipsize="end"
-                        android:gravity="top|left"
+                        android:gravity="top|start"
                         android:lines="3"
                         />
 

@@ -19,7 +19,7 @@
             android:layout_marginLeft="10dp"
             android:layout_marginRight="10dp"
             android:background="@drawable/et_search_style"
-            android:drawableLeft="@mipmap/search_bar_icon_normal"
+            android:drawableStart="@mipmap/search_bar_icon_normal"
             android:hint="@string/context_contract_hint"
             android:maxLines="1"
             android:textColorHint="@color/cl_hint_common_search"
@@ -36,7 +36,7 @@
             android:id="@+id/sidrbar"
             android:layout_width="30.0dip"
             android:layout_height="fill_parent"
-            android:layout_gravity="right|center"
+            android:layout_gravity="end|center"
             android:visibility="invisible"/>
 
         <ListView

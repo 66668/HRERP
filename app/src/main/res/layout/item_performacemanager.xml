@@ -17,7 +17,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
-        android:layout_marginLeft="8dp"
+        android:layout_marginStart="8dp"
         android:layout_toEndOf="@+id/img_icon"
         android:text="雨量检测站点：2个"
         android:textColor="@android:color/holo_blue_light"/>
@@ -27,7 +27,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/tv_title"
-        android:layout_marginLeft="8dp"
+        android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         android:layout_toEndOf="@+id/img_icon"
         android:text="无降雨"

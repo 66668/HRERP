@@ -64,21 +64,15 @@ public abstract class BaseFragment extends Fragment implements IBaseView{
 	public void onResume() {
 		super.onResume();
 		LogUtils.i(getFragmentName(), " onResume()");
-		if(!hasMultiFragment()) {
-			//  MobclickAgent.onPageStart(setFragmentName()); //统计页面，"MainScreen"为页面名称，可自定义
-		}
+
 	}
 
 	@Override
 	public void onPause() {
 		super.onPause();
 		LogUtils.i(getFragmentName(), " onPause()");
-		if(!hasMultiFragment()) {
-			//  MobclickAgent.onPageEnd(setFragmentName());
-		}
+
 	}
-	public abstract boolean hasMultiFragment();
-	protected abstract String setFragmentName();
 
 	@Override
 	public void onStop() {

@@ -111,7 +111,7 @@ public class ChooseItemDialog extends Dialog implements View.OnClickListener{
 	public void show() {
 		super.show();
 		WindowManager.LayoutParams lp = this.getWindow().getAttributes();
-		int screenWidth = (int)(Utils.getScreenWidth((Activity)context));
+		int screenWidth = (Utils.getScreenWidth((Activity)context));
 		lp.width = screenWidth - screenWidth * 60 / 640;
 		lp.gravity = Gravity.BOTTOM;
 		this.getWindow().setAttributes(lp);

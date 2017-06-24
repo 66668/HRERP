@@ -157,10 +157,6 @@ public class MessageFragment extends com.huirong.base.BaseFragment {
         super.onActivityCreated(savedInstanceState);
     }
 
-    @Override
-    public boolean hasMultiFragment() {
-        return false;
-    }
 
     @Override
     protected String setFragmentName() {

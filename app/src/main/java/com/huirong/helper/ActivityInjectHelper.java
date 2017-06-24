@@ -5,7 +5,7 @@ import android.view.View;
 
 public class ActivityInjectHelper extends InjectHelper {
 	//添加get方法
-	public Activity getActivity(){
+	private Activity getActivity(){
 		return (Activity)mObject;
 	}
 	//添加构造方法

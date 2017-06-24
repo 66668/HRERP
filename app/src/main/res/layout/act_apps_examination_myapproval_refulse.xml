@@ -20,7 +20,7 @@
             android:layout_height="150dp"
             android:layout_marginTop="12dp"
             android:background="@drawable/et_white_stroke"
-            android:gravity="top|left"
+            android:gravity="top|start"
             android:hint="@string/hint_examination_refulse"
             android:paddingEnd="0dp"
             android:paddingStart="10dp"

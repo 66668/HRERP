@@ -108,10 +108,7 @@ public class ContactsFragment extends BaseFragment {
         super.onActivityCreated(savedInstanceState);
     }
 
-    @Override
-    public boolean hasMultiFragment() {
-        return false;
-    }
+
 
     @Override
     protected String setFragmentName() {

@@ -282,7 +282,7 @@ public class BeAwayActivity extends BaseActivity {
         {
             //判断返回值是否为空
             List<ContactsEmployeeModel> list = new ArrayList<>();
-            if (data != null && (List<ContactsEmployeeModel>) data.getSerializableExtra("data") != null) {
+            if (data != null &&  data.getSerializableExtra("data") != null) {
                 list = (List<ContactsEmployeeModel>) data.getSerializableExtra("data");
             } else {
 

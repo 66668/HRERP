@@ -25,7 +25,7 @@
             android:id="@+id/sidrbar"
             android:layout_width="30.0dip"
             android:layout_height="fill_parent"
-            android:layout_gravity="right|center"
+            android:layout_gravity="end|center"
             android:visibility="invisible"/>
     </FrameLayout>
 </LinearLayout>

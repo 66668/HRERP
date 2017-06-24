@@ -32,7 +32,7 @@
                 android:layout_width="20dp"
                 android:layout_height="20dp"
                 android:layout_centerVertical="true"
-                android:layout_toRightOf="@+id/txt_item1"
+                android:layout_toEndOf="@+id/txt_item1"
                 android:contentDescription="@null"
                 android:src="@mipmap/choose_dialog_selected_sign"/>
         </RelativeLayout>
@@ -64,7 +64,7 @@
                 android:layout_width="20dp"
                 android:layout_height="20dp"
                 android:layout_centerVertical="true"
-                android:layout_toRightOf="@+id/txt_item2"
+                android:layout_toEndOf="@+id/txt_item2"
                 android:contentDescription="@null"
                 android:src="@mipmap/choose_dialog_selected_sign"/>
         </RelativeLayout>

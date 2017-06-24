@@ -45,7 +45,7 @@
                 android:layout_height="30dp"
                 android:layout_alignParentStart="true"
                 android:layout_alignParentTop="true"
-                android:layout_marginLeft="10dp"
+                android:layout_marginStart="10dp"
                 android:layout_marginTop="10dp"
                 android:src="@mipmap/topbar_quit_blue"/>
         </RelativeLayout>
@@ -76,7 +76,7 @@
                     android:layout_height="38dp"
                     android:layout_alignParentStart="true"
                     android:layout_alignTop="@+id/img_message"
-                    android:layout_marginLeft="5dp"
+                    android:layout_marginStart="5dp"
                     android:src="@mipmap/to_telephone"/>
 
                 <com.huirong.widget.CircleImageView
@@ -85,7 +85,7 @@
                     android:layout_height="38dp"
                     android:layout_alignParentEnd="true"
                     android:layout_centerVertical="true"
-                    android:layout_marginRight="5dp"
+                    android:layout_marginEnd="5dp"
                     android:src="@mipmap/to_message"/>
             </RelativeLayout>
 
@@ -123,7 +123,7 @@
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight="0.28"
-                    android:gravity="center_vertical|right"
+                    android:gravity="center_vertical|end"
                     android:text="@string/epl_phone"
                     android:textColor="@color/cl_text_common"
                     android:textSize="@dimen/common_textSize_default15"/>
@@ -133,7 +133,7 @@
                     android:layout_width="0dp"
                     android:layout_height="@dimen/common_topbar_height"
                     android:layout_weight="0.55"
-                    android:gravity="center_vertical|right"
+                    android:gravity="center_vertical|end"
                     android:paddingEnd="0dp"
                     android:paddingStart="20dp"
                     android:textColor="@color/cl_hint_common"
@@ -155,7 +155,7 @@
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight="0.28"
-                    android:gravity="center_vertical|right"
+                    android:gravity="center_vertical|end"
                     android:text="@string/epl_email"
                     android:textColor="@color/cl_text_common"
                     android:textSize="@dimen/common_textSize_default15"/>
@@ -165,7 +165,7 @@
                     android:layout_width="0dp"
                     android:layout_height="@dimen/common_topbar_height"
                     android:layout_weight="0.55"
-                    android:gravity="center_vertical|right"
+                    android:gravity="center_vertical|end"
                     android:paddingEnd="0dp"
                     android:paddingStart="20dp"
                     android:textColor="@color/cl_hint_common"
@@ -187,7 +187,7 @@
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight="0.28"
-                    android:gravity="center_vertical|right"
+                    android:gravity="center_vertical|end"
                     android:text="@string/epl_dept"
                     android:textColor="@color/cl_text_common"
                     android:textSize="@dimen/common_textSize_default15"/>
@@ -197,7 +197,7 @@
                     android:layout_width="0dp"
                     android:layout_height="@dimen/common_topbar_height"
                     android:layout_weight="0.55"
-                    android:gravity="center_vertical|right"
+                    android:gravity="center_vertical|end"
                     android:paddingEnd="0dp"
                     android:paddingStart="20dp"
                     android:textColor="@color/cl_hint_common"
@@ -219,7 +219,7 @@
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight="0.28"
-                    android:gravity="center_vertical|right"
+                    android:gravity="center_vertical|end"
                     android:text="@string/epl_enterTime"
                     android:textColor="@color/cl_text_common"
                     android:textSize="@dimen/common_textSize_default15"/>
@@ -229,7 +229,7 @@
                     android:layout_width="0dp"
                     android:layout_height="@dimen/common_topbar_height"
                     android:layout_weight="0.55"
-                    android:gravity="center_vertical|right"
+                    android:gravity="center_vertical|end"
                     android:paddingEnd="0dp"
                     android:paddingStart="20dp"
                     android:textColor="@color/cl_hint_common"

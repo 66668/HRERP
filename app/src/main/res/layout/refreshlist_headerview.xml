@@ -30,8 +30,8 @@
             android:id="@+id/arrow"
             android:layout_width="20dp"
             android:layout_height="20dp"
-            android:layout_marginRight="20dp"
-            android:layout_toLeftOf="@+id/layout"
+            android:layout_marginEnd="20dp"
+            android:layout_toStartOf="@+id/layout"
             android:src="@mipmap/uparrow"/>
 
         <ProgressBar

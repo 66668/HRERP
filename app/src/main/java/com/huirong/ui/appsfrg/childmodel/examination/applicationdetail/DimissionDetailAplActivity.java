@@ -5,7 +5,6 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.os.Message;
 import android.text.TextUtils;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.LinearLayout;
@@ -184,7 +183,6 @@ public class DimissionDetailAplActivity extends BaseActivity {
                 setShow(dismissionModel);
                 break;
             case POST_FAILED: // 1001
-                Log.d("SJY", "error" + (String) msg.obj);
                 PageUtil.DisplayToast((String) msg.obj);
                 break;
             default:
