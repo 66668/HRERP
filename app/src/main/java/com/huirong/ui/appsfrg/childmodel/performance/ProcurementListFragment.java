@@ -287,10 +287,7 @@ public class ProcurementListFragment extends BaseFragment implements RefreshAndL
 
     }
 
-    @Override
-    protected String setFragmentName() {
-        return null;
-    }
+
 
     //重写setMenuVisibility方法，不然会出现叠层的现象
     @Override

@@ -70,14 +70,23 @@ public class WebUrl {
         public static final String MISSIONLIST = LOGIN_URL + LOGIN_FLODER_USER + "Maintain/MaintainList";
 
         /**
-         * 03-01 任务 记录
+         * 03-02 任务 添加
          */
         public static final String ADDMISSION = LOGIN_URL + LOGIN_FLODER_USER + "Maintain/MaintainlAdd";
 
-         /**
-         * 03-01 任务详情，修改已读
+        /**
+         * 03-03 任务详情，修改已读
          */
-        public static final String MISSIONISREAD = LOGIN_URL + LOGIN_FLODER_USER + "Maintain/MaintainEdit";
+        public static final String MISSIONISREAD = LOGIN_URL + LOGIN_FLODER_USER + "Maintain/MaintainID";
+
+        /**
+         * 03-04 任务详情，修改完成
+         */
+        public static final String MISSIONISCOMPLETE = LOGIN_URL + LOGIN_FLODER_USER + "Maintain/MaintainEdit";
+        /**
+         * 03-04 任务 通讯录
+         */
+        public static final String MISSIONISCONTACTS = LOGIN_URL + LOGIN_FLODER_USER + "GetApplication/GetApplicationByEmployeeList";
 
         /**
          * 应用-地图签到 接口

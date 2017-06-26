@@ -110,11 +110,6 @@ public class ContactsFragment extends BaseFragment {
 
 
 
-    @Override
-    protected String setFragmentName() {
-        return null;
-    }
-
     /**
      * @param view
      */

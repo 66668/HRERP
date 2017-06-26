@@ -437,16 +437,69 @@ public class UserHelper<T> {
         }
     }
     /**
+     * 应用——任务 选择联系人
+     * <p>
+     * 获取级别权限的所有联系人
+     */
+    public static List<ContactsEmployeeModel> getMissionContacts(Context context) throws MyException {
+        if (!NetworkManager.isNetworkAvailable(context)) {
+            throw new MyException(R.string.network_invalid);
+        }
+
+        try {
+            HttpResult httpResult = APIUtils.postForObject(WebUrl.AppsManager.MISSIONISCONTACTS,
+                    HttpParameter.create().
+                            add("sEmployeeID", getCurrentUser().getEmployeeID()));
+
+            if (httpResult.hasError()) {
+                throw httpResult.getError();
+            }
+            LogUtils.d("HTTP", httpResult.jsonArray.toString());
+
+            //1
+            //            return (new Gson()).fromJson(httpResult.jsonArray.toString(), new TypeToken<List<ContactsEmployeeModel>>() {
+            //            }.getType());
+
+
+            //方式二：
+            return (List<ContactsEmployeeModel>) JSONUtils.fromJson(httpResult.jsonArray.toString(), new TypeToken<List<ContactsEmployeeModel>>() {
+            }.getType());
+
+        } catch (MyException e) {
+            throw new MyException(e.getMessage());
+        }
+
+    }
+    /**
      * 02-03
      *
      * 进入任务详情，标记已读
      */
-    public static void postReadThisMission(Context context, JSONObject js) throws MyException {
+    public static void postReadThisMission(Context context, String maintainID) throws MyException {
         if (!NetworkManager.isNetworkAvailable(context)) {
             throw new MyException(R.string.network_invalid);
         }
         HttpResult hr = APIUtils.postForObject(WebUrl.AppsManager.MISSIONISREAD
-                , HttpParameter.create().add("obj", js.toString()));
+                , HttpParameter.create().add("maintainID", maintainID).add("employeeId", UserHelper.getCurrentUser().getEmployeeID()));
+        if (hr.hasError()) {
+            throw hr.getError();
+        }
+    }
+
+    /**
+     * 02-04
+     *
+     * 任务 完成
+     */
+    public static void toCompleteMission(Context context, String maintainID,String commitContent) throws MyException {
+        if (!NetworkManager.isNetworkAvailable(context)) {
+            throw new MyException(R.string.network_invalid);
+        }
+        HttpResult hr = APIUtils.postForObject(WebUrl.AppsManager.MISSIONISCOMPLETE
+                , HttpParameter.create()
+                        .add("maintainID", maintainID)
+                        .add("ISremark", commitContent)
+                        .add("employeeId", UserHelper.getCurrentUser().getEmployeeID()));
         if (hr.hasError()) {
             throw hr.getError();
         }

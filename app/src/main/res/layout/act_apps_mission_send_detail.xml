@@ -8,261 +8,316 @@
         android:id="@+id/topbar"
         layout="@layout/topbar_common_itt"/>
 
-    <RelativeLayout
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:layout_above="@+id/laytout_complete">
 
-        <ScrollView
-            android:layout_above="@+id/laytout_complete"
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="wrap_content"
+            android:background="@color/notice_detail_bg_common"
+            android:orientation="vertical">
+            <!-- 标题 -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/common_topbar_height40"
+                android:background="@color/white"
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
+                android:weightSum="1">
+
+                <TextView
+                    style="@style/BlackText.standard"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="10dp"
+                    android:layout_weight="0.28"
+                    android:gravity="center_vertical"
+                    android:text="@string/msn_title"/>
+
+                <TextView
+                    android:id="@+id/tv_msnTitle"
+                    style="@style/BlackText.standard"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="10dp"
+                    android:layout_weight="0.72"
+                    android:gravity="center_vertical"
+                    />
+            </LinearLayout>
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="@color/notice_detail_bg_common"
-                android:orientation="vertical">
-                <!-- 标题 -->
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="@dimen/common_topbar_height40"
-                    android:background="@color/white"
-                    android:gravity="center_vertical"
-                    android:orientation="horizontal"
-                    android:weightSum="1">
+                android:background="@color/white"
+                android:orientation="horizontal"
+                android:weightSum="1">
 
-                    <TextView
-                        style="@style/BlackText.standard"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="10dp"
-                        android:layout_weight="0.28"
-                        android:gravity="center_vertical"
-                        android:text="@string/msn_title"/>
-
-                    <TextView
-                        android:id="@+id/tv_msnTitle"
-                        style="@style/BlackText.standard"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="10dp"
-                        android:layout_weight="0.72"
-                        android:gravity="center_vertical"
-                        />
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="match_parent"
+                <TextView
+                    style="@style/BlackText.standard"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:background="@color/white"
-                    android:orientation="horizontal"
-                    android:weightSum="1">
+                    android:layout_marginBottom="10dp"
+                    android:layout_marginStart="10dp"
+                    android:layout_weight="0.28"
+                    android:text="@string/msn_content"
+                    android:textColor="@color/cl_text_common"/>
 
-                    <TextView
-                        style="@style/BlackText.standard"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_marginBottom="10dp"
-                        android:layout_marginStart="10dp"
-                        android:layout_weight="0.28"
-                        android:text="@string/msn_content"
-                        android:textColor="@color/cl_text_common"/>
-
-                    <TextView
-                        android:id="@+id/tv_msnContent"
-                        style="@style/BlackText.standard"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="10dp"
-                        android:layout_weight="0.72"
-                        android:ellipsize="end"
-                        android:gravity="top|start"
-                        android:lines="3"
-                        android:paddingEnd="10dp"
-                        android:paddingStart="0dp"
-                        android:paddingTop="10dp"
-                        />
-
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="@dimen/common_topbar_height40"
-                    android:background="@color/white"
-                    android:gravity="center_vertical"
-                    android:orientation="horizontal"
-                    android:weightSum="1">
-
-                    <TextView
-                        style="@style/BlackText.standard"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="10dp"
-                        android:layout_weight="0.28"
-                        android:gravity="center_vertical"
-                        android:text="@string/msn_type"/>
-
-                    <TextView
-                        android:id="@+id/tv_msnType"
-                        style="@style/BlackText.standard"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="10dp"
-                        android:layout_weight="0.72"
-                        android:gravity="center_vertical"
-                        />
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="@dimen/common_topbar_height40"
-                    android:background="@color/white"
-                    android:gravity="center_vertical"
-                    android:orientation="horizontal"
-                    android:weightSum="1">
-
-                    <TextView
-                        style="@style/BlackText.standard"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="10dp"
-                        android:layout_weight="0.28"
-                        android:gravity="center_vertical"
-                        android:text="@string/msn_place"/>
-
-                    <TextView
-                        android:id="@+id/tv_msnPlace"
-                        style="@style/BlackText.standard"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="10dp"
-                        android:layout_weight="0.72"
-                        android:gravity="center_vertical"
-                        />
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="@dimen/common_topbar_height40"
-                    android:background="@color/white"
-                    android:gravity="center_vertical"
-                    android:orientation="horizontal"
-                    android:weightSum="1">
-
-                    <TextView
-                        style="@style/BlackText.standard"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="10dp"
-                        android:layout_weight="0.28"
-                        android:gravity="center_vertical"
-                        android:text="@string/msn_maintainMan"/>
-
-                    <TextView
-                        android:id="@+id/tv_maintainMan"
-                        style="@style/BlackText.standard"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="10dp"
-                        android:layout_weight="0.72"
-                        android:gravity="center_vertical"
-                        />
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="@dimen/common_topbar_height40"
-                    android:background="@color/white"
-                    android:gravity="center_vertical"
-                    android:orientation="horizontal"
-                    android:weightSum="1">
-
-                    <TextView
-                        style="@style/BlackText.standard"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="10dp"
-                        android:layout_weight="0.28"
-                        android:gravity="center_vertical"
-                        android:text="@string/msn_repairWay"/>
-
-                    <TextView
-                        android:id="@+id/tv_repairWay"
-                        style="@style/BlackText.standard"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="10dp"
-                        android:layout_weight="0.72"
-                        android:gravity="center_vertical"
-                        />
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="@dimen/common_topbar_height40"
-                    android:background="@color/white"
-                    android:gravity="center_vertical"
-                    android:orientation="horizontal"
-                    android:weightSum="1">
-
-                    <TextView
-                        style="@style/BlackText.standard"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="10dp"
-                        android:layout_weight="0.28"
-                        android:gravity="center_vertical"
-                        android:text="@string/msn_completeTime"/>
-
-                    <TextView
-                        android:id="@+id/tv_completeTime"
-                        style="@style/BlackText.standard"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="10dp"
-                        android:layout_weight="0.72"
-                        android:gravity="center_vertical"
-                        />
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="match_parent"
+                <TextView
+                    android:id="@+id/tv_msnContent"
+                    style="@style/BlackText.standard"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:background="@color/white"
-                    android:orientation="horizontal"
-                    android:weightSum="1">
+                    android:layout_marginStart="10dp"
+                    android:layout_weight="0.72"
+                    android:ellipsize="end"
+                    android:gravity="top|start"
+                    android:lines="3"
+                    android:paddingEnd="10dp"
+                    android:paddingStart="0dp"
+                    android:paddingTop="10dp"
+                    />
 
-                    <TextView
-                        style="@style/BlackText.standard"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_marginBottom="10dp"
-                        android:layout_marginStart="10dp"
-                        android:layout_weight="0.28"
-                        android:text="@string/remark_all_apl"
-                        android:textColor="@color/cl_text_common"/>
-
-                    <TextView
-                        android:id="@+id/tv_remark"
-                        style="@style/BlackText.standard"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="10dp"
-                        android:layout_weight="0.72"
-                        android:ellipsize="end"
-                        android:gravity="top|start"
-                        android:lines="3"
-                        android:paddingEnd="10dp"
-                        android:paddingStart="0dp"
-                        android:paddingTop="10dp"
-                        />
-
-                </LinearLayout>
             </LinearLayout>
-        </ScrollView>
 
-        <include
-            android:id="@+id/laytout_complete"
-            layout="@layout/bottombar_common_copyto"/>
-    </RelativeLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/common_topbar_height40"
+                android:background="@color/white"
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
+                android:weightSum="1">
+
+                <TextView
+                    style="@style/BlackText.standard"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="10dp"
+                    android:layout_weight="0.28"
+                    android:gravity="center_vertical"
+                    android:text="@string/msn_type"/>
+
+                <TextView
+                    android:id="@+id/tv_msnType"
+                    style="@style/BlackText.standard"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="10dp"
+                    android:layout_weight="0.72"
+                    android:gravity="center_vertical"
+                    />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/common_topbar_height40"
+                android:background="@color/white"
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
+                android:weightSum="1">
+
+                <TextView
+                    style="@style/BlackText.standard"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="10dp"
+                    android:layout_weight="0.28"
+                    android:gravity="center_vertical"
+                    android:text="@string/msn_place"/>
+
+                <TextView
+                    android:id="@+id/tv_msnPlace"
+                    style="@style/BlackText.standard"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="10dp"
+                    android:layout_weight="0.72"
+                    android:gravity="center_vertical"
+                    />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/common_topbar_height40"
+                android:background="@color/white"
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
+                android:weightSum="1">
+
+                <TextView
+                    style="@style/BlackText.standard"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="10dp"
+                    android:layout_weight="0.28"
+                    android:gravity="center_vertical"
+                    android:text="@string/msn_maintainMan"/>
+
+                <TextView
+                    android:id="@+id/tv_maintainMan"
+                    style="@style/BlackText.standard"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="10dp"
+                    android:layout_weight="0.72"
+                    android:gravity="center_vertical"
+                    />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/common_topbar_height40"
+                android:background="@color/white"
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
+                android:weightSum="1">
+
+                <TextView
+                    style="@style/BlackText.standard"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="10dp"
+                    android:layout_weight="0.28"
+                    android:gravity="center_vertical"
+                    android:text="@string/msn_repairWay"/>
+
+                <TextView
+                    android:id="@+id/tv_repairWay"
+                    style="@style/BlackText.standard"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="10dp"
+                    android:layout_weight="0.72"
+                    android:gravity="center_vertical"
+                    />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/common_topbar_height40"
+                android:background="@color/white"
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
+                android:weightSum="1">
+
+                <TextView
+                    style="@style/BlackText.standard"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="10dp"
+                    android:layout_weight="0.28"
+                    android:gravity="center_vertical"
+                    android:text="@string/msn_completeTime"/>
+
+                <TextView
+                    android:id="@+id/tv_completeTime"
+                    style="@style/BlackText.standard"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="10dp"
+                    android:layout_weight="0.72"
+                    android:gravity="center_vertical"
+                    />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/layout_completeTime2"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/common_topbar_height40"
+                android:background="@color/white"
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
+                android:weightSum="1">
+
+                <TextView
+                    style="@style/BlackText.standard"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="10dp"
+                    android:layout_weight="0.28"
+                    android:gravity="center_vertical"
+                    android:text="@string/msn_completeTime2"/>
+
+                <TextView
+                    android:id="@+id/tv_completeTime2"
+                    style="@style/BlackText.standard"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="10dp"
+                    android:layout_weight="0.72"
+                    android:gravity="center_vertical"
+                    />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/white"
+                android:orientation="horizontal"
+                android:weightSum="1">
+
+                <TextView
+                    style="@style/BlackText.standard"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="10dp"
+                    android:layout_marginStart="10dp"
+                    android:layout_weight="0.28"
+                    android:text="@string/remark_all_apl"
+                    android:textColor="@color/cl_text_common"/>
+
+                <TextView
+                    android:id="@+id/tv_remark"
+                    style="@style/BlackText.standard"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="10dp"
+                    android:layout_weight="0.72"
+                    android:ellipsize="end"
+                    android:gravity="top|start"
+                    android:lines="3"
+                    android:paddingEnd="10dp"
+                    android:paddingStart="0dp"
+                    android:paddingTop="10dp"
+                    />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/layout_remark2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/white"
+                android:orientation="horizontal"
+                android:weightSum="1">
+
+                <TextView
+                    style="@style/BlackText.standard"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="10dp"
+                    android:layout_marginStart="10dp"
+                    android:layout_weight="0.28"
+                    android:text="@string/msn_remark"
+                    android:textColor="@color/cl_text_common"/>
+
+                <TextView
+                    android:id="@+id/tv_remark2"
+                    style="@style/BlackText.standard"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="10dp"
+                    android:layout_weight="0.72"
+                    android:ellipsize="end"
+                    android:gravity="top|start"
+                    android:lines="3"
+                    android:paddingEnd="10dp"
+                    android:paddingStart="0dp"
+                    android:paddingTop="10dp"
+                    />
+
+            </LinearLayout>
+        </LinearLayout>
+    </ScrollView>
 </LinearLayout>

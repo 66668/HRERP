@@ -97,6 +97,7 @@
 
     <!-- 应用-任务-->
     <string name="msn_title">任务主题</string>
+    <string name="msn_title_add">添加任务</string>
     <string name="msn_title_hint">请输入任务主题</string>
     <string name="msn_content">任务内容</string>
     <string name="msn_content_hint">请输入任务内容</string>
@@ -109,7 +110,10 @@
     <string name="msn_repairWay">联系方式</string>
     <string name="msn_repairWay_hint">报修人联系方式</string>
     <string name="msn_completeTime">完成时间</string>
+    <string name="msn_completeTime2">实际完成时间</string>
+    <string name="msn_remark">完成说明</string>
     <string name="msn_complete">完成任务</string>
+    <string name="btn_complete">完成</string>
     <array name="msn_maintanType">
         <item>房屋维修维护</item>
         <item>设备设施维修维护</item>

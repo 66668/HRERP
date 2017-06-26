@@ -21,7 +21,6 @@ import com.huirong.dialog.Loading;
 import com.huirong.helper.UserHelper;
 import com.huirong.inject.ViewInject;
 import com.huirong.model.ContactsEmployeeModel;
-import com.huirong.ui.contractsfrg.ContactsSelectActivity;
 import com.huirong.utils.LogUtils;
 import com.huirong.utils.PageUtil;
 
@@ -60,7 +59,7 @@ public class AddMissionActivity extends BaseActivity {
     EditText et_missionContent;
 
     //任务类型
-    @ViewInject(id = R.id.layout_type,click = "missionType")
+    @ViewInject(id = R.id.layout_type, click = "missionType")
     LinearLayout layout_type;
     @ViewInject(id = R.id.tv_type)
     TextView tv_type;
@@ -122,7 +121,7 @@ public class AddMissionActivity extends BaseActivity {
     }
 
     private void initMyView() {
-        tv_title.setText(getResources().getString(R.string.leave));
+        tv_title.setText(getResources().getString(R.string.msn_title_add));
     }
 
     public void forCommit(View view) {
@@ -205,14 +204,13 @@ public class AddMissionActivity extends BaseActivity {
     }
 
 
-
     /**
      * 添加审批人
      *
      * @param view
      */
     public void forAddApprover(View view) {
-        myStartForResult(ContactsSelectActivity.class, 0);
+        myStartForResult(ContactsMissionActivity.class, 0);
     }
 
 
@@ -222,21 +220,25 @@ public class AddMissionActivity extends BaseActivity {
         if (requestCode == 0 && resultCode == 0) {
             //判断返回值是否为空
             List<ContactsEmployeeModel> list = new ArrayList<>();
-            if (data != null &&  data.getSerializableExtra("data") != null) {
+            if (data != null && data.getSerializableExtra("data") != null) {
                 list = (List<ContactsEmployeeModel>) data.getSerializableExtra("data");
+            }
+            if (list.size() >= 2) {
+                PageUtil.DisplayToast("只能选择一个联系人");
+                return;
             } else {
+                StringBuilder name = new StringBuilder();
+                StringBuilder employeeId = new StringBuilder();
+                for (int i = 0; i < list.size(); i++) {
+                    name.append(list.get(i).getsEmployeeName() + "  ");
+                    employeeId.append(list.get(i).getsEmployeeID() + ",");
+                }
 
-            }
-            StringBuilder name = new StringBuilder();
-            StringBuilder employeeId = new StringBuilder();
-            for (int i = 0; i < list.size(); i++) {
-                name.append(list.get(i).getsEmployeeName() + "  ");
-                employeeId.append(list.get(i).getsEmployeeID() + ",");
+                approvalID = getApprovalID(employeeId.toString());
+                Log.d("SJY", "approvalID=" + approvalID);
+                tv_Requester.setText(name);
             }
 
-            approvalID = getApprovalID(employeeId.toString());
-            Log.d("SJY", "approvalID=" + approvalID);
-            tv_Requester.setText(name);
         }
     }
 

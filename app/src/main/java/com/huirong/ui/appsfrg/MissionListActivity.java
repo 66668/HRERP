@@ -16,8 +16,8 @@ import com.huirong.helper.UserHelper;
 import com.huirong.inject.ViewInject;
 import com.huirong.model.mission.MissionListModel;
 import com.huirong.ui.appsfrg.childmodel.mission.AddMissionActivity;
+import com.huirong.ui.appsfrg.childmodel.mission.MissionReceiveDetailActivity;
 import com.huirong.ui.appsfrg.childmodel.mission.MissionSendDetailActivity;
-import com.huirong.ui.appsfrg.childmodel.workplan.WorkplanReceiveDetailActivity;
 import com.huirong.utils.LogUtils;
 import com.huirong.utils.PageUtil;
 import com.huirong.widget.NiceSpinner;
@@ -57,6 +57,7 @@ public class MissionListActivity extends BaseActivity implements RefreshAndLoadL
     private MissionListAdapter vAdapter;//记录适配
 
     private boolean ifLoading = false;//标记
+    private boolean isAdd = false;//标记
 
     private int pageSize = 20;//spinner监听中修改该状态
     private String seeType = "1";//1 --》我派发的 2--》我负责的
@@ -67,6 +68,8 @@ public class MissionListActivity extends BaseActivity implements RefreshAndLoadL
     private static final int GET_NEW_DATA = -37;//
     private static final int GET_REFRESH_DATA = -36;//
     private static final int GET_NONE_NEWDATA = -35;//没有新数据
+    private static final int REFRESH_NONE_NEWDATA = -34;//没有新数据
+    private static final int LOAD_NONE_NEWDATA = -33;//没有新数据
 
     //spinner
     private List<String> spinnerData;
@@ -116,8 +119,14 @@ public class MissionListActivity extends BaseActivity implements RefreshAndLoadL
                 if (!spinnerData.get(position).equals(myLastSelectState)) {
                     if (spinnerData.get(position).contains("我派发的")) {
                         seeType = "1";//我派发的
+                        myLastSelectState = spinnerData.get(position);
+                        tv_right.setText("添加任务");
+                        LogUtils.d("任务", myLastSelectState + "--" + seeType);
                     } else {
                         seeType = "2";//我负责的
+                        myLastSelectState = spinnerData.get(position);
+                        tv_right.setText("");
+                        LogUtils.d("任务", myLastSelectState + "--" + seeType);
                     }
                     getData();
                     //                    showSelectData(spinnerData.get(position).trim(), GET_NEW_DATA);//参数2必填GET_NEW_DATA
@@ -143,8 +152,10 @@ public class MissionListActivity extends BaseActivity implements RefreshAndLoadL
 
                 if (seeType.contains("1")) {
                     startActivity(MissionSendDetailActivity.class, bundle);//跳我派发界面
+                    isAdd = true;
                 } else {
-                    startActivity(WorkplanReceiveDetailActivity.class, bundle);//我负责界面
+                    startActivity(MissionReceiveDetailActivity.class, bundle);//我负责界面
+                    isAdd = true;
                 }
             }
         });
@@ -170,8 +181,8 @@ public class MissionListActivity extends BaseActivity implements RefreshAndLoadL
 
                     sendMessage(GET_NEW_DATA, visitorModelList);
                 } catch (MyException e) {
-                    LogUtils.e("获取数据出错", e.toString());
-                    sendMessage(GET_NONE_NEWDATA, "获取数据出错");
+                    LogUtils.e("异常：", e.toString());
+                    sendMessage(GET_NONE_NEWDATA, e.getMessage());
                 }
             }
         });
@@ -204,7 +215,7 @@ public class MissionListActivity extends BaseActivity implements RefreshAndLoadL
                     sendMessage(GET_REFRESH_DATA, visitorModelList);
 
                 } catch (MyException e) {
-                    sendMessage(GET_NONE_NEWDATA, e.getMessage());
+                    sendMessage(REFRESH_NONE_NEWDATA, e.getMessage());
                 }
             }
 
@@ -239,7 +250,7 @@ public class MissionListActivity extends BaseActivity implements RefreshAndLoadL
                     sendMessage(GET_MORE_DATA, visitorModelList);
 
                 } catch (MyException e) {
-                    sendMessage(GET_NONE_NEWDATA, e.getMessage());
+                    sendMessage(LOAD_NONE_NEWDATA, e.getMessage());
                 }
             }
         });
@@ -292,6 +303,26 @@ public class MissionListActivity extends BaseActivity implements RefreshAndLoadL
             case GET_NONE_NEWDATA://没有获取新数据
                 LogUtils.d("SJY", "无最新数据");
                 sendToastMessage((String) msg.obj);
+                vAdapter = new MissionListAdapter(this);// 上拉加载
+                myListView.setAdapter(vAdapter);
+                ifLoading = false;
+
+                myListView.loadAndFreshComplete();//停止footerView动作
+                break;
+
+            case REFRESH_NONE_NEWDATA://没有获取新数据
+                LogUtils.d("SJY", "无最新数据");
+                sendToastMessage((String) msg.obj);
+
+                ifLoading = false;
+
+                myListView.loadAndFreshComplete();//停止footerView动作
+                break;
+
+            case LOAD_NONE_NEWDATA://没有获取新数据
+                LogUtils.d("SJY", "无最新数据");
+                sendToastMessage((String) msg.obj);
+
                 ifLoading = false;
 
                 myListView.loadAndFreshComplete();//停止footerView动作
@@ -304,11 +335,11 @@ public class MissionListActivity extends BaseActivity implements RefreshAndLoadL
     }
 
     public void setIMaxTime(ArrayList<MissionListModel> list) {
-        IMaxtime = list.get(0).getUpdetTime();
+        IMaxtime = list.get(0).getCreateDate();
     }
 
     public void setIMinTime(ArrayList<MissionListModel> list) {
-        IMinTime = list.get(list.size() - 1).getUpdetTime();
+        IMinTime = list.get(list.size() - 1).getCreateDate();
     }
 
 
@@ -442,8 +473,16 @@ public class MissionListActivity extends BaseActivity implements RefreshAndLoadL
      */
     public void forAddMission(View view) {
         startActivity(AddMissionActivity.class);
-        this.finish();
+        isAdd = true;
+    }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+        if (isAdd) {
+            isAdd = false;
+            getData();
+        }
     }
 
     /**

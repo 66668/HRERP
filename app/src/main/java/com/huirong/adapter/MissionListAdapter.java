@@ -1,7 +1,6 @@
 package com.huirong.adapter;
 
 import android.content.Context;
-import android.text.TextUtils;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -44,7 +43,7 @@ public class MissionListAdapter extends BaseListAdapter {
     @Override
     protected View inflateConvertView() {
         //一条记录的布局
-        View view = inflater.inflate(R.layout.item_mission,  new LinearLayout(context), false);
+        View view = inflater.inflate(R.layout.item_mission, new LinearLayout(context), false);
         //该布局上的控件
         WidgetHolder holder = new WidgetHolder();
 
@@ -66,11 +65,15 @@ public class MissionListAdapter extends BaseListAdapter {
         holder.tvTime.setText(model.getCreateDate());
 
         //状态
-        if (model.getIsYesNo() != null && TextUtils.isEmpty(model.getIsYesNo())) {//排除后台 null和""情况
-            if (model.getIsYesNo().contains("已完成")) {
-                holder.img.setImageResource(R.mipmap.ic_launcher);
-            }
+
+        if (model.getShowState().contains("已完成")) {
+            holder.img.setImageResource(R.mipmap.ic_launcher);
+        } else if (model.getShowState().contains("未阅读")) {
+            holder.img.setImageResource(R.mipmap.ic_launcher);
+        } else if (model.getShowState().contains("已阅读")) {
+            holder.img.setImageResource(R.mipmap.ic_launcher);
         }
+
 
     }
 

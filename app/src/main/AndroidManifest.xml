@@ -253,9 +253,24 @@
             android:theme="@style/Theme.AppCompat.Light.NoActionBar">
         </activity>
 
-        <!-- 我负责的任务 详情-->
+        <!-- 我我派发的任务 详情-->
         <activity
             android:name="com.huirong.ui.appsfrg.childmodel.mission.MissionSendDetailActivity"
+            android:label="@string/app_name"
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar">
+        </activity>
+        <!-- 我负责的任务 详情-->
+        <activity
+            android:name="com.huirong.ui.appsfrg.childmodel.mission.MissionReceiveDetailActivity"
+            android:label="@string/app_name"
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar">
+        </activity>
+
+        <!-- 完成任务-->
+        <activity
+            android:name="com.huirong.ui.appsfrg.childmodel.mission.CommonCompleteActivity"
             android:label="@string/app_name"
             android:screenOrientation="portrait"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar">
@@ -264,6 +279,14 @@
         <!-- 添加任务-->
         <activity
             android:name="com.huirong.ui.appsfrg.childmodel.mission.AddMissionActivity"
+            android:label="@string/app_name"
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar">
+        </activity>
+
+        <!-- 选择维修维护人-->
+        <activity
+            android:name="com.huirong.ui.appsfrg.childmodel.mission.ContactsMissionActivity"
             android:label="@string/app_name"
             android:screenOrientation="portrait"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar">

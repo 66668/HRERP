@@ -158,11 +158,6 @@ public class MessageFragment extends com.huirong.base.BaseFragment {
     }
 
 
-    @Override
-    protected String setFragmentName() {
-        return null;
-    }
-
     /**
      * 数据详细操作
      *

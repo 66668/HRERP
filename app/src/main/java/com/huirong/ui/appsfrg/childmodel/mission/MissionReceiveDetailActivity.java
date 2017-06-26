@@ -2,11 +2,13 @@ package com.huirong.ui.appsfrg.childmodel.mission;
 
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.huirong.R;
+import com.huirong.application.MyApplication;
 import com.huirong.base.BaseActivity;
 import com.huirong.common.MyException;
 import com.huirong.dialog.Loading;
@@ -16,11 +18,13 @@ import com.huirong.model.mission.MissionListModel;
 import com.huirong.utils.LogUtils;
 
 /**
- * 工作计划详情 发出
+ * 工作计划详情 我负责的
+ * <p>
+ * 只有我负责的任务，才有完成按钮
  * Created by sjy on 2017/2/25
  */
 
-public class MissionSendDetailActivity extends BaseActivity {
+public class MissionReceiveDetailActivity extends BaseActivity {
     //back
     @ViewInject(id = R.id.layout_back, click = "forBack")
     RelativeLayout layout_back;
@@ -39,8 +43,8 @@ public class MissionSendDetailActivity extends BaseActivity {
     TextView tv_msnTitle;
 
     //内容
-    @ViewInject(id = R.id.tv_msnContent)//, click = "ContentExpended"
-            TextView tv_msnContent;
+    @ViewInject(id = R.id.tv_msnContent, click = "ContentExpended")
+    TextView tv_msnContent;
 
     //任务类型
     @ViewInject(id = R.id.tv_msnType)
@@ -62,10 +66,6 @@ public class MissionSendDetailActivity extends BaseActivity {
     @ViewInject(id = R.id.tv_completeTime)
     TextView tv_completeTime;
 
-    //备注
-    @ViewInject(id = R.id.tv_remark, click = "RemarkExpended")
-    TextView tv_remark;
-
     //实际完成时间
     @ViewInject(id = R.id.layout_completeTime2)
     LinearLayout layout_completeTime2;
@@ -79,29 +79,44 @@ public class MissionSendDetailActivity extends BaseActivity {
     TextView tv_remark2;
 
 
+    //备注
+    @ViewInject(id = R.id.tv_remark, click = "RemarkExpended")
+    TextView tv_remark;
+
+
+    //完成View
+    @ViewInject(id = R.id.laytout_complete)
+    LinearLayout laytout_complete;
+    @ViewInject(id = R.id.btn_copytp, click = "toComplete")
+    Button btn_copytp;
+
     private MissionListModel model;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.act_apps_mission_send_detail);
+        setContentView(R.layout.act_apps_mission_receive_detail);
         initMyView();
         setShow();
     }
 
     private void initMyView() {
-        tv_title.setText(getResources().getString(R.string.workplan_title_send));
+        tv_title.setText(getResources().getString(R.string.workplan_title_rec));
         tv_right.setText("");
 
         //获取跳转值
         Bundle bundle = getIntent().getExtras();
         model = (MissionListModel) bundle.getSerializable("MissionListModel");
-        LogUtils.d("我派发的详情", model.toString());
-        if (model.getShowState().contains("未阅读")) {
 
+        if (model.getShowState().contains("已完成")) {
+            //显示完成图片，完成时间，隐藏完成按钮
+            laytout_complete.setVisibility(View.GONE);
+        } else {
+            laytout_complete.setVisibility(View.VISIBLE);
         }
-        readThisNotice(model);
 
+        MyApplication.getInstance().addACT(this);
+        readThisNotice(model);
     }
 
     private void setShow() {
@@ -125,7 +140,6 @@ public class MissionSendDetailActivity extends BaseActivity {
         tv_remark.setText(model.getRemark());
     }
 
-
     /**
      * 调接口 未读-->已读
      *
@@ -137,7 +151,7 @@ public class MissionSendDetailActivity extends BaseActivity {
             public void run() {
                 try {
 
-                    UserHelper.postReadThisMission(MissionSendDetailActivity.this, model.getMaintainID());
+                    UserHelper.postReadThisMission(MissionReceiveDetailActivity.this, model.getMaintainID());
                     LogUtils.d("已阅读", "成功");
                 } catch (MyException e) {
                     e.printStackTrace();
@@ -145,6 +159,18 @@ public class MissionSendDetailActivity extends BaseActivity {
                 }
             }
         });
+    }
+
+    /**
+     * 我负责的 完成
+     *
+     * @param view
+     */
+    public void toComplete(View view) {
+        LogUtils.d("完成按钮", "toComplete: ");
+        Bundle bundle = new Bundle();
+        bundle.putSerializable("MissionListModel", model);
+        startActivity(CommonCompleteActivity.class, bundle);
     }
 
 
@@ -159,8 +185,25 @@ public class MissionSendDetailActivity extends BaseActivity {
             tv_remark.setMaxLines(Integer.MAX_VALUE);
             isRemarkExpend = true;
         } else {
-            tv_remark.setLines(3);
+            tv_remark.setLines(5);
             isRemarkExpend = false;
+        }
+
+    }
+
+    /**
+     * 完成说明显示扩展
+     */
+    private boolean isRemark2Expend = false;
+
+    public void Remark2Expended(View view) {
+        if (!isRemark2Expend) {
+            tv_remark2.setMinLines(0);
+            tv_remark2.setMaxLines(Integer.MAX_VALUE);
+            isRemark2Expend = true;
+        } else {
+            tv_remark2.setLines(5);
+            isRemark2Expend = false;
         }
 
     }
@@ -176,7 +219,7 @@ public class MissionSendDetailActivity extends BaseActivity {
             tv_msnContent.setMaxLines(Integer.MAX_VALUE);
             isContentExpend = true;
         } else {
-            //            tv_msnContent.setLines(20);
+            //            tv_msnContent.setLines(5);
             tv_msnContent.setMaxLines(Integer.MAX_VALUE);
             isContentExpend = false;
         }
