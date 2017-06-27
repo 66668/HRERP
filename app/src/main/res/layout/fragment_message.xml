@@ -18,6 +18,73 @@
                 android:layout_width="match_parent"
                 android:layout_height="1dip"
                 android:background="@color/common_bg_examination_line"/>
+            <!-- 通知-->
+            <RelativeLayout
+                android:id="@+id/layout_notification"
+                android:layout_width="match_parent"
+                android:layout_height="70dp">
+
+                <ImageView
+                    android:id="@+id/img_msg"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginTop="10dp"
+                    android:contentDescription="@null"
+                    android:src="@mipmap/app_notification"/>
+                <!-- 标题-->
+                <TextView
+                    android:id="@+id/tv_msgTitle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignTop="@+id/img_msg"
+                    android:layout_marginStart="10dp"
+                    android:layout_toEndOf="@+id/img_msg"
+                    android:text="@string/msg_msgTitle"
+                    android:textColor="#000000"
+                    android:textSize="@dimen/common_textSize_default17"/>
+
+                <!-- 内容-->
+                <TextView
+                    android:id="@+id/tv_msgContains"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignBottom="@+id/img_msg"
+                    android:layout_marginStart="10dp"
+                    android:layout_toEndOf="@+id/img_msg"
+                    android:text="没有最新通知"
+                    android:textColor="@color/textHintColor"
+                    android:textSize="@dimen/common_textSize_default14"/>
+                <!-- 时间-->
+                <TextView
+                    android:id="@+id/tv_msgTime"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentEnd="true"
+                    android:layout_alignTop="@+id/tv_msgTitle"
+                    android:layout_marginEnd="10dp"
+                    android:layout_marginStart="10dp"
+                    android:text=""
+                    android:textSize="@dimen/common_textSize_default11"/>
+
+                <com.huirong.widget.CircleTextView
+                    android:id="@+id/msg_number"
+                    android:layout_width="15dp"
+                    android:layout_height="15dp"
+                    android:layout_alignBottom="@+id/img_msg"
+                    android:layout_alignParentEnd="true"
+                    android:layout_marginEnd="10dp"
+                    android:background="@color/common_topbar_bgcolor"
+                    android:gravity="center"
+                    android:text="1"
+                    android:textColor="@color/white"
+                    android:visibility="invisible"/>
+            </RelativeLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dip"
+                android:background="@color/common_bg_examination_line"/>
 
             <!-- 公告-->
             <RelativeLayout
@@ -53,7 +120,7 @@
                     android:layout_alignBottom="@+id/img_notice"
                     android:layout_marginStart="10dp"
                     android:layout_toEndOf="@+id/img_notice"
-                    android:text="没有消息和公告"
+                    android:text="没有最新公告"
                     android:textColor="@color/textHintColor"
                     android:textSize="@dimen/common_textSize_default14"/>
                 <!-- 时间-->
@@ -63,8 +130,8 @@
                     android:layout_height="wrap_content"
                     android:layout_alignParentEnd="true"
                     android:layout_alignTop="@+id/tv_noticeTitle"
-                    android:layout_marginStart="10dp"
                     android:layout_marginEnd="10dp"
+                    android:layout_marginStart="10dp"
                     android:text=""
                     android:textSize="@dimen/common_textSize_default11"/>
 
@@ -79,139 +146,8 @@
                     android:gravity="center"
                     android:text="1"
                     android:textColor="@color/white"
+                    android:visibility="invisible"
                     />
-            </RelativeLayout>
-
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="1dip"
-                android:background="@color/common_bg_examination_line"/>
-
-            <RelativeLayout
-                android:id="@+id/layout_notification"
-                android:layout_width="match_parent"
-                android:layout_height="70dp">
-
-                <ImageView
-                    android:id="@+id/img_msg"
-                    android:layout_width="50dp"
-                    android:layout_height="50dp"
-                    android:layout_marginStart="10dp"
-                    android:layout_marginTop="10dp"
-                    android:contentDescription="@null"
-                    android:src="@mipmap/app_notification"/>
-                <!-- 标题-->
-                <TextView
-                    android:id="@+id/tv_msgTitle"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignTop="@+id/img_msg"
-                    android:layout_marginStart="10dp"
-                    android:layout_toEndOf="@+id/img_msg"
-                    android:text="@string/msg_msgTitle"
-                    android:textColor="#000000"
-                    android:textSize="@dimen/common_textSize_default17"/>
-
-                <!-- 内容-->
-                <TextView
-                    android:id="@+id/tv_msgContains"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignBottom="@+id/img_msg"
-                    android:layout_marginStart="10dp"
-                    android:layout_toEndOf="@+id/img_msg"
-                    android:text="没有消息和公告"
-                    android:textColor="@color/textHintColor"
-                    android:textSize="@dimen/common_textSize_default14"/>
-                <!-- 时间-->
-                <TextView
-                    android:id="@+id/tv_msgTime"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentEnd="true"
-                    android:layout_alignTop="@+id/tv_msgTitle"
-                    android:layout_marginStart="10dp"
-                    android:layout_marginEnd="10dp"
-                    android:text=""
-                    android:textSize="@dimen/common_textSize_default11"/>
-
-                <com.huirong.widget.CircleTextView
-                    android:id="@+id/msg_number"
-                    android:layout_width="15dp"
-                    android:layout_height="15dp"
-                    android:layout_alignBottom="@+id/img_msg"
-                    android:layout_alignParentEnd="true"
-                    android:layout_marginEnd="10dp"
-                    android:background="@color/common_topbar_bgcolor"
-                    android:gravity="center"
-                    android:text="1"
-                    android:textColor="@color/white"/>
-            </RelativeLayout>
-
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="1dip"
-                android:background="@color/common_bg_examination_line"/>
-
-            <RelativeLayout
-                android:id="@+id/layout_confernce"
-                android:layout_width="match_parent"
-                android:layout_height="70dp">
-
-                <ImageView
-                    android:id="@+id/img_confernce"
-                    android:layout_width="50dp"
-                    android:layout_height="50dp"
-                    android:layout_marginStart="10dp"
-                    android:layout_marginTop="10dp"
-                    android:contentDescription="@null"
-                    android:src="@mipmap/msg_conference"/>
-                <!-- 标题-->
-                <TextView
-                    android:id="@+id/tv_confernceTitle"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignTop="@+id/img_confernce"
-                    android:layout_marginStart="10dp"
-                    android:layout_toEndOf="@+id/img_confernce"
-                    android:text="@string/msg_confernce"
-                    android:textColor="#000000"
-                    android:textSize="@dimen/common_textSize_default17"/>
-
-                <!-- 内容-->
-                <TextView
-                    android:id="@+id/tv_confernceContains"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignBottom="@+id/img_confernce"
-                    android:layout_marginStart="10dp"
-                    android:layout_toEndOf="@+id/img_confernce"
-                    android:text="没有消息和公告"
-                    android:textColor="@color/textHintColor"
-                    android:textSize="@dimen/common_textSize_default14"/>
-                <!-- 时间-->
-                <TextView
-                    android:id="@+id/tv_confernceTime"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentEnd="true"
-                    android:layout_alignTop="@+id/tv_confernceTitle"
-                    android:layout_marginStart="10dp"
-                    android:layout_marginEnd="10dp"
-                    android:text=""
-                    android:textSize="@dimen/common_textSize_default11"/>
-
-                <com.huirong.widget.CircleTextView
-                    android:id="@+id/confernce_number"
-                    android:layout_width="15dp"
-                    android:layout_height="15dp"
-                    android:layout_alignBottom="@+id/img_confernce"
-                    android:layout_alignParentEnd="true"
-                    android:layout_marginEnd="10dp"
-                    android:background="@color/common_topbar_bgcolor"
-                    android:gravity="center"
-                    android:text="1"
-                    android:textColor="@color/white"/>
             </RelativeLayout>
 
             <View
@@ -262,8 +198,8 @@
                     android:layout_height="wrap_content"
                     android:layout_alignParentEnd="true"
                     android:layout_alignTop="@+id/tv_undoTitle"
-                    android:layout_marginStart="10dp"
                     android:layout_marginEnd="10dp"
+                    android:layout_marginStart="10dp"
                     android:text=""
                     android:textSize="@dimen/common_textSize_default11"/>
 
@@ -272,71 +208,6 @@
                     android:layout_width="15dp"
                     android:layout_height="15dp"
                     android:layout_alignBottom="@+id/img_undo"
-                    android:layout_alignParentEnd="true"
-                    android:layout_marginEnd="10dp"
-                    android:background="@color/common_topbar_bgcolor"
-                    android:gravity="center"
-                    android:text="1"
-                    android:textColor="@color/white"/>
-            </RelativeLayout>
-
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="1dip"
-                android:background="@color/common_bg_examination_line"/>
-
-            <!-- 未办事项-->
-            <RelativeLayout
-                android:id="@+id/layout_done"
-                android:layout_width="match_parent"
-                android:layout_height="70dp">
-
-                <ImageView
-                    android:id="@+id/img_done"
-                    android:layout_width="50dp"
-                    android:layout_height="50dp"
-                    android:layout_marginStart="10dp"
-                    android:layout_marginTop="10dp"
-                    android:background="@mipmap/msg_done"
-                    android:contentDescription="@null"
-                    android:textColor="@color/textHintColor"/>
-                <!-- 标题-->
-                <TextView
-                    android:id="@+id/tv_doneTitle"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignTop="@+id/img_done"
-                    android:layout_marginStart="10dp"
-                    android:layout_toEndOf="@+id/img_done"
-                    android:text="@string/msg_done"
-                    android:textColor="#000000"
-                    android:textSize="@dimen/common_textSize_default17"/>
-                <!-- 内容-->
-                <TextView
-                    android:id="@+id/tv_doneContains"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignBottom="@+id/img_done"
-                    android:layout_marginStart="10dp"
-                    android:layout_toEndOf="@+id/img_done"
-                    android:textSize="@dimen/common_textSize_default14"/>
-                <!-- 时间-->
-                <TextView
-                    android:id="@+id/tv_doneTime"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentEnd="true"
-                    android:layout_alignTop="@+id/tv_doneTitle"
-                    android:layout_marginStart="10dp"
-                    android:layout_marginEnd="10dp"
-                    android:text=""
-                    android:textSize="@dimen/common_textSize_default11"/>
-
-                <com.huirong.widget.CircleTextView
-                    android:id="@+id/done_number"
-                    android:layout_width="15dp"
-                    android:layout_height="15dp"
-                    android:layout_alignBottom="@+id/img_done"
                     android:layout_alignParentEnd="true"
                     android:layout_marginEnd="10dp"
                     android:background="@color/common_topbar_bgcolor"
@@ -351,7 +222,7 @@
                 android:layout_height="1dip"
                 android:background="@color/common_bg_examination_line"/>
 
-            <!-- 未办事项-->
+            <!-- 抄送给我-->
             <RelativeLayout
                 android:id="@+id/layout_copy"
                 android:layout_width="match_parent"
@@ -385,6 +256,7 @@
                     android:layout_alignBottom="@+id/img_copy"
                     android:layout_marginStart="10dp"
                     android:layout_toEndOf="@+id/img_copy"
+                    android:text="暂无抄送消息"
                     android:textSize="@dimen/common_textSize_default14"/>
 
                 <!-- 时间-->
@@ -394,8 +266,8 @@
                     android:layout_height="wrap_content"
                     android:layout_alignParentEnd="true"
                     android:layout_alignTop="@+id/tv_copyTitle"
-                    android:layout_marginStart="10dp"
                     android:layout_marginEnd="10dp"
+                    android:layout_marginStart="10dp"
                     android:text=""
                     android:textSize="@dimen/common_textSize_default11"/>
 
@@ -412,6 +284,143 @@
                     android:textColor="@color/white"
                     android:visibility="invisible"/>
             </RelativeLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dip"
+                android:background="@color/common_bg_examination_line"/>
+
+            <RelativeLayout
+                android:id="@+id/layout_mission"
+                android:layout_width="match_parent"
+                android:layout_height="70dp">
+
+                <ImageView
+                    android:id="@+id/img_mission"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginTop="10dp"
+                    android:contentDescription="@null"
+                    android:src="@mipmap/msg_conference"/>
+                <!-- 标题-->
+                <TextView
+                    android:id="@+id/tv_missionTitle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignTop="@+id/img_mission"
+                    android:layout_marginStart="10dp"
+                    android:layout_toEndOf="@+id/img_mission"
+                    android:text="@string/msg_mission"
+                    android:textColor="#000000"
+                    android:textSize="@dimen/common_textSize_default17"/>
+
+                <!-- 内容-->
+                <TextView
+                    android:id="@+id/tv_missionContains"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignBottom="@+id/img_mission"
+                    android:layout_marginStart="10dp"
+                    android:layout_toEndOf="@+id/img_mission"
+                    android:text="暂无任务"
+                    android:textColor="@color/textHintColor"
+                    android:textSize="@dimen/common_textSize_default14"/>
+                <!-- 时间-->
+                <TextView
+                    android:id="@+id/tv_missionTime"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentEnd="true"
+                    android:layout_alignTop="@+id/tv_missionTitle"
+                    android:layout_marginEnd="10dp"
+                    android:layout_marginStart="10dp"
+                    android:text=""
+                    android:textSize="@dimen/common_textSize_default11"/>
+
+                <com.huirong.widget.CircleTextView
+                    android:id="@+id/mission_number"
+                    android:layout_width="15dp"
+                    android:layout_height="15dp"
+                    android:layout_alignBottom="@+id/img_mission"
+                    android:layout_alignParentEnd="true"
+                    android:layout_marginEnd="10dp"
+                    android:background="@color/common_topbar_bgcolor"
+                    android:gravity="center"
+                    android:text="1"
+                    android:textColor="@color/white"
+                    android:visibility="invisible"/>
+            </RelativeLayout>
+
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dip"
+                android:background="@color/common_bg_examination_line"/>
+
+            <!-- 工作计划 -->
+            <RelativeLayout
+                android:id="@+id/layout_workplan"
+                android:layout_width="match_parent"
+                android:layout_height="70dp">
+
+                <ImageView
+                    android:id="@+id/img_workplan"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginTop="10dp"
+                    android:background="@mipmap/ic_launcher"
+                    android:contentDescription="@null"
+                    android:textColor="@color/textHintColor"/>
+                <!-- 标题-->
+                <TextView
+                    android:id="@+id/tv_workplanTitle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignTop="@+id/img_workplan"
+                    android:layout_marginStart="10dp"
+                    android:layout_toEndOf="@+id/img_workplan"
+                    android:text="@string/msg_workplan"
+                    android:textColor="#000000"
+                    android:textSize="@dimen/common_textSize_default17"/>
+
+                <!-- 内容-->
+                <TextView
+                    android:id="@+id/tv_workplanContains"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignBottom="@+id/img_workplan"
+                    android:layout_marginStart="10dp"
+                    android:layout_toEndOf="@+id/img_workplan"
+                    android:text="没有需要查看的工作计划"
+                    android:textSize="@dimen/common_textSize_default14"/>
+                <!-- 时间-->
+                <TextView
+                    android:id="@+id/tv_workplanTime"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentEnd="true"
+                    android:layout_alignTop="@+id/tv_workplanTitle"
+                    android:layout_marginEnd="10dp"
+                    android:layout_marginStart="10dp"
+                    android:text=""
+                    android:textSize="@dimen/common_textSize_default11"/>
+
+                <com.huirong.widget.CircleTextView
+                    android:id="@+id/workplan_number"
+                    android:layout_width="15dp"
+                    android:layout_height="15dp"
+                    android:layout_alignBottom="@+id/img_workplan"
+                    android:layout_alignParentEnd="true"
+                    android:layout_marginEnd="10dp"
+                    android:background="@color/common_topbar_bgcolor"
+                    android:gravity="center"
+                    android:text="1"
+                    android:textColor="@color/white"
+                    android:visibility="invisible"/>
+            </RelativeLayout>
+
 
             <View
                 android:layout_width="match_parent"
@@ -461,8 +470,8 @@
                     android:layout_height="wrap_content"
                     android:layout_alignParentEnd="true"
                     android:layout_alignTop="@+id/tv_scheduleTitle"
-                    android:layout_marginStart="10dp"
                     android:layout_marginEnd="10dp"
+                    android:layout_marginStart="10dp"
                     android:text=""
                     android:textSize="@dimen/common_textSize_default11"/>
 
@@ -476,7 +485,8 @@
                     android:background="@color/common_topbar_bgcolor"
                     android:gravity="center"
                     android:text="1"
-                    android:textColor="@color/white"/>
+                    android:textColor="@color/white"
+                    android:visibility="invisible"/>
             </RelativeLayout>
 
             <View

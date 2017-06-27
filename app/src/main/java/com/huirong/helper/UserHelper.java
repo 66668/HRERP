@@ -18,6 +18,7 @@ import com.huirong.model.ContactsDeptModel;
 import com.huirong.model.ContactsEmployeeModel;
 import com.huirong.model.ContactsSonCOModel;
 import com.huirong.model.MapAttendModel;
+import com.huirong.model.MessageFragmentListModel;
 import com.huirong.model.MyApplicationModel;
 import com.huirong.model.MyApprovalModel;
 import com.huirong.model.MyCopyModel;
@@ -166,7 +167,32 @@ public class UserHelper<T> {
         }
     }
 
-    //********************************************************通讯录***********************************************************************
+    //********************************************************消息***********************************************************************
+
+    /**
+     * 消息 其他字段
+     *
+     * @param context
+     * @return
+     * @throws MyException
+     */
+    public static MessageFragmentListModel GetMassageFragmentList(Context context) throws MyException {
+        if (!NetworkManager.isNetworkAvailable(context)) {
+            throw new MyException(R.string.network_invalid);
+        }
+
+        HttpResult httpResult = APIUtils.postForObject(WebUrl.MessageManager.MESSAGELIST,
+                HttpParameter.create().add("employeeId", UserHelper.getCurrentUser().getEmployeeID())
+        );
+
+        if (httpResult.hasError()) {
+            throw httpResult.getError();
+        }
+
+        return (new Gson()).fromJson(httpResult.jsonObject.toString(), MessageFragmentListModel.class);
+
+    }
+    // ********************************************************通讯录***********************************************************************
 
     /**
      * 通讯录01
@@ -312,6 +338,7 @@ public class UserHelper<T> {
     }
 
     //********************************************************应用-工作计划***********************************************************************
+
     /**
      * 02-01
      * 应用 工作计划 记录
@@ -352,7 +379,6 @@ public class UserHelper<T> {
     /**
      * 02-01
      * 应用 工作计划 添加
-     *
      */
 
     public static String addWorkplan(Context context, JSONObject jsonObject) throws MyException {
@@ -370,6 +396,7 @@ public class UserHelper<T> {
         return hr.Message;
     }
     //********************************************************应用-任务***********************************************************************
+
     /**
      * 02-01
      * 应用-任务 记录
@@ -381,7 +408,7 @@ public class UserHelper<T> {
      * @return
      * @throws MyException
      */
-    public static List<MissionListModel> GetMissionList(Context context, String iMaxTime, String iMinTime,String SeeType) throws MyException {
+    public static List<MissionListModel> GetMissionList(Context context, String iMaxTime, String iMinTime, String SeeType) throws MyException {
         if (!NetworkManager.isNetworkAvailable(context)) {
             throw new MyException(R.string.network_invalid);
         }
@@ -407,13 +434,13 @@ public class UserHelper<T> {
         return (List<MissionListModel>) JSONUtils.fromJson(hr.jsonArray.toString(), new TypeToken<List<MissionListModel>>() {
         }.getType());
     }
+
     /**
      * 02-02
      * 应用 任务 添加
      * <p>
      *
      * @param context
-     *
      * @return
      * @throws MyException
      */
@@ -436,6 +463,7 @@ public class UserHelper<T> {
             throw hr.getError();
         }
     }
+
     /**
      * 应用——任务 选择联系人
      * <p>
@@ -470,9 +498,10 @@ public class UserHelper<T> {
         }
 
     }
+
     /**
      * 02-03
-     *
+     * <p>
      * 进入任务详情，标记已读
      */
     public static void postReadThisMission(Context context, String maintainID) throws MyException {
@@ -488,10 +517,10 @@ public class UserHelper<T> {
 
     /**
      * 02-04
-     *
+     * <p>
      * 任务 完成
      */
-    public static void toCompleteMission(Context context, String maintainID,String commitContent) throws MyException {
+    public static void toCompleteMission(Context context, String maintainID, String commitContent) throws MyException {
         if (!NetworkManager.isNetworkAvailable(context)) {
             throw new MyException(R.string.network_invalid);
         }
@@ -505,6 +534,7 @@ public class UserHelper<T> {
         }
     }
     //********************************************************应用-地图***********************************************************************
+
     /**
      * 03-01添加地图考勤,（obj形式上传)
      *
@@ -574,6 +604,7 @@ public class UserHelper<T> {
 
     }
     //********************************************************应用-公告***********************************************************************
+
     /**
      * 04 应用 公告
      * 列表
@@ -625,6 +656,7 @@ public class UserHelper<T> {
         }
     }
     //********************************************************应用-通知***********************************************************************
+
     /**
      * 05 应用 通知
      * 通知列表
@@ -675,6 +707,7 @@ public class UserHelper<T> {
         }
     }
     //********************************************************应用-财务（费用）***********************************************************************
+
     /**
      * 06-01应用-财务
      */
@@ -705,6 +738,7 @@ public class UserHelper<T> {
         }.getType());
     }
     //********************************************************应用-审批***********************************************************************
+
     /**
      * 02-04-01
      * 获取 我的申请记录
@@ -1016,6 +1050,7 @@ public class UserHelper<T> {
         }
     }
     //********************************************************应用-审批-详细申请***********************************************************************
+
     /**
      * -02-04
      * 01 请假申请 （obj形式上传）
@@ -1455,7 +1490,6 @@ public class UserHelper<T> {
     }
 
 
-
     /**
      * 07 会议
      */
@@ -1543,9 +1577,6 @@ public class UserHelper<T> {
         return (List<ReceiveListModel>) JSONUtils.fromJson(hr.jsonArray.toString(), new TypeToken<List<ReceiveListModel>>() {
         }.getType());
     }
-
-
-
 
 
 }

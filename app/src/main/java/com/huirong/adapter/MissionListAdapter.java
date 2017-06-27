@@ -67,11 +67,11 @@ public class MissionListAdapter extends BaseListAdapter {
         //状态
 
         if (model.getShowState().contains("已完成")) {
-            holder.img.setImageResource(R.mipmap.ic_launcher);
+            holder.img.setImageResource(R.mipmap.missioncomplete);
         } else if (model.getShowState().contains("未阅读")) {
-            holder.img.setImageResource(R.mipmap.ic_launcher);
+            holder.img.setImageResource(R.mipmap.missionunread);
         } else if (model.getShowState().contains("已阅读")) {
-            holder.img.setImageResource(R.mipmap.ic_launcher);
+            holder.img.setImageResource(R.mipmap.missinread);
         }
 
 

@@ -1107,12 +1107,6 @@
 
         <!-- ****************************************应用-会议 **********************************************-->
         <!--08 会议列表 -->
-        <activity
-            android:name="com.huirong.ui.appsfrg.ConferenceListActivity"
-            android:label="@string/app_name"
-            android:screenOrientation="portrait"
-            android:theme="@style/Theme.AppCompat.Light.NoActionBar">
-        </activity>
 
         <!--08-02 会议详情 -->
         <activity

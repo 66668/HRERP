@@ -50,13 +50,13 @@
     <string name="person_psd_error_lenght">请检查密码长度，6-20位密码！</string>
 
     <!-- 消息-->
-    <string name="msg_undoTitle">未办事项</string>
-    <string name="msg_noticeTitle">公告</string>
     <string name="msg_msgTitle">通知</string>
-    <string name="msg_schedule">日程</string>
-    <string name="msg_confernce">会议</string>
-    <string name="msg_done">已受理</string>
+    <string name="msg_noticeTitle">公告</string>
+    <string name="msg_undoTitle">未办事项</string>
+    <string name="msg_mission">待完成任务</string>
+    <string name="msg_workplan">工作计划</string>
     <string name="msg_copy">抄送给我</string>
+    <string name="msg_schedule">日程</string>
 
     <!-- ********************************************** 通讯录 ****************************************************-->
     <!-- 通讯录-->

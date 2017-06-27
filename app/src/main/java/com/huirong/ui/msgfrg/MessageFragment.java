@@ -14,16 +14,22 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.huirong.R;
+import com.huirong.common.MyException;
+import com.huirong.db.sqlite.SQLiteScheduledb;
+import com.huirong.dialog.Loading;
 import com.huirong.helper.UserHelper;
+import com.huirong.model.MessageFragmentListModel;
 import com.huirong.model.NoticeListModel;
 import com.huirong.model.NotificationListModel;
-import com.huirong.ui.appsfrg.ConferenceListActivity;
+import com.huirong.model.ScheduleModel;
 import com.huirong.ui.appsfrg.NoticeListActivity;
 import com.huirong.ui.appsfrg.NotificationListActivity;
 import com.huirong.ui.appsfrg.ScheduleMainActivity;
 import com.huirong.ui.appsfrg.childmodel.examination.ZOAplicationListActivity;
 import com.huirong.ui.appsfrg.childmodel.examination.ZOApprovelListActivity;
 import com.huirong.ui.appsfrg.childmodel.examination.ZOCopyListActivity;
+import com.huirong.utils.LogUtils;
+import com.huirong.utils.PageUtil;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -46,38 +52,37 @@ public class MessageFragment extends com.huirong.base.BaseFragment {
     private TextView notice_content;
     private TextView undo_content;
     private TextView schedule_content;
-    private TextView confernce_content;
+    private TextView mission_content;
     private TextView copy_content;
-    private TextView done_content;
+    private TextView workplan_content;
 
     //时间
     private TextView msg_time;
     private TextView notice_time;
     private TextView undo_time;
     private TextView schedule_time;
-    private TextView confernce_time;
+    private TextView mission_time;
     private TextView copy_time;
-    private TextView done_time;
+    private TextView workplan_time;
 
     //个数
     private com.huirong.widget.CircleTextView msg_number;
     private com.huirong.widget.CircleTextView notice_number;
     private com.huirong.widget.CircleTextView undo_number;
     private com.huirong.widget.CircleTextView schedule_number;
-    private com.huirong.widget.CircleTextView confernce_number;
+    private com.huirong.widget.CircleTextView mission_number;
     private com.huirong.widget.CircleTextView copy_number;
-    private com.huirong.widget.CircleTextView done_number;
+    private com.huirong.widget.CircleTextView workplan_number;
 
     //布局
     private RelativeLayout layout_notification;
     private RelativeLayout layout_notice;
     private RelativeLayout layout_undo;
     private RelativeLayout layout_schedule;
-    private RelativeLayout layout_confernce;
-    private RelativeLayout layout_done;
+    private RelativeLayout layout_mission;
+    private RelativeLayout layout_workplan;
     private RelativeLayout layout_copy;
 
-    //常量
 
     //日程
     private static final int GET_SCHEDULE_DATA = -39;
@@ -87,25 +92,13 @@ public class MessageFragment extends com.huirong.base.BaseFragment {
     private static final int GET_NOTICE_DATA = -37;//
     private static final int NONE_NOTICE_DATA = -36;//
 
-    //未办事项
-    private static final int GET_UNDO_DATA = -35;//
-    private static final int NONE_UNDO_DATA = -34;//
-
     //通知
     private static final int GET_NOTIFICATION_DATA = -33;//
     private static final int NONE_NOTIFICATION_DATA = -32;//
 
-    //会议
-    private static final int GET_CONFERENCE_DATA = -31;//
-    private static final int NONE_CONFERENCE_DATA = -30;//
-
-    //已受理
-    private static final int GET_DONE_DATA = -29;//
-    private static final int NONE_DONE_DATA = -28;//
-
-    //抄送给我
-    private static final int GET_COPY_DATA = -27;//
-    private static final int NONE_COPY_DATA = -26;//
+    //其他通知
+    private static final int GET_MESSAGE_DATA = -35;//
+    private static final int NONE_MESSAGE_DATA = -34;//
 
 
     //单例模式
@@ -169,35 +162,35 @@ public class MessageFragment extends com.huirong.base.BaseFragment {
         notice_content = (TextView) view.findViewById(R.id.tv_noticeContains);
         undo_content = (TextView) view.findViewById(R.id.tv_undoContains);
         schedule_content = (TextView) view.findViewById(R.id.tv_ScheduleContains);
-        confernce_content = (TextView) view.findViewById(R.id.tv_confernceContains);
+        mission_content = (TextView) view.findViewById(R.id.tv_missionContains);
         copy_content = (TextView) view.findViewById(R.id.tv_copyContains);
-        done_content = (TextView) view.findViewById(R.id.tv_doneContains);
+        workplan_content = (TextView) view.findViewById(R.id.tv_workplanContains);
 
         //时间
         msg_time = (TextView) view.findViewById(R.id.tv_msgTime);
         notice_time = (TextView) view.findViewById(R.id.tv_noticeTime);
         undo_time = (TextView) view.findViewById(R.id.tv_undoTime);
         schedule_time = (TextView) view.findViewById(R.id.tv_scheduleTime);
-        confernce_time = (TextView) view.findViewById(R.id.tv_confernceTime);
+        mission_time = (TextView) view.findViewById(R.id.tv_missionTime);
         copy_time = (TextView) view.findViewById(R.id.tv_copyTime);
-        done_time = (TextView) view.findViewById(R.id.tv_doneTime);
+        workplan_time = (TextView) view.findViewById(R.id.tv_workplanTime);
 
         //数量提醒
         msg_number = (com.huirong.widget.CircleTextView) view.findViewById(R.id.msg_number);
         notice_number = (com.huirong.widget.CircleTextView) view.findViewById(R.id.notice_number);
         undo_number = (com.huirong.widget.CircleTextView) view.findViewById(R.id.undo_number);
         schedule_number = (com.huirong.widget.CircleTextView) view.findViewById(R.id.schedule_number);
-        confernce_number = (com.huirong.widget.CircleTextView) view.findViewById(R.id.confernce_number);
+        mission_number = (com.huirong.widget.CircleTextView) view.findViewById(R.id.mission_number);
         copy_number = (com.huirong.widget.CircleTextView) view.findViewById(R.id.copy_number);
-        done_number = (com.huirong.widget.CircleTextView) view.findViewById(R.id.done_number);
+        workplan_number = (com.huirong.widget.CircleTextView) view.findViewById(R.id.workplan_number);
 
         layout_notification = (RelativeLayout) view.findViewById(R.id.layout_notification);
         layout_notice = (RelativeLayout) view.findViewById(R.id.layout_notice);
         layout_undo = (RelativeLayout) view.findViewById(R.id.layout_undo);
         layout_schedule = (RelativeLayout) view.findViewById(R.id.layout_schedule);
-        layout_confernce = (RelativeLayout) view.findViewById(R.id.layout_confernce);
+        layout_mission = (RelativeLayout) view.findViewById(R.id.layout_mission);
         layout_copy = (RelativeLayout) view.findViewById(R.id.layout_copy);
-        layout_done = (RelativeLayout) view.findViewById(R.id.layout_done);
+        layout_workplan = (RelativeLayout) view.findViewById(R.id.layout_workplan);
     }
 
     /**
@@ -241,17 +234,17 @@ public class MessageFragment extends com.huirong.base.BaseFragment {
         });
 
         //会议
-        layout_confernce.setOnClickListener(new View.OnClickListener() {
+        layout_mission.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getActivity(), ConferenceListActivity.class);
+                Intent intent = new Intent(getActivity(), ZOAplicationListActivity.class);
                 startActivity(intent);
             }
         });
 
 
         //已受理
-        layout_done.setOnClickListener(new View.OnClickListener() {
+        layout_workplan.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(getActivity(), ZOAplicationListActivity.class);
@@ -275,13 +268,13 @@ public class MessageFragment extends com.huirong.base.BaseFragment {
      */
     private void getData() {
 
-        com.huirong.dialog.Loading.noDialogRun(getActivity(), new Runnable() {
+        Loading.noDialogRun(getActivity(), new Runnable() {
             @Override
             public void run() {
 
                 //日程表
-                dao = new com.huirong.db.sqlite.SQLiteScheduledb(getActivity(), com.huirong.helper.UserHelper.getCurrentUser().getEmployeeID() + ".db");
-                ArrayList<com.huirong.model.ScheduleModel> listSchedule = dao.getAllSchedule();
+                dao = new SQLiteScheduledb(getActivity(), UserHelper.getCurrentUser().getEmployeeID() + ".db");
+                ArrayList<ScheduleModel> listSchedule = dao.getAllSchedule();
                 int scheduleSize = -1;
                 if (listSchedule != null) {
                     scheduleSize = listSchedule.size();
@@ -295,7 +288,7 @@ public class MessageFragment extends com.huirong.base.BaseFragment {
                 }
 
 
-                //公告未读
+                //公告
                 try {
                     List<NoticeListModel> visitorModelList = UserHelper.GetAppNoticeList(
                             getActivity(),
@@ -307,12 +300,12 @@ public class MessageFragment extends com.huirong.base.BaseFragment {
                     } else if (visitorModelList.size() > 0) {
                         handler.sendMessage(handler.obtainMessage(GET_NOTICE_DATA, visitorModelList));
                     }
-                } catch (com.huirong.common.MyException e) {
+                } catch (MyException e) {
                     Log.d("SJY", "公告异常= " + e.getMessage());
                     handler.sendMessage(handler.obtainMessage(NONE_NOTICE_DATA, "没有最新公告"));
                 }
 
-                //通知未读
+                //通知
                 try {
                     List<NotificationListModel> visitorModelList = UserHelper.GetAppNotificationList(
                             getActivity(),
@@ -327,51 +320,24 @@ public class MessageFragment extends com.huirong.base.BaseFragment {
                             handler.sendMessage(handler.obtainMessage(GET_NOTIFICATION_DATA, visitorModelList));
                         }
                     }
-                } catch (com.huirong.common.MyException e) {
+                } catch (MyException e) {
                     Log.d("SJY", "通知异常= " + e.getMessage());
                     handler.sendMessage(handler.obtainMessage(NONE_NOTIFICATION_DATA, "没有最新通知"));
                 }
 
-//                //未办事项
-//                try {
-//                    List<com.huirong.model.MyApprovalModel> visitorModelList = com.huirong.helper.UserHelper.getApprovalSearchResults(
-//                            getActivity(),
-//                            "",//iMaxTime
-//                            "");
-//
-//                    if (visitorModelList == null) {
-//                        handler.sendMessage(handler.obtainMessage(NONE_UNDO_DATA, "没有未审批申请"));
-//                    } else {
-//                        if (visitorModelList.size() <= 0) {
-//                            handler.sendMessage(handler.obtainMessage(NONE_UNDO_DATA, "没有未审批申请"));
-//                        } else {
-//                            handler.sendMessage(handler.obtainMessage(GET_UNDO_DATA, visitorModelList));
-//                        }
-//                    }
-//                } catch (com.huirong.common.MyException e) {
-//                    handler.sendMessage(handler.obtainMessage(NONE_UNDO_DATA, "没有未审批申请"));
-//                }
-//
-//
-//                //会议
-//                try {
-//                    List<com.huirong.model.ConferenceMSGModel> conferenceModelList = com.huirong.helper.UserHelper.GetAppConferenceList(
-//                            getActivity(),
-//                            "",//iMaxTime
-//                            "");
-//
-//                    if (conferenceModelList == null) {
-//                        handler.sendMessage(handler.obtainMessage(NONE_CONFERENCE_DATA, "没有最新会议"));
-//                    } else {
-//                        if (conferenceModelList.size() <= 0) {
-//                            handler.sendMessage(handler.obtainMessage(NONE_CONFERENCE_DATA, "没有最新会议"));
-//                        } else {
-//                            handler.sendMessage(handler.obtainMessage(GET_CONFERENCE_DATA, conferenceModelList));
-//                        }
-//                    }
-//                } catch (com.huirong.common.MyException e) {
-//                    handler.sendMessage(handler.obtainMessage(NONE_CONFERENCE_DATA, "没有最新会议"));
-//                }
+                //其他消息
+                try {
+                    MessageFragmentListModel model = UserHelper.GetMassageFragmentList(
+                            getActivity());
+                    if (model == null) {
+                        handler.sendMessage(handler.obtainMessage(NONE_MESSAGE_DATA, "没有最新通知"));
+                    } else {
+                        handler.sendMessage(handler.obtainMessage(GET_MESSAGE_DATA, model));
+                    }
+                } catch (MyException e) {
+                    Log.d("SJY", "通知异常= " + e.toString());
+                    handler.sendMessage(handler.obtainMessage(NONE_MESSAGE_DATA, "没有最新通知"));
+                }
 
 
             }
@@ -385,8 +351,14 @@ public class MessageFragment extends com.huirong.base.BaseFragment {
     protected Handler handler = new Handler() {
         @Override
         public void handleMessage(Message msg) {
-            // 调用下边的方法处理信息
+            // 调用下边的方法处理信息msg
             switch (msg.what) {
+                case GET_MESSAGE_DATA://其他消息
+                    MessageFragmentListModel msgmodel = (MessageFragmentListModel) msg.obj;
+                    LogUtils.d("消息", msgmodel.toString());
+                    showMessageList(msgmodel);
+                    break;
+
                 case GET_NOTICE_DATA://公告
                     List<NoticeListModel> noticeList = (List<NoticeListModel>) msg.obj;
                     int noticeSize = splitNoticeDate(noticeList);
@@ -419,6 +391,7 @@ public class MessageFragment extends com.huirong.base.BaseFragment {
                     }
 
                     break;
+
                 case GET_NOTIFICATION_DATA://通知
                     List<com.huirong.model.NotificationListModel> notificationList = (List<com.huirong.model.NotificationListModel>) msg.obj;
                     int notificationSize = splitNotificationDate(notificationList);
@@ -453,76 +426,6 @@ public class MessageFragment extends com.huirong.base.BaseFragment {
 
                     break;
 
-                case GET_CONFERENCE_DATA://会议
-                    List<com.huirong.model.ConferenceMSGModel> conferenceModelList = (List<com.huirong.model.ConferenceMSGModel>) msg.obj;
-
-                    int conferenceSize = splitConferenceDate(conferenceModelList);
-
-                    if (conferenceSize == 0) {
-                        handler.sendMessage(handler.obtainMessage(NONE_CONFERENCE_DATA, "没有最新会议"));
-
-                    } else if (conferenceSize > 0 && conferenceSize <= 10) {
-
-                        //内容
-                        confernce_content.setTextColor(getActivity().getResources().getColor(R.color.red));
-                        confernce_content.setText("您有 " + conferenceSize + " 条未读会议");
-
-                        //时间
-                        confernce_time.setVisibility(View.VISIBLE);
-                        confernce_time.setText("");
-
-                        //个数
-
-                        confernce_number.setVisibility(View.VISIBLE);
-                        confernce_number.setText("" + conferenceSize);
-
-                    } else if (conferenceSize > 10) {
-                        confernce_content.setTextColor(getActivity().getResources().getColor(R.color.red));
-                        confernce_content.setText("您有 10+ 条未读会议");
-                        //时间
-                        confernce_time.setVisibility(View.VISIBLE);
-                        confernce_time.setText("");
-
-                        //个数
-                        confernce_number.setVisibility(View.VISIBLE);
-                        confernce_number.setText("10+");
-                    }
-
-                    break;
-
-                case GET_UNDO_DATA://未办事项
-                    List<com.huirong.model.MyApprovalModel> visitorModelList = (List<com.huirong.model.MyApprovalModel>) msg.obj;
-                    int size = splitApprovaDate(visitorModelList);
-                    if (size == 0) {
-                        handler.sendMessage(handler.obtainMessage(NONE_UNDO_DATA, "没有未办事项"));
-
-                    } else if (size > 0 && size <= 10) {
-
-                        //内容
-                        undo_content.setTextColor(getActivity().getResources().getColor(R.color.red));
-                        undo_content.setText("您有 " + size + " 条未审批申请");
-
-                        //时间
-                        undo_time.setVisibility(View.VISIBLE);
-                        undo_time.setText("");
-
-                        //个数
-                        undo_number.setVisibility(View.VISIBLE);
-                        undo_number.setText("" + size);
-
-                    } else if (size > 10) {
-                        undo_content.setTextColor(getActivity().getResources().getColor(R.color.red));
-                        undo_content.setText("您有 10+ 条未审批申请");
-                        //时间
-                        undo_time.setVisibility(View.VISIBLE);
-                        undo_time.setText("");
-
-                        //个数
-                        undo_number.setVisibility(View.VISIBLE);
-                        undo_number.setText("10+");
-                    }
-
-                    break;
 
                 case GET_SCHEDULE_DATA://日程
 
@@ -567,31 +470,6 @@ public class MessageFragment extends com.huirong.base.BaseFragment {
                     msg_time.setVisibility(View.INVISIBLE);
                     break;
 
-                case NONE_CONFERENCE_DATA:
-
-                    //内容
-                    confernce_content.setText((String) msg.obj);
-                    confernce_content.setTextColor(getActivity().getResources().getColor(R.color.textHintColor));
-                    //时间
-                    confernce_number.setVisibility(View.INVISIBLE);
-                    //个数
-                    confernce_time.setVisibility(View.INVISIBLE);
-                    break;
-
-                case NONE_UNDO_DATA:
-
-                    //内容
-                    undo_content.setText((String) msg.obj);
-                    undo_content.setTextColor(getActivity().getResources().getColor(R.color.textHintColor));
-
-                    //时间
-                    undo_number.setVisibility(View.INVISIBLE);
-
-                    //个数
-                    undo_time.setText("");
-                    undo_time.setVisibility(View.INVISIBLE);
-                    break;
-
 
                 case NONE_SCHEDULE_DATA:
 
@@ -605,23 +483,81 @@ public class MessageFragment extends com.huirong.base.BaseFragment {
                     //个数
                     schedule_number.setVisibility(View.INVISIBLE);
                     break;
+                case NONE_MESSAGE_DATA:
+                    PageUtil.DisplayToast((String) msg.obj);
+                    break;
                 default:
                     break;
             }
+
             super.handleMessage(msg);
         }
     };
 
-    //获取ApprovalStatus != 0的list
-    private int splitApprovaDate(List<com.huirong.model.MyApprovalModel> list) {
-        List<com.huirong.model.MyApprovalModel> undoList = new ArrayList<>();
-        for (int i = 0; i < list.size(); i++) {
-            if (list.get(i).getApprovalStatus().contains("0")) {
-                undoList.add(list.get(i));
-            }
+    private void showMessageList(MessageFragmentListModel model) {
+        //待办事项 审批
+        if (model.getApprovalCount() != null) {
+            undo_number.setVisibility(View.VISIBLE);
+            undo_number.setText(model.getApprovalCount());
+
+            undo_content.setTextColor(getActivity().getResources().getColor(R.color.red));
+            undo_content.setText("有" + model.getApprovalCount() + "条未办事项！");
+
+            undo_time.setText(model.getApprovalCreateTime());
+
+        } else {
+            undo_number.setVisibility(View.INVISIBLE);
+            undo_content.setText("没有未办事项！");
+            undo_time.setText("");
         }
-        int size = undoList.size();
-        return size;
+
+        //抄送给我
+        if (model.getApprovalCount1() != null) {
+            copy_number.setVisibility(View.VISIBLE);
+            copy_number.setText(model.getApprovalCount1());
+
+            copy_content.setTextColor(getActivity().getResources().getColor(R.color.red));
+            copy_content.setText("有" + model.getApprovalCount1() + "条抄送信息！");
+
+            copy_time.setText(model.getApprovalCreateTime1());
+
+        } else {
+            copy_number.setVisibility(View.INVISIBLE);
+            copy_content.setText("暂无抄送信息！");
+            copy_time.setText("");
+        }
+
+        //任务
+        if (model.getApprovalCount1() != null) {
+            mission_number.setVisibility(View.VISIBLE);
+            mission_number.setText(model.getMaintainCount());
+
+            mission_content.setTextColor(getActivity().getResources().getColor(R.color.red));
+            mission_content.setText("有" + model.getMaintainCount() + "条未阅读任务！");
+
+            mission_time.setText(model.getMaintainCreateTime());
+
+        } else {
+            mission_number.setVisibility(View.INVISIBLE);
+            mission_content.setText("暂无任务！");
+            mission_time.setText("");
+        }
+
+        //工作计划
+        if (model.getApprovalCount1() != null) {
+            workplan_number.setVisibility(View.VISIBLE);
+            workplan_number.setText(model.getTaskScheduleCount());
+
+            workplan_content.setTextColor(getActivity().getResources().getColor(R.color.red));
+            workplan_content.setText("有" + model.getTaskScheduleCount() + "条收到的工作计划！");
+
+            workplan_time.setText(model.getTaskScheduleCreateTime());
+
+        } else {
+            workplan_number.setVisibility(View.INVISIBLE);
+            workplan_content.setText("没有需要查看的工作计划！");
+            workplan_time.setText("");
+        }
 
     }
 
@@ -651,18 +587,6 @@ public class MessageFragment extends com.huirong.base.BaseFragment {
 
     }
 
-    //获取会议! = 0的list
-    private int splitConferenceDate(List<com.huirong.model.ConferenceMSGModel> list) {
-        List<com.huirong.model.ConferenceMSGModel> NoticeList = new ArrayList<com.huirong.model.ConferenceMSGModel>();
-        for (int i = 0; i < list.size(); i++) {
-            if (list.get(i).getIsRead().contains("0")) {
-                NoticeList.add(list.get(i));
-            }
-        }
-        int size = NoticeList.size();
-        return size;
-
-    }
 
     //重写setMenuVisibility方法，不然会出现叠层的现象
     @Override

@@ -67,6 +67,7 @@ public class MyApplication extends Application {
 				.build();
 		ImageLoader.getInstance().init(config);
 	}
+
 	public void onLowMemory() {
 		super.onLowMemory();
 		System.gc();

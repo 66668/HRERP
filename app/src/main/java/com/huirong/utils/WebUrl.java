@@ -16,6 +16,16 @@ public class WebUrl {
     public static final String LOGIN_FLODER_USER = "openapi/";
 
     /**
+     * 消息
+     */
+    public class MessageManager {
+        /**
+         * 统一消息返回
+         */
+        public static final String MESSAGELIST = LOGIN_URL + LOGIN_FLODER_USER + "Massage/MassageList";
+    }
+
+    /**
      * 使用者管理
      *
      * @author JackSong
