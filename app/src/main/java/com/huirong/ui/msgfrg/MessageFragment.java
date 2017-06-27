@@ -22,6 +22,7 @@ import com.huirong.model.MessageFragmentListModel;
 import com.huirong.model.NoticeListModel;
 import com.huirong.model.NotificationListModel;
 import com.huirong.model.ScheduleModel;
+import com.huirong.model.workplan.WorkplanListModel;
 import com.huirong.ui.appsfrg.NoticeListActivity;
 import com.huirong.ui.appsfrg.NotificationListActivity;
 import com.huirong.ui.appsfrg.ScheduleMainActivity;
@@ -65,14 +66,14 @@ public class MessageFragment extends com.huirong.base.BaseFragment {
     private TextView copy_time;
     private TextView workplan_time;
 
-    //个数
-    private com.huirong.widget.CircleTextView msg_number;
-    private com.huirong.widget.CircleTextView notice_number;
-    private com.huirong.widget.CircleTextView undo_number;
-    private com.huirong.widget.CircleTextView schedule_number;
-    private com.huirong.widget.CircleTextView mission_number;
-    private com.huirong.widget.CircleTextView copy_number;
-    private com.huirong.widget.CircleTextView workplan_number;
+    //    //个数
+    //    private TextView msg_number;
+    //    private TextView notice_number;
+    //    private TextView undo_number;
+    //    private TextView schedule_number;
+    //    private TextView mission_number;
+    //    private TextView copy_number;
+    //    private TextView workplan_number;
 
     //布局
     private RelativeLayout layout_notification;
@@ -99,6 +100,10 @@ public class MessageFragment extends com.huirong.base.BaseFragment {
     //其他通知
     private static final int GET_MESSAGE_DATA = -35;//
     private static final int NONE_MESSAGE_DATA = -34;//
+
+    //工作计划 我收到的
+    private static final int GET_WORKPLAN_DATA = -31;//
+    private static final int NONE_WORKPLAN_DATA = -30;//
 
 
     //单例模式
@@ -176,13 +181,13 @@ public class MessageFragment extends com.huirong.base.BaseFragment {
         workplan_time = (TextView) view.findViewById(R.id.tv_workplanTime);
 
         //数量提醒
-        msg_number = (com.huirong.widget.CircleTextView) view.findViewById(R.id.msg_number);
-        notice_number = (com.huirong.widget.CircleTextView) view.findViewById(R.id.notice_number);
-        undo_number = (com.huirong.widget.CircleTextView) view.findViewById(R.id.undo_number);
-        schedule_number = (com.huirong.widget.CircleTextView) view.findViewById(R.id.schedule_number);
-        mission_number = (com.huirong.widget.CircleTextView) view.findViewById(R.id.mission_number);
-        copy_number = (com.huirong.widget.CircleTextView) view.findViewById(R.id.copy_number);
-        workplan_number = (com.huirong.widget.CircleTextView) view.findViewById(R.id.workplan_number);
+        //        msg_number = (TextView) view.findViewById(R.id.msg_number);
+        //        notice_number = (TextView) view.findViewById(R.id.notice_number);
+        //        undo_number = (TextView) view.findViewById(R.id.undo_number);
+        //        schedule_number = (TextView) view.findViewById(R.id.schedule_number);
+        //        mission_number = (TextView) view.findViewById(R.id.mission_number);
+        //        copy_number = (TextView) view.findViewById(R.id.copy_number);
+        //        workplan_number = (TextView) view.findViewById(R.id.workplan_number);
 
         layout_notification = (RelativeLayout) view.findViewById(R.id.layout_notification);
         layout_notice = (RelativeLayout) view.findViewById(R.id.layout_notice);
@@ -339,7 +344,22 @@ public class MessageFragment extends com.huirong.base.BaseFragment {
                     handler.sendMessage(handler.obtainMessage(NONE_MESSAGE_DATA, "没有最新通知"));
                 }
 
+                //工作计划
+                try {
+                    List<WorkplanListModel> visitorModelList = UserHelper.GetWorkPlanList(
+                            getActivity(),
+                            "",//iMaxTime
+                            "");
 
+                    if (visitorModelList == null || visitorModelList.size() <= 0) {
+                        handler.sendMessage(handler.obtainMessage(NONE_WORKPLAN_DATA, "没有最新通知"));
+                    }
+
+                    handler.sendMessage(handler.obtainMessage(GET_WORKPLAN_DATA, visitorModelList));
+                } catch (MyException e) {
+                    LogUtils.e("获取数据出错", e.toString());
+                    handler.sendMessage(handler.obtainMessage(NONE_WORKPLAN_DATA, "没有最新通知"));
+                }
             }
         });
     }
@@ -359,6 +379,11 @@ public class MessageFragment extends com.huirong.base.BaseFragment {
                     showMessageList(msgmodel);
                     break;
 
+                case GET_WORKPLAN_DATA://工作计划
+                    List<WorkplanListModel> visitorModelList = (List<WorkplanListModel>) msg.obj;
+
+                    break;
+
                 case GET_NOTICE_DATA://公告
                     List<NoticeListModel> noticeList = (List<NoticeListModel>) msg.obj;
                     int noticeSize = splitNoticeDate(noticeList);
@@ -375,8 +400,8 @@ public class MessageFragment extends com.huirong.base.BaseFragment {
                         notice_time.setVisibility(View.VISIBLE);
                         notice_time.setText(noticeList.get(0).getCreateTime());
                         //个数
-                        notice_number.setVisibility(View.VISIBLE);
-                        notice_number.setText("" + noticeSize);
+                        //                        notice_number.setVisibility(View.VISIBLE);
+                        //                        notice_number.setText("" + noticeSize);
 
                     } else if (noticeSize > 10) {
                         notice_content.setTextColor(getActivity().getResources().getColor(R.color.red));
@@ -387,7 +412,7 @@ public class MessageFragment extends com.huirong.base.BaseFragment {
 
                         //个数
                         notice_time.setVisibility(View.VISIBLE);
-                        notice_number.setText("10+");
+                        //                        notice_number.setText("10+");
                     }
 
                     break;
@@ -409,8 +434,8 @@ public class MessageFragment extends com.huirong.base.BaseFragment {
                         msg_time.setText(notificationList.get(0).getCreateTime());
 
                         //个数
-                        msg_number.setVisibility(View.VISIBLE);
-                        msg_number.setText("" + notificationSize);
+                        //                        msg_number.setVisibility(View.VISIBLE);
+                        //                        msg_number.setText("" + notificationSize);
 
                     } else if (notificationSize > 10) {
                         msg_content.setTextColor(getActivity().getResources().getColor(R.color.red));
@@ -420,8 +445,8 @@ public class MessageFragment extends com.huirong.base.BaseFragment {
                         msg_time.setText(notificationList.get(0).getCreateTime());
 
                         //个数
-                        msg_number.setVisibility(View.VISIBLE);
-                        msg_number.setText("10+");
+                        //                        msg_number.setVisibility(View.VISIBLE);
+                        //                        msg_number.setText("10+");
                     }
 
                     break;
@@ -436,7 +461,7 @@ public class MessageFragment extends com.huirong.base.BaseFragment {
                         schedule_content.setText("您有 " + scheduleSize + " 条日程要处理");
                         schedule_time.setText("");
                         //个数
-                        schedule_number.setText(scheduleSize + "");
+                        //                        schedule_number.setText(scheduleSize + "");
 
                     } else if (scheduleSize > 10) {
                         //内容
@@ -444,7 +469,7 @@ public class MessageFragment extends com.huirong.base.BaseFragment {
                         schedule_content.setText("您有 10+ 条日程要处理");
                         schedule_time.setText("");
                         //个数
-                        schedule_number.setText("10+");
+                        //                        schedule_number.setText("10+");
                     }
                     break;
 
@@ -455,7 +480,7 @@ public class MessageFragment extends com.huirong.base.BaseFragment {
                     notice_content.setTextColor(getActivity().getResources().getColor(R.color.textHintColor));
 
                     //时间
-                    notice_number.setVisibility(View.INVISIBLE);
+                    //                    notice_number.setVisibility(View.INVISIBLE);
                     //个数
                     notice_time.setVisibility(View.INVISIBLE);
                     break;
@@ -465,7 +490,7 @@ public class MessageFragment extends com.huirong.base.BaseFragment {
                     msg_content.setText((String) msg.obj);
                     msg_content.setTextColor(getActivity().getResources().getColor(R.color.textHintColor));
                     //时间
-                    msg_number.setVisibility(View.INVISIBLE);
+                    //                    msg_number.setVisibility(View.INVISIBLE);
                     //个数
                     msg_time.setVisibility(View.INVISIBLE);
                     break;
@@ -474,14 +499,14 @@ public class MessageFragment extends com.huirong.base.BaseFragment {
                 case NONE_SCHEDULE_DATA:
 
                     //内容
-                    schedule_content.setText("没有日程安排");
+                    schedule_content.setText("");
                     schedule_content.setTextColor(getActivity().getResources().getColor(R.color.textHintColor));
 
                     //时间
                     schedule_time.setText("");
 
                     //个数
-                    schedule_number.setVisibility(View.INVISIBLE);
+                    //                    schedule_number.setVisibility(View.INVISIBLE);
                     break;
                 case NONE_MESSAGE_DATA:
                     PageUtil.DisplayToast((String) msg.obj);
@@ -497,8 +522,8 @@ public class MessageFragment extends com.huirong.base.BaseFragment {
     private void showMessageList(MessageFragmentListModel model) {
         //待办事项 审批
         if (model.getApprovalCount() != null) {
-            undo_number.setVisibility(View.VISIBLE);
-            undo_number.setText(model.getApprovalCount());
+            //            undo_number.setVisibility(View.VISIBLE);
+            //            undo_number.setText(model.getApprovalCount());
 
             undo_content.setTextColor(getActivity().getResources().getColor(R.color.red));
             undo_content.setText("有" + model.getApprovalCount() + "条未办事项！");
@@ -506,15 +531,15 @@ public class MessageFragment extends com.huirong.base.BaseFragment {
             undo_time.setText(model.getApprovalCreateTime());
 
         } else {
-            undo_number.setVisibility(View.INVISIBLE);
-            undo_content.setText("没有未办事项！");
+            //            undo_number.setVisibility(View.INVISIBLE);
+            undo_content.setText("");
             undo_time.setText("");
         }
 
         //抄送给我
         if (model.getApprovalCount1() != null) {
-            copy_number.setVisibility(View.VISIBLE);
-            copy_number.setText(model.getApprovalCount1());
+            //            copy_number.setVisibility(View.VISIBLE);
+            //            copy_number.setText(model.getApprovalCount1());
 
             copy_content.setTextColor(getActivity().getResources().getColor(R.color.red));
             copy_content.setText("有" + model.getApprovalCount1() + "条抄送信息！");
@@ -522,15 +547,15 @@ public class MessageFragment extends com.huirong.base.BaseFragment {
             copy_time.setText(model.getApprovalCreateTime1());
 
         } else {
-            copy_number.setVisibility(View.INVISIBLE);
-            copy_content.setText("暂无抄送信息！");
+            //            copy_number.setVisibility(View.INVISIBLE);
+            copy_content.setText("");
             copy_time.setText("");
         }
 
         //任务
-        if (model.getApprovalCount1() != null) {
-            mission_number.setVisibility(View.VISIBLE);
-            mission_number.setText(model.getMaintainCount());
+        if (model.getMaintainCount() != null) {
+            //            mission_number.setVisibility(View.VISIBLE);
+            //            mission_number.setText(model.getMaintainCount());
 
             mission_content.setTextColor(getActivity().getResources().getColor(R.color.red));
             mission_content.setText("有" + model.getMaintainCount() + "条未阅读任务！");
@@ -538,15 +563,15 @@ public class MessageFragment extends com.huirong.base.BaseFragment {
             mission_time.setText(model.getMaintainCreateTime());
 
         } else {
-            mission_number.setVisibility(View.INVISIBLE);
-            mission_content.setText("暂无任务！");
+            //            mission_number.setVisibility(View.INVISIBLE);
+            mission_content.setText("");
             mission_time.setText("");
         }
 
         //工作计划
-        if (model.getApprovalCount1() != null) {
-            workplan_number.setVisibility(View.VISIBLE);
-            workplan_number.setText(model.getTaskScheduleCount());
+        if (model.getTaskScheduleCount() != null) {
+            //            workplan_number.setVisibility(View.VISIBLE);
+            //            workplan_number.setText(model.getTaskScheduleCount());
 
             workplan_content.setTextColor(getActivity().getResources().getColor(R.color.red));
             workplan_content.setText("有" + model.getTaskScheduleCount() + "条收到的工作计划！");
@@ -554,8 +579,8 @@ public class MessageFragment extends com.huirong.base.BaseFragment {
             workplan_time.setText(model.getTaskScheduleCreateTime());
 
         } else {
-            workplan_number.setVisibility(View.INVISIBLE);
-            workplan_content.setText("没有需要查看的工作计划！");
+            //            workplan_number.setVisibility(View.INVISIBLE);
+            workplan_content.setText("");
             workplan_time.setText("");
         }
 

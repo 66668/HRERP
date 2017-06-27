@@ -52,7 +52,7 @@
                     android:layout_alignBottom="@+id/img_msg"
                     android:layout_marginStart="10dp"
                     android:layout_toEndOf="@+id/img_msg"
-                    android:text="没有最新通知"
+                    android:hint="没有最新通知"
                     android:textColor="@color/textHintColor"
                     android:textSize="@dimen/common_textSize_default14"/>
                 <!-- 时间-->
@@ -67,18 +67,18 @@
                     android:text=""
                     android:textSize="@dimen/common_textSize_default11"/>
 
-                <com.huirong.widget.CircleTextView
-                    android:id="@+id/msg_number"
-                    android:layout_width="15dp"
-                    android:layout_height="15dp"
-                    android:layout_alignBottom="@+id/img_msg"
-                    android:layout_alignParentEnd="true"
-                    android:layout_marginEnd="10dp"
-                    android:background="@color/common_topbar_bgcolor"
-                    android:gravity="center"
-                    android:text="1"
-                    android:textColor="@color/white"
-                    android:visibility="invisible"/>
+                <!--<TextView-->
+                    <!--android:id="@+id/msg_number"-->
+                    <!--android:layout_width="15dp"-->
+                    <!--android:layout_height="15dp"-->
+                    <!--android:layout_alignBottom="@+id/img_msg"-->
+                    <!--android:layout_alignParentEnd="true"-->
+                    <!--android:layout_marginEnd="10dp"-->
+                    <!--android:background="@color/common_topbar_bgcolor"-->
+                    <!--android:gravity="center"-->
+                    <!--android:text="1"-->
+                    <!--android:textColor="@color/white"-->
+                    <!--android:visibility="invisible"/>-->
             </RelativeLayout>
 
             <View
@@ -120,7 +120,7 @@
                     android:layout_alignBottom="@+id/img_notice"
                     android:layout_marginStart="10dp"
                     android:layout_toEndOf="@+id/img_notice"
-                    android:text="没有最新公告"
+                    android:hint="没有最新公告"
                     android:textColor="@color/textHintColor"
                     android:textSize="@dimen/common_textSize_default14"/>
                 <!-- 时间-->
@@ -135,19 +135,19 @@
                     android:text=""
                     android:textSize="@dimen/common_textSize_default11"/>
 
-                <com.huirong.widget.CircleTextView
-                    android:id="@+id/notice_number"
-                    android:layout_width="15dp"
-                    android:layout_height="15dp"
-                    android:layout_alignBottom="@+id/img_notice"
-                    android:layout_alignParentEnd="true"
-                    android:layout_marginEnd="10dp"
-                    android:background="@color/common_topbar_bgcolor"
-                    android:gravity="center"
-                    android:text="1"
-                    android:textColor="@color/white"
-                    android:visibility="invisible"
-                    />
+                <!--<TextView-->
+                    <!--android:id="@+id/notice_number"-->
+                    <!--android:layout_width="15dp"-->
+                    <!--android:layout_height="15dp"-->
+                    <!--android:layout_alignBottom="@+id/img_notice"-->
+                    <!--android:layout_alignParentEnd="true"-->
+                    <!--android:layout_marginEnd="10dp"-->
+                    <!--android:background="@color/common_topbar_bgcolor"-->
+                    <!--android:gravity="center"-->
+                    <!--android:text="1"-->
+                    <!--android:textColor="@color/white"-->
+                    <!--android:visibility="invisible"-->
+                    <!--/>-->
             </RelativeLayout>
 
             <View
@@ -189,7 +189,7 @@
                     android:layout_alignBottom="@+id/img_undo"
                     android:layout_marginStart="10dp"
                     android:layout_toEndOf="@+id/img_undo"
-                    android:text="没有未办事项"
+                    android:hint="没有未办事项"
                     android:textSize="@dimen/common_textSize_default14"/>
                 <!-- 时间-->
                 <TextView
@@ -203,18 +203,18 @@
                     android:text=""
                     android:textSize="@dimen/common_textSize_default11"/>
 
-                <com.huirong.widget.CircleTextView
-                    android:id="@+id/undo_number"
-                    android:layout_width="15dp"
-                    android:layout_height="15dp"
-                    android:layout_alignBottom="@+id/img_undo"
-                    android:layout_alignParentEnd="true"
-                    android:layout_marginEnd="10dp"
-                    android:background="@color/common_topbar_bgcolor"
-                    android:gravity="center"
-                    android:text="1"
-                    android:textColor="@color/white"
-                    android:visibility="invisible"/>
+                <!--<TextView-->
+                    <!--android:id="@+id/undo_number"-->
+                    <!--android:layout_width="15dp"-->
+                    <!--android:layout_height="15dp"-->
+                    <!--android:layout_alignBottom="@+id/img_undo"-->
+                    <!--android:layout_alignParentEnd="true"-->
+                    <!--android:layout_marginEnd="10dp"-->
+                    <!--android:background="@color/common_topbar_bgcolor"-->
+                    <!--android:gravity="center"-->
+                    <!--android:text="1"-->
+                    <!--android:textColor="@color/white"-->
+                    <!--android:visibility="invisible"/>-->
             </RelativeLayout>
 
             <View
@@ -256,7 +256,7 @@
                     android:layout_alignBottom="@+id/img_copy"
                     android:layout_marginStart="10dp"
                     android:layout_toEndOf="@+id/img_copy"
-                    android:text="暂无抄送消息"
+                    android:hint="暂无抄送消息"
                     android:textSize="@dimen/common_textSize_default14"/>
 
                 <!-- 时间-->
@@ -271,18 +271,18 @@
                     android:text=""
                     android:textSize="@dimen/common_textSize_default11"/>
 
-                <com.huirong.widget.CircleTextView
-                    android:id="@+id/copy_number"
-                    android:layout_width="15dp"
-                    android:layout_height="15dp"
-                    android:layout_alignBottom="@+id/img_copy"
-                    android:layout_alignParentEnd="true"
-                    android:layout_marginEnd="10dp"
-                    android:background="@color/common_topbar_bgcolor"
-                    android:gravity="center"
-                    android:text="1"
-                    android:textColor="@color/white"
-                    android:visibility="invisible"/>
+                <!--<TextView-->
+                    <!--android:id="@+id/copy_number"-->
+                    <!--android:layout_width="15dp"-->
+                    <!--android:layout_height="15dp"-->
+                    <!--android:layout_alignBottom="@+id/img_copy"-->
+                    <!--android:layout_alignParentEnd="true"-->
+                    <!--android:layout_marginEnd="10dp"-->
+                    <!--android:background="@color/common_topbar_bgcolor"-->
+                    <!--android:gravity="center"-->
+                    <!--android:text="1"-->
+                    <!--android:textColor="@color/white"-->
+                    <!--android:visibility="invisible"/>-->
             </RelativeLayout>
 
             <View
@@ -323,7 +323,7 @@
                     android:layout_alignBottom="@+id/img_mission"
                     android:layout_marginStart="10dp"
                     android:layout_toEndOf="@+id/img_mission"
-                    android:text="暂无任务"
+                    android:hint="暂无任务"
                     android:textColor="@color/textHintColor"
                     android:textSize="@dimen/common_textSize_default14"/>
                 <!-- 时间-->
@@ -338,18 +338,18 @@
                     android:text=""
                     android:textSize="@dimen/common_textSize_default11"/>
 
-                <com.huirong.widget.CircleTextView
-                    android:id="@+id/mission_number"
-                    android:layout_width="15dp"
-                    android:layout_height="15dp"
-                    android:layout_alignBottom="@+id/img_mission"
-                    android:layout_alignParentEnd="true"
-                    android:layout_marginEnd="10dp"
-                    android:background="@color/common_topbar_bgcolor"
-                    android:gravity="center"
-                    android:text="1"
-                    android:textColor="@color/white"
-                    android:visibility="invisible"/>
+                <!--<TextView-->
+                    <!--android:id="@+id/mission_number"-->
+                    <!--android:layout_width="15dp"-->
+                    <!--android:layout_height="15dp"-->
+                    <!--android:layout_alignBottom="@+id/img_mission"-->
+                    <!--android:layout_alignParentEnd="true"-->
+                    <!--android:layout_marginEnd="10dp"-->
+                    <!--android:background="@color/common_topbar_bgcolor"-->
+                    <!--android:gravity="center"-->
+                    <!--android:text="1"-->
+                    <!--android:textColor="@color/white"-->
+                    <!--android:visibility="invisible"/>-->
             </RelativeLayout>
 
 
@@ -393,7 +393,7 @@
                     android:layout_alignBottom="@+id/img_workplan"
                     android:layout_marginStart="10dp"
                     android:layout_toEndOf="@+id/img_workplan"
-                    android:text="没有需要查看的工作计划"
+                    android:hint="没有需要查看的工作计划"
                     android:textSize="@dimen/common_textSize_default14"/>
                 <!-- 时间-->
                 <TextView
@@ -407,18 +407,18 @@
                     android:text=""
                     android:textSize="@dimen/common_textSize_default11"/>
 
-                <com.huirong.widget.CircleTextView
-                    android:id="@+id/workplan_number"
-                    android:layout_width="15dp"
-                    android:layout_height="15dp"
-                    android:layout_alignBottom="@+id/img_workplan"
-                    android:layout_alignParentEnd="true"
-                    android:layout_marginEnd="10dp"
-                    android:background="@color/common_topbar_bgcolor"
-                    android:gravity="center"
-                    android:text="1"
-                    android:textColor="@color/white"
-                    android:visibility="invisible"/>
+                <!--<TextView-->
+                    <!--android:id="@+id/workplan_number"-->
+                    <!--android:layout_width="15dp"-->
+                    <!--android:layout_height="15dp"-->
+                    <!--android:layout_alignBottom="@+id/img_workplan"-->
+                    <!--android:layout_alignParentEnd="true"-->
+                    <!--android:layout_marginEnd="10dp"-->
+                    <!--android:background="@color/common_topbar_bgcolor"-->
+                    <!--android:gravity="center"-->
+                    <!--android:text="1"-->
+                    <!--android:textColor="@color/white"-->
+                    <!--android:visibility="invisible"/>-->
             </RelativeLayout>
 
 
@@ -461,7 +461,7 @@
                     android:layout_alignBottom="@+id/img_schedule"
                     android:layout_marginStart="10dp"
                     android:layout_toEndOf="@+id/img_schedule"
-                    android:text="没有日程安排"
+                    android:hint="没有日程安排"
                     android:textSize="@dimen/common_textSize_default14"/>
                 <!-- 时间-->
                 <TextView
@@ -475,18 +475,18 @@
                     android:text=""
                     android:textSize="@dimen/common_textSize_default11"/>
 
-                <com.huirong.widget.CircleTextView
-                    android:id="@+id/schedule_number"
-                    android:layout_width="15dp"
-                    android:layout_height="15dp"
-                    android:layout_alignBottom="@+id/img_schedule"
-                    android:layout_alignParentEnd="true"
-                    android:layout_marginEnd="10dp"
-                    android:background="@color/common_topbar_bgcolor"
-                    android:gravity="center"
-                    android:text="1"
-                    android:textColor="@color/white"
-                    android:visibility="invisible"/>
+                <!--<TextView-->
+                    <!--android:id="@+id/schedule_number"-->
+                    <!--android:layout_width="15dp"-->
+                    <!--android:layout_height="15dp"-->
+                    <!--android:layout_alignBottom="@+id/img_schedule"-->
+                    <!--android:layout_alignParentEnd="true"-->
+                    <!--android:layout_marginEnd="10dp"-->
+                    <!--android:background="@color/common_topbar_bgcolor"-->
+                    <!--android:gravity="center"-->
+                    <!--android:text="1"-->
+                    <!--android:textColor="@color/white"-->
+                    <!--android:visibility="invisible"/>-->
             </RelativeLayout>
 
             <View
