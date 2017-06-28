@@ -194,7 +194,7 @@
                     android:layout_height="match_parent"
                     android:background="@drawable/et_white_stroke"
                     android:gravity="top|start"
-                    android:hint="@string/completeTime_hint"
+                    android:hint="@string/planContent_hint"
                     android:maxLength="1000"
                     android:padding="10dp"
                     android:textColorHint="@color/cl_hint_common"

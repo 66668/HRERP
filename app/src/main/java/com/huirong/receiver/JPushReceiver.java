@@ -8,8 +8,10 @@ import android.text.TextUtils;
 
 import com.huirong.helper.UserHelper;
 import com.huirong.ui.LoginActivity;
+import com.huirong.ui.appsfrg.MissionListActivity;
 import com.huirong.ui.appsfrg.NoticeListActivity;
 import com.huirong.ui.appsfrg.NotificationListActivity;
+import com.huirong.ui.appsfrg.WorkplanListActivity;
 import com.huirong.ui.appsfrg.childmodel.examination.ZOAplicationListActivity;
 import com.huirong.ui.appsfrg.childmodel.examination.ZOApprovelListActivity;
 import com.huirong.ui.appsfrg.childmodel.examination.ZOCopyListActivity;
@@ -94,6 +96,20 @@ public class JPushReceiver extends BroadcastReceiver {
         if (content.contains("申请审批已完成")) {
             Intent intent = new Intent();
             intent.setClass(context, ZOAplicationListActivity.class);
+            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+            context.startActivity(intent);
+        }
+
+        if (content.contains("有新的任务需要查看")) {
+            Intent intent = new Intent();
+            intent.setClass(context, MissionListActivity.class);
+            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+            context.startActivity(intent);
+        }
+
+        if (content.contains("有新的工作计划需要查看")) {
+            Intent intent = new Intent();
+            intent.setClass(context, WorkplanListActivity.class);
             intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
             context.startActivity(intent);
         }

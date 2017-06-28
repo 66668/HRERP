@@ -23,10 +23,11 @@ import com.huirong.model.NoticeListModel;
 import com.huirong.model.NotificationListModel;
 import com.huirong.model.ScheduleModel;
 import com.huirong.model.workplan.WorkplanListModel;
+import com.huirong.ui.appsfrg.MissionListActivity;
 import com.huirong.ui.appsfrg.NoticeListActivity;
 import com.huirong.ui.appsfrg.NotificationListActivity;
 import com.huirong.ui.appsfrg.ScheduleMainActivity;
-import com.huirong.ui.appsfrg.childmodel.examination.ZOAplicationListActivity;
+import com.huirong.ui.appsfrg.WorkplanListActivity;
 import com.huirong.ui.appsfrg.childmodel.examination.ZOApprovelListActivity;
 import com.huirong.ui.appsfrg.childmodel.examination.ZOCopyListActivity;
 import com.huirong.utils.LogUtils;
@@ -229,30 +230,21 @@ public class MessageFragment extends com.huirong.base.BaseFragment {
             }
         });
 
-        //日程
-        layout_schedule.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(getActivity(), ScheduleMainActivity.class);
-                startActivity(intent);
-            }
-        });
-
-        //会议
+        //任务
         layout_mission.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getActivity(), ZOAplicationListActivity.class);
+                Intent intent = new Intent(getActivity(), MissionListActivity.class);
                 startActivity(intent);
             }
         });
 
 
-        //已受理
+        //工作计划
         layout_workplan.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getActivity(), ZOAplicationListActivity.class);
+                Intent intent = new Intent(getActivity(), WorkplanListActivity.class);
                 startActivity(intent);
             }
         });
@@ -265,7 +257,14 @@ public class MessageFragment extends com.huirong.base.BaseFragment {
                 startActivity(intent);
             }
         });
-
+        //日程
+        layout_schedule.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getActivity(), ScheduleMainActivity.class);
+                startActivity(intent);
+            }
+        });
     }
 
     /**
@@ -380,8 +379,36 @@ public class MessageFragment extends com.huirong.base.BaseFragment {
                     break;
 
                 case GET_WORKPLAN_DATA://工作计划
-                    List<WorkplanListModel> visitorModelList = (List<WorkplanListModel>) msg.obj;
+                    List<WorkplanListModel> worlplanList = (List<WorkplanListModel>) msg.obj;
+                    int workplanSize = splitWorkplanData(worlplanList);
 
+                    if (workplanSize == 0) {
+                        workplan_content.setText("");
+                        workplan_time.setText("");
+                    } else if (workplanSize > 0 && workplanSize <= 10) {
+
+                        //内容
+                        workplan_content.setTextColor(getActivity().getResources().getColor(R.color.red));
+                        workplan_content.setText("有 " + workplanSize + " 条收到的工作计划");
+
+                        //时间
+                        workplan_time.setVisibility(View.VISIBLE);
+                        workplan_time.setText(worlplanList.get(0).getCreateTime());
+                        //个数
+                        //                        notice_number.setVisibility(View.VISIBLE);
+                        //                        notice_number.setText("" + noticeSize);
+
+                    } else if (workplanSize > 10) {
+                        workplan_content.setTextColor(getActivity().getResources().getColor(R.color.red));
+                        workplan_content.setText("您有 10+  条收到的工作计划");
+                        //时间
+                        workplan_time.setVisibility(View.VISIBLE);
+                        workplan_time.setText(worlplanList.get(0).getCreateTime());
+
+                        //个数
+                        //                        notice_time.setVisibility(View.VISIBLE);
+                        //                        notice_number.setText("10+");
+                    }
                     break;
 
                 case GET_NOTICE_DATA://公告
@@ -411,7 +438,7 @@ public class MessageFragment extends com.huirong.base.BaseFragment {
                         notice_time.setText(noticeList.get(0).getCreateTime());
 
                         //个数
-                        notice_time.setVisibility(View.VISIBLE);
+                        //                        notice_time.setVisibility(View.VISIBLE);
                         //                        notice_number.setText("10+");
                     }
 
@@ -568,25 +595,24 @@ public class MessageFragment extends com.huirong.base.BaseFragment {
             mission_time.setText("");
         }
 
-        //工作计划
-        if (model.getTaskScheduleCount() != null) {
-            //            workplan_number.setVisibility(View.VISIBLE);
-            //            workplan_number.setText(model.getTaskScheduleCount());
 
-            workplan_content.setTextColor(getActivity().getResources().getColor(R.color.red));
-            workplan_content.setText("有" + model.getTaskScheduleCount() + "条收到的工作计划！");
+    }
 
-            workplan_time.setText(model.getTaskScheduleCreateTime());
-
-        } else {
-            //            workplan_number.setVisibility(View.INVISIBLE);
-            workplan_content.setText("");
-            workplan_time.setText("");
+    //截取 我收到的 工作计划 list
+    private int splitWorkplanData(List<WorkplanListModel> list) {
+        List<WorkplanListModel> workplanList = new ArrayList<WorkplanListModel>();
+        for (int i = 0; i < list.size(); i++) {
+            if (list.get(i).getSeeType().contains("我收到的")) {
+                workplanList.add(list.get(i));
+            }
         }
+        int size = workplanList.size();
+        return size;
 
     }
 
     //截取未读公告的list
+
     private int splitNoticeDate(List<NoticeListModel> list) {
         List<NoticeListModel> NoticeList = new ArrayList<NoticeListModel>();
         for (int i = 0; i < list.size(); i++) {

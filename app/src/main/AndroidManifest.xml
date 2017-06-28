@@ -178,7 +178,7 @@
             android:value="developer-default"/>
         <meta-data
             android:name="JPUSH_APPKEY"
-            android:value=" 272a312f56a5fffaaa593c4b"/> <!--  </>值来自开发者平台取得的AppKey-->
+            android:value="272a312f56a5fffaaa593c4b"/> <!--  </>值来自开发者平台取得的AppKey-->
 
         <!-- ****************************************极光推送 结束**********************************************-->
 
@@ -187,7 +187,6 @@
             android:name="com.huirong.ui.MainActivity"
             android:label="@string/app_name"
             android:screenOrientation="portrait">
-
         </activity>
 
         <!-- 登录-->
@@ -1105,16 +1104,6 @@
             android:theme="@style/Theme.AppCompat.Light.NoActionBar">
         </activity>
 
-        <!-- ****************************************应用-会议 **********************************************-->
-        <!--08 会议列表 -->
-
-        <!--08-02 会议详情 -->
-        <activity
-            android:name="com.huirong.ui.appsfrg.childmodel.coference.ConferenceDetailActivity"
-            android:label="@string/app_name"
-            android:screenOrientation="portrait"
-            android:theme="@style/Theme.AppCompat.Light.NoActionBar">
-        </activity>
 
         <!-- ****************************************应用-采购领用 **********************************************-->
 

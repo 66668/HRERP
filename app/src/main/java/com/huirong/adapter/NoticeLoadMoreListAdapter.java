@@ -43,7 +43,7 @@ public class NoticeLoadMoreListAdapter extends BaseLoadMoreListAdapter {
     @Override
     protected View inflateConvertView() {
         //一条记录的布局
-        View view = inflater.inflate(R.layout.item_app_notification_notice_common,  new LinearLayout(context), false);
+        View view = inflater.inflate(R.layout.item_app_notification_notice_common, new LinearLayout(context), false);
         //该布局上的控件
         WidgetHolder holder = new WidgetHolder();
         holder.tvTime = (TextView) view.findViewById(R.id.tv_time);
@@ -62,13 +62,14 @@ public class NoticeLoadMoreListAdapter extends BaseLoadMoreListAdapter {
         holder.tvTime.setText(model.getCreateTime());
         holder.tvType.setText(model.getApplicationTitle());
         holder.tvContent.setText(model.getAbstract());
-        if(model.getIsRead().contains("1")){
-            holder.tv_state.setTextColor(context.getResources().getColor(R.color.green));
-            holder.tv_state.setText("已读");
-        }else{
-            holder.tv_state.setTextColor(context.getResources().getColor(R.color.red));
-            holder.tv_state.setText("未读");
-        }
+        holder.tv_state.setText("");
+        //        if(model.getIsRead().contains("1")){
+        //            holder.tv_state.setTextColor(context.getResources().getColor(R.color.green));
+        //            holder.tv_state.setText("已读");
+        //        }else{
+        //            holder.tv_state.setTextColor(context.getResources().getColor(R.color.red));
+        //            holder.tv_state.setText("未读");
+        //        }
 
     }
 

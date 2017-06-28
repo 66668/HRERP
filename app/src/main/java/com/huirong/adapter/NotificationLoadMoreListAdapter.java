@@ -63,13 +63,15 @@ public class NotificationLoadMoreListAdapter extends BaseLoadMoreListAdapter {
         holder.tvTime.setText(model.getCreateTime());
         holder.tvType.setText(model.getApplicationTitle());
         holder.tvContent.setText(model.getAbstract());
-        if(model.getIsRead().contains("1")){
-            holder.tv_state.setTextColor(context.getResources().getColor(R.color.green));
-            holder.tv_state.setText("已读");
-        }else{
-            holder.tv_state.setTextColor(context.getResources().getColor(R.color.red));
-            holder.tv_state.setText("未读");
-        }
+
+        holder.tv_state.setText("");
+//        if(model.getIsRead().contains("1")){
+//            holder.tv_state.setTextColor(context.getResources().getColor(R.color.green));
+//            holder.tv_state.setText("已读");
+//        }else{
+//            holder.tv_state.setTextColor(context.getResources().getColor(R.color.red));
+//            holder.tv_state.setText("未读");
+//        }
 
     }
 

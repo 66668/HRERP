@@ -94,6 +94,7 @@
     <string name="workplan_title_hint">请输入标题</string>
     <string name="receiver">选择接受者</string>
     <string name="planContent">计划内容</string>
+    <string name="planContent_hint">请输入计划内容</string>
 
     <!-- 应用-任务-->
     <string name="msn_title">任务主题</string>
