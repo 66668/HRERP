@@ -83,7 +83,7 @@ public class WorkplanReceiveDetailActivity extends BaseActivity {
     private void setShow() {
         tv_workplan_title.setText(model.getTitle());
         tv_time.setText(model.getCreateTime());
-        tv_to.setText(model.getUploaderEmployeeID());
+        tv_to.setText(model.getEmployeeName());
         tv_advance.setText(model.getSchedules());
         tv_completeTime.setText(model.getCompletiontime());
         tv_content.setText(model.getPlancontent());

@@ -85,8 +85,8 @@ public class WorkplanSendDetailActivity extends BaseActivity {
     private void setShow() {
         tv_workplan_title.setText(model.getTitle());
         tv_time.setText(model.getCreateTime());
-        tv_to.setText(model.getUploaderEmployeeID());
-        tv_rec.setText(model.getReceiveerEmployeeID());
+        tv_to.setText(model.getEmployeeName());
+        tv_rec.setText(model.getReceiveerName());
         tv_advance.setText(model.getSchedules());
         tv_completeTime.setText(model.getCompletiontime());
         tv_content.setText(model.getPlancontent());
@@ -113,8 +113,6 @@ public class WorkplanSendDetailActivity extends BaseActivity {
     //            }
     //        });
     //    }
-
-
 
 
     /**

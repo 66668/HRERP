@@ -24,6 +24,87 @@ public class WorkplanListModel implements Serializable {
     private String StoreID;
     private String CreateTime;
     private String SeeType;
+    private String DocumentID;
+    private String UploaderDepartmentName;
+    private String AttachmentPath;
+    private String LastModifierEmployeeID;
+    private String DepartmentName;
+    private String DownloadTimes;
+    private String EmployeeName;
+    private String ReceiveerName;
+    private String RecipientIDList;
+
+    public String getEmployeeName() {
+        return EmployeeName;
+    }
+
+    public void setEmployeeName(String employeeName) {
+        EmployeeName = employeeName;
+    }
+
+    public String getDocumentID() {
+        return DocumentID;
+    }
+
+    public void setDocumentID(String documentID) {
+        DocumentID = documentID;
+    }
+
+    public String getUploaderDepartmentName() {
+        return UploaderDepartmentName;
+    }
+
+    public void setUploaderDepartmentName(String uploaderDepartmentName) {
+        UploaderDepartmentName = uploaderDepartmentName;
+    }
+
+    public String getAttachmentPath() {
+        return AttachmentPath;
+    }
+
+    public void setAttachmentPath(String attachmentPath) {
+        AttachmentPath = attachmentPath;
+    }
+
+    public String getLastModifierEmployeeID() {
+        return LastModifierEmployeeID;
+    }
+
+    public void setLastModifierEmployeeID(String lastModifierEmployeeID) {
+        LastModifierEmployeeID = lastModifierEmployeeID;
+    }
+
+    public String getDepartmentName() {
+        return DepartmentName;
+    }
+
+    public void setDepartmentName(String departmentName) {
+        DepartmentName = departmentName;
+    }
+
+    public String getDownloadTimes() {
+        return DownloadTimes;
+    }
+
+    public void setDownloadTimes(String downloadTimes) {
+        DownloadTimes = downloadTimes;
+    }
+
+    public String getReceiveerName() {
+        return ReceiveerName;
+    }
+
+    public void setReceiveerName(String receiveerName) {
+        ReceiveerName = receiveerName;
+    }
+
+    public String getRecipientIDList() {
+        return RecipientIDList;
+    }
+
+    public void setRecipientIDList(String recipientIDList) {
+        RecipientIDList = recipientIDList;
+    }
 
     public String getSeeType() {
         return SeeType;
