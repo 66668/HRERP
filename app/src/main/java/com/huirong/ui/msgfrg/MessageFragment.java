@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -19,10 +20,7 @@ import com.huirong.db.sqlite.SQLiteScheduledb;
 import com.huirong.dialog.Loading;
 import com.huirong.helper.UserHelper;
 import com.huirong.model.MessageFragmentListModel;
-import com.huirong.model.NoticeListModel;
-import com.huirong.model.NotificationListModel;
 import com.huirong.model.ScheduleModel;
-import com.huirong.model.workplan.WorkplanListModel;
 import com.huirong.ui.appsfrg.MissionListActivity;
 import com.huirong.ui.appsfrg.NoticeListActivity;
 import com.huirong.ui.appsfrg.NotificationListActivity;
@@ -34,7 +32,6 @@ import com.huirong.utils.LogUtils;
 import com.huirong.utils.PageUtil;
 
 import java.util.ArrayList;
-import java.util.List;
 
 
 /**
@@ -90,21 +87,10 @@ public class MessageFragment extends com.huirong.base.BaseFragment {
     private static final int GET_SCHEDULE_DATA = -39;
     private static final int NONE_SCHEDULE_DATA = -38;
 
-    //公告
-    private static final int GET_NOTICE_DATA = -37;//
-    private static final int NONE_NOTICE_DATA = -36;//
-
-    //通知
-    private static final int GET_NOTIFICATION_DATA = -33;//
-    private static final int NONE_NOTIFICATION_DATA = -32;//
 
     //其他通知
     private static final int GET_MESSAGE_DATA = -35;//
     private static final int NONE_MESSAGE_DATA = -34;//
-
-    //工作计划 我收到的
-    private static final int GET_WORKPLAN_DATA = -31;//
-    private static final int NONE_WORKPLAN_DATA = -30;//
 
 
     //单例模式
@@ -290,45 +276,6 @@ public class MessageFragment extends com.huirong.base.BaseFragment {
                 } else {
                     handler.sendMessage(handler.obtainMessage(NONE_SCHEDULE_DATA));
                 }
-
-
-                //公告
-                try {
-                    List<NoticeListModel> visitorModelList = UserHelper.GetAppNoticeList(
-                            getActivity(),
-                            "",//iMaxTime
-                            "");
-
-                    if (visitorModelList == null || visitorModelList.size() <= 0) {
-                        handler.sendMessage(handler.obtainMessage(NONE_NOTICE_DATA, "没有最新公告"));
-                    } else if (visitorModelList.size() > 0) {
-                        handler.sendMessage(handler.obtainMessage(GET_NOTICE_DATA, visitorModelList));
-                    }
-                } catch (MyException e) {
-                    Log.d("SJY", "公告异常= " + e.getMessage());
-                    handler.sendMessage(handler.obtainMessage(NONE_NOTICE_DATA, "没有最新公告"));
-                }
-
-                //通知
-                try {
-                    List<NotificationListModel> visitorModelList = UserHelper.GetAppNotificationList(
-                            getActivity(),
-                            "",//iMaxTime
-                            "");
-                    if (visitorModelList == null) {
-                        handler.sendMessage(handler.obtainMessage(NONE_NOTIFICATION_DATA, "没有最新通知"));
-                    } else {
-                        if (visitorModelList.size() <= 0) {
-                            handler.sendMessage(handler.obtainMessage(NONE_NOTIFICATION_DATA, "没有最新通知"));
-                        } else {
-                            handler.sendMessage(handler.obtainMessage(GET_NOTIFICATION_DATA, visitorModelList));
-                        }
-                    }
-                } catch (MyException e) {
-                    Log.d("SJY", "通知异常= " + e.getMessage());
-                    handler.sendMessage(handler.obtainMessage(NONE_NOTIFICATION_DATA, "没有最新通知"));
-                }
-
                 //其他消息
                 try {
                     MessageFragmentListModel model = UserHelper.GetMassageFragmentList(
@@ -341,23 +288,6 @@ public class MessageFragment extends com.huirong.base.BaseFragment {
                 } catch (MyException e) {
                     Log.d("SJY", "通知异常= " + e.toString());
                     handler.sendMessage(handler.obtainMessage(NONE_MESSAGE_DATA, "没有最新通知"));
-                }
-
-                //工作计划
-                try {
-                    List<WorkplanListModel> visitorModelList = UserHelper.GetWorkPlanList(
-                            getActivity(),
-                            "",//iMaxTime
-                            "");
-
-                    if (visitorModelList == null || visitorModelList.size() <= 0) {
-                        handler.sendMessage(handler.obtainMessage(NONE_WORKPLAN_DATA, "没有最新通知"));
-                    }
-
-                    handler.sendMessage(handler.obtainMessage(GET_WORKPLAN_DATA, visitorModelList));
-                } catch (MyException e) {
-                    LogUtils.e("获取数据出错", e.toString());
-                    handler.sendMessage(handler.obtainMessage(NONE_WORKPLAN_DATA, "没有最新通知"));
                 }
             }
         });
@@ -376,106 +306,6 @@ public class MessageFragment extends com.huirong.base.BaseFragment {
                     MessageFragmentListModel msgmodel = (MessageFragmentListModel) msg.obj;
                     LogUtils.d("消息", msgmodel.toString());
                     showMessageList(msgmodel);
-                    break;
-
-                case GET_WORKPLAN_DATA://工作计划
-                    List<WorkplanListModel> worlplanList = (List<WorkplanListModel>) msg.obj;
-                    int workplanSize = splitWorkplanData(worlplanList);
-
-                    if (workplanSize == 0) {
-                        workplan_content.setText("");
-                        workplan_time.setText("");
-                    } else if (workplanSize > 0 && workplanSize <= 10) {
-
-                        //内容
-                        workplan_content.setTextColor(getActivity().getResources().getColor(R.color.red));
-                        workplan_content.setText("有 " + workplanSize + " 条收到的工作计划");
-
-                        //时间
-                        workplan_time.setVisibility(View.VISIBLE);
-                        workplan_time.setText(worlplanList.get(0).getCreateTime());
-                        //个数
-                        //                        notice_number.setVisibility(View.VISIBLE);
-                        //                        notice_number.setText("" + noticeSize);
-
-                    } else if (workplanSize > 10) {
-                        workplan_content.setTextColor(getActivity().getResources().getColor(R.color.red));
-                        workplan_content.setText("您有 10+  条收到的工作计划");
-                        //时间
-                        workplan_time.setVisibility(View.VISIBLE);
-                        workplan_time.setText(worlplanList.get(0).getCreateTime());
-
-                        //个数
-                        //                        notice_time.setVisibility(View.VISIBLE);
-                        //                        notice_number.setText("10+");
-                    }
-                    break;
-
-                case GET_NOTICE_DATA://公告
-                    List<NoticeListModel> noticeList = (List<NoticeListModel>) msg.obj;
-                    int noticeSize = splitNoticeDate(noticeList);
-                    if (noticeSize == 0) {
-                        handler.sendMessage(handler.obtainMessage(NONE_NOTICE_DATA, "没有最新公告"));
-
-                    } else if (noticeSize > 0 && noticeSize <= 10) {
-
-                        //内容
-                        notice_content.setTextColor(getActivity().getResources().getColor(R.color.red));
-                        notice_content.setText("您有 " + noticeSize + " 条公告未阅读");
-
-                        //时间
-                        notice_time.setVisibility(View.VISIBLE);
-                        notice_time.setText(noticeList.get(0).getCreateTime());
-                        //个数
-                        //                        notice_number.setVisibility(View.VISIBLE);
-                        //                        notice_number.setText("" + noticeSize);
-
-                    } else if (noticeSize > 10) {
-                        notice_content.setTextColor(getActivity().getResources().getColor(R.color.red));
-                        notice_content.setText("您有 10+  条公告未阅读");
-                        //时间
-                        notice_time.setVisibility(View.VISIBLE);
-                        notice_time.setText(noticeList.get(0).getCreateTime());
-
-                        //个数
-                        //                        notice_time.setVisibility(View.VISIBLE);
-                        //                        notice_number.setText("10+");
-                    }
-
-                    break;
-
-                case GET_NOTIFICATION_DATA://通知
-                    List<com.huirong.model.NotificationListModel> notificationList = (List<com.huirong.model.NotificationListModel>) msg.obj;
-                    int notificationSize = splitNotificationDate(notificationList);
-                    if (notificationSize == 0) {
-                        handler.sendMessage(handler.obtainMessage(NONE_NOTIFICATION_DATA, "没有最新通知"));
-
-                    } else if (notificationSize > 0 && notificationSize <= 10) {
-
-                        //内容
-                        msg_content.setTextColor(getActivity().getResources().getColor(R.color.red));
-                        msg_content.setText("您有 " + notificationSize + " 条通知未阅读");
-
-                        //时间
-                        msg_time.setVisibility(View.VISIBLE);
-                        msg_time.setText(notificationList.get(0).getCreateTime());
-
-                        //个数
-                        //                        msg_number.setVisibility(View.VISIBLE);
-                        //                        msg_number.setText("" + notificationSize);
-
-                    } else if (notificationSize > 10) {
-                        msg_content.setTextColor(getActivity().getResources().getColor(R.color.red));
-                        msg_content.setText("您有 10+  条通知未阅读");
-                        //时间
-                        msg_time.setVisibility(View.VISIBLE);
-                        msg_time.setText(notificationList.get(0).getCreateTime());
-
-                        //个数
-                        //                        msg_number.setVisibility(View.VISIBLE);
-                        //                        msg_number.setText("10+");
-                    }
-
                     break;
 
 
@@ -499,29 +329,6 @@ public class MessageFragment extends com.huirong.base.BaseFragment {
                         //                        schedule_number.setText("10+");
                     }
                     break;
-
-                case NONE_NOTICE_DATA:
-
-                    //内容
-                    notice_content.setText((String) msg.obj);
-                    notice_content.setTextColor(getActivity().getResources().getColor(R.color.textHintColor));
-
-                    //时间
-                    //                    notice_number.setVisibility(View.INVISIBLE);
-                    //个数
-                    notice_time.setVisibility(View.INVISIBLE);
-                    break;
-                case NONE_NOTIFICATION_DATA:
-
-                    //内容
-                    msg_content.setText((String) msg.obj);
-                    msg_content.setTextColor(getActivity().getResources().getColor(R.color.textHintColor));
-                    //时间
-                    //                    msg_number.setVisibility(View.INVISIBLE);
-                    //个数
-                    msg_time.setVisibility(View.INVISIBLE);
-                    break;
-
 
                 case NONE_SCHEDULE_DATA:
 
@@ -548,7 +355,7 @@ public class MessageFragment extends com.huirong.base.BaseFragment {
 
     private void showMessageList(MessageFragmentListModel model) {
         //待办事项 审批
-        if (model.getApprovalCount() != null) {
+        if (model.getApprovalCount() != null && !TextUtils.isEmpty(model.getApprovalCount())) {
             //            undo_number.setVisibility(View.VISIBLE);
             //            undo_number.setText(model.getApprovalCount());
 
@@ -564,7 +371,7 @@ public class MessageFragment extends com.huirong.base.BaseFragment {
         }
 
         //抄送给我
-        if (model.getApprovalCount1() != null) {
+        if (model.getApprovalCount1() != null && !TextUtils.isEmpty(model.getApprovalCount1())) {
             //            copy_number.setVisibility(View.VISIBLE);
             //            copy_number.setText(model.getApprovalCount1());
 
@@ -580,7 +387,7 @@ public class MessageFragment extends com.huirong.base.BaseFragment {
         }
 
         //任务
-        if (model.getMaintainCount() != null) {
+        if (model.getMaintainCount() != null && !TextUtils.isEmpty(model.getMaintainCount())) {
             //            mission_number.setVisibility(View.VISIBLE);
             //            mission_number.setText(model.getMaintainCount());
 
@@ -595,50 +402,59 @@ public class MessageFragment extends com.huirong.base.BaseFragment {
             mission_time.setText("");
         }
 
+        //通知
+        if (model.getNoticeCount() != null && !TextUtils.isEmpty(model.getNoticeCount())) {
+            //            mission_number.setVisibility(View.VISIBLE);
+            //            mission_number.setText(model.getMaintainCount());
 
-    }
+            //内容
+            msg_content.setTextColor(getActivity().getResources().getColor(R.color.red));
+            msg_content.setText("有 " + model.getNoticeCount() + " 条通知未阅读");
 
-    //截取 我收到的 工作计划 list
-    private int splitWorkplanData(List<WorkplanListModel> list) {
-        List<WorkplanListModel> workplanList = new ArrayList<WorkplanListModel>();
-        for (int i = 0; i < list.size(); i++) {
-            if (list.get(i).getSeeType().contains("我收到的")) {
-                workplanList.add(list.get(i));
-            }
+            //时间
+            msg_time.setText(model.getNoticeTime());
+        } else {
+            //            mission_number.setVisibility(View.INVISIBLE);
+            msg_content.setText("");
+            msg_time.setText("");
         }
-        int size = workplanList.size();
-        return size;
 
-    }
+        //公告
+        if (model.getAfficheCount() != null && !TextUtils.isEmpty(model.getAfficheCount())) {
+            //            mission_number.setVisibility(View.VISIBLE);
+            //            mission_number.setText(model.getMaintainCount());
 
-    //截取未读公告的list
+            //内容
+            notice_content.setTextColor(getActivity().getResources().getColor(R.color.red));
+            notice_content.setText("有 " + model.getAfficheCount() + " 条通知未阅读");
 
-    private int splitNoticeDate(List<NoticeListModel> list) {
-        List<NoticeListModel> NoticeList = new ArrayList<NoticeListModel>();
-        for (int i = 0; i < list.size(); i++) {
-            if (list.get(i).getIsRead().contains("0")) {
-                NoticeList.add(list.get(i));
-            }
+            //时间
+            notice_time.setText(model.getAfficheTime());
+        } else {
+            //            mission_number.setVisibility(View.INVISIBLE);
+            notice_content.setText("");
+            notice_time.setText("");
         }
-        int size = NoticeList.size();
-        return size;
 
-    }
+        //工作计划
+        if (model.getTaskScheduleCount() != null && !TextUtils.isEmpty(model.getTaskScheduleCount())) {
+            //            mission_number.setVisibility(View.VISIBLE);
+            //            mission_number.setText(model.getMaintainCount());
 
-    //获取通知! = 0的list
-    private int splitNotificationDate(List<com.huirong.model.NotificationListModel> list) {
-        List<com.huirong.model.NotificationListModel> NoticeList = new ArrayList<com.huirong.model.NotificationListModel>();
-        for (int i = 0; i < list.size(); i++) {
-            if (list.get(i).getIsRead().contains("0")) {
-                NoticeList.add(list.get(i));
-            }
+            //内容
+            workplan_content.setTextColor(getActivity().getResources().getColor(R.color.red));
+            workplan_content.setText("有 " + model.getTaskScheduleCount() + " 条通知未阅读");
+
+            //时间
+            workplan_time.setText(model.getApprovalCreateTime());
+        } else {
+            //            mission_number.setVisibility(View.INVISIBLE);
+            workplan_content.setText("");
+            workplan_time.setText("");
         }
-        int size = NoticeList.size();
-        return size;
+
 
     }
-
-
     //重写setMenuVisibility方法，不然会出现叠层的现象
     @Override
     public void setMenuVisibility(boolean menuVisibile) {

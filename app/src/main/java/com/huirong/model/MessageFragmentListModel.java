@@ -14,10 +14,47 @@ public class MessageFragmentListModel implements Serializable {
     private String ApprovalCreateTime1;//抄送
     private String maintainCreateTime;//任务
     private String TaskScheduleCreateTime;//计划
+    private String NoticeTime;//通知
+    private String AfficheTime;//公告
+
     private String ApprovalCount1;
     private String ApprovalCount;
     private String maintainCount;
+    private String NoticeCount;
+    private String AfficheCount;
     private String TaskScheduleCount;
+
+    public String getNoticeTime() {
+        return NoticeTime;
+    }
+
+    public void setNoticeTime(String noticeTime) {
+        NoticeTime = noticeTime;
+    }
+
+    public String getAfficheTime() {
+        return AfficheTime;
+    }
+
+    public void setAfficheTime(String afficheTime) {
+        AfficheTime = afficheTime;
+    }
+
+    public String getNoticeCount() {
+        return NoticeCount;
+    }
+
+    public void setNoticeCount(String noticeCount) {
+        NoticeCount = noticeCount;
+    }
+
+    public String getAfficheCount() {
+        return AfficheCount;
+    }
+
+    public void setAfficheCount(String afficheCount) {
+        AfficheCount = afficheCount;
+    }
 
     public static long getSerialVersionUID() {
         return serialVersionUID;

@@ -1,7 +1,6 @@
 package com.huirong.ui.appsfrg.childmodel.notice;
 
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -13,6 +12,7 @@ import com.huirong.dialog.Loading;
 import com.huirong.helper.UserHelper;
 import com.huirong.inject.ViewInject;
 import com.huirong.model.NoticeListModel;
+import com.huirong.utils.LogUtils;
 
 /**
  * 公告详情
@@ -82,10 +82,10 @@ public class NoticeDetailActivity extends BaseActivity {
                 try {
                     UserHelper.postReadThisNotice(NoticeDetailActivity.this
                             ,model.getApplicationID());
-                    Log.d("SJY", "成功");
+                    LogUtils.d("SJY", "成功");
                 } catch (MyException e) {
                     e.printStackTrace();
-                    Log.d("SJY", "已读异常="+e.getMessage());
+                    LogUtils.d("SJY", "已读异常="+e.getMessage());
                 }
             }
         });

@@ -124,14 +124,18 @@ public class WebUrl {
         public static final String GETNOTICELIST = LOGIN_URL + LOGIN_FLODER_USER + "AfficheList/MyAfficheList";
 
         /**
-         * 04-02 应用 公告 获取列表
+         * 04-02 应用 公告 已读
          */
-        public static final String READTHISNOTICE = LOGIN_URL + LOGIN_FLODER_USER + "UpdateIsread/UpdateIsreads";
-
+        public static final String READTHISNOTICE = LOGIN_URL + LOGIN_FLODER_USER + "AfficheList/AfficheListID";
         /**
          * 05 应用 通知 列表
          */
         public static final String GETNOTIFICATIONLIST = LOGIN_URL + LOGIN_FLODER_USER + "NoticeList/MyNoticeList";
+
+        /**
+         * 05-02 应用 通知 已读
+         */
+        public static final String READTHISNOTIFICATION = LOGIN_URL + LOGIN_FLODER_USER + "NoticeList/NoticeListID";
         /**
          * 应用-费用（财务） 接口
          * #############################################################################################

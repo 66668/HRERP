@@ -76,12 +76,13 @@ public class NotificationDetailActivity extends BaseActivity {
         tv_content.setText(model.getAbstract());
     }
 
+    //将状态标位 已读
     private void readThisNotice(final NotificationListModel model){
         Loading.noDialogRun(this, new Runnable() {
             @Override
             public void run() {
                 try {
-                    UserHelper.postReadThisNotice(NotificationDetailActivity.this
+                    UserHelper.postReadThisNotification(NotificationDetailActivity.this
                             ,model.getApplicationID());
                     Log.d("SJY", "成功");
                 } catch (MyException e) {

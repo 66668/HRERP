@@ -639,7 +639,7 @@ public class UserHelper<T> {
 
     /**
      * 04-02
-     * 进入公告详情，标记已读
+     * 公告详情，标记已读
      */
     public static void postReadThisNotice(Context context, String ApplicationID) throws MyException {
         if (!NetworkManager.isNetworkAvailable(context)) {
@@ -648,8 +648,8 @@ public class UserHelper<T> {
         LogUtils.d("SJY", "ApplicationID=" + ApplicationID + "--EmployeeID=" + UserHelper.getCurrentUser().getEmployeeID());
         HttpResult hr = APIUtils.postForObject(WebUrl.AppsManager.READTHISNOTICE,
                 HttpParameter.create()
-                        .add("ApplicationID", ApplicationID)
-                        .add("EmployeeID", UserHelper.getCurrentUser().getEmployeeID())
+                        .add("AfficheID", ApplicationID)
+                        .add("employeeId", UserHelper.getCurrentUser().getEmployeeID())
         );
         if (hr.hasError()) {
             throw hr.getError();
@@ -690,17 +690,17 @@ public class UserHelper<T> {
 
     /**
      * 05-02
-     * 进入公告详情，标记已读
+     * 通知详情，标记已读
      */
-    public static void postReadThisNoti(Context context, String ApplicationID) throws MyException {
+    public static void postReadThisNotification(Context context, String ApplicationID) throws MyException {
         if (!NetworkManager.isNetworkAvailable(context)) {
             throw new MyException(R.string.network_invalid);
         }
         LogUtils.d("SJY", "ApplicationID=" + ApplicationID + "--EmployeeID=" + UserHelper.getCurrentUser().getEmployeeID());
         HttpResult hr = APIUtils.postForObject(WebUrl.AppsManager.READTHISNOTICE,
                 HttpParameter.create()
-                        .add("ApplicationID", ApplicationID)
-                        .add("EmployeeID", UserHelper.getCurrentUser().getEmployeeID())
+                        .add("NoticeID", ApplicationID)
+                        .add("employeeId", UserHelper.getCurrentUser().getEmployeeID())
         );
         if (hr.hasError()) {
             throw hr.getError();

@@ -64,13 +64,13 @@ public class AppsFragment extends BaseFragment {
 
         HashMap<String, Object> map1 = new HashMap<String, Object>();
         map1.put("name", "工作计划");
-        map1.put("icon", R.mipmap.app_conference);
+        map1.put("icon", R.mipmap.app_workplan);
         list.add(map1);
 
 
         HashMap<String, Object> map2 = new HashMap<String, Object>();
         map2.put("name", "任务");
-        map2.put("icon", R.mipmap.app_performancemg);
+        map2.put("icon", R.mipmap.app_mission);
         list.add(map2);
 
         HashMap<String, Object> map3 = new HashMap<String, Object>();
