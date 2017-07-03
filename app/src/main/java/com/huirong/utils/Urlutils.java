@@ -188,9 +188,9 @@ public class Urlutils {
          */
         public static final String GETCOPYLIST = LOGIN_URL + LOGIN_FLODER_USER + "Mycopy/MycopyList";
         /**
-         * 01-03获取 抄送详情
+         * 01-03获取 抄送详情--调用审批详情接口即可
          */
-        public static final String GETCOPYDETAIL = LOGIN_URL + LOGIN_FLODER_USER + "AllCopyListInfo/GetAllCopyListInfo";
+        public static final String GETCOPYDETAIL = LOGIN_URL + LOGIN_FLODER_USER + "AllApprovalInfo/GetAllApprovalInfoByAppID";
 
         /**
          * 01-04-01 请假申请

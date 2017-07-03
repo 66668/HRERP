@@ -289,14 +289,21 @@ public class ZOCopyListActivity extends BaseActivity implements RefreshListView.
                 startActivity(WorkOverTimeDetailCopyActivity.class, bundle);
                 break;
 
-            case "财务申请"://06
+            case "费用申请"://06
+
                 //根据type决定跳转到具体界面
-                if (model.getApplicationTitle().contains("借款")) {
+                if (model.getDetail().contains("借款")) {
+
                     startActivity(FinancialLoanDetailCopyActivity.class, bundle);
-                } else if (model.getApplicationTitle().contains("付款")) {
+
+                } else if (model.getDetail().contains("付款")) {
+
                     startActivity(FinancialPayDetailCopyActivity.class, bundle);
-                } else if (model.getApplicationTitle().contains("报销")) {
+
+                } else if (model.getDetail().contains("报销")) {
+
                     startActivity(FinancialReimburseDetailCopyActivity.class, bundle);
+
                 } else {
                     PageUtil.DisplayToast("error!");
                 }
