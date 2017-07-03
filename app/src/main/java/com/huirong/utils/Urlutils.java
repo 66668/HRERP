@@ -1,6 +1,6 @@
 package com.huirong.utils;
 
-public class WebUrl {
+public class Urlutils {
     /**
      * 根接口
      */

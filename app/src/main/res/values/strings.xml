@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">惠荣ERP-OA-SaaS办公系统</string>
+    <string name="app_name">惠荣OA办公</string>
     <string name="action_settings">Settings</string>
     <string name="network_invalid">网络不给力，请检查网络连接！</string>
 

@@ -33,7 +33,7 @@ import com.huirong.utils.ConfigUtil;
 import com.huirong.utils.JSONUtils;
 import com.huirong.utils.LogUtils;
 import com.huirong.utils.Utils;
-import com.huirong.utils.WebUrl;
+import com.huirong.utils.Urlutils;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -96,7 +96,7 @@ public class UserHelper<T> {
         if (!NetworkManager.isNetworkAvailable(context))
             throw new MyException(R.string.network_invalid);
 
-        HttpResult hr = APIUtils.postForObject(WebUrl.UserManager.LOGIN_POST,
+        HttpResult hr = APIUtils.postForObject(Urlutils.UserManager.LOGIN_POST,
                 HttpParameter.create().
                         add("storeId", storeId).
                         add("workId", workId).
@@ -149,7 +149,7 @@ public class UserHelper<T> {
         }
 
         try {
-            HttpResult httpResult = APIUtils.postForObject(WebUrl.UserManager.CHANGE_PASSWORD,
+            HttpResult httpResult = APIUtils.postForObject(Urlutils.UserManager.CHANGE_PASSWORD,
                     HttpParameter.create()
                             .add("oldpassword", oldpassword)
                             .add("newpassword", newpassword)
@@ -181,7 +181,7 @@ public class UserHelper<T> {
             throw new MyException(R.string.network_invalid);
         }
 
-        HttpResult httpResult = APIUtils.postForObject(WebUrl.MessageManager.MESSAGELIST,
+        HttpResult httpResult = APIUtils.postForObject(Urlutils.MessageManager.MESSAGELIST,
                 HttpParameter.create().add("employeeId", UserHelper.getCurrentUser().getEmployeeID())
         );
 
@@ -205,7 +205,7 @@ public class UserHelper<T> {
         }
         try {
             LogUtils.d("SJY", UserHelper.getCurrentUser().getEmployeeID());
-            HttpResult httpResult = APIUtils.postForObject(WebUrl.ContactsManager.GETCOMPANYSONOFCO,
+            HttpResult httpResult = APIUtils.postForObject(Urlutils.ContactsManager.GETCOMPANYSONOFCO,
                     HttpParameter.create().
                             add("sEmployeeID", UserHelper.getCurrentUser().getEmployeeID()));
 
@@ -240,7 +240,7 @@ public class UserHelper<T> {
             throw new MyException(R.string.network_invalid);
         }
         try {
-            HttpResult httpResult = APIUtils.postForObject(WebUrl.ContactsManager.DEPTINFOBYSTOREID,
+            HttpResult httpResult = APIUtils.postForObject(Urlutils.ContactsManager.DEPTINFOBYSTOREID,
                     HttpParameter.create()
                             .add("sStoreID", sStoreID)
                             .add("sEmployeeID", UserHelper.getCurrentUser().getEmployeeID()));//分公司ID
@@ -278,7 +278,7 @@ public class UserHelper<T> {
             throw new MyException(R.string.network_invalid);
         }
         try {
-            HttpResult httpResult = APIUtils.postForObject(WebUrl.ContactsManager.EMPLOYEEINFOBYDEPTID,
+            HttpResult httpResult = APIUtils.postForObject(Urlutils.ContactsManager.EMPLOYEEINFOBYDEPTID,
                     HttpParameter.create()
                             .add("sDeptID", sDeptID)
                             .add("sEmployeeID", UserHelper.getCurrentUser().getEmployeeID())
@@ -313,7 +313,7 @@ public class UserHelper<T> {
         }
 
         try {
-            HttpResult httpResult = APIUtils.postForObject(WebUrl.ContactsManager.CONTACTSSELECTCO,
+            HttpResult httpResult = APIUtils.postForObject(Urlutils.ContactsManager.CONTACTSSELECTCO,
                     HttpParameter.create().
                             add("sEmployeeID", getCurrentUser().getEmployeeID()));
 
@@ -355,7 +355,7 @@ public class UserHelper<T> {
             throw new MyException(R.string.network_invalid);
         }
 
-        HttpResult hr = APIUtils.postForObject(WebUrl.AppsManager.WORKPLANLIST,
+        HttpResult hr = APIUtils.postForObject(Urlutils.AppsManager.WORKPLANLIST,
                 HttpParameter.create()
                         .add("iMaxTime", iMaxTime)
                         .add("iMinTime", iMinTime)
@@ -386,7 +386,7 @@ public class UserHelper<T> {
             throw new MyException(R.string.network_invalid);
         }
 
-        HttpResult hr = APIUtils.postForObject(WebUrl.AppsManager.ADDWORKPLAN,
+        HttpResult hr = APIUtils.postForObject(Urlutils.AppsManager.ADDWORKPLAN,
                 HttpParameter.create()
                         .add("obj", jsonObject.toString()));
 
@@ -413,7 +413,7 @@ public class UserHelper<T> {
             throw new MyException(R.string.network_invalid);
         }
 
-        HttpResult hr = APIUtils.postForObject(WebUrl.AppsManager.MISSIONLIST,
+        HttpResult hr = APIUtils.postForObject(Urlutils.AppsManager.MISSIONLIST,
                 HttpParameter.create()
                         .add("iMaxTime", iMaxTime)
                         .add("iMinTime", iMinTime)
@@ -455,7 +455,7 @@ public class UserHelper<T> {
         } catch (JSONException e) {
             e.printStackTrace();
         }
-        HttpResult hr = APIUtils.postForObject(WebUrl.AppsManager.ADDMISSION,
+        HttpResult hr = APIUtils.postForObject(Urlutils.AppsManager.ADDMISSION,
                 HttpParameter.create()
                         .add("obj", jsonObject.toString()));
 
@@ -475,7 +475,7 @@ public class UserHelper<T> {
         }
 
         try {
-            HttpResult httpResult = APIUtils.postForObject(WebUrl.AppsManager.MISSIONISCONTACTS,
+            HttpResult httpResult = APIUtils.postForObject(Urlutils.AppsManager.MISSIONISCONTACTS,
                     HttpParameter.create().
                             add("sEmployeeID", getCurrentUser().getEmployeeID()));
 
@@ -508,7 +508,7 @@ public class UserHelper<T> {
         if (!NetworkManager.isNetworkAvailable(context)) {
             throw new MyException(R.string.network_invalid);
         }
-        HttpResult hr = APIUtils.postForObject(WebUrl.AppsManager.MISSIONISREAD
+        HttpResult hr = APIUtils.postForObject(Urlutils.AppsManager.MISSIONISREAD
                 , HttpParameter.create().add("maintainID", maintainID).add("employeeId", UserHelper.getCurrentUser().getEmployeeID()));
         if (hr.hasError()) {
             throw hr.getError();
@@ -524,7 +524,7 @@ public class UserHelper<T> {
         if (!NetworkManager.isNetworkAvailable(context)) {
             throw new MyException(R.string.network_invalid);
         }
-        HttpResult hr = APIUtils.postForObject(WebUrl.AppsManager.MISSIONISCOMPLETE
+        HttpResult hr = APIUtils.postForObject(Urlutils.AppsManager.MISSIONISCOMPLETE
                 , HttpParameter.create()
                         .add("maintainID", maintainID)
                         .add("ISremark", commitContent)
@@ -556,7 +556,7 @@ public class UserHelper<T> {
             js.put("attendCapTime", attendCapTime);
             js.put("address", address);
 
-            HttpResult httpResult = APIUtils.postForObject(WebUrl.AppsManager.ATTENDRECORD,
+            HttpResult httpResult = APIUtils.postForObject(Urlutils.AppsManager.ATTENDRECORD,
                     HttpParameter.create().add("obj", js.toString()));
 
             if (httpResult.hasError()) {
@@ -583,7 +583,7 @@ public class UserHelper<T> {
             throw new MyException(R.string.network_invalid);
         }
 
-        HttpResult hr = APIUtils.postForObject(WebUrl.AppsManager.GETATTENDRECORD,
+        HttpResult hr = APIUtils.postForObject(Urlutils.AppsManager.GETATTENDRECORD,
                 HttpParameter.create()
                         .add("iMaxTime", iMaxTime)
                         .add("iMinTime", iMinTime)
@@ -614,7 +614,7 @@ public class UserHelper<T> {
             throw new MyException(R.string.network_invalid);
         }
 
-        HttpResult hr = APIUtils.postForObject(WebUrl.AppsManager.GETNOTICELIST,
+        HttpResult hr = APIUtils.postForObject(Urlutils.AppsManager.GETNOTICELIST,
                 HttpParameter.create()
                         .add("iMaxTime", iMaxTime)
                         .add("iMinTime", iMinTime)
@@ -646,7 +646,7 @@ public class UserHelper<T> {
             throw new MyException(R.string.network_invalid);
         }
         LogUtils.d("SJY", "ApplicationID=" + ApplicationID + "--EmployeeID=" + UserHelper.getCurrentUser().getEmployeeID());
-        HttpResult hr = APIUtils.postForObject(WebUrl.AppsManager.READTHISNOTICE,
+        HttpResult hr = APIUtils.postForObject(Urlutils.AppsManager.READTHISNOTICE,
                 HttpParameter.create()
                         .add("AfficheID", ApplicationID)
                         .add("employeeId", UserHelper.getCurrentUser().getEmployeeID())
@@ -666,7 +666,7 @@ public class UserHelper<T> {
             throw new MyException(R.string.network_invalid);
         }
 
-        HttpResult hr = APIUtils.postForObject(WebUrl.AppsManager.GETNOTIFICATIONLIST,
+        HttpResult hr = APIUtils.postForObject(Urlutils.AppsManager.GETNOTIFICATIONLIST,
                 HttpParameter.create()
                         .add("iMaxTime", iMaxTime)
                         .add("iMinTime", iMinTime)
@@ -697,7 +697,7 @@ public class UserHelper<T> {
             throw new MyException(R.string.network_invalid);
         }
         LogUtils.d("SJY", "ApplicationID=" + ApplicationID + "--EmployeeID=" + UserHelper.getCurrentUser().getEmployeeID());
-        HttpResult hr = APIUtils.postForObject(WebUrl.AppsManager.READTHISNOTICE,
+        HttpResult hr = APIUtils.postForObject(Urlutils.AppsManager.READTHISNOTICE,
                 HttpParameter.create()
                         .add("NoticeID", ApplicationID)
                         .add("employeeId", UserHelper.getCurrentUser().getEmployeeID())
@@ -716,7 +716,7 @@ public class UserHelper<T> {
             throw new MyException(R.string.network_invalid);
         }
 
-        HttpResult hr = APIUtils.postForObject(WebUrl.AppsManager.FINCANCIALLIST,
+        HttpResult hr = APIUtils.postForObject(Urlutils.AppsManager.FINCANCIALLIST,
                 HttpParameter.create()
                         .add("iMaxTime", iMaxTime)
                         .add("iMinTime", iMinTime)
@@ -755,7 +755,7 @@ public class UserHelper<T> {
             throw new MyException(R.string.network_invalid);
         }
 
-        HttpResult hr = APIUtils.postForObject(WebUrl.AppsManager.GETMYAPPLICATIONRECORD,
+        HttpResult hr = APIUtils.postForObject(Urlutils.AppsManager.GETMYAPPLICATIONRECORD,
                 HttpParameter.create()
                         .add("iMaxTime", iMaxTime)
                         .add("iMinTime", iMinTime)
@@ -792,7 +792,7 @@ public class UserHelper<T> {
             throw new MyException(R.string.network_invalid);
         }
         try {
-            HttpResult httpResult = APIUtils.postForObject(WebUrl.AppsManager.APPLICATIONDETAIL,
+            HttpResult httpResult = APIUtils.postForObject(Urlutils.AppsManager.APPLICATIONDETAIL,
                     HttpParameter.create()
                             .add("ApplicationID", ApplicationID)
                             .add("ApplicationType", ApplicationType)
@@ -831,7 +831,7 @@ public class UserHelper<T> {
         }
 
         try {
-            HttpResult hr = APIUtils.postForObject(WebUrl.AppsManager.GETMYAPPROVALRECORD,
+            HttpResult hr = APIUtils.postForObject(Urlutils.AppsManager.GETMYAPPROVALRECORD,
                     HttpParameter.create()
                             .add("iMaxTime", iMaxTime)
                             .add("iMinTime", iMinTime)
@@ -865,7 +865,7 @@ public class UserHelper<T> {
             throw new MyException(R.string.network_invalid);
         }
         try {
-            HttpResult httpResult = APIUtils.postForObject(WebUrl.AppsManager.GETMYAPPROVALDETAIL,
+            HttpResult httpResult = APIUtils.postForObject(Urlutils.AppsManager.GETMYAPPROVALDETAIL,
                     HttpParameter.create()
                             .add("ApplicationID", ApplicationID)
                             .add("ApplicationType", ApplicationType)
@@ -906,7 +906,7 @@ public class UserHelper<T> {
         }
         try {
             LogUtils.d("SJY", mCurrentUser.getEmployeeID());
-            HttpResult hr = APIUtils.postForObject(WebUrl.AppsManager.APPROVALE_AGREE_DISAGREE,
+            HttpResult hr = APIUtils.postForObject(Urlutils.AppsManager.APPROVALE_AGREE_DISAGREE,
                     HttpParameter.create()
                             .add("sApprovalid", sApprovalid)
                             .add("sComment", sComment)
@@ -939,7 +939,7 @@ public class UserHelper<T> {
         String toJsondata = new Gson().toJson(model);
         try {
             LogUtils.d("SJY", mCurrentUser.getEmployeeID());
-            HttpResult hr = APIUtils.postForObject(WebUrl.AppsManager.APPROVAL_TRANSFORTO,
+            HttpResult hr = APIUtils.postForObject(Urlutils.AppsManager.APPROVAL_TRANSFORTO,
                     HttpParameter.create().add("obj", toJsondata));
 
             if (hr.hasError()) {
@@ -967,7 +967,7 @@ public class UserHelper<T> {
         String toJsondata = new Gson().toJson(model);
         try {
             LogUtils.d("SJY", mCurrentUser.getEmployeeID());
-            HttpResult hr = APIUtils.postForObject(WebUrl.AppsManager.APPROVAL_COPYTO,
+            HttpResult hr = APIUtils.postForObject(Urlutils.AppsManager.APPROVAL_COPYTO,
                     HttpParameter.create().add("obj", toJsondata));
 
             if (hr.hasError()) {
@@ -998,7 +998,7 @@ public class UserHelper<T> {
         }
 
         try {
-            HttpResult hr = APIUtils.postForObject(WebUrl.AppsManager.GETCOPYLIST,
+            HttpResult hr = APIUtils.postForObject(Urlutils.AppsManager.GETCOPYLIST,
                     HttpParameter.create()
                             .add("iMaxTime", iMaxTime)
                             .add("iMinTime", iMinTime)
@@ -1032,7 +1032,7 @@ public class UserHelper<T> {
             throw new MyException(R.string.network_invalid);
         }
         try {
-            HttpResult httpResult = APIUtils.postForObject(WebUrl.AppsManager.GETCOPYDETAIL,
+            HttpResult httpResult = APIUtils.postForObject(Urlutils.AppsManager.GETCOPYDETAIL,
                     HttpParameter.create()
                             .add("ApplicationID", ApplicationID)
                             .add("ApplicationType", ApplicationType)
@@ -1071,7 +1071,7 @@ public class UserHelper<T> {
             jsonObject.put("StoreID", UserHelper.getCurrentUser().getStoreID());
             jsonObject.put("EmployeeID", UserHelper.getCurrentUser().getEmployeeID());
 
-            HttpResult httpResult = APIUtils.postForObject(WebUrl.AppsManager.LEAVEPOST
+            HttpResult httpResult = APIUtils.postForObject(Urlutils.AppsManager.LEAVEPOST
                     , HttpParameter.create().add("obj", jsonObject.toString())
                     , picPath);
 
@@ -1105,7 +1105,7 @@ public class UserHelper<T> {
             jsonObject.put("StoreID", UserHelper.getCurrentUser().getStoreID());
             jsonObject.put("EmployeeID", UserHelper.getCurrentUser().getEmployeeID());
 
-            HttpResult httpResult = APIUtils.postForObject(WebUrl.AppsManager.BEAWAY,
+            HttpResult httpResult = APIUtils.postForObject(Urlutils.AppsManager.BEAWAY,
                     HttpParameter.create().add("obj", jsonObject.toString()));
 
             if (httpResult.hasError()) {
@@ -1138,7 +1138,7 @@ public class UserHelper<T> {
             js.put("StoreID", UserHelper.getCurrentUser().getStoreID());
             js.put("EmployeeID", UserHelper.getCurrentUser().getEmployeeID());
 
-            HttpResult httpResult = APIUtils.postForObject(WebUrl.AppsManager.VEHICLEPOST,
+            HttpResult httpResult = APIUtils.postForObject(Urlutils.AppsManager.VEHICLEPOST,
                     HttpParameter.create().add("obj", js.toString()));
 
             if (httpResult.hasError()) {
@@ -1172,7 +1172,7 @@ public class UserHelper<T> {
             js.put("StoreID", UserHelper.getCurrentUser().getStoreID());
             js.put("EmployeeID", UserHelper.getCurrentUser().getEmployeeID());
 
-            HttpResult httpResult = APIUtils.postForObject(WebUrl.AppsManager.MAINTENANCE,
+            HttpResult httpResult = APIUtils.postForObject(Urlutils.AppsManager.MAINTENANCE,
                     HttpParameter.create().add("obj", js.toString()));
 
             if (httpResult.hasError()) {
@@ -1204,7 +1204,7 @@ public class UserHelper<T> {
             js.put("StoreID", UserHelper.getCurrentUser().getStoreID());
             js.put("EmployeeID", UserHelper.getCurrentUser().getEmployeeID());
 
-            HttpResult httpResult = APIUtils.postForObject(WebUrl.AppsManager.OVERAPPROVALPOST,
+            HttpResult httpResult = APIUtils.postForObject(Urlutils.AppsManager.OVERAPPROVALPOST,
                     HttpParameter.create().add("obj", js.toString()));
 
             if (httpResult.hasError()) {
@@ -1239,7 +1239,7 @@ public class UserHelper<T> {
             js.put("StoreID", mCurrentUser.getStoreID());
             js.put("EmployeeID", UserHelper.getCurrentUser().getEmployeeID());
 
-            HttpResult httpResult = APIUtils.postForObject(WebUrl.AppsManager.LRAPPLICATIONPOST
+            HttpResult httpResult = APIUtils.postForObject(Urlutils.AppsManager.LRAPPLICATIONPOST
                     , HttpParameter.create().add("obj", js.toString())
                     , file);
 
@@ -1276,7 +1276,7 @@ public class UserHelper<T> {
             jsonObject.put("StoreID", UserHelper.getCurrentUser().getStoreID());
             jsonObject.put("EmployeeID", UserHelper.getCurrentUser().getEmployeeID());
 
-            HttpResult httpResult = APIUtils.postForObject(WebUrl.AppsManager.DIMISSIONPOST,
+            HttpResult httpResult = APIUtils.postForObject(Urlutils.AppsManager.DIMISSIONPOST,
                     HttpParameter.create().add("obj", jsonObject.toString()));
 
             if (httpResult.hasError()) {
@@ -1309,7 +1309,7 @@ public class UserHelper<T> {
             jsonObject.put("StoreID", UserHelper.getCurrentUser().getStoreID());
             jsonObject.put("EmployeeID", UserHelper.getCurrentUser().getEmployeeID());
 
-            HttpResult httpResult = APIUtils.postForObject(WebUrl.AppsManager.BOOKTICKET,
+            HttpResult httpResult = APIUtils.postForObject(Urlutils.AppsManager.BOOKTICKET,
                     HttpParameter.create().add("obj", jsonObject.toString()));
 
             if (httpResult.hasError()) {
@@ -1342,7 +1342,7 @@ public class UserHelper<T> {
             js.put("StoreID", UserHelper.getCurrentUser().getStoreID());
             js.put("EmployeeID", UserHelper.getCurrentUser().getEmployeeID());
 
-            HttpResult httpResult = APIUtils.postForObject(WebUrl.AppsManager.TAKEDAYSOFFPOST,
+            HttpResult httpResult = APIUtils.postForObject(Urlutils.AppsManager.TAKEDAYSOFFPOST,
                     HttpParameter.create().add("obj", js.toString()));
 
             if (httpResult.hasError()) {
@@ -1375,7 +1375,7 @@ public class UserHelper<T> {
             js.put("StoreID", UserHelper.getCurrentUser().getStoreID());
             js.put("EmployeeID", UserHelper.getCurrentUser().getEmployeeID());
 
-            HttpResult httpResult = APIUtils.postForObject(WebUrl.AppsManager.SIGNET,
+            HttpResult httpResult = APIUtils.postForObject(Urlutils.AppsManager.SIGNET,
                     HttpParameter.create().add("obj", js.toString()));
 
             if (httpResult.hasError()) {
@@ -1408,7 +1408,7 @@ public class UserHelper<T> {
             js.put("StoreID", UserHelper.getCurrentUser().getStoreID());
             js.put("EmployeeID", UserHelper.getCurrentUser().getEmployeeID());
 
-            HttpResult httpResult = APIUtils.postForObject(WebUrl.AppsManager.TRAINING,
+            HttpResult httpResult = APIUtils.postForObject(Urlutils.AppsManager.TRAINING,
                     HttpParameter.create().add("obj", js.toString()));
 
             if (httpResult.hasError()) {
@@ -1442,7 +1442,7 @@ public class UserHelper<T> {
             js.put("StoreID", UserHelper.getCurrentUser().getStoreID());
             js.put("EmployeeID", UserHelper.getCurrentUser().getEmployeeID());
 
-            HttpResult httpResult = APIUtils.postForObject(WebUrl.AppsManager.BORROWPOST,
+            HttpResult httpResult = APIUtils.postForObject(Urlutils.AppsManager.BORROWPOST,
                     HttpParameter.create().add("obj", js.toString()));
 
             if (httpResult.hasError()) {
@@ -1476,7 +1476,7 @@ public class UserHelper<T> {
             js.put("StoreID", UserHelper.getCurrentUser().getStoreID());
             js.put("EmployeeID", UserHelper.getCurrentUser().getEmployeeID());
 
-            HttpResult httpResult = APIUtils.postForObject(WebUrl.AppsManager.CHANGESALARY,
+            HttpResult httpResult = APIUtils.postForObject(Urlutils.AppsManager.CHANGESALARY,
                     HttpParameter.create().add("obj", js.toString()));
 
             if (httpResult.hasError()) {
@@ -1499,7 +1499,7 @@ public class UserHelper<T> {
             throw new MyException(R.string.network_invalid);
         }
 
-        HttpResult hr = APIUtils.postForObject(WebUrl.AppsManager.CONFERENCELIST,
+        HttpResult hr = APIUtils.postForObject(Urlutils.AppsManager.CONFERENCELIST,
                 HttpParameter.create()
                         .add("iMaxTime", iMaxTime)
                         .add("iMinTime", iMinTime)
@@ -1528,7 +1528,7 @@ public class UserHelper<T> {
             throw new MyException(R.string.network_invalid);
         }
 
-        HttpResult hr = APIUtils.postForObject(WebUrl.AppsManager.PROCUREMENTLIST,
+        HttpResult hr = APIUtils.postForObject(Urlutils.AppsManager.PROCUREMENTLIST,
                 HttpParameter.create()
                         .add("iMaxTime", iMaxTime)
                         .add("iMinTime", iMinTime)
@@ -1557,7 +1557,7 @@ public class UserHelper<T> {
             throw new MyException(R.string.network_invalid);
         }
 
-        HttpResult hr = APIUtils.postForObject(WebUrl.AppsManager.RECEIVELIST,
+        HttpResult hr = APIUtils.postForObject(Urlutils.AppsManager.RECEIVELIST,
                 HttpParameter.create()
                         .add("iMaxTime", iMaxTime)
                         .add("iMinTime", iMinTime)

@@ -269,7 +269,7 @@ public class ZOCopyListActivity extends BaseActivity implements RefreshListView.
 
             case "请假申请"://01
                 startActivity(LeaveDetailCopyActivity.class, bundle);
-                ;
+
                 break;
 
             case "出差申请"://02
@@ -278,7 +278,7 @@ public class ZOCopyListActivity extends BaseActivity implements RefreshListView.
 
             case "用车申请"://03
                 startActivity(VehicleDetailCopyActivity.class, bundle);
-                ;
+
                 break;
 
             case "车辆维保"://04

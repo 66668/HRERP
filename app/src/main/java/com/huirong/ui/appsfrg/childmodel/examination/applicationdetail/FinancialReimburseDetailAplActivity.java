@@ -137,7 +137,7 @@ public class FinancialReimburseDetailAplActivity extends BaseActivity {
     }
 
     private void setShow(FinancialAllModel model) {
-        LogUtils.d("SJY", "图片size=" + model.getImageLists().size());
+        LogUtils.d("报销详情", "图片size=" + model.getImageLists().size());
 
         if (model.getImageLists().size() == 1) {
             imgLoader.displayImage(model.getImageLists().get(0), img_01, imgOptions);

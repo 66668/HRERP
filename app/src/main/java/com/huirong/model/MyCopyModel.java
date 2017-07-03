@@ -12,8 +12,13 @@ public class MyCopyModel implements Serializable {
     private static final long serialVersionUID = 1L;
 
     private String Temp;
+    private String PublishTime;
+    private String Abstract;
+    private String IsRead;
+    private String PublishDeptName;
     private String ApprovalInfomodel;
     private String ApprovalID;
+
     private String ApplicationID;
     private String ApplicationTitle;
     private String ApplicationType;
@@ -28,7 +33,6 @@ public class MyCopyModel implements Serializable {
     private String ApprovalDepartmentName;
     private String ApprovalEmployeeID;
     private String ApprovalEmployeeName;
-
     private String ApprovalDate;
     private String ApprovalStatus;
     private String Comment;
@@ -36,6 +40,56 @@ public class MyCopyModel implements Serializable {
     private String CreateTimeForApp;
     private String CreateTime;
     private String StoreID;
+    private String Detail;
+    private String ID;
+
+    public String getPublishTime() {
+        return PublishTime;
+    }
+
+    public void setPublishTime(String publishTime) {
+        PublishTime = publishTime;
+    }
+
+    public String getAbstract() {
+        return Abstract;
+    }
+
+    public void setAbstract(String anAbstract) {
+        Abstract = anAbstract;
+    }
+
+    public String getIsRead() {
+        return IsRead;
+    }
+
+    public void setIsRead(String isRead) {
+        IsRead = isRead;
+    }
+
+    public String getPublishDeptName() {
+        return PublishDeptName;
+    }
+
+    public void setPublishDeptName(String publishDeptName) {
+        PublishDeptName = publishDeptName;
+    }
+
+    public String getDetail() {
+        return Detail;
+    }
+
+    public void setDetail(String detail) {
+        Detail = detail;
+    }
+
+    public String getID() {
+        return ID;
+    }
+
+    public void setID(String ID) {
+        this.ID = ID;
+    }
 
     public String getYesOrNo() {
         return YesOrNo;
