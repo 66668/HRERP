@@ -40,6 +40,7 @@
             android:layout_alignStart="@+id/tv_type"
             android:layout_below="@+id/tv_type"
             android:gravity="center_vertical"
+            android:lines="1"
             android:text="n内容"
             android:textColor="@color/textHintColor"
             android:textSize="@dimen/common_textSize_default14"/>

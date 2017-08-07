@@ -90,7 +90,6 @@ public class MainActivity extends BaseActivity {
      * 控件初始化
      */
 
-
     protected void initMyView() {
 
         toolbar = (Toolbar) findViewById(R.id.toolbar);

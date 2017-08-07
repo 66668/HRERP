@@ -138,10 +138,12 @@ public class WorkplanListActivity extends BaseActivity implements RefreshAndLoad
                 Bundle bundle = new Bundle();
                 bundle.putSerializable("WorkplanListModel", workplanListModel);
 
-                if (workplanListModel.getSeeType().contains("我发出的")) {
+                if (workplanListModel.getUploaderEmployeeID().equals(UserHelper.getCurrentUser().getEmployeeID())) {
                     startActivity(WorkplanSendDetailActivity.class, bundle);//跳转发送界面
-                } else if (workplanListModel.getSeeType().contains("我收到的")) {
+                } else if (workplanListModel.getUploaderEmployeeID().equals(UserHelper.getCurrentUser().getEmployeeID())) {
                     startActivity(WorkplanReceiveDetailActivity.class, bundle);//跳转接收界面
+                }else{
+                    PageUtil.DisplayToast("返回数据缺少参数！");
                 }
             }
         });
@@ -326,11 +328,10 @@ public class WorkplanListActivity extends BaseActivity implements RefreshAndLoad
          *
          */
         for (int i = 0; i < list.size(); i++) {
-            if (list.get(i).getSeeType().contains("我收到的")) {//我收到的
-                listREC.add(list.get(i));
-            }
-            if (list.get(i).getSeeType().contains("我发出的")) {//我发送的
+            if (list.get(i).getUploaderEmployeeID().equals(UserHelper.getCurrentUser().getEmployeeID())) {//我发送的
                 listSED.add(list.get(i));
+            } else {//我收到的
+                listREC.add(list.get(i));
             }
         }
 
